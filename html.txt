@@ -1,0 +1,294 @@
+﻿web语义化H5标签：
+	<header></header>															头部专属标签
+	<nav></nav>																		导航条专属标签
+	<article></article>																文章专属标签
+	<aside></aside>																侧边栏专属标签
+	<footer></footer>															底部专属标签
+	<section></section>															章节标签
+	<time datetime="2019-07-12"></time>						时间专属标签	datetime属性可有可无，写了之后以里面的属性值的时间为标准
+	<address></address>														地址专用标签
+	<code></code>																	代码专用标签，里面可以写代码，一般用得少，用于技术类分享网站
+	<mark></mark>																	重点区域标记专用标签，相当于着重符号
+	<progress value="80" max="100"></progress>		数据条
+	
+	
+表单新增属性：
+	autofocus		自动获取焦点，进入页面，鼠标焦点就直接获取了，直接写在标签里就可以了
+	pattern=""	里面写正则表达式，如果满足正则就提交，否则就不提交
+	disabled		禁用表单控件，不能提交
+	readonly		设置表单为只读，但能提交
+	
+	
+新增input表单：
+	type="range"			滑块
+	type="email"			邮箱（只能输入邮箱类型的文本）
+	type="number"		数字（让表单只能输入数字）	
+		滑块和数组的相关属性：
+			min 	最小输入值	
+			max 	最大输入值	
+			step 	每次变化的值
+			value 	当前值为多少
+	日期表单的type值可以为以下内容：
+		date						选取日、月、年								
+		month					选取月、年									
+		week						选取周和年									
+		time						选取时间（小时和分钟）						
+		datetime				选取时间、日、月、年（UTC 时间）		
+		datetime-local		选取时间、日、月、年（本地时间）
+	上传文件表单：<input type="file" multiple>		可以提交电脑上的文件，multiple属性表示可以提交多个文件，否则只能提交一个文件
+
+	
+表单下拉列表新属性：
+	<optgroup></optgroup>	分组标签（用于清晰显示下拉列表里的分组情况）
+	如<optgroup label="四川省">
+			<option>达州</option>
+			<option>成都</option>
+			<option>绵阳</option>
+		</optgroup>
+		<optgroup label="浙江省">
+			<option>杭州</option>
+			<option>温州</option>
+			<option>宁波</option>
+		</optgroup>
+	
+
+单行文本自定义列表：（文本框获得焦点时，就会弹出下拉自定义选项列表）
+	<input type="text" list="rx">
+	<datalist id="rx">
+		<option>南京</option>
+		<option>北京</option>
+		<option>东京</option>
+	</datalist>
+	
+	
+视频和音频：	
+	<video src="">您的浏览器版本太低，请升级。</video>	
+	<radio src="">您的浏览器版本太低，请升级。</radio>	
+
+相关常用属性：
+	controls： 一些播放控件，如快进，暂停等
+	loop：	循环播放
+	muted：	音视频为静音
+	poster=""	给视频添加封面（通常用作广告）
+	autoplay： 自动播放属性
+	preload：预加载策略（三个属性值）
+		（1）none：不预加载任何数据
+		（2）metadata：只预加载元数据（视频时长/视频第一个画面/视频高度和宽度）
+		（3）auto：加载元数据并且加载一定时长视频（默认值）
+
+video兼容写法：(浏览器会逐一查看视频格式，如果都不支持，就会显示最下面的内容)
+	<video controls loop id="vid">
+		<source src="video.mp4">
+		<source src="video.ogg">
+		<source src="video.webm">
+		您的浏览器版本太低，请升级。
+	</video>
+	
+radio兼容写法：(浏览器会逐一查看音频格式，如果都不支持，就会显示最下面的内容)
+	<radio controls loop>
+		<source src="video.mp3">
+		<source src="video.ogg">
+		<source src="video.webm">
+		您的浏览器版本太低，请升级。
+	</radio>
+	
+
+JS的相关属性与方法（操作多媒体专用）: 
+	vid.play();	 					//播放视频（vid为video播放器对象）
+	vid.pause();					//暂停视频
+	vid.paused;					//获取当前视频播放状态（true表示视频暂停；false表示视频正在播放）
+	
+	vid.playbackRate;					// 回放速率（整数：大于1就快放；小于1就慢放）
+		vid.playbackRate = 2;			//2倍速播放
+	
+	vid.currentTime;						//获取当前播放到的时间，单位S
+		实现快进快退的方式：
+			vid.currentTime += 5;
+			vid.currentTime  -= 5;
+			
+	vid.muted;									//获取视频是否静音，是为ture，否为false
+		vid.muted = !vid.muted;		//点一下就静音，再点一下就非静音
+		
+	vid.volume;									//获取当前视频音量，音量最高为1，最低为0 
+		实现加减音量：
+			vid.volume += 0.1;
+			vid.volume  -= 0.1;
+	
+	vid.onplay;									//获取当前视频是否正在播放
+	v.duraion;										//获取视频的总长度
+		实现进度条效果：（首先要自己写一个进度条样式）
+			v.onplay = function() {
+				setInterval(function() {
+					var ctime = v.currentTime;			//获取当前的播放位置
+					var alltime = v.duraion;					//获取视频的总长度
+					var lsl = ctime/alltime*300;			//当前进度条的位置 = 当前播放位置 / 视频的总长度 * 进度条的总宽度
+					ls.style.width = lsl + "px";				//再把当前进度条的位置赋给ls进度条，这样就能实现进度条效果
+				},1000); 
+			}
+			
+		实现点击进度条的位置，视频就跳转到该位置：
+			pro.onclick = function(e) {						//鼠标点击进度条触发的事件
+				var ev = window.event || e;				//获取事件对象
+				var mx = ev.layerX || offseX;				//获取当前鼠标点击时的X轴位置
+				var ctime = mx/600*v.duraion;			//计算当前视频播放的位置
+				v.currentTime = ctime;						//设置视频播放的时间
+				ls.style.width = mx + "px";				//将当前鼠标的位置赋给进度条，这样鼠标点哪儿，进度条也会在哪儿
+			}
+			
+
+video相关的事件（非重点）：
+	一、canplaythrough：当视频加载结束后，并且可以播放时触发（只触发一次）
+		该事件触发时，可获得的属性： 
+			duraion：视频时长（秒）
+	二、timeupdate：视频正在播放中触发（会触发多次，4次/S）
+		该事件触发时，可获得的属性： 
+			currentTime：当前播放时间点
+	三、ended：当前视频播放结束后触发（只触发一次）
+	
+	
+video相关的样式：
+	一、object-fit：指定视频在区域内如何显示
+		1.fit：填充（默认值），将视频拉伸操作填充满整个父元素
+		2.contain：包含，保持原有视频比例，父元素会有空白区域
+		3.conver：覆盖，保持原有视频比例，宽度或高度至少有一个与父元素一致
+		
+		
+web storage储存：
+	sessionStorage关闭浏览器后过期，localStrage不会过期 
+	一、sessionStorage操作：
+		1.sessionStorage.setItem(key,value) 			获取指定key的本地存储的值
+		2.sessionStorage.getItem(key) 					将value存储到key字段中
+		3.sessionStorage.removeItem(key) 			删除指定key的本地存储的值
+		4.sessionStorage.length 								sessionStorage的项目数
+		5.sessionStorage.clear() 								清除所有sessionStorage数据
+	
+	二、localStorage操作：
+		1.localStorage.setItem(key,value) 				将value存储到key字段中
+		2.localStorage.getItem(key) 						获取指定key的本地存储的值
+		3.localStorage.removeItem(key) 					删除指定ke的本地存储的值
+		4.localStorage.length 									localStorage的项目数
+		5.localStorage.clear() 									清除所有localStorage数据
+		
+		
+canvas（用像素点组成图形，针对2D位图）：
+	特点：位图不能发大缩小，并且会失真
+	缺点：颜色细腻
+	
+	
+svg（用线段组成图形，针对2D矢量图）：
+	特点：矢量图可以无限放大和缩小并且不失真
+	缺点：颜色不丰富
+	
+	
+web worker：
+	作用：创建新线程去帮助其他主线程完成相应的任务
+	创建：let w = new Worker("js任务路径");		//创建并自动执行传入的js任务
+	
+	worker程序实现数据传递
+	（1）html主线程将数据发送给worker（js任务）线程
+	（2）worker（js任务）线程将数据发送给html主线程
+		如：
+			html发数据：
+				let w = new Worker("js任务路径");
+				w.postMessage("要发送的东西");
+			
+			worker收数据：
+				onmessage = function(e) {
+					e.data;	//接收到的数据
+				}
+				
+		注意事项：
+		（1）worker线程执行代码中不能包含任何DOM/BOM元素
+		（2）操作网页中DOM/BOM只能交给html主线程
+		（3）其他线程不能操作DOM/BOM
+		
+		
+websocket制作聊天室：
+	一、下载第三方模块
+		npm i socket.io（服务端）	客户端需要单独下载socket.io文件
+		
+	二、服务器端程序
+		（1）创建web服务器
+			let app = require("http").createServer();
+		
+		（2）创建socketio服务器端对象
+			let io = require("socket.io")(app);	//io模块依赖于app模块
+			
+		（3）监听端口
+			app.listen(3000);		//端口可以自定义，只要不重复
+		
+		（4）为io对象绑定事件 connection（当客户端连接服务器触发此事件）
+			io.on("connection",(socket) => {
+				console.log("有客户端连接到了服务器");
+				//socket 是为当前客户创建的专属“服务员”，可以获得当前客户端的相关连接信息
+			})
+	
+	三、客户端程序
+		（1）创建socket对象并且连接服务器
+			let clientSocket = io("ws://127.0.0.1:3000");
+				//ws：websocket的简写
+				//127.0.0.1：服务器端程序的地址
+				//3000：服务器运行的端口，这里是根据服务端设置的端口来写
+				
+	四、客户端发送数据给服务器（一对一）
+		socket.io 发送与接收数据采用事件绑定方式与事件触发机制
+		（1）客户端发送
+			clientSocket.emit("message","要发送的消息")		//emit为触发事件的方式， message为自定义事件名，要与服务端接收时保持一致
+			
+		（2）服务端接收
+			socket.on("message",(data) => {
+				console.log(data);		//data为客户端发送过来的数据
+			})
+			
+	五、服务器发送数据给客户端（一对一）
+		（1）服务器发送
+			socket.emit("server","要发送的消息")		//server为自定义事件名，要与客户端保持一致
+		
+		（2）客户端接收
+			clientSocket.on("server",(data) => {
+				console.log(data);		//data为服务端发送过来的数据
+			})
+	
+	六、服务器向所有客户端发送消息（广播消息）
+		（1）服务器发送
+			io.emit("list","要广播的消息")
+			
+		（2）客户端接收
+			clientSocket.on("list",(data) => {
+				console.log(data);		//data为服务端发送过来的数据
+			});
+			
+	七、客服端关闭浏览器时，会触发服务器默认事件（disconnect）
+		socket.on("disconnect",(data) => {
+			console.log("客户已退出群聊");
+		})
+		
+		
+拖动和释放（drag & drop）：
+	一、拖动源对象（会动），触发三个事件
+	（1）ondragstart			拖动开始（执行1次）
+	（2）ondrag					拖动中（执行n次）
+	（3）ondragend			拖动结束（执行1次）
+	
+	二、拖动目标对象（不动），触发四个事件
+	（1）ondragenter		拖动进入（执行1次）
+	（2）ondragover			拖动悬停（执行n次） 
+		注意：该事件有个默认行为，悬停事件结束后会立刻执行离开事件，永远也不会执行释放事件
+		解决：阻止事件默认行为
+		如：demo.ondragover = function(e) {
+					e.preventDefault();		//阻止事件默认行为
+				}
+	（3）ondragleave		拖动离开（执行1次）
+	（4）ondrop				拖动释放（执行1次）
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

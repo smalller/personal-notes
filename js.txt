@@ -1,0 +1,1165 @@
+主流浏览器：		内核：
+IE							trident
+Chrome				webkit(早期)	blink
+Safari					webkit
+Firefox				gecko
+Opare					presto(早期) blink
+
+
+
+数据类型：
+	数据类型分为原始类型和引用类型
+	原始类型分为：数值型（number）、字符串型（string）、布尔型（boolean）、未定义型（undefined）、空（null）、Symbol（ES6新引入的，表独一无二的值）
+	引用类型分为：对象（object）、数组（Array）、函数（function）
+	
+	
+	
+关于字符串的一些转换类型方法：
+	let demo = "123-456-789";
+	
+	一、将字符串按照指定的字符分割成数组（不改变原数组）
+	（1）arr = demo.split("-")
+		
+	二、字符串大小写转换
+	（1）demo.toLowerCase()		将字符串转换为小写
+	（2）demo.toUpperCase()		将字符串转换为大写
+
+	三、截取字符串
+	（1）demo.slice(0,6)					从第0位开始，截取到第六位
+	（2）demo.substr(3,4)				从第3位开始，截取4个字符
+			  demo.substr(4)					从第4位开始，一直截取到最后
+			 
+	四、替换字符串
+	（1）demo.replace("456","四五六")		第一个参数为查找要替换的字符，第二个参数为要替换成的值（只替换搜索到的第一个字符串）
+			  demo.replace(/SB/gi,"***")				全局、不区分大小写查到“SB”，将其替换成“***”
+					
+	五、搜索字符串
+	（1）demo.match("456")							如果搜索到了就以数组的形式返回搜索到的值，且默认只返回首次查到的值，如果没搜索到就返回null
+			  demo.match(/xiaomao/ig)				全局、不区分大小写查到“xiaomao”，搜索到几个，就返回几个值
+	（2）demo.indexOf("456")						获得字符在字符串中首次出现的位置，第二个参数默认为空或0，假如为2，则表示从第二位开始查找；找不到则返回 -1
+	（3）demo.search(/xiaomao/i)					用法与indexOf一样，但它可以使用正则表达式使其不区分大小写
+	（4）demo.lastIndexOf("6")						获得字符在字符串中最后一次出现的位置，第二个参数默认为空或0，假如为2，则表示从第二位开始查找；找不到则返回 -1
+	（5）demo.includes("123")						查找字符串中是否包含该指定的字符
+	（6）demo.startsWith("1")						查看字符串是否以指定的子字符开头
+	（7）demo.charAt(3)									用于获得字符串中第几号位的字符
+	（8）demo.charCodeAt(4)						用于获得字符串中第几号位的Unicode编码
+
+	六、将Unicode编码转换成原始字符
+	（1）demo.fromCharCode(119)
+
+	七、连接两个或多个字符串的作用，并返回新的字符串	
+	（1）demo.concat("1234")
+	
+	八、去除字符串中某些字符
+	（1）demo.trim()																				去除字符串两边的空白
+	（2）demo.substring(1, demo.length - 1);									去掉字符串首位的字符
+	（3）demo.slice(0, demo.length - 1)												去掉字符串的最后一位
+	（4）demo.substr(0,demo.length - 1) 											去掉字符串的最后一位
+	（5）demo.substring(0, demo.length - 1)										去掉字符串的最后一位
+	（6）demo.substring(0, demo.lastIndexOf('最后一位字符'))		去掉字符串的最后一位
+
+
+
+typeof：显示出这是什么类型的值
+	支持：boolean，string，number，undefined，object，function() ，symbol
+	不支持：null类型，null会返回object
+	typeof(typeof(a))			无论a的值是什么，结果都是string类型
+
+
+
+转义字符：
+（1）\'		将特殊意义的引号转换成普通的字符
+（2）\n		将字符n转换成换行符
+（3）\t		将字符t转换成制表符（tab键的效果）
+
+
+
+隐式转换：在运算的过程中，自动发生转换
+（1）数值 + 字符串 = 字符串
+	如：2 + '3' = '23'
+	
+（2）数值 + 布尔型 = 数值型
+	如：2 + true = 3	（true转1，false转0）
+	
+（3）布尔型 + 字符串 = 字符串
+	如：'2' + true = '2true'
+	
+（4）做其他法则（减乘除）运算时，无论两端为什么类型，结果都为数值型
+	如：'2' - true = 1
+	
+（5）如果隐式转换失败，则返回NaN
+	如：'2a' * 5 = NaN	因为2a不能转换为数值
+	
+（6）数值 + null = 数值型
+	如：3 + null = 3	这里null会转换为0
+	
+（7）isNaN（判断是不是一个非数）:
+	如：isNaN("abc");	如果是数就是false,不是数就是true
+	
+（8）!!0		将数据隐式转换成布尔型（这里返回false）
+
+（9）false：0	NaN	undefined	 ""	null		其他值均为true
+
+
+
+显式（强制）转换:
+	Number(将其转换为数值型)：
+		Number(false);			将其他类型转换成数值类型, undefined和字母不能转换为数值类型，因为它不是一个数，结果会为NaN，但它们转换后的类型还是number类型；null会转换为0
+
+	parseInt(将其转换为整形):
+		parseInt("123a");			值为123，将字符串或者数字转为整形，其他的数据返回NaN，如果要转换的字符串开头为非数字，则返回NaN
+		parseInt("123",16);    	这里的16叫做基底，是指将123看成16进制的数，然后将其转换成十进制,里面是8就看成8进制
+
+	parseFloat(将其转换为浮点型):
+		parseFloat("123.2avc");    将所有数类型转换成浮点型，用法和parseInt一样
+		
+	Boolean(将其转换为布尔类型):
+		Boolean(undefined);    将所有类型转换为布尔类型
+		
+	toFixed(保留小数位数):
+		var demo = 123.34567;
+		demo.toFixed(2);    将demo的值保留2位有效数值，包括整数也可以使用，里面写几就保留几位有效数
+
+	String(将其转换为字符串类型)：
+		String(123.2);    可以将所有类型转换为字符串类型
+
+	toString() (将其转换为字符串类型):
+		a.toString();    可以将所有的的数据都转换为字符串，但是要排除null 和 undefined
+		可以使用 toString() 方法 输出16进制、8进制、2进制。
+			var myNumber=128;
+			myNumber.toString(16);	// 返回 80
+			myNumber.toString(8);		// 返回 200
+			myNumber.toString(2);		// 返回 10000000
+			
+			
+			
+比较运算符：
+（1）当一个数字和一个字符串相比较时，字符串会自动转换成数字
+（2）两个字符串进行比较时，比较的是首字母的Unicode码
+（3）如果数据类型不同，则会发生数据类型转换
+（4）NaN和任何值比较（包括自身），比较的值都为false
+（5）undefined == null（返回true）
+	
+	
+	
+逻辑短路：
+	逻辑短路无需关注整个逻辑运算的结果是true还是false，重点是看是否会执行第二个条件
+	&& 第一个条件满足后才会执行第二个条件
+		如：3 > 5 && console.log("正确");
+	||	第一个条件满足了，就不会去执行第二个条件
+		如：7 < 5 || console.log("错误");
+	
+
+
+三目运算符(三元表达式)：
+	格式：	条件判断 ? 表达式1 : 表达式2
+	如： var a = 1>0 ? 2+2 : 1+1		如果1 > 0 为真，那么执行前面的 2 + 2 ，如果为假，那么执行后面的 1 + 1
+
+
+
+switch case 用法：
+	var code = 10;
+	switch(code) {
+		case 1:
+			console.log("党员");
+			break;
+		case 2:
+			console.log("团员");
+			break;
+		case 3:
+			console.log("群众");
+			break;
+		case 4:
+			console.log("其他");
+			break;
+		default:
+			console.log("非法群众");
+	}
+	switch中的表达式和case后的值比较时，使用的是全等于，要求值和类型都相同
+
+
+
+if else 和 switch case 的区别：
+	相同点：两者都可以用于多项分支语句
+	不同点：if else 可以判断相等或不等的情况，适用范围更广；switch只能用于全等的比较，结构上更清晰，执行效率更高。
+
+
+
+循环：
+	循环条件：控制循环的次数
+	循环体：执行相同或者相似的代码
+	一、while循环
+		while 表示先判断再循环
+		格式：
+			while(循环条件) {
+				循环体
+			}
+	
+	二、do while循环
+		do while 表示先循环一次，在进行判断；即使循环条件为false，也会执行一次循环体
+		格式：
+			do { 
+			循环体
+		} while(循环条件);
+		
+	三、for循环
+		格式：
+			for(初始值；循环条件；增量) {
+				循环体
+			}
+			执行顺序为：初始值，循环条件，循环体，增量
+	
+	四、循环嵌套：
+		任何循环之间都可以相互嵌套
+	
+	break	表示终止循环
+	continue 表示终止本次循环，进行下次循环
+	以上两者均可用于各种循环	
+	
+
+
+变量作用域：
+	一、局部变量：在函数内部，用var声明的变量，叫局部变量；只能在当前作用域下使用，一旦经历了var操作，所得出的属性叫做不可配置的属性，delete不掉
+	二、全局变量：不是局部变量，就一定是全局变量
+	三、变量提升
+		JS程序执行前，会将使用var关键字声明的变量提升到所在作用域的最前边，但是赋值这一操作还是在原来的位置执行
+		如：
+			console.log(a);
+			var a = 1;
+		这里打印的值为undefined；因为系统将var a提升到作用域的最前面，但是 a = 1 还是在原来的位置
+		相当于：
+			var a;
+			console.log(a);
+			a = 1;	
+	四、往函数里传参，就相当于在函数内部var了一个局部变量
+		
+
+函数作用域：
+	一、函数的可访问范围，在全局作用域下创建的函数可以在任何位置访问。
+	二、在函数作用域下创建的函数只能在函数内部访问。
+	三、函数提升：
+		和变量提升一样，JS程序执行前，会把创建的字面量函数提升到所在作用域的最前边，在调用时才会执行函数体中的代码
+
+
+递归：
+	（1）结束递归的条件
+	（2）递归中的参数要变化
+	（3）在函数内部调用自身，默认就是一个死循环
+	（4）如果要跳出死循环条件，就结合return使用
+
+
+匿名函数自调用（立即执行函数）：
+	作用：创建函数作用域，把变量放到当前函数作用域下，避免全局污染，执行完会立即销毁，在自调用时，没有传参的情况下，指向的是window
+	
+	(function () {
+		...		//函数体中的变量和函数不能被外部访问
+	})();
+	
+	一、可以有参数：
+		(function (a,b) {
+			return a+b;
+		})(3,5);
+	
+	二、匿名函数里也可以将匿名函数以实参的形式传入（回调函数）
+		(function (a,b) {
+			/*
+				过程：
+				1.将实参里的匿名函数赋给形参
+				2.把匿名函数赋值给a，a就是该匿名函数的名称
+				3.相当于 a = function() { }
+				4.调用函数a，执行传递的匿名函数中的代码
+			*/
+			a();
+			b();
+		})(function () {
+			console.log("你好吗");
+		},function () {
+			console.log("我很好");
+		});
+		
+	三、匿名函数可以赋给一个变量，如函数表达式
+		var sum = (function (a,b) {
+			var c = a + b;
+			console.log(c);
+		} )(1,2);
+		sum;	//调用sum函数
+	
+	
+回调函数：
+	作用：把匿名函数以实参的形式传递，意味着形参就是传递的匿名函数的名称
+	如：
+		function fn1(a) {
+			/*
+				过程：
+				1.将实参里的匿名函数赋给形参
+				2.把匿名函数赋值给a，a就是该匿名函数的名称
+				3.相当于 a = function() { }
+				4.调用函数a，执行传递的匿名函数中的代码
+			*/
+			a();
+		}
+		fu1(function () {
+			console.log("hello");
+		});
+	
+
+全局函数：
+	isNaN();				//判断一个变量是否是一个非数（不是数返回true，是数则返回fasle）
+	encodeURI();	//将网址中的中文字符转成16进制编码
+	decodeURI();	//将已经编码的网址进行解码
+	isFinite();			//判断一个数是否为有限值
+	eval();					// 用JS语法解析字符串中的内容		如：eval("1+2") 	输出的值就是两者之和 3
+		
+		
+		
+对象：
+	是一组属性（property）和方法（method）的集合
+	自定义对象的创建形式
+	（1）字面量创建对象
+		如：var person = {
+			name:"small l",
+			age:18,
+			'user-name':"root"		//含有特殊字符属性名，一定要加引号
+			say:function () {
+				console.log("hello" + this.name);
+			}
+		}
+		person.name;					//获取对象的某个属性
+		person['user-name'];		//获取对象的某个属性，属性名要加引号
+		person.name = "狗蛋";	//修改对象的某个属性值
+		person.sex = "male";		//给对象中增加一个新的属性
+		person.say();						//调用对象中的方法
+		对象是存储在堆内存中的，并且以地址的形式存储		
+		
+	（2）内置构造函数
+		var car = new Object();	//先创建一个空对象
+		car.brand = "五菱宏光";	//往里面添加属性
+		car.color = "白色";
+		car["price"] = 50000;
+		var obj1 = Object.create(null);	//创建一个对象，括号里默认填null。括号里面可以填其他对象名，填了之后，obj1就会继承括号里填的对象的属性
+		
+	
+遍历对象中的属性（访问对象中的每一个属性）:
+	for(var key in 对象名) {
+		key					表示对象中的每个属性名（键名）
+		对象名[key]	通过属性名获取对应的属性值
+	}
+	
+
+判断对象里是否含有某一个属性：
+	一、属性值和undefined比较
+		如：person.ename === undefined				//返回true表不存在，false表存在
+	
+	二、对象名.hasOwnProperty("属性名")
+		如：person.hasOwnProperty("ename");		//返回true表存在，false表不存在
+	
+	三、属性名 in 对象名
+		如："ename" in person									//返回true表存在，false表不存在
+
+
+判断一个变量是不是对象：
+	var arr = [1,2,3];
+	arr instanceof Object;
+	
+
+
+数组的相关方法API：
+	一、splice()：删除或增加元素方法（原数组会改变）
+		arr.splice(start,count)						第一个参数表示开始删除或开始追加的位置，第二个参数表示删除的个数，如果是追加的话，第二个参数就写0
+		arr.splice(2,3)   								从数组的第二位开始删除(包括第二位)，删除三个元素
+		arr.splice(2,3,"a","b")   					从数组的第二位开始删除(包括第二位)，删除三个元素，然后在删除的元素后面再添加a,b两个元素
+		arr.splice(2,0,"苹果","橘子")			在数组的第二位的后面，添加苹果和橘子两个元素
+
+	二、slice()：截取元素（不改变原数组）
+		slice(strat,end)		start表开始的下标；end表结束的下标（不包含end本身）；如果是负数，表示倒数，end为空则表截取到最后
+		arr.slice(0,3)			从数组的第0位（第一个）开始，截取到第三个（第二位）元素
+		arr.slice(2)  			从第二位（第三个）开始截取，一直截取到结尾
+		arr.slice(-2)			从倒数第二个开始一直截取到结尾
+		arr.slice(-3,-1)		从倒数第三个一直截取到倒数第一个的前一个，也就是倒数第二个
+		arr.slice()	  			如果不给参数的话，那么它就会截取所有的元素,可以用此来赋值一个数组
+
+	三、join()：将数组拼接成字符串，传 "-" 表示用 - 将数组连接起来，不填的话就默认以 , 相连（不改变原数组）
+		arr.join();				此操作会将数组转换成字符串形式(数组本身是对象类型，即object，转换过后就是string类型)，与字符串的split方法是互逆的。
+
+	四、concat: 连接数组的作用（不改变原数组）
+		如：var num1 = [1,2,3,4,5];
+				var num2 = [6,7,8,9,10];
+				num1.concat(num2);
+				num1.concat(num1);
+	
+	五、向数组的末尾追加元素（返回值为数组的长度）：arr.push()    或 arr[arr.length] = ""
+	六、向数组的开头追加元素（返回值为数组的长度）：arr.unshift() 或 arr[0] = ""
+	七、删除数组末尾的元素（返回值为删除的元素值）：arr.pop()
+	八、删除数组开头的元素（返回值为删除的元素值）：arr.shift()
+	九、把数组里的序列顺序颠倒：arr.reverse()
+	十、判断一个对象是不是数组的方式：Array.isArray(arr)		
+	十一、给数组里的无序数组排序，从小到大的顺序：arr.sort()
+		准确版排序：（可在sort()里添加一个函数）
+			arr.sort(function(a,b) {
+				return a - b;		//升序
+				//return b - a;	//降序
+			});
+			arr.sort((a,b) => a-b;);		//ES6简写形式
+			
+		把一个有序数组排成乱序：（每次刷新的序列都不一样）
+			arr.sort(function() {
+				return Math.random() - 0.5;
+			});
+			arr.sort(() => Math.random() - 0.5;);		//ES6简写形式
+			
+	十二、arr.filter();		//遍历数组，并返回符合条件所有元素的数组，可在里面写相关操作方法进行相关筛选，但不能修改数组或对象里的值
+		如：var arr = [20,-1,0,1,2,-3,50];
+				var result = arr.filter(item => {
+					return item > 10;			//返回数组里值大于10的元素
+				});
+				
+	十三、arr.map(); 		//遍历并赋值原数组为新数组，该新数组的值改变不会影响到原数组
+		如：var price = [50, 100, 150, 300];
+				var newPrice = price.map(item => {
+					if (item > 200) {		
+						return item * 0.5;			//数组中值大于200的，打五折
+					} else {
+						return item * 0.7;			//否则打七折
+					}
+				})
+				
+	十四、arr.includes(); 		//判断一个数组是否包含一个指定的值。
+	
+	十五、arr.indexOf()			//得元素在数组中首次出现的位置；第二个参数默认为空或0，若为2，则表示从第二位开始查找；找不到则返回-1
+		如：demo.indexOf("元素");
+		
+	十六、arr.every()				//判断数组中是否所有元素都符合要求，如果是返回true，反之返回fasle
+		如：var bool = demo.every((item,i,demo)  => {
+					return 判断条件
+				})
+		原理：
+			（1）every会自动遍历arr中每个元素，每遍历一个元素，就自动调用一次回调函数 function ；每次调用 function 时，自动传入当前正在遍历的元素值（elem）、下标位置（i）、当前的数组对象（demo），i和demo参数可按需传入，也可不传
+			（2）每次调用 function ，都会用函数内的条件检查当前元素是否符合要求，只有当前元素符合要求时，才会继续遍历下一个，只要碰上一个不符合要求的元素，就立刻退出every；并返回false，意思就是不是所有元素都满足条件
+			（3）如果遍历结束，都还没有退出，说明整个数组中所有元素都符合要求，就返回true
+
+	十七、arr.some()				//判断数组中是否包含符合要求的元素
+		如：var bool = demo.some((item,i,demo)  => {
+					return 判断条件
+				})
+		原理：
+			（1）用法和every完全相同，，i和demo参数可按需传入，也可不传
+			（2）只不过执行时，只要碰到一个元素判断为true，就不再遍历，直接返回true，只有遍历结束，还没有找到判断为true的元素，才返回false
+
+	十八、arr.forEach()			//遍历数组
+		如：arr.forEach((item,i,arr) => {
+				...对当前元素执行的操作
+			})
+		原理：
+			（1）forEach会遍历arr中的每个元素，每遍历一个元素，就自动调用一次回调函数 function ，i和arr参数可按需传入，也可不传
+			（2）然后自动传入当前元素值value，当前元素下标i，当前数组对象arr
+	
+	十九、汇总（求和）
+		定义：对数组中的元素内容进行统计，得出最终结论
+		如：var sum = arr.reduce((prev,item) => {	
+					return prev + item;
+				},
+				0
+			)
+		原理：
+			（1）prev：保存截止到当前元素的临时汇总值
+			（2）return的值为：将当前元素item，累加到prev中，得到的新的汇总值
+			（3）0：起始值，这里写0，表示从0开始累加传进来的元素；可以写其他值作为参数，也可以写sum，以上一次汇总的值作为基数再进行汇总；也可以写其他东西，比如对象等
+			
+	value = value || 0	（如果形参value值有意义，不是 "" undefined NaN null false ， 那么就用形参value代替后续操作，如果形参value没有意义就用 0 代替后续操作）
+
+
+Math对象：
+	（1）Math.PI;									//获取圆周率
+	（2）Math.abs(19-20);					//取绝对值
+	（3）Math.pow(2,n);						//计算2的n次幂
+	（4）Math.max(123,-2,0,1,5);		//取最大值
+	（5）Math.min(123,-2,0,1,5);		//取最小值
+	
+	（6）取近似整数:
+		Math.round(4.49);						//四舍五入取整
+		Math.floor(4.99);							//对数进行向下取整，值为4
+		Math.ceil(5.01);							//对数进行向上取整，值为6
+		
+	（7）取随机数：
+		Math.random();												//取0到1之间的随机小数
+		Math.random()*10;											//取0到10之间的随机小数
+		 Math.floor(Math.random()*10);					//取0到10之间的随机整数
+		Math.floor(Math.random()*(y+1-x)+x);		//取x到y之间的随机整数
+
+
+
+Date对象：
+	作用：用于对日期时间的存储和计算
+	数据库存储的是距离计算机元年的毫秒数（时间戳格式），元年为：1970-1-1 0:0:0
+	一、创建Date对象
+		（1）var now_time = new Date(); 												创建当前系统日期
+		（2）var new_time = new Date("2020/2/26 12:17:16");			创建指定日期，时间值可以不写
+		（3）var time2022 = new Date(2022,0,1,0,0,0);						创建指定日期，这里的月份值为0~11（1月~12月），超过11就跳到下一年，时间值可以不写
+	
+	二、获取存储日期时间对象
+		（1）now_time.getFullYear();    			获取当前年份对象
+		（2）now_time.getMonth()+1;     		获取当前月份对象
+		（3）now_time.getDate();        				获取当前天数对象
+		（4）now_time.getHours();       			获取当前小时对象
+		（5）now_time.getMinutes();     			获取当前分钟对象
+		（6）now_time.getSeconds();    			获取当前秒钟对象
+		（7）now_time.getMilliseconds();		获取当前毫秒对象
+		（8）now_time.getDay();						获取星期几对象（0~6，星期日~星期六）
+		（9）now_time.getTime();						获得指定日期和计算机元年之间相差的毫秒数（获取当前时间的时间戳）
+	
+	三、获取本地字符串格式
+		（1）now_time.toLocaleString();				将日期格式转为 xx-xx-xx  xx:xx:xx
+		（2）now_time.toLocaleDateString();		将年月日转为 xx-xx-xx 格式
+		（3）now_time.toLocaleTimeString();	将时间转为 xx:xx:xx 格式
+	
+	四、获取两个时间对象相差的毫秒数
+		两个时间对象直接相减，即可获取相差的毫秒数
+		如：new_time - now_time
+		
+	五、修改时间日期对象
+		（1）var time2 = new Date(time1);			克隆一个时间对象，这样两个时间对象分别操作就互不干扰
+		（2）time2.setFullYear(2019);					修改时间中的年份
+		（3）time2.setMonth(6);							修改时间中的月份
+		（4）time2.setDate(17);								修改时间中的天数
+		（5）time2.setHours(12);							修改时间中的小时
+		（6）time2.setMinutes(32);						修改时间中的分钟
+		（7）time2.setSecondss(47);					修改时间中的秒数
+		（8）time2.setMilliseconds(3000);			修改时间中的毫秒
+				  console.log(time2);							打印修改后的日期
+		
+
+时间差计算：
+	var now_time = new Date();                          			//创建当前日期函数
+	var new_time = new Date(2033,2,26,0,0,0);           //自定义创建一个新时间    
+	var sjc = new_time - now_time;  								//获得当前日期到指定日期的时间差,结果是以ms为单位 
+	var days = parseInt(sjc/(24*60*60*1000));   			//计算天数	
+	sjc = sjc%(24*60*60*1000);                  						//获得计算完天数后还剩余的毫秒数	
+	var hours = parseInt(sjc/(60*60*1000));   			    //计算小时	
+	sjc = sjc%(60*60*1000);                     						//获得计算完小时后还剩余的毫秒数	
+	var minutes = parseInt(sjc/(60*1000));     			 	//计算分钟	
+	sjc = sjc%(60*1000);                        							//计算分钟后还剩余的毫秒数
+	var secondes = parseInt(sjc/1000);          				//计算秒数
+
+
+
+
+重载（overload）：
+	一、定义
+		多个同名的函数，不同形参列表，在调用时，可根据传入实参列表的不同，动态选择匹配的函数执行
+		
+	二、作用
+	（1）减少函数个数，减轻调用者的负担
+	（2）只要做一件事，可能根据传入的参数不同，执行不同的逻辑时，都要用重载
+	（3）只要在JS中接收不确定个数的参数时，都用 arguments（类数组）
+			arguments.length			获取传进来的参数个数
+			arguments[0]					获得传进来的第1个参数的值
+			
+	三、当遇到多个参数不确定有没有，又要求对应关系时，只能用对象语法解决
+	（1）定义函数
+			function 函数名(一个形参变量obj) {
+				//先判断obj对象中包含哪些属性，不包含哪些属性，缺少的属性用默认值代替
+				//函数执行过程中，都从对象里，取实参值使用
+			}
+			将来调用时，所有实参值都要放在一个对象中传入
+	
+	（2）调用函数
+		函数名({
+			属性1：实参值1，
+			属性2：实参值2
+			...
+		})
+		优点：任意参数都可以缺少，都不会报错
+
+
+作用域（scope）
+	一、定义
+		作用域是一个变量的可用范围，本质就是保存变量的一个对象
+	
+	二、作用
+		为了避免不同范围的变量相互干扰
+		
+	三、JS中只包括2级作用域
+	（1）全局作用域（window）：保存任何地方都可以访问到的变量的区域
+	（2）局部作用域：保存仅在函数内才可使用的变量的区域
+	
+
+作用域链（scopes）
+	一、定义：一个函数可用的所有作用域对象的集合
+	
+	二、普通函数的作用域链，在调用时就是2个成员
+	（1）离自己最近的临时创建的函数作用域
+	（2）离自己最远的全局作用域对象window
+
+	三、一个函数的作用域链
+	（1）保存着这个函数可用的所有变量
+	（2）控制着变量的使用顺序（先局部，后全局）
+	
+	
+闭包（closure）
+	一、定义
+		即重用一个变量，又保护变量不被污染的一种编程方法
+
+	二、作用
+		只要为一个函数保存一个专属的、可重用的、不会被外部污染的变量
+
+	三、本质
+		外层函数的作用域对象，被内层函数对象引用着，无法释放，这个外层函数的作用域就是闭包对象 
+	
+	四、步骤
+	（1）外层函数包裹着要保护的变量和内层函数，内层函数一定要使用了外层函数的局部变量
+	（2）外层函数将内层函数抛出到外部
+	（3）调用者调用外层函数，获得返回的内层函数对象，并保存在一个新的变量中，可反复使用
+	
+	如：function parent() {
+            var total = 1000;
+            return function (money) {
+                total -= money;
+                console.log(total);
+            }
+        }
+        var use = parent();
+        use(100);
+        use(100);
+        use(100);
+		use = null;		//不再使用时，就可以释放
+	
+	五、闭包是如何形成的：外层函数的作用域对象，被内层函数对象引用着，无法释放。
+
+	六、闭包的缺点
+	（1）比普通函数占用更多的内存，多占用父母的函数作用域对象
+	（2）闭包不会自动释放，可能会造成内存溢出
+	
+	解决方案：
+		不再调用时，直接将函数赋值的变量赋值为空，如 use = null;
+
+
+
+构造函数（constructor）：
+	一、new的原理（步骤）：
+	（1）新建一个空对象
+	（2）让子对象自动继承原型
+	（3）用new调用构造函数，将构造函数中的this，都吸引到new上，然后通过强行赋值的形式，给新对象new添加规定好的属性
+	（4）返回新对象的地址给变量保存起来
+
+
+
+原型：系统本身就有原型，我们可以给它定义属性，不定义的话就是空值
+	（1）prototype叫做原型，本身就是一种对象，也是所有对象的祖先，每新建一个对象，就会有他自己的原型，所有对象都可以继承它的对象和属性
+	（2）当构造函数自己有的属性，就先调用自己对象的属性，自己没有的对象，才去调用原型的对象
+	（3）给原型添加新的属性并赋值：
+			Student.prototype.say = function() { }
+	（4）实例化对象调用原型中的属性：
+			student1.__proto__.say();
+			
+			
+			
+重写：
+	一、定义：在子对象中定义和父对象中成员完全相同的成员，来覆盖父对象中的成员
+	二、何时：只要子对象觉得从父对象中继承来的成员不好用，就要重写
+	三、如何：
+		（1）只更换一个子对象的父对象
+			子对象.__proto__ = 新父对象（ Object.setPrototypeOf(子对象,新父对象) ）
+			注：浏览器不推荐使用__proto__，应使用  setPrototypeOf(子对象,新父对象);
+			Object.setPrototypeOf(子对象,新父对象);
+		
+		（2）同时换多个对象的父对象
+			构造函数.prototype = 新父对象（要在创建子对象之前就要换掉父对象）
+
+
+
+错误处理：
+	（1）语法错误（SyntaxError）：		错误的使用了中文符号，缺少括号
+	（2）引用错误（ReferenceError）：使用了未声明的变量
+	（3）类型错误（TypeError）：			错误的使用了小括号，如把属性当成函数来使用
+	（4）范围错误（RangeError）：		参数的使用超出了范围
+		说明：第（1）种错误出现，一行代码都不执行；其他错误出现，只会影响后面代码的执行
+		
+
+
+严格模式：
+	一、禁止给未声明（未用 var 声明）的变量赋值，否则会报错（xxx is not defined）
+	二、静默失败（执行不成功，也不报错）升级为报错
+	三、普通函数调用和匿名函数自调用中的this不再默认指向window，而是指向undefined
+	四、禁止使用arguments.callee
+		（1）什么是arguments.callee ： 是指在函数运行时，专门获得当前正在执行的函数本身
+		（2）出于性能考虑，ES5禁用了arguments.callee，意味着不推荐使用递归算法，推荐使用循环
+		
+	在js代码最顶端写入 "use strict";  这样就开启了es5的严格模式
+	也可以写在局部函数里的顶端，这样只有这个局部函数采用严格模式，其他代码不用严格模式
+
+
+
+保护对象：
+	一、定义：保护对象的属性值或对象结构，避免被随意的篡改
+	
+	二、ES5对对象的属性进行了重新的分类
+		（1）命名属性：可用 . 访问到的属性
+		（2）内部属性：不可用 . 访问到的属性
+		
+	三、保护对象属性方式
+		Object.defineProperties(对象名,{
+			属性名1 : {
+				enumerable : true / false,		//是否可以被for in遍历
+				writable : true / false,				//是否可以修改这个属性的值
+				configurable : true / false		//是否允许上面2个属性的开启或关闭，是否可删除该属性（configurable一旦改为false，后续就不能再被更改，除非删除configurable的定义）
+			},
+			属性名2 : {
+				enumerable : true / false,		
+				writable : true / false,				
+				configurable : true / false		
+			},  
+			... 
+		});
+	
+
+
+call：根本作用就是改变this的指向，指向call里的第一个参数
+	（1）方法：要调用的函数.call(要替换的this的对象,其他参数,...) 
+	（2）如果.call() 里面不传任何参数，那么该对象指向的就是全局window
+	（3）形参必须根据实参的个数传进去，且要按照顺序传值
+	（4）本质：借用别人的函数，实现自己的功能。前提是自己的需求必须完全涵盖别人的需求
+	
+apply：根本作用就是改变this的指向
+	（1）本质和call差不多，call可以传很多个值，apply只能传一个值，且是数组形式的
+	（2）方法：要调用的函数.apply(要替换的this的对象,数组) 
+	（3）区别：传参列表不同————apply传参只能传一个，而且必须是数组形式，传的是一个实参列表		
+				
+bind：不调用函数，而是基于原函数，创建一个新函数副本，并永久替换新函数中的this为指定的对象
+	（1）方法：
+				var 新函数 = 旧函数.bind(
+					要替换的this的对象,
+					[要绑定的实参值]
+				)
+				调用方式： 新函数(实参值,...)
+				
+	（2）结果：
+			新函数的功能和旧函数的是完全一样的
+			但新函数中的this和开头部分形参已被永久替换为固定的对象和固定的参数值
+			今后调用新函数时，只要传入可能变化的剩余几个实参值即可
+		
+
+call、apply、bind三者的区别：
+	（1）call和apply是临时绑定一次，临时替换一次this的指向
+	（2）bind是永久绑定，永久替换this的指向
+	（3）call是传入的实参值，而apply传入的是数组
+	
+
+arguments.callee	//调用函数本身（在不知道函数名时，又想调用函数本身时，可用此方式调用函数本身）
+	如：求10的阶乘
+		var num = (function(n) {
+			if(n == 1) {
+				return 1;
+			}
+			return n * arguments.callee(n - 1);
+		}(10))
+		
+	
+
+DOM对象：
+	一、DOM树：在内存中，集中保存一个网页的所有内容的树形结构
+	
+	二、元素节点关系查找
+		（1）父子关系
+				元素.parentElement						获得当前元素的父元素
+				父元素.children								获得当前父元素下的所有直接子元素的集合（childNodes是一个类数组，俗称集合，可以用下标进行获取）
+				父元素.firstElementChild				获得当前父元素下的第一个直接子元素
+				父元素.lastElementChild				获得当前父元素下的最后一个直接子元素
+
+		（2）兄弟关系
+				元素.previousElementSibling		获得当前元素平级的前一个相邻的兄弟元素
+				元素.nextElementSibling				获得当前元素平级的下一个相邻的兄弟元素
+			
+	三、修改
+		（1）元素.innerHTML											获取或修改原始HTML片段
+		（2）元素.innerText / 元素.textContent			获取或修改纯文本内容
+		（3）表单元素.value												获取或设置表单元素的内容
+		
+		核心DOM操作元素属性（老版）
+		（1）元素.getAttribute("属性名")						获取属性值
+		（2）元素.setAttribute("属性名","新值")			修改或添加属性值
+		（3）元素.hasAttribute("属性名")						判断元素是否包含该属性
+		（4）元素.removeAttribute("属性名")				移除元素上的指定属性
+		
+		HTML DOM操作标准元素属性（新版）
+		（1）元素.属性名（如：dom.title）							获取属性值
+		（2）元素.属性名 = "值"（如：dom.href="xxx"）	修改或添加属性值
+		（3）元素.属性名!==""（如：dom.src!==""）		判断元素上是否包含该属性，因为属性值默认为空字符串
+		（4）元素.属性名=""（如dom.id=""）						移除元素上的指定属性
+		
+			特例：操作class属性时，要写 元素.className				
+				元素.classList.add("xxx").;				添加某个样式名到class属性里
+				元素.classList.remove("xxx");			移除class属性里的某个样式名
+			
+			表单状态属性的用法：
+				（1）元素.disabled = true			禁用一个按钮（相当于 <button disabled></button>）
+				（2）元素.disabled = false			启用一个按钮
+				（3）元素.checked = true			选中一个checkbox（相当于<input checked>）
+				（4）元素.checked = false			取消选中一个checkbox
+		
+		自定义扩展属性：
+			用途：
+				（1）在客户端html元素上临时缓存数据
+				（2）代替其他选择器，用来选择触发事件的元素，为元素绑定事件
+		
+			用法：
+				（1）为元素添加自定义扩展属性
+							行业规范：<标签名	data-自定义属性名 = "属性值">	
+							如：<div	data-type="d1"></div>
+					
+				（2）用自定义扩展属性作为查询条件，只能用属性选择器 querySelector([data-属性名 = 值])	
+							如：document.querySelector("[data-type = d1]")
+					
+				（3）获取或修改自定义属性的值
+							不能用.访问自定义扩展属性
+							
+							可用核心DOM方法访问
+								如：元素.getAttribute("data-type");
+								
+							HTML5中可用 元素.dataset.属性名 的方式进行访问
+								如：元素.dataset.type			//获取以data-type属性
+								dataset 可以自动收集页面中所有以data- 开头的自定义扩展属性
+			
+			修改样式：
+				（1）元素.style.属性 = "xxx";		复合样式要写成驼峰式（如：margin-left 要写为 marginLeft）在操作float属性时，要写成 元素.style.cssFloat
+				（2）元素.style.cssText = "width:200px; height:100px";
+				（3）当批量修改样式时，在css里写一个样式，用className将该样式添加到元素上
+				
+			获取样式（元素上所有样式的集合）：
+				（1）var style = getComputedStyle(元素);				获得指定元素计算后的完整样式（对象集合）
+				（2）var xx = style.属性			获取属性值	
+				此方法不支持修改（只读）
+
+	四、新增 / 替换
+		（1）创建一个空元素
+				var a = document.createElement("a");		//创建一个a元素
+				
+		（2）为空元素添加关键属性和内容
+				a.href = "xxx";
+				a.innerHTML = "xxx";
+				
+		（3）将空元素挂载到DOM树上
+				追加到一个父元素下的所有子元素的末尾
+					父元素.appendChild(新元素)
+				
+				插入到一个父元素下的某个子元素之前
+					父元素.insertBefore(新元素,旧元素)
+				
+				替换父元素下的一个现有的旧元素
+					父元素.replaceChild(新元素,旧元素)
+		
+		（4）文档片段：内存中临时保存多个平级子元素的虚拟父元素
+					（1）创建文档片段
+							var frag = document.createDocumentFragment();
+							
+					（2）将子元素添加到文档片段中
+							frag.appendChild(新元素);
+							
+					（3）将文档片段对象一次性添加到DOM树上
+							真实父元素.appendChild(frag);
+
+		（5）强调！！！
+					如果同时添加父元素和子元素，应该先将子元素添加到父元素，最后再将父元素一次性添加到DOM树上
+					如果父元素已经在页面上，需要同时添加多个平级子元素时，应该临时创建文档片段对象，将子元素先加入到文档片段中，最后将文档片段对象整体一次性添加到DOM树上
+
+	五、删除
+		（1）父元素.removeChild(子元素)				删除父元素里的某个子元素（删除之后还在内存里，可以随时调用）
+		（2）元素.remove()										删除某个元素（删除之后就没有了）
+
+
+	六、部分常用的复杂元素对象的简写方式
+		（1）var img = new Image()													创建<img>元素（只负责创建，不负责挂载）
+		（2）var opt = new Option(文本内容,value属性值)			创建<option>元素（value参数可不写）
+		
+		（3）.selectedIndex											获得当前选中的option在整个select中的位置下标
+		（4）.value															获得当前选中的option的value属性值（如果option上没有value属性，则返回option的文本内容代替）
+		（5）.options														获得当前select下所有option对象的集合
+		（6）.length															获得当前select下共有几个option对象
+		（7）.add(option)												向select下添加一个option对象
+		（8）.remove(i)													移除select里 i 位置的option对象
+		
+		（9）var thead = table.createTHead()			追加thead元素（创建并追加到table里）
+		（10）var tbody = table.createTBody()			追加tbody元素（创建并追加到table里）
+		（11）var tfoot = table.createTFoot()			追加tfoot元素（创建并追加到table里）
+		（12）table.delete.THead()								删除thead元素
+		（13）table.delete.TFoot()								删除tfoot元素
+		（14）table.tHead												获取thead元素
+		（15）table.tFoot												获取tfoot元素
+		（16）table.tBodies[0]										删除tbody元素（一个table下可以有多个tbody）
+		
+		（17）var tr1 = tr.insertRow()							在tr这一行的末尾追加一行（创建并追加）
+		（18）var tr1 = tr.insetRow(0)							在tr这一行的开头追加一行（创建并追加）
+		（19）table.deleteRow(tr.rowIndex)				在table中删除当前行tr（rowIndex指在table中当前行的下标）
+		（20）tr.rows[i]													获取table中第 i 行
+		（21）var td = tr.insertCell()								在tr末尾添加一个单元格（创建并追加到tr里）
+		（22）tr.cells[i]													获取tr中第 i 个单元格
+		
+		（23）document.forms[i 或 id]							获取HTML中第 i 个form对象，或者以id名来获取
+		（24）form.elements											获得form表单元素中所有表单元素对象的集合
+		（25）form.length												获得form表单元素中表单元素的个数
+		（26）from.elements[i 或 id]								获得form表单元素集合中第 i 个不带name的表单元素，或者以id来获取
+		（27）form.name名											获得form表单元素中name名字为xxx的元素
+		
+		（28）表单元素.focus()										让当前表单元素自动获取焦点
+		
+
+DOM优化：
+	一、查找
+		（1）如果只要一个条件就可以找到元素时，首选getElementByxxx这种方式
+		（2）如果查找条件复杂，就首选选择器查找方式
+	
+	二、修改样式
+		（1）能一句话修改的，就不用多句话
+			如：元素.style.width = "200px"; 和 元素.style.height = "100px";
+			可以代替为：元素.style.cssText = "width:200px; height:100px";
+		
+	三、添加元素
+		（1）为了减少DOM重排重绘，应该尽量减少操作DOM树的次数
+		（2）如果同时添加父元素和子元素，应该先将子元素添加到父元素，最后再将父元素一次性添加到DOM树上
+		（3）如果父元素已经在页面上，需要同时添加多个平级子元素时，应该临时创建文档片段对象，将子元素先加入到文档片段中，最后将文档片段对象整体一次性添加到DOM树上
+				
+	四、尽量减少事件监听的个数
+		（1）只要多个平级元素要绑定相同的事件时，都要用事件委托
+		
+
+
+BOM对象:
+	window对象,是BOM和DOM中所有对象的核心（包含所有内置函数和属性）
+	window下包含：
+		（1）history			前进后退
+		（2）location		地址栏
+		（3）document	DOM中的document对象
+		（3）navigator	浏览器配置信息
+		（4）screen			显示设备信息
+		（5）event			事件处理
+	
+	一、history对象（保存当前窗口打开后，成功访问过的url的历史记录数组）
+	作用：只要用程序自动前进后退时，都用history
+	用法：history.go(n)
+		（1）history.go(1)			前进一次
+		（2）history.go(-1)		后退一次，有时后退一次不管用，就后退两次
+		（3）history.go(0)			刷新页面
+	
+	二、location对象（专门保存地址栏中的地址信息，以及提供跳转操作的方法）
+		作用：希望获得地址栏中的url信息；希望执行一些特殊的跳转操作事
+		用法：
+			（1）获取地址栏中的url信息
+				location.href				完整的url
+				location.protocol		协议
+				location.host			主机名+端口号
+				location.hostname	主机名
+				location.port				端口号
+				location.pathname	文件的相对路径 
+				location.search			?以及后面的查询字符串（常用于获取页面传值的数据）
+				location.hash			#锚点地址
+				
+			（2）在当前窗口打开新页面
+				location.href = "链接"		可后退
+				location.assign("链接")		可后退
+				location = "链接";				可后退
+				location.replace("链接")		不可后退
+			
+			（3）页面刷新
+				普通刷新：优先从浏览器缓存中获取资源，缓存中过期或没有时，才去从服务器中重新获取
+					存在问题：页面刷新后，可能也无法从服务器上获得新的内容
+					history.go(0)
+					location.reload()
+					
+				强制刷新：始终跳过浏览器缓存，总是从服务器获取新的内容
+					存在问题：每次都需要从服务器中重新获取，导致加载慢，且增大服务器压力
+					location.reload(true);
+		
+	三、navigator对象（保存浏览器配置信息的对象）
+		作用：获取浏览器的配置信息时（如：是否安装插件，判断浏览器版本号和名称）
+			navigator.plugins					查看浏览器安装的所有插件信息
+			navigator.plugins["插件名"]	查看是否安装了某个插件（没安装就返回undefined）
+			navigator.userAgent				查看浏览器的版本号和名称等信息
+				
+	四、弹窗	
+		（1）alert(); 			弹出对话框（阻断式弹窗）
+		（2）prompt(); 		可输入的值的弹窗，返回值是string字符串类型
+		（3）confirm();  	弹出一段对话的对话框，并且有确认和取消按钮的弹窗（阻断式弹窗）
+		
+	五、定时器
+		setInterval(demo,2000); 定时器函数，每隔一段时间就执行一次,第一个参数指要执行的函数，第二个参数指要执行的时间，单位是ms,这里就是2S
+		clearInterval(); 清理定时器函数，这个函数可以放在倒计时函数里，倒计时一段时间后，定时器函数就会被清除
+			如：timer = setInterval(function() {	注意！在给局部变量赋值时，不要用var ，不然调用不到
+						alert("你是猪");
+					},2000);
+		
+	六、倒计时
+		setTimeout(demo,3000);	倒计时函数，倒计时一段时间，就会自动执行这个函数,并且只执行一次	
+		setTimeout(function() {
+			clearInterval(timer);
+		},5000);
+		注意！ setTimeout里只能执行一个函数，不能执行多个
+	
+	七、获取浏览器窗口的大小
+		（1）浏览器完整的大小（包括浏览器的外边框阴影）
+			window.outerWidth		//宽
+			window.outerHeight		//高			
+		（2）文档显示区域大小（页面所展示的区域，包含滚动条）
+			window.innerWidth		//宽
+			window.innerHeight		//高
+	
+	八、打开窗口（window.open()）
+		（1）在当前窗口打开，可后退（默认）
+			html实现：<a href="" target="_self">
+			js实现：window.open("网址","_self")
+			
+		（2）在当前窗口打开，禁止后退
+			js实现：location.replace("网址");
+			
+		（3）在新窗口打开，可打开多个
+			html实现：<a href="" target="_blank">
+			js实现：window.open("网址","_blank")
+			
+		（4）在新窗口打开，只能打开一个
+			html实现：<a href="" target="自定义的窗口名">
+			js实现：window.open("网址","自定义的窗口名")
+			
+			
+		
+事件：	
+	常用的事件：
+	鼠标类：
+	onclick					鼠标单击事件
+	ondblclick				鼠标双击事件
+	onmousedown		鼠标按下时的事件
+	onmouseup			鼠标抬起时的事件
+	onmousemove		鼠标移动事件，在内部移动也触发
+	onmouseover		鼠标移入事件
+	onmouseout			鼠标离开时的事件
+	
+	键盘类：
+	onkeydown		键盘按下事件
+	onkeypress		键盘按下事件（常用于监测操作字符类键盘）
+	onkeyup			键盘松开事件
+	
+	文本类：		
+	dom.value 	 	获取表单的内容属性
+	oninput				输入框的任何操作都会被触发（输入，删除等）
+	onchange			对比鼠标聚焦和失去焦点后输入框内的内容有无变化，有变化就触发，无变化就不触发
+	onfocus 			在输入框鼠标聚焦时触发
+	onblur				在输入框鼠标失去焦点时触发
+	onsubmit 			在表单提交之前触发
+	document.oncontextmenu 			鼠标右键显示菜单事件
+	window.onresize 							窗体事件
+	
+	一、事件的三大要素:
+	（1）事件源
+	（2）事件触发条件
+	（3）事件处理函数
+
+	二、绑定事件监听对象
+	（1）通过HTML标签来绑定事件:
+			function foo() {
+				alert("你是猪");
+			}
+			<button onclick = foo();>点击</button>
+			不足：不便于维护和重用
+
+	（2）JS中赋值方式绑定
+			DOM元素.on事件名 = function () {...}
+			不足：一个事件属性，只能绑定一个处理函数，如果多次绑定，前面的事件将会被覆盖，只有最后一个才有用
+		
+	（3）JS中用添加事件监听对象的方式
+			DOM元素.addEventListener( "事件名",事件处理函数 )
+			IE浏览器独有的事件绑定方法：
+			DOM对象.attachEvent("onclick",function() {});
+			好处：一个事件能够绑定多个处理函数，并且按照顺序去执行	
+		
+		声明：第（2）种和第（3）种方法可以嵌套；事件处理函从外部数调用时,不需要写()，直接写函数名就行
+	
+	三、移除事件监听对象
+		（1）DOM元素.removeEventListener( "事件名",原处理函数对象 )
+		（2）DOM元素.on事件名 = null;
+			声明：
+				（1）如果一个处理函数可能被移出，那么在绑定时就不要用匿名函数，而要用有名称的函数绑定
+				（2）使用onclick绑定的事件处理函数不能用 removeEventListener 移出，只能用 DOM元素.onclick = null 进行移除	
+
+	四、DOM事件模型（从事件发生开始，到所有处理函数触发完，所经历的整个过程）
+		包括3个阶段：
+		（1）捕获：由外向内，依次记录各级父元素上绑定的处理函数，只记录，不执行
+		（2）目标触发：先触发目标元素（最初想点击的那个元素）上的处理函数
+		（3）冒泡：由内向外，依次触发捕获阶段记录的各级父元素上的处理函数
+
+	五、事件对象（当事件发生时，浏览器会自动创建的，保存事件信息的对象）
+		作用：
+		（1）获得事件相关的信息
+			DOM元素.on事件名 = function (e) {
+				//  e  是形参，自己传进去的，此时e就获得了window自动创建的event
+			}
+			
+		（2）取消冒泡行为
+			e.stopPropagation();		取消冒泡（写在事件处理函数里就可以阻止冒泡行为）
+		
+	六、事件委托/利用冒泡
+		作用：减少事件监听的个数
+		用法：多个平级子元素都要绑定相同的事件时，只要将事件在他们的父元素上绑定一次，所有子元素就可以通过冒泡原理共享父元素的事件使用
+		流程：
+			（1）将事件只绑定在父元素上，让所有子元素冒泡共用
+			（2）用 e.target 代替 this 去获取当前实际点击的目标元素
+			（3）判断 e.target 的特征（nodeName），只有符合条件的目标元素才能进行冒泡，以及后续的流程
+		
+		优点：
+			（1）无论多少个子元素，都可以共享一个事件处理函数
+			（2）即使动态添加元素，也可以自动获得处理函数
+			
+		难题：
+			（1）每个按钮做的事不一样，如何获得实际点击的目标元素？
+				解决方案：e.target	始终保存目标元素的特殊属性，不随冒泡而改变
+					如：console.log(e.target.innerHTML);		//打印当前点击的目标元素里的值
+			
+			（2）如何鉴别目标元素是否是想要冒泡的
+				解决方案：用 e.target.nodeName == "目标元素名" 进行判断
+					如：if(e.target.nodeName == "BUTTON") {		//只有点击的是button类型的目标元素时才起作用
+								console.log(e.target.innerHTML);					//打印当前点击的目标元素里的内容
+							}
+							
+	七、阻止默认行为
+		e.preventDefault();
+		如：a.onclick = function (e) {
+			e.preventDefault();
+			//后续JS代码。。。
+		}
+		
+	八、鼠标位置
+	（1）相对于屏幕左上角的位置
+			e.screenX		e.screenY
+			
+	（2）相对于浏览器中文档显示区左上角的位置
+			e.clientX		e.clientY
+			
+	（3）相对于当前事件绑定的元素左上角的偏移量
+			e.offsetX		e.offsetY
+				
+	九、获取元素实际的尺寸
+	（1）offsetWidth				元素实际的宽度
+	（2）offsetHeight			元素的实际高度
+	
+	十、查看元素的位置（对于无定位父级的元素，返回的是相对整个页面的坐标;对于有定位父级的元素，返回的是相对于最近的有定位的父级的坐标）
+	（1）offsetLeft				X轴
+	（2）offsetTop			Y轴
+	
+	十一、页面滚动事件
+	（1）window.onscroll = function() { }				绑定页面滚动事件
+	
+	（2）获得页面滚动过的距离：其实就是页面超出文档显示区顶部的距离
+	
+	（3）var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;		获得页面向上滚动的距离（也就是鼠标向下滑动的距离）
+	
+	（4）window.scrollTo(横向滚动到的位置，纵向滚动到的位置);			指定页面滚动到的位置
+	
+	（5）window.scrollBy(横向滚动的距离，纵向滚动的距离)			指定页面滚动的距离
+
+	（6）页面滚动事件的三个要素
+			总距离
+			总步数
+			总时间
+			
+			可算出每步走多长（总距离 / 总步数）
+			可算出每步间隔时间（总时间 / 总步数）值不能小于10ms
+
+		
+
+

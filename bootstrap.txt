@@ -1,0 +1,376 @@
+栅格布局：
+	一、栅格属性
+	（1）元素必须放在.container 或者 .container-fluid中，两者有15px的内边距（实际开发中最好去掉）
+	（2）每一个row，具有：弹性布局，主轴为X，可以换行，有-15px的左右外边距的属性（实际开发中最好去掉）
+	（3）所有col自带左右15px的内边距（实际开发中最好去掉）
+	（4）.col-n 								声明子元素在row中占几份
+	（5）.col-sm/md/lg/xl-n		响应式中子元素在row中占几份
+	（6）.col									无论有多少子元素，都自动均分row，且不换行
+	（7）bootstrap中媒体查询，小屏幕会向大屏幕兼容（较大尺寸未设置时，默认会继承较小尺寸；较小尺寸未设置时，默认会独占一行）
+
+
+
+列偏移：
+	offset-n									col向右偏移n份（n：0~11）
+	offset-sm/md/lg/xl-n			响应式中col向右偏移几份
+	
+	
+	
+栅格嵌套：
+	在col中再单独写出<div class="row"></div>	col和row类名不能写在同一个class里
+	
+	
+	
+弹性布局：
+	d-sm/md/lg/xl-none/block/inline-block/flex											响应式下转换盒模型
+	flex-sm/md/lg/xl-row/row-reverse/column/column-reverse				响应式下主轴的方向
+	justify-content-sm/md/lg/xl-between/around/start/end/center		项目在主轴上的排列方式
+
+
+
+按钮的相关class：
+	.btn：基本类（必有）
+	
+	按钮背景颜色：
+		.btn-danger：			红色
+		.btn-success：			绿色
+		.btn-warning：			黄色
+		.btn-info：				藏青
+		.btn-primary：			主要
+		.btn-secondary：		次要
+		.btn-dark：				深色
+		.btn-light：				浅色
+		......
+		
+		颜色是通用的，除了按钮，其他标签一样可以使用（直接在类型后面加上相关颜色）
+		
+		
+	按钮边框颜色：
+		.btn-outline-danger：	红色边框
+		.btn-outline-info：			蓝色边框
+		.btn-outline-dark：			深色边框
+		......
+		
+	按钮大小：
+		.btn-lg：			大按钮
+		.btn-sm：			小按钮
+		.btn-block：		宽为100%的横排按钮（移动端常用）
+		.btn-link：			链接按钮
+		......
+		
+		
+		
+图片的相关class：
+	.rounded						带圆角的图片（0.25rem）
+	.rounded-circle			圆形图片
+	.img-thumbnail			相框图片（有内边距和边框）
+	.img-fluid						响应式图片，图片可以缩放，但是不能超过原始大小
+	
+
+
+文字相关的class：
+	.h1 ~ .h6										文本字号和加粗
+	.text-lowercase							全部英文小写
+	.text-uppercase							全部英文大写
+	.text-capitalize								单词首字母大写
+	.text-justify									文本两端对齐
+	.text-center/right/left					文本居中/居右/居左对齐
+	.text-sm-center/right/left			小屏时，文本居中/居右/居左对齐
+	.text-md-center/right/left			中屏时，文本居中/居右/居左对齐
+	.text-lg-center/right/left			大屏时，文本居中/居右/居左对齐
+	
+	
+
+列表相关的class：
+	ul：
+		.list-unstyled					去掉自带的 . 和左内边距清0
+		.list-group						列表组（转换成弹性布局，使列表的主轴变成Y轴，纵向排列）
+	
+	li：
+		.list-group-item			列表项（给li添加边框，首元素和尾元素添加了圆角）
+		.active							激活项
+		.disabled						禁用项
+		
+		
+	
+表格相关的class：
+	.table														对table本身和table的后代布局
+	.table-bordered									为table本身和后代添加边框
+	.table-hover											带悬停效果的表格
+	.table-striped										隔行变色
+	.table-responsive-sm/md/lg/xl			响应式布局的表格，写在table的父元素上
+	
+	
+
+
+辅助类（所有元素都能用上）：
+	一、边框
+		.border（必写类）									灰色实线边框
+		.border-0													去掉边框
+		.border-top/right/bottom/left-0			去掉某一个方向的边框
+		.border-top/right/bottom/left				给某一个方向的边框添加灰色实线边框
+	
+	
+	二、浮动
+		.float-left/right/none								左浮动/右浮动/不浮动
+		.float-sm/md/lg-left/right/none			响应式所对应的浮动
+		.clearfix														清除浮动（解决高度坍塌）
+		
+	
+	三、显示/隐藏
+		.visible			visibility:visible			显示
+		.invisible		visibility:hidden		隐藏
+		
+		
+	四、背景颜色
+		.bg-danger/warning/success....
+		
+		
+	五、圆角
+		.rounded													添加0.25rem的圆角
+		.rounded-0												去掉圆角
+		.rounded-top/right/bottom/left			设置某个方向上的圆角
+	
+	
+	六、尺寸
+		w-25/50/75/100				width:25%/50%/75%/100%（其他宽度需自己定义）
+		h-25/50/75/100				height:25%/50%/75%/100%（其他高度需自己定义）
+		mw-100								max-width:100%
+		mh-100								max-height:100%
+		
+		
+	七、内外边距
+		外边距：
+			m-auto												margin:auto
+			mt/mr/mb/ml-auto							上外/右外/下外/左外边距自动
+			mt/mr/mb/ml-sm/md/lg-auto		响应式对应的外边距自动
+			m-0														margin:0
+			mt/mr/mb/ml-0								上外/右外/下外/左外边距清0
+			mt/mr/mb/ml-sm/md/lg-0			响应式对应的外边距清0
+			mx-0 / my-0										水平 / 垂直 外边距清0
+	
+		内边距：
+			p-0														padding:0
+			pt/pr/pb/pl-0									上外/右外/下外/左内边距清0
+			pt/pr/pb/pl-sm/md/lg-0				响应式对应的内边距清0
+			px-0 / py-0										水平 / 垂直 内边距清0
+	
+
+
+表单：
+	form：
+		.form-group			堆叠表单，垂直排列
+		.form-inline			内联表单，水平排列（弹性）
+		
+	表单控件样式：
+		.form-control						input元素的基本类（块级，100%宽，字体，背景，边框，过渡都有默认值）
+		.col-form-label						设置输入文本与边框的距离（上下内边距）
+		col-form-label-sm/lg			上下内边距大小不同
+		.form-text								0.25的上外边距，转换成块级
+	
+	
+	
+组件：
+	一、按钮组
+		基本结构：
+			<div class="btn-group ">
+				<button class="btn"></button>
+				...
+			</div>		
+			
+		外层div添加类：
+			btn-group 						横向按钮组（基本类）
+			btn-group-vertical			纵向按钮组
+			btn-group-lg/sm				调整按钮组大小
+			
+			
+	二、下拉菜单
+		基本结构：
+			<div class="dropdown">
+				<button class="btn" dropdown-toggle data-toggle="dropdown">下拉菜单</button>
+				<ul class="dropdown-menu">
+					<li>xxx</li>
+					...
+				</ul>
+			</div>
+		
+		相关类：
+		dropdown										基本类
+		dropdown-toggle						向下的小三角
+		dropdown-menu							将下拉菜单事先隐藏
+		data-toggle="dropdown"			点击按钮就展示或隐藏下拉菜单（事件）
+		
+	
+	三、信息提示框
+		基本结构：
+			<div class="alert alert-danger alert-dismissible">
+				<span class="close" data-dismiss="alert">&times;</span>
+				对不起,xxxxx。。。。
+			</div>
+			
+		相关类：
+			alert										基本类
+			alert-danger							提示框背景颜色
+			alert-dismissible					配合子元素的.close类（小叉叉）使用
+			close										右浮动的小叉叉按钮
+			data-dismiss="alert"			点击小叉叉就关闭这个alert提示框（事件）
+
+
+	四、导航
+		水平导航：
+			基本结构：
+				<ul class="nav">
+					<li class="nav-item">
+						<a href="" class="nav-link">首页</a>
+					</li>
+					...
+				</ul>
+			
+			相关类：
+				nav						弹性布局，去点，主轴默认X轴
+				nav-item			配合ul里的 nav-justified 去使用，让li等宽显示
+				nav-link				块级，内边距撑开，有hover，focus效果等
+
+		
+		选项卡导航：
+			基本结构：
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a href="#tab1" class="nav-link" data-toggle="tab">首页</a>
+					</li>
+					<li class="nav-item">
+						<a href="#tab2" class="nav-link" data-toggle="tab">关于</a>
+					</li>
+					...
+				</ul>
+				<div class="tab-content">
+					<div id="tab1" class="tab-pane active">xxx</div>
+					<div id="tab2" class="tab-pane">xxx</div>
+					...
+				</div>
+				
+			相关类：
+				nav-tabs							水平导航变成选项卡导航
+				tab-pane							与父元素tab-content配合，让当前元素隐藏（display:none）
+				active									与tab-content配合，让当前元素显示
+				data-toggle="tab"			点击当前的导航，就让当前导航所对应的内容显示或隐藏（点击事件）
+				href="#tab2"					与内容中的id="tab2"所对应，这样点击当前的导航，就会显示所对应的内容
+				
+				
+		胶囊导航（按钮导航）：
+			基本结构：
+				<ul class="nav nav-pills">
+					<li class="nav-item">
+						<a href="#tab1" class="nav-link" data-toggle="pill">首页</a>
+					</li>
+					<li class="nav-item">
+						<a href="#tab2" class="nav-link" data-toggle="pill">关于</a>
+					</li>
+					...
+				</ul>
+				<div class="tab-content">
+					<div id="tab1" class="tab-pane active">xxx</div>
+					<div id="tab2" class="tab-pane">xxx</div>
+					...
+				</div>
+				
+			相关类：
+				nav-pills								水平导航变成胶囊导航
+				data-toggle="pill"			点击当前的导航，就让当前导航所对应的内容显示或隐藏（点击事件）
+				
+				
+	五、导航栏
+		基本结构：
+			<div class="navbar-expand-md">
+				<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="" class="nav-link">首页</a>
+						</li>
+						<li class="nav-item">
+							<a href="" class="nav-link">关于</a>
+						</li>
+						...
+				</ul>
+			</div>
+			
+		相关类：
+			navbar-expand-sm/md/lg					响应式中使子元素ul中的li的排列方式为横着排列（主轴改为x），否则默认主轴为y轴
+			navbar-nav											默认为弹性，主轴为y
+			
+			
+			
+	六、折叠
+		基本结构：
+			<button class="btn btn-danger" data-toggle="collapse" data-target="#demo">折叠1</button>
+			<a href="#demo" class="btn btn-danger" data-toggle="collapse">折叠2</a>
+			<div class="collapse" id="demo">
+				xxxxxx
+			</div>
+			
+			相关类：
+				data-toggle="collapse"			当点击该按钮，就显示或隐藏下面的内容区域（触发事件的方式）
+				data-target="#demo"			button的绑定目标内容的方式
+				href="#demo"							a标签绑定目标内容的方式
+				collapse										要显示或隐藏区域的触发事件的名称，默认隐藏这个区域
+				id="demo"								给要显示或隐藏的区域加上一个特定的名称
+	
+	
+	
+	七、卡片
+		基本结构：
+			<div class="card">
+				<div class="card-header">xxx</div>
+				<div class="card-body">xxx</div>
+				<div class="card-footer">xxx</div>
+			</div>
+			
+		相关类：
+			card-header				卡片的头部区域
+			card-body					卡片的主体区域
+			card-footer				卡片的尾部区域
+		
+		注：
+			1.如果在card中使用a标签，那么a可以使用card-link样式
+			2.card中不一定每个区域都要写，不要的区域可以不写
+	
+		
+		手风琴编写注意事项（案例：demo2文件）：
+			1. .collapse不能和.card-body写在用一个div的class里，不然在隐藏/显示的时候，会出现卡顿
+			2.在手风琴的最外边套上一个div#parent，并且要在显示/隐藏的div上（所有的div.collapse上）添加data-parent="#parent"，这样可以避免多个折叠部分同时打开
+	
+	
+	
+	八、折叠导航
+		基本结构：
+			<div class="navbar navbar-expand-md bg-dark navbar-dark">
+				<a href="" class="navbar-brand">首页</a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#demo">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="demo">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="" class="nav-link">xxx</a>
+						</li>
+						...
+					</ul>
+				</div>
+			</div>
+	
+		相关类：
+			navbar										表明该容器是导航栏，必须有
+			navbar-expand-md					响应式中使子元素ul中的li的排列方式为横着排列（这里是当中屏以上时，主轴改为x），否则默认主轴为y轴
+			bg-dark										背景颜色为深色，必须要表明
+			navbar-dark								导航栏背景颜色为深色，也要表明，为了告诉内部的元素我使用了深色背景，你们就要使用浅色文字内容；浅色就要用深色
+			navbar-brand							不隐藏，显示在最前面的菜单项，可以做”商标“使用
+			navbar-toggler						折叠按钮的父盒子，必须有
+			navbar-toggler-icon				折叠按钮（带三条横线的图标）
+			collapse										要隐藏或显示的区域盒子必有的类
+			navbar-collapse						要折叠的导航菜单的类名，必须有（它与navbar-expand-md配合使用，这里是当大于md屏时，就显示导航栏，否则就隐藏）
+			navbar-nav								ul中必有的类，表明该为导航栏
+			nav-item									li上必有的类，表明该为导航栏中的子项
+			nav-link										a标签上的类，表明该为导航栏中的链接按钮
+			data-toggle="collapse"			触发的事情类型（这里为当点击该按钮时显示或隐藏导航栏）
+			data-target="#demo"			触发目标（这里为id为demo的盒子）
+			id="demo"								被触发区域的id名（与上面的data-target配合使用）
+	

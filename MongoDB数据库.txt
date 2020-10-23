@@ -1,0 +1,99 @@
+关系型数据库：
+	mysql,Oracle,DB2,SQL Server等
+	以表存储数据
+	
+	
+非关系型数据库（noSQL）：
+	MongoDB,ROMA,Redis等
+	MongoDB以键值对的集合存储数据
+		如：{
+			name:"small",
+			age:12,
+			sex:"male"
+		}
+	
+	优点：处理速度快，特别是大型数据量。与nodejs配合更好，处理文本数据更好。
+	缺点：没有表关联。要用表关联就用关系型的数据库。
+	
+
+注意！
+	每次开机要先使用mongo命令检测是否有数据库服务开启，如果有服务开启的，
+	就将已开启的数据库关闭。
+	再使用第一条命令，开启需要开启的数据库。
+
+
+mongod --dbpath + "数据库存放的位置"	开启要使用的数据库服务（注意！安装路径和要使用的数据库的位置要处于同一个盘符下）	
+
+mongo 开启数据库服务
+
+db.shutdownServer()		将已开启的数据库服务关闭（必须执行use admin之后才能执行这一步）	
+	
+使用哪个数据库就 use "数据库名"		如：use amdin
+
+use small	使用small数据库（如果没有该数据库也可以使用，没有数据就不会保存该数据库）
+
+show collections	查询当前数据库的所有集合
+
+db.test1.drop()		删除test1集合
+
+db.dropDatabase()	删除该数据库
+
+db.test1.save({_id:xxxxx,name:"张三三",num:1893})	表示替换掉id为xxx的数据，更改为后面写的参数
+
+db		显示当前在哪个数据库里面
+
+
+创建（增加）集合的方式：
+	db.test1.insert({age:20,sex:"male"})
+	
+	db.test1.insert({		括号不括回来按回车表示换行
+		name:"small",
+		age:19
+		})
+		
+	demo = {		先创建一个变量
+		name:"small",
+		age:19,
+		sex:"male"
+	}
+	db.test1.insert(demo)	再把变量传进去
+
+
+更新（修改）集合里的数据：
+	db.test1.update({name:"张三"},{$set:{age:66}})	第一个键值对表示要更改name为张三的，第二个键值对表示把age更改为66
+	默认只会更改第一个满足name为张三的，其他name为张三的不会更改
+	
+	db.test1.update({name:"李伟"},{$set:{age:29}},{upsert:true})	如果查询时，没有满足name为李伟的条件，并且写了第三个参数，那么就以当前条件插入到集合中去
+	db.test1.updateOne({name:"李伟"},{$set:{age:29}})	只更改第一个满足条件的数据，比update效率更高
+	db.test1.updateMany({name:"李伟"},{$set:{age:29}})	更改全部满足条件的
+	
+
+删除集合里的数据：
+	db.test1.deleteOne({name:"李四"})	删除第一条满足name为李四的数据
+	db.test1.deleteMany({name:"李四"})	删除全部满足name为李四的数据
+
+	
+查询集合里的数据：
+	db.test1.find()		查询test1集合中的所有数据
+	db.test1.find().pretty()		表示让所有数据显示的更加规范直观
+	db.test1.find({name:"张三",age:14})	查询所有满足该条件的记录
+	db.test1.findOne({name:"张三"})	只查询满足该条件的第一条记录
+	db.test1.find({age:{$gt:25}})	查询所有满足age大于25的记录
+	db.test1.find({age:{$gte:25}})	查询所有满足age大于等于25的记录
+	db.test1.find({age:{$lt:25}})	查询所有满足age小于25的记录
+	db.test1.find({age:{$lte:25}})	查询所有满足age小于等于25的记录
+	db.test1.find({age:{$ne:25}})	查询所有满足age不等于25的记录
+	db.test1.find({$or:[{name:"李四"},{age:25}]})	查询所有满足name为李四的，或者满足age为25的记录
+
+
+
+
+
+
+
+
+
+
+
+
+

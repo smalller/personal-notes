@@ -1,0 +1,443 @@
+字符的线条（text-decoration）：
+		1.none	表示没有线条
+		2.line-through	表示线条从文字中间穿过（删除线）
+		3.overline		表示线条在文字的头顶上（上划线）
+		4.underline	表示线条在文字的底部（下划线）
+
+	
+定位：position: ;      
+	1.position：fixed;			固定定位，不会随页面的滑动而改变位置
+	2.position: relative;			相对定位，只针对原先的位置进行移动，不会影响其他元素的位置
+	3.position: absolute;		绝对定位，位置改变了，原有的位置会被其他元素占据，脱离原来位置进行定位
+	注：绝对定位的元素，会变成行内块元素，没有写宽度的元素，绝对定位以后，宽度会被内容撑开
+	
+
+解决外边距叠加（外边距溢出）：
+	父子元素外边距叠加问题：在父元素上添加下面的方法，触发BFC（Block Formatting Context）解决方案
+		1.position:absolute;
+		2.display:inline-block;
+		3.float:left/right;
+		4.overflow:hidden; zoom:1;   
+		5.添加垂直方向上的padding
+		6.添加border
+		7.在子元素与父元素之间添加一个空的<table></table> 
+		8.	使用伪类 before
+			div::before {	
+				display:table;
+				content:"";
+			}
+
+
+层级关系（z-index）：
+	1.有定位属性的元素才有层级关系
+	2.如果不给元素加层级，那么默认的层级为0
+	3.如果层级一样，那么后加载的元素在上面
+
+
+处理溢出文字：
+	单行文本：
+		white-space:nowrap;			让溢出文本不换行显示，直接显示在当行
+		overflow:hidden;					省略溢出的文本
+		text-overflow:ellipsis;			让溢出的文本用省略号代替
+
+	多行文本：
+		 display: -webkit-box;
+		 overflow: hidden;
+		 text-overflow: ellipsis;
+		 -webkit-line-clamp: 4;
+		 -webkit-box-orient: vertical;
+
+		
+伪类选择器：
+	a:link{ }			a链接没有被点击访问时的效果（正常效果）
+	a:visited{ }		a链接被点击访问过后的效果
+	a:active{ }		当鼠标选中a链接不放时的效果
+	a:hover { }		鼠标移动到链接的状态
+	
+
+用border写三角形：
+	div {
+		width:0;
+		border:50px solid transparent;
+		border-top:50px solid #999;
+	}
+
+	
+显示效果（visibility）：
+	取值：1.visible	默认值，可见的
+				2.hidden		隐藏
+	visibility和display的区别：display会脱离文档流，后续元素上前补位；visibility不脱离文档流，虽然看不到，但是还占位置
+	
+	
+透明度（opacity）：
+	取值 0~1	1是不透明，0是全透名
+	opacity和rgba的区别：opacity作用于元素，与颜色相关的属性都会改变透明度；rgba只改变当前颜色的透明度
+
+	
+垂直对齐方式（vertical-align）：
+	table中使用：
+		取值： top/middle/bottom		设置table中内容的对齐方式
+	img中使用：
+		取值： top/middle/bottom	 	设置图片与图片前后的文字垂直对齐方式，相当于设置的是文字的垂直对齐方式
+	
+	
+	
+弹性盒模型：
+	1.弹性盒模型至少需要2层元素，外层父级称为容器，内层子级称为项目
+	2.容器有2根轴，默认为水平的主轴和与主轴垂直的交叉轴，如果主轴改为垂直方向，那么交叉轴就为水平方向
+	3.弹性盒模型容器中的项目默认会在主轴上排列，默认不会换行，主轴起点默认在左端
+	4.如果项目总宽度小于容器宽度，就正常排列，按照设置的宽度进行排列
+	5.如果项目的总宽度大于容器的宽度，那么项目就均分容器的宽度进行排列，设置的宽度就无效
+	6.元素设置为flex容器后，容器的text-align、vertical-align会失效，项目的float、clear会失效
+	
+	
+	容器的相关属性：
+		一、主轴方向（flex-direction）
+			取值：1.row	默认值					主轴是x轴，主轴起点在左端
+						2.row-reverse				主轴是x轴，主轴起点在右端
+						3.column						主轴是y轴，主轴起点在顶部
+						4.column-reverse		主轴是y轴，主轴起点在底部
+		
+		二、项目换行（flex-wrap）
+			取值：1.nowrap	默认值			空间不够时，不换行，项目会自动缩小，设置的宽度会无效
+						2.wrap							空间不够时，项目不缩小，换行
+						3.wrap-reverse				项目换行，并转换主轴的起点
+		
+		三、项目在主轴上的对齐方式（justify-content）
+			取值：1.flex-start		默认值		以主轴起点对齐
+						2.flex-end						以主轴终点对齐
+						3.center							以主轴中心对齐
+						4.space-around			让每个项目的外边距相同，两端会有空白
+						5.space-between			让每个项目两端对齐，两端无空白
+		
+		四、项目在交叉轴上的对齐方式（align-items）
+			取值：1.flex-start		默认值		以交叉轴起点对齐
+						2.flex-end						以交叉轴终点对齐
+						3.center							以交叉轴中心对齐
+						4.baseline						基线，同flex-start类似
+						5.stretch						当项目不写高时，项目就充满容器的整个高度
+		
+		五、项目换行后在交叉轴上的对齐方式（align-content）
+			取值：1.flex-start		默认值		以交叉轴的起点对齐
+						2.flex-end						以交叉轴的终点对齐
+						3.center							以交叉轴的中心对齐
+						4.space-around			让每个项目的外边距相同，上下两端会有空白
+						5.space-between			让每个项目上下两端对齐，两端无空白
+						6.stretch						当项目不写高时，项目就充满容器的整个高度
+						
+	
+	单个项目的相关属性（设置在项目中的属性，只会影响当前的项目，不影响其他项目）：
+		一、定义某一个项目的项目顺序（order）
+			取值：无单位的数字
+			order 定义项目排列的顺序，值越小，越靠近起点，默认值为0。	如：order:3
+		
+		二、定义某一个项目在主轴上的放大比例（flex-grow）
+			取值：无单位的数字		默认值为0		取值越大，放大越快
+			如果容器有足够大的剩余空间，项目将按比例放大（比例不准确）		
+	
+		三、定义某一个项目在主轴上的缩小比例（flex-shrink）
+			取值：无单位的数字		默认值为1		取值越大，缩小越快
+			如果容器空间不够，项目将按比例缩小（比例不准确）
+			
+		四、定义某一个项目在交叉轴上的对齐方式（align-self）
+			取值：1.flex-start		默认值		以交叉轴起点对齐
+						2.flex-end						以交叉轴重点对齐
+						3.center							以交叉轴中心对齐
+						4.baseline						基线，同flex-start类似
+						5.stretch						当项目不写高时，项目就充满容器的整个高度
+						6.auto							使用align-items定义的值
+	
+		
+选择器：
+	p:empty  { }					选择空的p标签，即标签内部没有任何元素标签，包括文本、回车、空格等
+	p:not(#one) { }				选择除了id为one以外的所有p标签
+	::selection { }					选择被用户选取的元素部分，只能修改文本颜色和背景颜色
+	[属性名] { }						属性选择器，属性名可以为自定义的；属性选择器可以和其他普通选择器一样使用
+		如：[demo1] { }				选择属性名为demo1的标签
+				[demo1 = "c1"] { }	选择属性名为demo1，且值为c1的标签
+				[demo1][id] { }			选择属性名同时拥有demo1和id属性的标签
+			
+			
+文本选择器：
+	div:first-line {}		选择div中的文本中的第一行文本
+	div:first-letter {}	选择div中的文本中的第一个字符
+
+
+目标伪类：
+	在锚点被激活时，让锚点元素应用相关样式
+	如：div:target { }	当div被点击时，执行相关操作	
+
+
+状态伪类：
+	:disabled			对被禁用的表单元素进行相关操作
+	:checked			对被选中的表单元素（checkbox）进行相关操作
+	:selected			对被选中的表单元素（select）进行相关操作
+
+
+浏览器兼容性前缀：
+	火狐：-moz-
+	谷歌：-webkit-
+	欧朋：-o-
+	IE：-ms-
+	
+	
+CSS hack：通过在CSS样式中加入一些特殊的符号，让不同的浏览器识别不同的符号，以达到应用不同的CSS样式的目的
+
+边框线（outline）：outline:1px solid black;	这样的效果等同于border的效果，但不占空间，不会把元素的宽高变大
+	
+
+盒子阴影效果（box-shadow）：
+	包括5个值：
+		h-shadow			水平阴影的位置，允许负值
+		v-shadow			垂直阴影的位置，允许负值
+		blur						模糊距离
+		spread				阴影的尺寸
+		color					阴影的颜色
+		inset/outset		设置内部阴影和外部阴影，默认为inset内部阴影，可不写
+	示例：box-shadow: -5px 5px 20px 10px #333;
+
+	
+渐变（gradient）：
+	渐变：多种颜色，平缓变化的一种显示效果
+	渐变的主要因素：色标，一种颜色，和它出现的位置；一个渐变最少两个色标
+	渐变分类：
+		1.线性渐变：以直线的方式来填充渐变色
+		2.径向渐变：以圆形的方式来填充渐变色
+		3.重复渐变：将线性渐变，径向渐变重复几次实现
+	
+	线性渐变：
+		格式：background-image: linear-gradient(方向,色标1,色标2....);
+			方向（angle）取值：
+				1.关键字： 
+					to bottom
+					to	right
+					to top
+					to left					
+				2.角度值（deg）：如0deg
+				
+			色标（color-point）取值：
+				颜色+位置
+				1.只写颜色不写位置，一般用于只有两个色标，对应开头和结尾
+					如：linear-gradient(to right,#000,#fff);
+				2.颜色+px为单位的数字
+					如：linear-gradient(0deg,#000 0px,#fff 50px,#f40 100px);
+				3.颜色+百分比
+					如：linear-gradient(0deg,#000 20%,#fff 50%,#f40 100%);
+	
+	径向（圆形）渐变：（不常用）
+		格式：background-image:radial-gradient(半径 at 圆心,色标1，色标2...);
+			半径取值：px为单位的数字
+			圆心取值：
+				1.以px为单位的数字，x轴和y轴
+				2.x% y%
+				3.关键字：
+					x:left/center/right
+					y:top/center/bottom
+					
+			色标取值：
+				1.颜色+px
+					颜色的填充，就与半径没有关系了
+				2.颜色+%
+					这里的位置，就是半径的%
+			
+	线性重复渐变：
+		格式：background-image: repeating-linear-gradient(方向,色标1,色标2....);
+		其他操作与线性渐变一样
+		
+	径向重复渐变：
+		格式：background-image:repeating-radial-gradient(半径 at 圆心,色标1，色标2...);
+		其他操作与径向渐变一样
+		
+	注意！！！：当渐变方式前加了浏览器兼容性前缀，则渐变方向不加to，但方向就与以前相反，top就表示to bottom的意思
+	
+
+转换（transform）:
+	取值：transform:位移，旋转，放大，倾斜，3D旋转									
+	2D转换（transform）：
+		一、位移：transform:translate();
+			取值：1.translate(x,y) 	同时设置x轴和y轴的位移距离
+						2.translateX(x)	只设置x轴的位移距离
+						3.translateY(y)	只设置y轴的位移距离
+
+		二、缩放：transform:scale();
+			取值：1.scale(n)		同时设置x轴和y轴的缩放比例
+							n>1			放大
+							n=1			不变
+							0<n<1		缩小
+							-1<n<0	缩小并反转
+							n<-1		放大并反转
+					  2.scale(x,y)		分别设置x轴和y轴的缩放比例
+					  3.scaleX(x)		只设置x轴的缩放比例
+					  4.scaleY(y)		只设置y轴的缩放比例
+			
+		三、旋转：transform:rotate(ndeg);
+						n为正，旋转方向为顺时针
+						n为负，旋转方向为逆时针
+			注意：1.旋转的转换，会被转换原点影响效果
+					  2.旋转是连同坐标轴一起旋转的，会影响旋转之后的位移方向
+
+		四、倾斜：transform:skew(ndeg);	（不常用）
+			取值：1.skewX(xdeg)		让元素向着x轴方向倾斜，实际上改变的是y轴的角度
+							xdeg 为正	元素绕着y轴逆时针倾斜
+							xdeg 为负	元素绕着y轴顺时针倾斜
+					  2.skewY(ydeg)	让元素向着y轴方向倾斜，实际上改变的是x轴的角度
+							ydeg 为正	元素绕着x轴顺时针倾斜
+							ydeg 为负	元素绕着x轴逆时针倾斜
+					  3.skew(ndeg)		x轴和y轴同时发生倾斜
+	3D转换：
+		透视距离：perspective:px	此属性要写在3D转换元素的父元素上；透视距离不同，看到的效果也就不同
+		3D旋转（transform:rotate）：
+			取值：1.rotateX(xdeg)
+							以x轴为中心轴，旋转元素
+					  2.rotateY(ydeg)
+							以y轴为中心轴，旋转元素
+					  3.rotateZ(zdeg)
+							以z轴为中心轴，旋转元素
+					  4.rotate(x,y,z,ndeg)
+							x,y,z取值为0，不参与旋转
+
+	转换原点（transform-origin）：
+		转换原点会影响元素旋转时的效果
+		取值：1.以px为单位的数值
+				  2.%
+				  3.关键字：left/center/right	  top/center/bottom
+
+
+过渡（transition）：
+	transition:过渡属性   过渡时长   过度函数   过渡延迟
+	如：transition:all .3s linear .2s
+	多个过渡属性可写在一起，中间用逗号隔开；过渡属性，过渡函数和过渡延迟可不写
+	如：transition:3s	默认过渡全部属性all
+	
+	过渡时间曲线函数：
+		transition-timing-function:
+			取值：1.linear		匀速过渡（默认）
+					  2.ease			慢速开始，中间加速，慢速结束
+					  3.ease-in	慢速开始，一直加速
+					  4.ease-out		快速开始，慢速结束
+					  5.ease-in-out		慢开始，慢结束，中间先加速再减速
+
+	过渡代码写在hover里，过渡就没有回来的效果
+
+
+动画（animation）：
+	一、使用关键帧定义动画
+		@keyframes	动画名 {
+			0% { }
+			...
+			100% { }
+		}
+		
+	二、调用动画
+		animation:动画名	持续时长	时间曲线函数	  动画延迟
+		以上属性值与过渡基本一致
+		
+		动画的播放次数：
+			animation-iteration-count:
+			取值：1.具体的播放次数
+					  2.infinite		无限次播放
+		
+		动画的播放顺序：
+			animation-direction:
+			取值：1.normal	  默认值	0%~100%
+					  2.reverse		100%~0%
+					  3.alternate	轮流播放，奇数次正向，偶数次逆向
+
+		以上所有属性都可以简写，与过渡基本一样
+			animation:name  duration  timing-function  delay  count  direction
+			最简方式为：animation:name  duration(过渡时长)
+			
+		动画在播放前后的显示状态：
+			animation-fill-mode:
+			取值：1.backwards	动画播放之前的延迟时间内，显示动画的第一帧
+					  2.forwards		动画播放结束之后，停留在最后一帧
+					  3.both			1和2的合体
+			
+			动画的播放与暂停：
+				animation-play-state:
+				取值：1.running	播放
+						  2.paused	暂停
+			
+		动画的兼容性：
+			低版本浏览器要使用动画，需要在动画声明的时候添加前缀
+				@-webkit-keyframes 动画名 { }
+				@-o-keyframes 动画名 { }
+				@-moz-keyframes 动画名 { }
+				@-ms-keyframes 动画名 { }
+			
+			
+css优化原则：
+	1.尽量减少http的请求个数
+	2.在页面的顶部引入css文件
+	3.将css和js写在外部单独的文件中
+	4.合并样式属性（能写群组，就不单写，能用简写，就不单独定义属性）
+	5.缩小样式文件的大小（能重用的尽量重用，减少样式重写）
+	6.避免出现空的href和src
+	7.代码压缩
+			
+			
+响应式布局：
+	响应式网页必须做到的几件事：
+		1.布局：使用流式布局（默认文档流+浮动）+弹性布局+栅格布局
+		2.文字和图片大小随着容器大小改变
+		3.媒体查询技术
+	
+	编写响应式布局：
+		1.视口（项目要在移动端运行，需要设置视口）：
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			width=device-width, 		设置视口宽度等于设备宽度
+			initial-scale=1					设置视口宽度初始不能被缩放
+		2.所有的内容/文字/图片都尽量使用相对尺寸，少使用绝对值
+		3.流式布局+弹性布局+媒体查询+栅格布局完成响应式布局
+		4.媒体查询（css3 Media Query）做响应式的必备技术
+			media：媒体，指的是浏览网页的设备
+							设备：screen（pc/pad/phone）
+										TV/print
+			根据浏览网页的设备不同，有选择的执行一部分css样式，忽略其他css样式
+			@media screen and (min-width:992px) { }													屏幕尺寸大于992px的写法
+			@media screen and (min-width:768px) and (max-width:991px) { }		屏幕尺寸大于768px小于991px的写法
+			@media screen and (max-width:767px) { }													屏幕尺寸小于767px的写法
+			
+			
+SASS（SCSS）：
+	一、定义
+		SASS是一款强化CSS的辅助工具，他和CSS的语法很像，在CSS的基础上增加了变量、嵌套、混合、导入、函数等高级功能
+	
+	二、安装
+		npm install -g sass
+	
+	三、预处理转换
+		1.手动将单个scss文件转换成css文件 或 自动监听单个scss文件的改动，自动编译到另一个css文件里
+			当前目录下，命令行输入  sass  xx.scss  xx.css	或	sass --watch  xx.scss xx.css
+		3.自动监听scss目录下所有scss文件改动，并自动编译到另一个css目录下
+			当前目录下，命令行输入  sass  --watch  scss:css
+	
+	四、导入
+		1.在scss语法中，如果scss文件，以下划线开头，那么这个scss就被称为局部scss文件
+		2.局部scss文件的特点
+		（1）每一个局部scss文件，就是一个小模块
+		（2）scss在做转换css的时候，不会转换局部scss文件
+		（3）一般会在全局scss文件中，导入局部scss文件，导入语法： @import "局部scss文件名称"	（局部scss导入时，不带下划线和后缀名）  这样就能将n个局部scss生成一个统一的css文件
+		（4）局部scss中的变量，可以在被导入的文件中使用
+	
+	五、混合器
+		1.把多个选择器都会用到的样式，封装进一个混合器中，需要的时候，调用混合器，实现代码的重用，跟js的方法原理差不多
+		2.声明混合器：
+			@mixin 混合器名称(参数1,参数2,...) {
+				样式...   如：color : red;
+			}
+		3.调用混合器
+			在要使用的选择器里写： @include 混合器名称(实参1,实参2,...)
+		4.混合器使用最多的场合是：css hack
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

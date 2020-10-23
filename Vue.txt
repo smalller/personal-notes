@@ -1,0 +1,534 @@
+脚手架：
+	步骤：
+		1.安装生成脚手架代码的工具：
+			npm i -g @vue/cli（cli3的语法）		npm i -g vue-cli（cli2的语法）
+			
+		2.用脚手架生成工具为本次项目生成一套脚手架结构代码：
+			vue create 项目名（cli3的语法）		vue init webpack 项目名（cli2的语法）	
+			
+		3.运行脚手架项目：
+			npm run serve（cli3的语法）		npm run dev（cli2的语法）
+			
+		4.打包项目
+			npm run build
+
+
+
+生命周期：
+	1.beforeCreate()			组件创建前执行
+	2.created()					组件创建后执行（该阶段没有虚拟DOM树，不能做DOM操作）
+	3.beforeMount()			页面首次加载之前执行
+	4.mounted()					页面首次加载完后执行
+	5.beforeUpdate()		data中的变量值更新之前执行
+	6.updated()					data中的变量值更新之后执行
+	7.beforeDestroy()		销毁组件之前执行
+	8.destroyed()				销毁组件之后执行
+		
+		
+		
+vue实例中的属性和方法：
+	一、$refs
+	（1）获取页面中所有添加了ref属性的元素，对其进行DOM操作
+		如：<h2 ref="myH2">你好</h2>
+				this.$refs.myH2.style.color="red"
+				
+	（2）父组件可获取子组件中的属性和方法（子组件给父组件传参）
+		如：<com1 ref="header"></com1>		// header为自定义的标识，com1为父组件中定义的子组件
+			在父组件中通过以下方式获取子组件中的属性和方法：
+				this.$refs.header.name		// name为子组件中的属性名
+				this.$refs.header.fn1			// fn1子组件中的方法名
+
+	二、$mount()		手动挂载vue实例
+	
+	三、$destroy		销毁vue实例
+	
+	四、$nextTick()		在DOM更新完成后再执行括号里的回调函数，一般在修改数据之后使用该方法，以便获取更新后的DOM
+	
+	五、$set()		通过普通方式为对象添加属性时，vue无法实时添加上去，要用$set进行添加
+		如：this.$set(对象名,"要添加到对象里的属性名","属性值")
+		
+	六、$delete()			删除对象中的属性
+		如：this.$delete(对象名,"要删除对象里的属性名")
+		
+	七、$ 和$route的区别
+		问题：一个带参数的路由地址，仅修改参数值，不修改相对路径名，整个页面不会刷新，无法加载新参数值对应的内容
+		解决方案一：
+			地址栏中参数值变化，说明props中的变量值也跟着变了，可以在watch中监听该变量，只要props中的变量变化，就重新发起请求，修改相关变量值，这样页面内容就会跟着改变
+			
+		解决方案二（监视地址栏$route）：
+			DOM中有location对象代表地址栏信息，可以获得地址栏中的信息
+			Vue中有$route代表地址栏；所以可以直接在watch中监听$route，只要$route发生变化就发起ajax请求，执行相关操作，引发页面中的内容更新
+		
+		$router：是路由器对象（路由实例对象），专门执行跳转动作的对象
+		$route： 是封装地址栏信息的对象（路由信息对象），是保存数据的，不执行相关操作
+		
+		
+		
+指令：
+	1.v-bind：专门绑定元素的属性值，只要元素的属性值需要根据变量自动变化时，都用v-bind。 v-bind:  可简写为 :
+		
+	2.根据条件控制元素的显示和隐藏
+	（1）控制一个元素的显示隐藏：v-show=""，如果引号里为真当前元素就显示，否则隐藏	
+	
+	（2）控制两个元素二选一的显示隐藏：v-if  v-else 
+			如：<元素1 v-if="判断条件">
+					<元素2 v-else>
+			如果判断条件返回true，就显示第一个元素，删除第二个元素，反之就显示第二个元素，删除第一个元素
+			强调：两个元素之间不能插入其他元素，v-else不需要写属性值
+	
+	（3）控制多个元素多选一的显示隐藏：v-else-if
+			如：<元素1 v-if="条件1">
+					<元素2 v-else-if="条件2">
+					<元素3 v-else-if="条件3">
+					...
+					<元素n v-else>
+	
+		三目运算符回顾：
+			1.一个条件，2件事，二选一执行：
+				条件 ？ 操作1 ： 操作2
+		
+			2.多个条件，多选一执行：
+				条件1 ？ 操作1 ：
+				条件2 ？ 操作2 ：
+				条件3 ？ 操作3 ：
+								操作4
+			其实：问号代替的是if，冒号代替的是else
+			上面的操作可替换为：
+				if(条件1) {
+					操作1
+				} else if (条件2) {
+					操作2
+				} else if (条件3) {
+					操作3
+				} else {
+					操作4
+				}
+	
+	3.v-for：
+		<要反复生成的元素 v-for="(item,index) of 数组 :key='index'">
+	
+	4.v-on: 	绑定事件，可简写为@
+		如：@事件名 = "处理函数"
+	（1）如果处理函数既需要参数，又需要事件对象，就要在绑定事件时的处理函数上写上要传的参数和$event（跟DOM中的e一样）
+		如：<p @click="say(item,$event)"></p>
+	（2）事件修饰符：
+		如：限制触发这个事件的键盘号（如只有按回车才能触发该事件）
+			@keydown.13 = "change"		//13表示回车的键盘号，只有按回车键才能触发该键盘事件
+			
+	5.绑定HTML片段：v-html
+		如：<h1 v-html  = "msg"></h1>		//msg变量里就写相关片段内容
+		
+	6.防止用户刷新页面时短暂看到{{}}
+	（1）v-cloak： 专门用于在new Vue加载完之前，临时隐藏个别元素；该方法适用于隐藏大片内容结构复杂的元素
+			使用步骤：
+				1）先在style中用属性选择器为有v-cloak属性的元素，添加隐藏样式，vue在加载完之后，会自动移除所有元素上的v-cloak属性
+				2）在要隐藏的元素上，添加v-cloak属性。 如： <h1 v-cloak>{{mes}}</h1>
+			问题：v-cloak是彻底隐藏，包括隐藏样式和内容
+			
+	（2）v-text="表达式"：	仅内容暂时隐藏，其他样式会正常显示
+			如：<h1 v-text="mes"></h1>
+		
+	7.绑定样式（绑定class）：									
+			<元素 :class="变量名">
+			变量:{
+				css类名1:true/false,
+				css类名2:true/false,
+				css类名3:true/false
+			}
+			所有值为true的class，最后会拼成一个完整的字符串，赋值给class属性
+
+
+
+计算属性（computed）：
+	一、定义：不实际保存属性值，仅通过其他属性计算获得属性值；只要一个属性的值不是现成的，而需要通过其他属性计算，才能获得
+	
+	二、与普通方法区别：
+		1.计算属性是基于它的依赖变量进行更新的，只有在相关依赖发生改变时才能更新变化
+		2.计算属性是有缓存的，只要相关依赖变量没有改变，多次访问计算属性得到的值都是之前缓存的计算结果，除非它依赖的值改变了，计算结果才会跟着改变
+		3.无法通过外部函数修改计算属性的结果/值
+		
+	三、步骤：
+		（1）定义计算属性，根据其他属性的值，动态计算获得自己的属性（计算属性本质是一个函数）
+				computed : {
+					变量名() {
+						... 通过依赖变量，计算获得统计结果，并返回
+						return 计算结果
+					}
+				}
+				调用：<元素>{{变量名}}</元素>
+		（2）使用计算属性进行绑定（计算属性的用法，和普通变量、属性完全一样，但不需要加圆括号）
+		
+	四、get和set
+		1.计算属性由两部分组成，get和set，分别用来获取计算属性和操作计算属性
+		2.默认只有get，如果需要set，则要自己添加
+			如：computer : {
+						num : {
+							get() {
+								... 通过依赖变量，计算获得统计结果，并返回
+								return 计算结果
+							},
+							set() {
+								修改依赖变量的值
+							}
+						}
+					}
+					
+					
+					
+侦听属性（watch）：如果当一个变量值改变时，就立刻自动执行相关操作
+	watch : {
+		变量名(newVal,oldVal) {
+			console.log("旧值为：" + oldVal,"新值为：" + newVal);			//可以看到新值和旧值的改变（该属性可以用来请求ajax请求操作）
+		}
+	}
+	
+	$watch和侦听属性效果一样
+		如：this.$watch("age",(newVal,oldVal)=> {				//第一个参数为要监听的变量，第二个参数为一个回调函数，有2个参数，分别为新值和旧值
+					console.log("旧值为：" + oldVal,"新值为：" + newVal);
+				});
+				
+	深度监视：常用于监视对象中的属性变化情况，但是它只能监视到改变后的值，原来的值监视不到
+		如：user: {												//user为一个对象
+					handler(newVal) {					//固定写法
+						console.log("新值为：" + newVal.name);
+					},
+					deep: true				//表示深度监视
+				}
+
+
+
+过滤器：
+	1.添加过滤器（main.js中）：
+		Vue.filter("过滤器名",function(oldVal) {
+			...
+			return 处理过后的新值
+		})
+	
+	2.使用过滤器：
+		在绑定语法中：{{变量 | 过滤器名}}
+
+
+
+axios：
+	安装axios
+		1.本地安装（即使拷贝走项目，项目依然能使用axios）
+			npm i -save axios
+	
+		2.全局安装（在当前电脑的系统盘中安装，拷贝走项目，axios就没有了）
+			npm i -g axios
+
+	引入（在main.js中）
+		1.import axios from 'axios'
+		2.Vue.prototype.axios = axios;
+
+	操作
+		1.配置默认请求地址
+			axios.defaults.baseURL = '';
+
+	axios拦截器
+		1.请求拦截
+		axios.interceptors.request.use(
+			config => {
+				console.log("请求成功1", config);
+				return config;
+			},
+			err => {
+				return Promise.reject(err)
+			}
+		)
+		
+		2.响应拦截
+		axios.interceptors.response.use(
+			response => {
+				console.log("响应成功2", response);
+				return response
+			},
+			//接口错误状态处理，也就是说无响应时的处理
+			error => {
+				return Promise.reject(error.response.status) //接口返回的错误信息
+			}
+		)
+		
+
+
+组件（component）：
+	一、使用：
+		1.全局组件引入与使用（在main.js里操作）
+		（1）引入
+			import Myheader from './components/Myheader'
+		（2）注册
+			Vue.component("Myheader",Myheader);		//在要用该全局组件的地方直接写 <Myheader></Myheader>
+
+		2.子组件在父组件中引入与使用
+		（1）在父组件的script里引入
+			import childComponent1 from "../../components/ChildComponent1";
+		（2）在 components 里注册
+			components: {
+				childComponent1
+			}
+		（3）在要用该组件的地方直接写 <child-component1></child-component1>
+
+
+	二、组件间传参：
+		1.父给子传参（属性，数组，对象）：
+			1）父组件中：
+					<子组件标签  :自定义属性名 = "父组件里要传的参数">	注：自定义属性名最好要和要传的参数名一样
+			2）子组件中：
+					props:["要接收的自定义属性名"]			props里的属性名跟普通的属性、变量、方法、对象的用法是一样的，该怎么用就怎么用
+					
+		2.父给子传方法：
+			1）父组件中：
+				<子组件标签  @test = "test">
+			2）子组件中：
+				在要使用的地方： this.$emit("test",{msg : "hello father"});			//第二个参数为要回传给父组件的参数，可不写
+				如果子组件要传给父组件值，父组件就要接收
+				接收方式：
+					test(res) {
+						console.log(res);		//res为子组件传给父组件的参数集合
+					}
+					
+		3.子组件使用父组件中的属性、对象、数组、方法：
+			子组件中：this.$parent.fn();					//fn为父组件中的方法
+					
+		4.父组件中使用子组件的属性、对象、数组、方法
+				import com1 from 'xxx'
+				<com1 ref="com"></com1>			// com为自定义的标识，com1为父组件中定义的子组件
+				this.$refs.com.fn()								// fn子组件中的方法名
+				
+		5.通知传值/广播传值（只能传基本数据类型，适用于父子组件、兄弟组件间进行传值）
+		（1）通过 VueEmit.$emit('名称','数据') 传播数据
+		（2）在接收收数据的地方通过VueEmit.$on('名称',function(data){ ... }) 接收（data为接收到的值）
+		
+
+	三、动态组件
+		1.component加载方式：切换出去的组件不会被保留在内存中，当切换回来时，里面的内容会被重新渲染
+		（1）在data中定义一个变量，并附上初始要展示的组件
+				如：data () {
+							return {
+								flag : "mycom"
+							}
+						}
+			
+		（2）在要展示组件的位置写上 <component :is="flag"></component>				:is里的属性值是定义的变量名（falg）也就是要展示的组件
+				如果要动态的加载某个组件，就直接修改flag的属性值，把里面的值改为要展示的组件，即可实现动态加载某个组件
+				
+		2.keep-alive加载方式：可以把切换出去的组件保留在内存中，可以保留它原来的状态，避免被重新渲染，可以减少数据请求（常用方式），使用方式和component方式一样
+			 在要显示的地方写上：
+					<keep-alive>
+						<component :is="mycom"></component>
+					</keep-alive>
+					
+					
+	四、单向数据流
+		1.props是单向绑定的，当父组件的属性变化时，传给子组件相应的值也会跟着改变
+		
+		2.子组件修改传过来的值，不会影响的父组件中的值，但是会报错
+			解决报错：
+				1.如果子组件想把传过来的数据作为局部数据来使用，可以将这个数据赋给另一个变量，再进行操作
+				
+		3.如果子组件想修改父组件传过来的数据，并且想同步更新到父组件中，有2个方法
+			（1）显示的触发一个事件
+					1）传值方式加上修饰符.sync
+						如：<com1 :name.sync="name"></com1>
+					2）在子组件中的相关函数中写：this.$emit('update:要修改的数据名','要修改成的值')
+					
+			（2）可以将父组件中的数据包装成对象，然后在子组件中修改对象的属性（因为对象是引用类型的，指向同一个内存空间，推荐！）
+					注：父组件传值就直接传这个对象，子组件也接收这个对象，操作时，就操作这个对象里的某个属性就可以了
+			
+
+			
+路由：
+	一、路由跳转：
+		（1）HTML中：
+				1）<router-link to="/相对路径">文本</router-link>
+				2）<router-link :to="{name:'name所对应的组件名'}">文本</router-link>
+				
+				router-link标签上的一些用法：
+					tag:	事先将一个标签转换为其他标签
+						如：<router-link tag="li"></router-link>
+					
+					active-class:	如果该标签被选中就执行什么样式
+						如：<router-link active-class="active"></router-link>
+						
+					.router-link-active：当前标签被选中后就执行这个样式里的内容
+			
+		（2）JS中：
+			this.$router.push("/相对路径");			
+			
+		（3）路由自己跳自己（复制到 router/index.js中）：
+			const originalPush = VueRouter.prototype.push
+			VueRouter.prototype.push = function push(location) {
+				return originalPush.call(this, location).catch(err => err)
+			}	
+			
+	二、路由嵌套
+		（1）在要嵌套的路由里，写上相关参数
+			如：{
+						path : '/index',
+						name : 'index',
+						component : index,
+						children : [
+							{
+								path: 'agencyList',
+								name: 'agencyList',
+								component: agencyList,
+							},
+							...
+						]
+					}			
+		（2）在要展示该子路由的地方，写上 <router-view></router-view>
+			
+	三、路由传参：		
+		this.$router.push（即实现了路由跳转，又实现了携带参数过去）
+		（1） this.$router.push({ path: `/details/${id}`})		// 页面刷新数据不会丢；直接在路由地址的后面加上要传的值（地址跟参数，都要在路由里的path里配置 path:"/details/:id"）
+				接收方式：this.$route.params
+		
+		（2）this.$router.push({path:'/相对路径',query:{参数1:'xxx',参数2:'xxx'}});		//相当于get显式传参
+				接收方式：this.$route.query
+			
+		（3）this.$router.push({name:'组件名',params:{参数1:'xxx',参数2:'xxx'}});		//页面刷新数据会丢失，相当于post隐式传参
+				接收方式：this.$route.params
+				
+		router-link传参
+		（1）params传值与接收（相当于post传参方式）
+				如：<router-link :to="{name:'组件名',params:{参数1:'xxx',参数2:'xxx'}}">文本</router-link>
+			接收方式：this.$route.params
+			
+		（2）query传值与接收（相当于get传参方式，传的值会显示在地址栏上）
+				如：<router-link :to="{path:'/相对路径',query:{参数1:'xxx',参数2:'xxx'}}">文本</router-link>
+			接收方式：this.$route.query
+			
+
+	四、路由导航守卫
+	（1）每个守卫方法接收三个参数
+		1）to：即将要进入的目标 路由对象
+		2）from：当前导航正要离开的路由
+		3）next：一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数
+			next(): 进行管道中的下一个钩子
+			next(false): 中断当前的导航
+			next('/') 或者 next({ path: '/' }): 跳转到一个不同的地址
+	
+	（2）导航守卫分类
+		1）router.beforeEach()			全局前置守卫（当一个导航触发时，全局前置守卫按照创建顺序调用）
+			如：router.beforeEach((to, from, next) => {
+						if (to.meta.isLogin) {
+							if (localStorage.getItem("username")) {
+								alert("登录成功");
+								next();
+							} else {
+								alert("请输入正确的信息并登录");
+								next("/");
+							}
+						} else {
+							next();
+						}
+					})
+		2）router.beforeResolve		全局解析守卫（在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用）
+		3）router.beforeEnter			路由独享的守卫（可以在路由配置上直接定义 beforeEnter 守卫）
+	
+	（3）完整的导航解析流程
+			导航被触发。
+			在失活的组件里调用 beforeRouteLeave 守卫。
+			调用全局的 beforeEach 守卫。
+			在重用的组件里调用 beforeRouteUpdate 守卫 (2.2+)。
+			在路由配置里调用 beforeEnter。
+			解析异步路由组件。
+			在被激活的组件里调用 beforeRouteEnter。
+			调用全局的 beforeResolve 守卫 (2.5+)。
+			导航被确认。
+			调用全局的 afterEach 钩子。
+			触发 DOM 更新。
+			调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
+
+
+
+
+
+	
+	
+	
+	
+MintUI组件库：
+	一、下载使用mint-ui组件库
+		npm i mint-ui -S 
+	
+	二、使用mint-ui组件库（配置）：在main.js文件里进行操作
+		1.引入组件库
+			import MintUI from "mint-ui"
+			
+		2.引入组件库样式文件
+			import "mint-ui/lib/style.css"
+			
+		3.注册
+			Vue.use(MintUI)
+			
+	
+	三、相关组件
+		如果要用官方文档里的方法进行调用，就要引入相关组件，否则就得用以下的方法进行调用
+		
+		1.Toast短消息提示框组件
+			this.$toast({})
+
+		2.Message Box
+		（1）弹出式提示框
+			this.$messagebox({})
+			
+		（2）确认消息框
+			this.$messagebox.confirm("提示消息")
+				.then(res => {})		//确认后的回调函数
+				.catch(err => {})	//取消后的回调函数
+		（3）输入框
+			this.$messagebox.prompt("请输入xxx")
+				.then(({ value, action }) => {})	//输入成功后的回调（value为输入的内容，action为执行的选项）
+				.catch(err => {});		//取消后的回调
+		
+		3.面板（类似于路由的原理）
+			一个父面板中间可以有多个子面板，可以相互之间切换
+			如：
+				<!--父面板-->
+				<mt-tab-container v-model="active">
+					<!--子面板-->
+					<mt-tab-container-item id="tab1">子面板1</mt-tab-container-item>
+					<mt-tab-container-item id="tab2">子面板2</mt-tab-container-item>
+					<mt-tab-container-item id="tab3">子面板3</mt-tab-container-item>
+				</mt-tab-container>
+			当active变量中保存tab1时，则显示tab1子面板，保存谁就显示谁
+	
+		4.导航条（tabbar）
+			<mt-tabbar fixed v-model="active">
+				<mt-tab-item id="tab1">导航1</mt-tab-item>
+				<mt-tab-item id="tab2">导航2</mt-tab-item>
+				<mt-tab-item id="tab3">导航3</mt-tab-item>
+			</mt-tabbar>
+			
+		fixed：将tabbar固定在页面底部
+		当用户点击某个导航时，当前导航的id会保存在active变量中（常用于配合面板使用，能实现点哪个导航就跳到哪个子面板去，面板中的id和导航中的id的值要对应一样）
+	
+		注意事项：如果当前组件没有提供事件，那就采取绑定原生事件的方法（给事件加上 .native）
+		如：<mt-tab-item @click.native="change"></mt-tab-item>
+	
+	
+	
+	
+vue3使用：
+		项目创建好后在命令行中输入：vue add vue-next
+
+
+vue3新特性：
+	一、performance（比vue2的runtime快了2倍）
+		1.重写了虚拟dom的实现
+		2.编译模板的优化（运行时编译）
+		3.update性能提高
+		4.SSR速度提高
+		
+	二、tree shaking（按需编译代码）
+		1.fragment：不再限于模板中的单个根节点
+	
+	三、ts support（更优秀的ts支持）
+	四、composition API（组合API）
+	五、custom renderer API（自定义渲染器）
+	六、内置新特性组件
+	
+	
+	
+
