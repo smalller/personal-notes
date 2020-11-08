@@ -1,0 +1,49 @@
+基本操作
+	一、全局安装ts：
+		npm install typescript -g
+		
+	二、ts文件转换成js文件（正常情况，ts要运行在node环境里，需要先编译成js文件）：
+		tsc demo.ts
+		
+	三、安装ts运行模块（能够直接编译ts文件到node环境里）：
+		npm install -g ts-node
+		
+	四、运行ts文件：
+		ts-node demo.ts
+		
+	五、指定编译文件输入目录：
+		tsc --outDir ./dist ./scr/demo.ts
+	
+	六、指定编译的代码版本目标，默认为编译成ES3（--target es5）：
+		tsc --outDir ./dist --target es6 ./scr/demo.ts
+		
+	七、监听ts文件的改变，自动进行编译（--watch）：
+		tsc --outDir ./dist --target es6 --watch ./scr/demo.ts
+		
+	八、使用编译配置文件，快捷操作ts
+		1.在根目录创建tsconfig.json
+		2.输入以下代码：
+			{
+				"compilerOptions": {
+					"target": "ES5",
+					"watch": true,
+					"outDir": "./dist"
+				},
+				"include": ["./src/**/*"]
+			}
+		3.直接在命令行输入tsc，即可实现自动编译等操作
+		4.指定配置文件目录（默认情况下tsconfig.json是放在根目录的，如果放在其他目录/其他名称，就要进行此操作）
+			tsc -p ./config/tsconfig.json
+			
+			
+类型系统：
+	let str : string = 'hello';	//此处的str变量就只能是string类型，后续会被类型沿用切且不能修改
+		
+		
+		
+		
+		
+		
+		
+		
+		
