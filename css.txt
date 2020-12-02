@@ -46,8 +46,11 @@
 		 text-overflow: ellipsis;
 		 -webkit-line-clamp: 4;
 		 -webkit-box-orient: vertical;
+		 
+		 
+处理一行文字还没占满就自动换行：word-break: break-all;
 
-		
+
 伪类选择器：
 	a:link{ }			a链接没有被点击访问时的效果（正常效果）
 	a:visited{ }		a链接被点击访问过后的效果

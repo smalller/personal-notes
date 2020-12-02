@@ -1,3 +1,9 @@
+//数据类型判断
+function toRawType(value) {
+    return Object.prototype.toString.call(value).slice(8, -1);
+}
+
+
 //时间戳转换
 function timestampToTime(timestamp) {
     let date = new Date(timestamp.length == 10 ? timestamp * 1000 : timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -136,7 +142,7 @@ function type(target) {
     var template = { //具体什么类型，就从这里调用并返回具体的类型
         "[object Array]": "array",
         "[object Object]": "object",
-        "[object ]Boolean": "boolean - object",
+        "[object Boolean]": "boolean - object",
         "[object String]": "string - object"
     }
     if (target === null) {
