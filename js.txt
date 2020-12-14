@@ -392,7 +392,7 @@ if else 和 switch case 的区别：
 	七、删除数组末尾的元素（返回值为删除的元素值）：arr.pop()
 	八、删除数组开头的元素（返回值为删除的元素值）：arr.shift()
 	九、把数组里的序列顺序颠倒：arr.reverse()
-	十、判断一个对象是不是数组的方式：Array.isArray(arr)		
+	十、检测数组：Array.isArray(arr)		
 	十一、给数组里的无序数组排序，从小到大的顺序：arr.sort()
 		准确版排序：（可在sort()里添加一个函数）
 			arr.sort(function(a,b) {

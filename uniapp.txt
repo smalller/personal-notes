@@ -11,4 +11,41 @@
 	
 	二、uni.$once	只可调用一次，用法与uni.$on一样（应用场景：首屏加载广告等）
 	
+
+nvue引入字体图标：
+	一、在APP.vue文件里的onLaunch生命周期里写上以下内容，即可全局引入
+		const domModule = weex.requireModule('dom')
+		domModule.addRule('fontFace', {
+			'fontFamily': "iconfont",
+			'src': "url('http://at.alicdn.com/t/font_1469606063_76593.ttf')"	//复制阿里图标库的unicode里的.ttf后缀名链接
+		});
 	
+	二、在要引用字体图标的地方写
+		<text class="iconfont">&#xe6dc;</text>
+		
+
+三、给元素添加点击后的样式
+	<view hover-class="xxx" hover-stop-propagation :hover-start-time="2000"></view>
+	hover-class								点击后的样式类名
+	hover-stop-propagation		阻止冒泡
+	:hover-start-time="2000"		点击延时多久后才执行相关样式
+	:hover-stay-time="2000"		点击手指离开屏幕之后持续相关样式多久
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
