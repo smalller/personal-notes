@@ -76,9 +76,10 @@ rest语法（代替ES5的 arguments，在不确定形参个数时可以用到此
 			如：
 				let user = {
 					fn1() {...},		//fn1 : function() {...}的简写方式
-					fn2() {...}
+					fn2() {...},
+					a : 1
 				}
-				let {fn1,fn2} = user;		//解构user对象中的方法fn1和fn2（这一个名字即用作匹配，又用来做变量名）
+				let {fn1,fn2,a} = user;		//解构user对象中的方法fn1和fn2（这一个名字即用作匹配，又用来做变量名）
 				fn1();
 				fn2();
 				

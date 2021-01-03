@@ -1,0 +1,19 @@
+面向对象：
+	ECMA中有2种属性：数据属性和访问器属性
+	一、数据属性
+	数据属性包含一个数据值的位置，在这个位置可以读取和写入值，数据属性有4个描述其行为的特性
+		1.configurable：表示能否通过delete删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。默认为true
+		2.enumerable：表示能否通过for-in循环返回属性。默认为true
+		3.writable：表示能否修改属性的值。默认为true
+		4.value：包含这个属性的数据值，读取属性值的时候，从这个位置读；写入属性值的时候，把新值保存到这个位置。默认为undefined
+	
+	要修改属性默认的特性，必须使用ES5的Object.defineProperty()方法。这个方法接收三个参数：属性所在的对象、属性的名字和一个描述符对象，其中，描述符对象的属性必须是以上4种值，设置其中的一个或多个值，可以修改对应的特性值（第三个参数以对象的形式进行操作）
+	例如：
+	var person = {};
+	Object.defineProperty(person,'name',{
+		configurable:false,
+		value:'small_l'
+	});
+	
+	该例子创建了一个名为name的属性，它的值'small_l'        是只读的，不能调用delete，在严格模式下会报错，非严格模式不会发生操作；而且，一旦把configurable属性定义为不可配置的，就不能再把它变回可配置的了，此时只能调用writable特性，其他的都会报错；也就是说，可以调用多次Object.defineProperty()方法修改同一个属性，但在把configurable设置为false后就会有限制了；除非在原来的基础上进行修改
+	在调用Object.defineProperty()方法创建一个新的属性时，如果不指定以上4种特性，它们默认的值都是false
