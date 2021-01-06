@@ -99,6 +99,25 @@
 原型对象：
 	只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，该属性指向prototype属性所在函数的指针；如：Person.prototype.constructor指向Person。通过该构造函数，我们可以继续为原型对象添加其他属性和方法
 	
+	通过hasOwnProperty()方法，可以判断当前访问的属性是实例属性还是原型属性，为false则为原型属性，为true则为实例属性
+	如：person1.hasOwnProperty('name')
+	通过in操作符，无论该属性存在于实例中还是存在于原型中，都会返回true
+	如：'name' in person1
+	同时使用以上2种方法，就可以确定该属性是在原型对象中还是对象中
+	
+	要取得所有可枚举的实例属性，使用Object.keys()方法，接收一个对象作为参数，返回一个包含所有可枚举属性的字符串数组
+	如：Object.keys(Person.prototype)
+	要取得所有实例属性，无论它是否可枚举，可使用Object.getOwnPropertyNames()方法
+	如：Object.getOwnPropertyNames(Person.prototype)
+	以上2种方法都可以代替for-in循环
+	
+	原型的动态性：
+		重写原型对象会切断现有原型与任何之前已经存在的对象实例之间的联系，因为他们引用的仍然是最初的原型对象
+		
+	原生对象的原型
+		所有原生的引用类型（Object、Array、String等）都在其构造函数的原型上定义了方法
+		如：Array.prototype.sort();	String.prototype.substring
+		通过原生对象的原型，不仅可以取得所有默认方法的引用，而且也可以定义新方法
 	
 
 
