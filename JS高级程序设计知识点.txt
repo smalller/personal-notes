@@ -131,6 +131,19 @@
 	原型链：原型链在ES6之前作为实现继承的主要方法，基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法
 	所有函数的默认原型都是Object的实例，默认原型都会包含一个内部的指针，指向Object.prototype
 	确定原型和实例的关系：a instanceof Object	和 Object.prototype.isPrototypeOf(a)
+	
+
+
+代码约定：
+	变量名应为名词如car或person
+	函数名应以动词开始，如getName()，返回布尔值的函数一般以is开头，如isEnable()
+	变量名和函数名都应使用合乎逻辑的名字，不要担心长度
+	
+变量类型透明：
+	var found = false;		//布尔型
+	varr count = -1;		//数字
+	var name = '';			//字符串
+	var person = null;		//对象
 
 
 

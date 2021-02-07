@@ -1,13 +1,13 @@
 脚手架：
 	步骤：
 		1.安装生成脚手架代码的工具：
-			npm i -g @vue/cli（cli3的语法）		npm i -g vue-cli（cli2的语法）
+			npm i -g @vue/cli
 			
 		2.用脚手架生成工具为本次项目生成一套脚手架结构代码：
-			vue create 项目名（cli3的语法）		vue init webpack 项目名（cli2的语法）	
+			vue create 项目名	
 			
 		3.运行脚手架项目：
-			npm run serve（cli3的语法）		npm run dev（cli2的语法）
+			npm run serve/npm run dev
 			
 		4.打包项目
 			npm run build
@@ -50,7 +50,7 @@ vue实例中的属性和方法：
 	六、$delete()			删除对象中的属性
 		如：this.$delete(对象名,"要删除对象里的属性名")
 		
-	七、$ 和$route的区别
+	七、$router 和$route的区别
 		问题：一个带参数的路由地址，仅修改参数值，不修改相对路径名，整个页面不会刷新，无法加载新参数值对应的内容
 		解决方案一：
 			地址栏中参数值变化，说明props中的变量值也跟着变了，可以在watch中监听该变量，只要props中的变量变化，就重新发起请求，修改相关变量值，这样页面内容就会跟着改变
@@ -82,27 +82,6 @@ vue实例中的属性和方法：
 					<元素3 v-else-if="条件3">
 					...
 					<元素n v-else>
-	
-		三目运算符回顾：
-			1.一个条件，2件事，二选一执行：
-				条件 ？ 操作1 ： 操作2
-		
-			2.多个条件，多选一执行：
-				条件1 ？ 操作1 ：
-				条件2 ？ 操作2 ：
-				条件3 ？ 操作3 ：
-								操作4
-			其实：问号代替的是if，冒号代替的是else
-			上面的操作可替换为：
-				if(条件1) {
-					操作1
-				} else if (条件2) {
-					操作2
-				} else if (条件3) {
-					操作3
-				} else {
-					操作4
-				}
 	
 	3.v-for：
 		<要反复生成的元素 v-for="(item,index) of 数组 :key='index'">
