@@ -1,3 +1,11 @@
+ES6：新增支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型
+ES7：新增Array.prototype.includes 和指数操作符等
+ES8：新增异步函数（async/await）、SharedArrayBuffer 及 Atomics API，以及 Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()和字符串填充方法，另外明确支持对象字面量最后的逗号。
+ES9：新增异步迭代、剩余和扩展属性、一组新的正则表达式特性、Promise finally()
+ES10：新增Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()方法，以及 Symbol.prototype.description 属性，明确定义了 Function.prototype.toString()的返回值并固定了 Array.prototype.sort()的顺序。另外，这次修订解决了与 JSON 字符串兼容的问题，并定义了 catch 子句的可选绑定。
+
+
+
 面向对象：
 	定义：无序属性的集合，其属性可以包含基本值，对象或函数
 	ECMA中有2种属性：数据属性和访问器属性
@@ -132,6 +140,7 @@
 	所有函数的默认原型都是Object的实例，默认原型都会包含一个内部的指针，指向Object.prototype
 	确定原型和实例的关系：a instanceof Object	和 Object.prototype.isPrototypeOf(a)
 	
+<<<<<<< HEAD
 
 
 代码约定：
@@ -144,6 +153,39 @@
 	varr count = -1;		//数字
 	var name = '';			//字符串
 	var person = null;		//对象
+=======
+	
+	
+
+类：
+	一、类定义
+		class Person {}		//类声明
+		const Person = class {}		//类表达式
+		类表达式在它们被求值前也不能引用，并且类没有提升；类受块级作用域限制。
+		类可以包含构造函数方法、实例方法、获取函数、设置函数和静态类方法，但这些都不是必需的。空的类定义照样有效。默认情况下，类定义中的代码都在严格模式下执行。
+	
+	二、类构造函数
+		constructor 关键字用于在类定义块内部创建类的构造函数。方法名 constructor 会告诉解释器在使用 new 操作符创建类的新实例时，应该调用这个函数。构造函数的定义不是必需的，不定义构造函数相当于将构造函数定义为空函数。
+		类实例化时传入的参数会用作构造函数的参数。如果不需要参数，则类名后面的括号也是可选的。
+		class Person {
+			constructor(name) {
+				console.log(arguments.length);
+				this.name = name || null;
+			}
+		}
+		
+		let p1 = new Person; // 0
+		console.log(p1.name); // null
+		
+		let p2 = new Person(); // 0
+		console.log(p2.name); // null
+		
+		let p3 = new Person('Jake'); // 1
+		console.log(p3.name); // Jake
+		
+		类构造函数与构造函数的主要区别是，调用类构造函数必须使用new操作符。而普通构造函数如果不使用new调用，那么就会以全局的this（通常是window）作为内部对象。调用类构造函数时如果忘了使用 new 则会抛出错误
+		
+>>>>>>> 456b43d1e75572de8b49dc4acfca97c5f0c03952
 
 
 
