@@ -3,6 +3,14 @@ function toRawType(value) {
     return Object.prototype.toString.call(value).slice(8, -1);
 }
 
+function toRawType(type) {
+    if (typeof type !== 'object') {
+        return typeof type
+    } else {
+        return Object.prototype.toString.call(type).slice(8, -1);
+    }
+}
+
 
 //时间戳转换
 function timestampToTime(timestamp) {
@@ -100,8 +108,28 @@ function cancleHandler(event) {
     }
 }
 
+//基础版深拷贝1
+function deepClone(origin, target = {}) {
+    const toStr = Object.prototype.toString;
+    for (let key in origin) {
+        if (key in origin) {
+            if (typeof origin[key] === 'object' && origin[key] !== null) {
+                if (toStr.call(origin[key]) === '[object Array]') {
+                    target[key] = [];
+                } else {
+                    target[key] = {};
+                }
+                deepClone(origin[key], target[key])
+            } else {
+                target[key] = origin[key];
+            }
+        }
+    }
+    return target;
+}
 
-// 深度克隆（克隆之后,被克隆者不受克隆者操作的影响）
+
+//基础版深拷贝2
 function deepClone(origin, target) {
     var target = target || {};
     toStr = Object.prototype.toString;
@@ -109,7 +137,7 @@ function deepClone(origin, target) {
 
     for (var prop in origin) {
         if (origin.hasOwnProperty(prop)) {
-            if (origin[prop] !== "null" && typeof (origin[prop]) == "object") {
+            if (origin[prop] !== null && typeof (origin[prop]) == "object") {
                 if (toStr.call(origin[prop]) == arrStr) {
                     target[prop] = [];
                 } else {
@@ -142,8 +170,8 @@ function type(target) {
     var template = { //具体什么类型，就从这里调用并返回具体的类型
         "[object Array]": "array",
         "[object Object]": "object",
-        "[object Boolean]": "boolean - object",
-        "[object String]": "string - object"
+        "[object Boolean]": "boolean",
+        "[object String]": "string"
     }
     if (target === null) {
         return "null";
@@ -208,10 +236,4 @@ function creatAppend(tag, parent) { //传入要创建的标签和要追加到的
         parent.appendChild(newElement); //就将该元素追加元素到父元素上
     }
     return newElement; //返回当前创建并追加好的元素
-}
-
-
-
-export {
-    timestampToTime
 }

@@ -1,7 +1,7 @@
 ES6：新增支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型
 ES7：新增Array.prototype.includes 和指数操作符等
 ES8：新增异步函数（async/await）、SharedArrayBuffer 及 Atomics API，以及 Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()和字符串填充方法，另外明确支持对象字面量最后的逗号。
-ES9：新增异步迭代、剩余和扩展属性、一组新的正则表达式特性、Promise finally()
+ES9：新增异步迭代、剩余和扩展属性、一组新的正则表达式特性、Promise.finally()
 ES10：新增Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()方法，以及 Symbol.prototype.description 属性，明确定义了 Function.prototype.toString()的返回值并固定了 Array.prototype.sort()的顺序。另外，这次修订解决了与 JSON 字符串兼容的问题，并定义了 catch 子句的可选绑定。
 
 
@@ -174,7 +174,37 @@ ES10：新增Array.prototype.flat()/flatMap()、String.prototype.trimStart()/tri
 
 
 
-
+代理：
+	代理是使用 Proxy 构造函数创建的，这个构造函数接收两个参数：目标对象和处理程序对象
+	如：
+	const target = {
+		id: 'target'
+	};
+	const handler = {};
+	const proxy = new Proxy(target, handler); 
+	
+	target：要使用 Proxy 包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）。
+	handler：一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。
+	
+	const p = new Proxy(target, {
+		get: function(target, property, receiver) {
+			// receiver
+		}
+	});
+	
+	get 捕获器用于拦截对象的读取属性操作，该捕获器含有三个参数：
+	target：目标对象。
+	property：被读取的属性名。
+	receiver：指向当前的 Proxy 对象或者继承于当前 Proxy 的对象。
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

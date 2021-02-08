@@ -1,71 +1,4 @@
-﻿web语义化H5标签：
-	<header></header>															头部专属标签
-	<nav></nav>																		导航条专属标签
-	<article></article>																文章专属标签
-	<aside></aside>																侧边栏专属标签
-	<footer></footer>															底部专属标签
-	<section></section>															章节标签
-	<time datetime="2019-07-12"></time>						时间专属标签	datetime属性可有可无，写了之后以里面的属性值的时间为标准
-	<address></address>														地址专用标签
-	<code></code>																	代码专用标签，里面可以写代码，一般用得少，用于技术类分享网站
-	<mark></mark>																	重点区域标记专用标签，相当于着重符号
-	<progress value="80" max="100"></progress>		数据条
-	
-	
-表单新增属性：
-	autofocus		自动获取焦点，进入页面，鼠标焦点就直接获取了，直接写在标签里就可以了
-	pattern=""	里面写正则表达式，如果满足正则就提交，否则就不提交
-	disabled		禁用表单控件，不能提交
-	readonly		设置表单为只读，但能提交
-	
-	
-新增input表单：
-	type="range"			滑块
-	type="email"			邮箱（只能输入邮箱类型的文本）
-	type="number"		数字（让表单只能输入数字）	
-		滑块和数组的相关属性：
-			min 	最小输入值	
-			max 	最大输入值	
-			step 	每次变化的值
-			value 	当前值为多少
-	日期表单的type值可以为以下内容：
-		date						选取日、月、年								
-		month					选取月、年									
-		week						选取周和年									
-		time						选取时间（小时和分钟）						
-		datetime				选取时间、日、月、年（UTC 时间）		
-		datetime-local		选取时间、日、月、年（本地时间）
-	上传文件表单：<input type="file" multiple>		可以提交电脑上的文件，multiple属性表示可以提交多个文件，否则只能提交一个文件
-
-	
-表单下拉列表新属性：
-	<optgroup></optgroup>	分组标签（用于清晰显示下拉列表里的分组情况）
-	如<optgroup label="四川省">
-			<option>达州</option>
-			<option>成都</option>
-			<option>绵阳</option>
-		</optgroup>
-		<optgroup label="浙江省">
-			<option>杭州</option>
-			<option>温州</option>
-			<option>宁波</option>
-		</optgroup>
-	
-
-单行文本自定义列表：（文本框获得焦点时，就会弹出下拉自定义选项列表）
-	<input type="text" list="rx">
-	<datalist id="rx">
-		<option>南京</option>
-		<option>北京</option>
-		<option>东京</option>
-	</datalist>
-	
-	
-视频和音频：	
-	<video src="">您的浏览器版本太低，请升级。</video>	
-	<radio src="">您的浏览器版本太低，请升级。</radio>	
-
-相关常用属性：
+﻿音视频相关常用属性：
 	controls： 一些播放控件，如快进，暂停等
 	loop：	循环播放
 	muted：	音视频为静音
@@ -76,21 +9,14 @@
 		（2）metadata：只预加载元数据（视频时长/视频第一个画面/视频高度和宽度）
 		（3）auto：加载元数据并且加载一定时长视频（默认值）
 
-video兼容写法：(浏览器会逐一查看视频格式，如果都不支持，就会显示最下面的内容)
+
+音视频兼容写法：(浏览器会逐一查看视频格式，如果都不支持，就会显示最下面的内容)
 	<video controls loop id="vid">
 		<source src="video.mp4">
 		<source src="video.ogg">
 		<source src="video.webm">
 		您的浏览器版本太低，请升级。
 	</video>
-	
-radio兼容写法：(浏览器会逐一查看音频格式，如果都不支持，就会显示最下面的内容)
-	<radio controls loop>
-		<source src="video.mp3">
-		<source src="video.ogg">
-		<source src="video.webm">
-		您的浏览器版本太低，请升级。
-	</radio>
 	
 
 JS的相关属性与方法（操作多媒体专用）: 

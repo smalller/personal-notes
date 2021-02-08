@@ -1,3 +1,7 @@
+数据类型：
+	基本类型：Number、String、Boolean、Null、Undefined、Symbol、BigInt
+	引用类型：Object（Array、Function、Date、RegExp、Math）
+
 关于字符串的一些转换类型方法：
 let demo = "123-456-789";
 
@@ -49,7 +53,7 @@ let demo = "123-456-789";
 （6）3 + null = 3	null会转换为0
 
 
-显式转换：
+强制转换：
 	Number(将其转换为数值型)：
 		Number(false);			将其他类型转换成数值类型, undefined和字母不能转换为数值类型，因为它不是一个数，结果会为NaN，但它们转换后的类型还是number类型；null会转换为0
 
@@ -138,7 +142,39 @@ let demo = "123-456-789";
 	
 	三、属性名 in 对象名
 		如："ename" in person
+
+
+
+数组:
+	ES6新增的构造方法：
+	一、Array.of
+	二、Array.from
+		接收3个参数
+		1.类似数组的对象，必选
+		2.加工函数，新生成的数组会经过函数的加工再返回，可选
+		3.this作用域，表示加工函数执行时this的值，可选
 	
+	数组的判断：
+		let a = [];
+		Array.isArray(a);
+		a instanceof Array;
+		a.constructor === Array;
+		Array.prototype.isPrototypeOf(a);
+		Object.getPrototypeOf(a) === Array.prototype;
+		Object.prototype.toString.call(a) === '[object Array]';
+	
+	数组的相关方法：
+		一、改变数组自身的方法：pop、push、reverse、shift、sort、splice、unshift、copyWithin、fill
+		二、不改变数组自身的方法:concat、join、slice、toString、toLocateString、indexOf、lastIndexOf、includes、toSource(暂未形成标准)
+		三、不改变自身的数组遍历方法：forEach、every、some、filter、map、reduce、reduceRight、entries、find、findIndex、keys、values
+	
+	类数组arguments转为数组的方法（因为类数组不能使用数组原型上的方法，所以要转成数组）：
+		Array.prototype.concat.apply([],arguments);
+		Array.prototype.slice.call(arguments);
+		Array.from(arguments);
+		[...arguments];
+		
+
 
 
 数组的相关方法API：
@@ -221,7 +257,7 @@ Math对象：
 		Math.ceil(5.01);	//对数进行向上取整，值为6
 		
 	（7）取随机数：
-		Math.random();							//取0到1之间的随机小数
+		Math.random();							//取0到1之间的随机小数（包含0，不包含1）
 		Math.random()*10;						//取0到10之间的随机小数
 		Math.floor(Math.random()*(y+1-x)+x);	//取x到y之间的随机整数
 
@@ -340,10 +376,11 @@ Date对象：
 
 构造函数：
 	一、new的原理（步骤）：
-	（1）新建一个空对象
-	（2）让子对象自动继承原型
-	（3）用new调用构造函数，将构造函数中的this，都吸引到new上，然后通过强行赋值的形式，给新对象new添加规定好的属性
-	（4）返回新对象的地址给变量保存起来
+	（1）创建一个新对象
+	（2）将构造函数的作用域赋给新对象（this指向新对象）
+	（3）执行构造函数中的代码（为这个新对象添加属性）
+	（4）返回新对象
+	new关键词执行后总是会返回一个对象，要么是实例对象，要么是return语句指定的对象
 
 
 
@@ -379,7 +416,10 @@ Date对象：
 	也可以写在局部函数里的顶端，这样只有这个局部函数采用严格模式，其他代码不用严格模式
 
 
-
+apply、call、bind原理：
+	三者是挂在Function对象上的三个方法，调用者必须是一个函数
+	当自己需要使用某个方法时，别人有该方法，就不需要自己单独写一个，可以直接借用别人的该方法
+	
 call：根本作用就是改变this的指向，指向call里的第一个参数
 	（1）方法：要调用的函数.call(要替换的this的对象,其他参数,...) 
 	（2）如果.call() 里面不传任何参数，那么该对象指向的就是全局window
@@ -409,6 +449,19 @@ call、apply、bind三者的区别：
 	（1）call和apply是临时绑定一次，临时替换一次this的指向
 	（2）bind是永久绑定，永久替换this的指向
 	（3）call是传入的实参值，而apply传入的是数组
+	
+call、apply、bind实践：
+	一、类数组借用方法
+		类数组可以通过call、apply、bind借用数组的相关方法，进行增删改查操作
+	二、获取数组的最大值/最小值
+		用apply来实现数组中判断最大/最小值，apply直接传递数组作为调用方法的参数，可以减少一步展开数组操作
+
+call、apply、bind的异同点总结：
+	特性：		call		apply		bind
+	方法参数：	多个		单个数组	多个
+	方法功能：	三者都是函数调用改变this
+	返回结果：	直接执行	直接执行	返回待执行函数
+	底层实现：	通过eval	通过eval	间接调用apply
 
 
 arguments.callee	//调用函数本身（在不知道函数名时，又想调用函数本身时，可用此方式调用函数本身）
