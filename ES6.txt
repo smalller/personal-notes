@@ -329,6 +329,26 @@ Object.is()	相等判断，接收两个参数
 	
 	
 	
+
+迭代器：
+	let obj = {
+		a : 1,
+		b : 2,
+		c : 3
+	}
+	
+	obj[Symbol.iterator] = function () {
+		return {
+			next() {
+				return {
+					value : '1',	//循环过程中要输出的值
+					done : false,	//循环是否完成
+				}
+			}
+		}
+	}
+	
+	return 是固定语法，里面只能是对象形式
 	
 	
 	
