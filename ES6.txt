@@ -149,7 +149,7 @@ promise：
 		（2）多个异步任务需要顺序执行：
 			(async () => {
 				同步代码;
-				await 异步函数()	//let 返回值 = await 异步函数() 如：let res = await this.axios.post(url) 
+				await 异步函数
 				同步代码;
 			})()
 		（3）错误捕捉：

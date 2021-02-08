@@ -237,3 +237,15 @@ function creatAppend(tag, parent) { //传入要创建的标签和要追加到的
     }
     return newElement; //返回当前创建并追加好的元素
 }
+
+//获取数组中最大值
+const maxItemofArray = (arr) => [...arr].sort((a, b) => b - a).slice(0, 1)[0];
+
+//获取数组中最小值
+const minItemofArray = (arr) => [...arr].sort((a, b) => a - b).slice(0, 1)[0];
+
+//数组的所有项是否相等
+const areAllEqual = array => array.every(item => item === array[0]);
+
+//返回给定数的平均数
+const averageOf = (...numbers) => numbers.reduce((a, b) => a + b, 0) / numbers.length;

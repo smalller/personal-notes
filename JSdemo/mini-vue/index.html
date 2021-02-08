@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="svue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <div>{{msg2}}</div>
+        芳龄18
+        <p>哈哈哈</p>
+    </div>
+</body>
+<script>
+    'use stict'
+    const println = console.log;
+
+    let vm = new Suve({
+        el: '#app',
+        data: {
+            msg: '大家好！',
+            msg2: '我是small l'
+        }
+    });
+
+    setTimeout(() => {
+        let msg = vm.$options.data.msg = '你好！';
+        println(vm.$options.data.msg);
+    }, 1000)
+</script>
+
+</html>

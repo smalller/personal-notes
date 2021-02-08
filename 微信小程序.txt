@@ -1,69 +1,30 @@
-小程序的目录结构：
-	1.project.config.json：项目配置文件，用得最多的就是配置是否开启https校验
-	2.App.js： 设置一些全局的基础数据等
-	3.App.json 底部tab，标题栏和路由等设置
-	4.App.wxss 公共样式，引入iconfont等
-	5.pages 里面包含一个个具体的页面
-	6.index.json（配置当前页面标题和引入组件等）
-	7.index.wxml（页面结构）
-	8.index.wxss（页面样式表）
-	9.index.js（页面的逻辑，请求和数据处理等）
-
-
-
-.wxml：
-	常见标签：
-		<view></view>			相当于块级元素
-		<text></text>				相比于行内元素
-			特殊属性：
-				selectable = "true"			表示该文本中的内容可以选中复制
-		<image></image>		相当于<img src="">
-			特殊属性：
-				lazy-load = "true"		懒加载
-		<form></form>			表单	
-	
-
-
-.wxss：
-	一、大多数功能与css相同，也有独特点
-		1.单位：rpx（响应式像素）
-			可以根据屏幕宽度自动调整元素大小，一般用于元素高端宽度等
-			如：小程序750rpx = 750物理像素（psd图里的像素值）
-			
-		2.关键字：@import
-			可以在当前样式文件中引入其他样式文件
-			如：@import "相对路径"
-			注：小程序中与网页（组件）同名的样式文件会自动引入加载
-			
-
-
-.json：
-	一、project.config.json 		当前项目配置文件
-	二、app.json         				全局配置文件（此配置文件中的选项会影响当前项目所有组件）
-	（1）"pages":[]       		组件列表，第一个组件为默认显示的组件
+app.json         			
+	全局配置文件（此配置文件中的选项会影响当前项目所有组件）
+	（1）"pages":[]       	组件列表，第一个组件为默认显示的组件
 	（2）"window":""     	全局窗口样式
-	（3）  "tabBar": {			底部导航条
-					"color": "#bfbfbf",
-					"selectedColor": "#333",
-					"list": [
-						{
-							"pagePath": "pages/exam/exam1",
-							"text": "首页",
-							"iconPath": "./images/01.png",
-							"selectedIconPath": "./images/01_active.png"
-						},
-						{
-							"pagePath": "pages/exam2/exam2",
-							"text": "购物车",
-							"iconPath": "./images/02.png",
-							"selectedIconPath": "./images/02_active.png"
-						}
-					]
+	（3）底部导航条
+		"tabBar": {
+			"color": "#bfbfbf",
+			"selectedColor": "#333",
+			"list": [
+				{
+					"pagePath": "pages/exam/exam1",
+					"text": "首页",
+					"iconPath": "./images/01.png",
+					"selectedIconPath": "./images/01_active.png"
+				},
+				{
+					"pagePath": "pages/exam2/exam2",
+					"text": "购物车",
+					"iconPath": "./images/02.png",
+					"selectedIconPath": "./images/02_active.png"
 				}
-			注意事项：
-				1.底部导航条按钮最少二个，少于二个报错
-				2.图片路径只能支持本地图片，不支持：http://127.0.0.1/1.jpg
-				3.json文件不能添加注释
+			]
+		}
+		注意事项：
+			1.底部导航条按钮最少二个，少于二个报错
+			2.图片路径只能支持本地图片，不支持：http://127.0.0.1/1.jpg
+			3.json文件不能添加注释
 
 
 

@@ -45,6 +45,8 @@ Object.defineProperty(beer, 'year', {
     }
 })
 
+print(beer)
+
 // beer.year = 2004;
 // print(beer)
 // beer.year = 2020;

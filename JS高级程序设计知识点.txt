@@ -140,7 +140,6 @@ ES10：新增Array.prototype.flat()/flatMap()、String.prototype.trimStart()/tri
 	所有函数的默认原型都是Object的实例，默认原型都会包含一个内部的指针，指向Object.prototype
 	确定原型和实例的关系：a instanceof Object	和 Object.prototype.isPrototypeOf(a)
 	
-<<<<<<< HEAD
 
 
 代码约定：
@@ -150,10 +149,9 @@ ES10：新增Array.prototype.flat()/flatMap()、String.prototype.trimStart()/tri
 	
 变量类型透明：
 	var found = false;		//布尔型
-	varr count = -1;		//数字
+	var count = -1;		//数字
 	var name = '';			//字符串
 	var person = null;		//对象
-=======
 	
 	
 
@@ -185,7 +183,6 @@ ES10：新增Array.prototype.flat()/flatMap()、String.prototype.trimStart()/tri
 		
 		类构造函数与构造函数的主要区别是，调用类构造函数必须使用new操作符。而普通构造函数如果不使用new调用，那么就会以全局的this（通常是window）作为内部对象。调用类构造函数时如果忘了使用 new 则会抛出错误
 		
->>>>>>> 456b43d1e75572de8b49dc4acfca97c5f0c03952
 
 
 
