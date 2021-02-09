@@ -39,10 +39,14 @@ class Suve {
 
     //先获取所有属性
     observe(data) {
-        let keys = Object.keys(data);
-        keys.forEach(key => {
+        // let keys = Object.keys(data);
+        // keys.forEach(key => {
+        //     this.definePropertyData(data, key, data[key]);
+        // })
+
+        for (let key in data) {
             this.definePropertyData(data, key, data[key]);
-        })
+        }
     }
 
 
