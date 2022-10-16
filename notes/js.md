@@ -130,6 +130,7 @@ Object.assign(obj1,obj2)
 const obj3 = {...obj1,...obj2}
 ```
 
+
 #### Math对象
   - Math.PI 获取圆周率
   - Math.abs(19-20) 取绝对值
