@@ -1,0 +1,220 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		}
+	},
+	"pages": [
+		{
+			"path": "pages/login/login",
+			"style": {}
+		},
+		{
+			"path": "pages/store/store",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/store/storeManage/storeManage",
+			"style": {
+				"enablePullDownRefresh" : true
+			}
+		},
+		{
+			"path": "pages/store/goodsManage/goodsManage",
+			"style": {
+				"enablePullDownRefresh" : true
+			}
+		},
+		{
+			"path": "pages/store/goodsManage/goodsEdit/goodsEdit",
+			"style": {}
+		},
+		{
+			"path": "pages/store/goodsManage/addGoods/addGoods",
+			"style": {}
+		},
+		{
+			"path": "pages/store/seatMessage/ktvRoomMessage/ktvRoomMessage",
+			"style": {}
+		},
+		{
+			"path": "pages/store/seatMessage/ktvRoomMessage/addKtvRoom/addKtvRoom",
+			"style": {}
+		},
+		{
+			"path": "pages/store/seatMessage/ktvRoomMessage/editKtvRoom/editKtvRoom",
+			"style": {}
+		},
+		{
+			"path": "pages/store/profit/profit",
+			"style": {
+				"enablePullDownRefresh" : true
+			}
+		},
+		{
+			"path": "pages/store/stageNum/stageNum",
+			"style": {}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"enablePullDownRefresh" : true
+			}
+		},
+		{
+			"path": "pages/order/orderDetails/orderDetails",
+			"style": {}
+		},
+		{
+			"path": "pages/order/saveDrinks/saveDrinks",
+			"style": {}
+		},
+		{
+			"path": "pages/info/info",
+			"style": {
+				"enablePullDownRefresh" : true
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {}
+		},
+		{
+			"path": "pages/store/storeEvaluate/storeEvaluate",
+			"style": {
+				
+			}
+
+		},
+		{
+			"path": "pages/store/storeEvaluate/evaluateDetails/evaluateDetails",
+			"style": {}
+
+		},
+		{
+			"path": "pages/store/seatMessage/seatMessage",
+			"style": {
+				// "enablePullDownRefresh" : true
+			}
+		},
+		{
+			"path": "pages/order/seatMan/historySeat/historySeat",
+			"style": {}
+		},
+		{
+			"path": "pages/info/tellInformation/tellInformation",
+			"style": {}
+		},
+		{
+			"path": "pages/info/userInformation/userInformation",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/mySet/mySet",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/mySet/phoneSet",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/mySet/passwordSet",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/mySet/amendPass",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/myCoupons/myCoupons",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mine/myCoupons/compileCoupons",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/myCoupons/addCoupons",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/myActivity/myActivity",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/myActivity/activityDetails",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/myActivity/addActivity",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/myActivity/rich",
+			"style": {}
+		}
+	    ,{
+            "path" : "pages/order/seatMan/topPrice/topPrice",
+            "style" :{}
+        },{
+            "path" : "pages/store/seatMessage/setState",
+            "style" :{}
+        },{
+            "path" : "pages/mine/mySet/addAccount",
+            "style" :{}
+        }
+        ,{
+            "path" : "pages/mine/mySet/accountInfo",
+            "style" : { }
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "玖座商家端",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"titleNView": false,
+			"scrollIndicator": "none",
+			"softinputMode": "adjustResize"
+		}
+	},
+	"tabBar": {
+		"color": "rgba(204, 204, 204, 1)",
+		"selectedColor": "rgba(24, 73, 244, 1)",
+		"borderStyle": "black",
+		"backgroundColor": "#fff",
+		"height": "100rpx",
+		"list": [{
+				"pagePath": "pages/store/store",
+				"iconPath": "static/icon/1.png",
+				"selectedIconPath": "static/icon/1-1.png",
+				"text": "店铺"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"iconPath": "static/icon/2.png",
+				"selectedIconPath": "static/icon/2-2.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/info/info",
+				"iconPath": "static/icon/3.png",
+				"selectedIconPath": "static/icon/3-3.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/icon/4.png",
+				"selectedIconPath": "static/icon/4-4.png",
+				"text": "我的"
+			}
+		]
+	}
+
+}

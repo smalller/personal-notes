@@ -1,0 +1,55 @@
+page{
+  background-color: #161823;
+}
+
+.header{
+  padding: 50rpx 20rpx 0 20rpx;
+}
+.header .one{
+  font-size: 26rpx;
+  color: #7D7F89;
+}
+.header .two{
+  width: 214rpx;
+  height: 72rpx;
+  background-color: #242630;
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 72rpx;
+  margin-top: 24rpx;
+  box-sizing: border-box;
+  color: #FFFFFF;
+}
+.header .two .iconfont{
+  color: #f4ea2a;
+  font-size: 32rpx;
+  margin-right: 20rpx;
+}
+.header .two text{
+  font-size: 26rpx;
+}
+.other_city{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20rpx;
+}
+.other_cityone{
+  font-size: 26rpx;
+  color: #7D7F89;
+  margin-top: 50rpx;
+  padding: 0 20rpx;
+}
+.other_city .two{
+  width: 214rpx;
+  height: 72rpx;
+  background-color: #242630;
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 72rpx;
+  margin-top: 30rpx;
+  font-size: 26rpx;
+  margin-right: 30rpx;
+  border: 2rpx solid #292C3C;
+  box-sizing: border-box;
+  color: #FFFFFF;
+}

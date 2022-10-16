@@ -1,0 +1,136 @@
+page{
+    background: #161823;
+}
+.save_wine{
+    padding: 0 20rpx;
+}
+.search {
+    z-index: 2;
+    position: relative;
+    height: 68rpx;
+}
+.search .search_inp {
+    height: 100%;
+    background: #20222C;
+    padding-left: 68rpx;
+    font-size: 24rpx;
+    border-radius: 4rpx;
+    color: #FFFFFF;
+}
+.ser_icon {
+    position: absolute;
+    left: 20rpx;
+    font-size: 32rpx;
+    top: 10rpx;
+    color: #D0D0D0;
+}
+.search input::placeholder{
+    font-size: 28rpx;
+    color: #A2A2A7;
+}
+.property{
+    padding: 30rpx 0;
+}
+.property .text{ 
+    font-size:28rpx;
+    color: #7D7F89;
+}
+.property .total{
+    font-size:28rpx;
+    color: #EF5954;
+}
+.st_ul{
+    padding: 0 0 58rpx;
+}
+.store_list{
+    background: #20222C;
+    border-radius: 8rpx;
+    padding: 30rpx 30rpx 40rpx;
+    margin-bottom: 20rpx;
+}
+.jus{
+    justify-content: space-between;
+    align-items: center;
+}
+.li_top{
+    padding-bottom: 28rpx;
+}
+.li_btm{
+    height: 64rpx;
+    align-items: center;
+}
+.store_name{
+    color: #ffffff;
+    font-size: 30rpx;
+    flex: 0 1 auto;
+}
+.store_property{
+    color: #7D7F89;
+    font-size: 26rpx;
+    flex: 0 0 auto;
+}
+.goods_li{
+    border-top: 2rpx solid #272936;
+}
+.time{
+    padding: 30rpx 0;
+}
+.time .tl{
+    color: #A1A5AF;
+    font-size: 26rpx;
+}
+.time .tr{
+    color: #EF5954;
+    font-size: 24rpx;
+}
+
+.hint{
+    color: #474856;
+    font-size: 26rpx;
+}
+.down_order{
+    border: 2rpx solid rgba(112, 112, 112,  0.23);
+    box-sizing: border-box;
+    border-radius: 2px;
+    height: 100%;
+    width: 192rpx;
+    text-align: center;
+    line-height: 64rpx;
+    color: #FACE15;
+    font-size: 26rpx;
+}
+.goods{
+    margin-bottom: 26rpx;
+}
+.goods_picture{
+    width: 170rpx;
+    font-size: 0;
+}
+.goods_picture image{
+    width: 140rpx;
+    height: 140rpx;
+}
+.goods_info{
+    flex: 1;
+    padding: 6rpx 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.goods_name{
+    color: #FFFFFF;
+    font-size: 26rpx;
+}
+.goods_num{
+    color: #FFFFFF;
+    font-size: 24rpx;
+}
+.wine_res{
+    padding-top: 100rpx;
+    display: flex;
+    justify-content: center;
+}
+.wine_null{
+    width: 260rpx;
+    height: 136rpx;
+}

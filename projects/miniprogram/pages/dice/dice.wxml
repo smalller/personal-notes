@@ -1,0 +1,35 @@
+<view>
+    <web-view bindmessage="bindmessage" src="{{url}}#wechat_redirect"></web-view>
+</view>
+<!-- <view class="dice">
+    <image class="game_bg_1" src="../../image/dice/215614.png" alt=""></image>
+    <view class="main">
+        <view class="fx">
+            <image class="back_btn" src="../../image/dice/back.png" alt=""></image>
+            <image class="dice_btn" src="../../image/dice/title.png" alt=""></image>
+        </view>
+        <view class="game_bg_2">
+            <view class="show_dice">
+                <view class="scope">
+
+                </view>
+            </view>
+            <view class="footer">
+                <view class="left">
+                    <image class="volume" src="../../image/dice/volume.png" alt=""></image>
+                </view>
+                <view class="middle">
+                    <view class="add_minus">
+                        <image onclick="changeDiceNum(-1)" src="../../image/dice/minus_num.png" alt=""></image>
+                        <view class="dice_num">5</view>
+                        <image onclick="changeDiceNum(1)" src="../../image/dice/add_num.png" alt=""></image>
+                    </view>
+                </view>
+                <view class="right">
+                    <image class="start_game" src="../../image/dice/start.png" alt=""></image>
+                </view>
+            </view>
+        </view>
+    </view>
+
+</view> -->

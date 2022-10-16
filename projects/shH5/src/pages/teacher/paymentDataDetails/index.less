@@ -1,0 +1,101 @@
+.paymentDataDetails {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    margin-top: 10px;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+
+    .box {
+      width: 100%;
+      background: #ffffff;
+      padding: 0 15px 18px;
+      box-sizing: border-box;
+
+      .top {
+        border-bottom: 1px solid #eaeaea;
+        height: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left {
+          color: #898989;
+          font-weight: 500;
+          font-size: 14px;
+        }
+
+        .right {
+          font-weight: 700;
+          font-size: 28px;
+          color: #333333;
+        }
+      }
+
+      .item {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left {
+          font-weight: 500;
+          font-size: 14px;
+          color: #898989;
+        }
+
+        .right {
+          color: #333333;
+          font-weight: 500;
+          font-size: 14px;
+        }
+      }
+
+      .ref-info-box {
+        font-weight: 500;
+        font-size: 14px;
+        margin-top: 20px;
+
+        .title {
+          color: #898989;
+          border-bottom: 1px solid #eaeaea;
+          padding: 10px 0;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+
+  .btnBox {
+    height: 86px;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.04);
+
+    .btn {
+      width: 100%;
+      height: 44px;
+      background: #3775f6;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 16px;
+      transition: 0.3s;
+
+      &:active {
+        background: #235cce;
+      }
+    }
+  }
+}

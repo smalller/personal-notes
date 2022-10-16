@@ -1,0 +1,15 @@
+<!--pages/index/citys/citys.wxml-->
+<view class="header">
+  <view class="one">定位城市</view>
+  <view class="two" bindtap="positioning">
+    <!-- <icon class="iconfont icon-dizhi"></icon> -->
+    <text>{{city}}</text>
+  </view>
+</view>
+   <view class="other_cityone">热门城市</view>
+<view class="other_city">
+  <!-- bindtap="goIndex" -->
+  <view class="two" wx:for="{{citys}}" wx:key="index"  data-name="{{item}}" bindtap="goIndex">
+    <text>{{item.name}}</text>
+  </view>
+</view>

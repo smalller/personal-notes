@@ -1,0 +1,468 @@
+小程序与普通网页开发的区别：
+1.网页开发渲染线程和脚本线程是互斥的，这也是为什么长时间的脚本运行可能会导致页面失去响应，而在小程序中，二者是分开的，分别运行在不同的线程中。
+2.网页开发者可以使用到各种浏览器暴露出来的 DOM API，进行 DOM 选中和操作。而如上文所述，小程序的逻辑层和渲染层是分开的，逻辑层运行在 JSCore 中，并没有一个完整浏览器对象，因而缺少相关的DOM API和BOM API。这一区别导致了前端开发非常熟悉的一些库，例如 jQuery、 Zepto 等，在小程序中是无法运行的。
+3.同时 JSCore 的环境同 NodeJS 环境也是不尽相同，所以一些 NPM 的包在小程序中也是无法运行的。
+
+双线程设计：
+优点：
+	1.防止恶意攻击者的XSS攻击
+	2.防止开发者恶意盗取用户敏感信息
+	3.提升页面加载性能（JS执行和页面渲染不在一个线程中，不存在阻塞问题）
+	
+缺点：
+	1.无法使用DOM、BOM等对象API
+	2.一些API使用方式与浏览器不一致（如请求，缓存等）
+	3.逻辑层和渲染层的通信依赖客户端进行通信，当通信过于频繁的场景可能导致性能问题（如高频使用setData会出现页面卡顿）
+
+
+小程序的优化开发体验：
+	1.提供kbone解决方案，用于支持让web项目同时运行在小程序端和web端
+	2.由于原生组件的引入带来的渲染层级无法控制的问题，通过提供同屏渲染的方式让开发者更好地控制组件样式
+	3.开发者工具提供了丰富的调试能力，也提供了体验评分等功能，来引导开发者如何进行项目优化
+	4.通过页面预渲染减少启动和加载耗时：小程序在启动之前，客户端会提前准备好，并且会快速展示小程序首页，被小程序使用和渲染时，客户端也会提前准备好其他页面
+	5.在启动之前，JS基础库，基础代码，基础UI组件等API都会提前注入
+	6.通过使用缓存，热启动机制，提供分包加载和数据预拉取等方式，减少了用户等待时间
+
+
+app.json         			
+	全局配置文件（此配置文件中的选项会影响当前项目所有组件）
+	（1）"pages":[]       	组件列表，第一个组件为默认显示的组件
+	（2）"window":""     	全局窗口样式
+	（3）底部导航条
+		"tabBar": {
+			"color": "#bfbfbf",
+			"selectedColor": "#333",
+			"list": [
+				{
+					"pagePath": "pages/exam/exam1",
+					"text": "首页",
+					"iconPath": "./images/01.png",
+					"selectedIconPath": "./images/01_active.png"
+				},
+				{
+					"pagePath": "pages/exam2/exam2",
+					"text": "购物车",
+					"iconPath": "./images/02.png",
+					"selectedIconPath": "./images/02_active.png"
+				}
+			]
+		}
+		注意事项：
+			1.底部导航条按钮最少二个，少于二个报错
+			2.图片路径只能支持本地图片，不支持：http://127.0.0.1/1.jpg
+			3.json文件不能添加注释
+
+
+
+.js： 
+	一、小程序中js与网页中js的区别：
+		1.DOM/BOM 不能使用
+		2.小程序中有顶层对象 wx ，相当于网页中的 window
+		3.小程序组件中的文件
+			-app.js		全局js（全局共享数据）
+			-exam.js		当前组件的js
+			Page({})		表示当前组件对象（属性、方法、事件、数据data）
+			
+			
+		
+循环：
+	<view wx:for="{{数组名}}" wx:key="index" wx:for-item="item">
+		{{item}}
+	</view>
+	item：默认表示当前数组中的每个对象
+	index：默认表示数组下标
+	
+
+小程序的传参方式：
+	1.通过页面跳转API传参
+	2.全局属性传参
+		let app = getApp();
+		app.globalData.xxx = xxx;
+	3.本地缓存
+	4.vuex
+	
+	
+判断条件：
+	<view wx:if="{{判断条件}}"></view>			如果判断条件为真就显示该元素，否则就隐藏
+	<view wx:elif="{{判断条件}}"></view>		如果上面他条件不满足就执行该判断，否则就继续往下执行
+	......
+	<view wx:else></view>			都不满足就显示该元素
+	
+
+隐藏元素：
+	<view hidden="{{判断条件}}"></view>		如果条件为真，就隐藏该元素
+	
+
+事件：
+	touchstart			手指触发屏幕（不管几个手指）
+	touchend			手指离开屏幕
+	touchmove		手指滑动屏幕
+	touchcancel		手指的操作被打断（如：你正在操作，突然有人打电话过来）
+	tap						手指触发屏幕后立即离开（点击事件）
+	longtap				手指长按屏幕超过350ms后离开（旧版本）
+	longpress			手指长按屏幕超过350ms后离开（新版本，推荐使用！）
+	input 					输入框改变事件
+	
+
+事件绑定：
+	一、支持事件冒泡
+		<view bind事件名="函数"></view>
+		如：<view bindtap="handle1"></view>
+		
+	二、不支持事件冒泡
+		<view catch事件名="函数"></view>
+		如：<view catchtap="handle2"></view>
+		
+		
+标签上传参给函数
+	如：
+	wxml：<view bindtap="handle1" data-id="item.id"></view>
+	js：handle1(e) {
+				let _id = e.target.dataset.id;		//用自定义属性的传参方式
+		}
+		
+		
+input实现双向绑定：
+	<input bindinput="change" value="{{kw}}" ></input>
+	change(e) {
+		this.setData({
+			kw : e.detail.value		 // e.detail.value  为input输入内容
+		});
+	}
+	
+	
+	
+组件间跳转
+	一、会销毁当前组件：
+		wx.redirectTo({
+			url: `/pages/exam3/exam3?id=${this.data.id}`		//要跳转的组件路径，问号后面为要传过去的参数，在exam3里的onLoad函数里可以接收到该参数；要跳转到的组件不能是已经定义在tabbar中的组件，因为跳转不了
+		})
+		接收参数方式：在onLoad生命周期函数里用： options.id 接收
+		
+	二、会保留当前组件：
+		wx.navigateTo({
+			url: `/pages/exam3/exam3?id=${this.data.id}`
+		})
+		
+	三、支持跳转到tabbar中的组件
+		wx.switchTab({
+			url: `/pages/index/index`
+		})
+		注：switchTab不能传参，要传参就要用全局对象的方式
+		
+		
+组件的生命周期：
+	定义：一个组件从创建开始到使用中，最后被销毁的过程
+	一、onLoad：组件创建成功并且加载完成，触发一次
+		适用场景：
+		（1）发送请求获取数据可在此周期进行
+		（2）获取其他组件传递的数据（options）
+		
+	二、onReady：组件渲染成功，触发一次
+	三、onShow：组件显示完成，触发多次
+	四、onHide：组件隐藏完成，触发多次
+	五、onUnload：组件销毁完成，触发一次（谨慎使用，销毁后该组件就没有了）
+	六、onPullDownRefresh：监听用户下拉动作
+		注：要使用该函数，必须得去当前组件的json文件下进行配置才能使用（加上  "enablePullDownRefresh": true ）
+
+
+通过js获取或者修改data中的数据：
+	如：
+		data : {
+			msg : "hello"
+		}
+		（1）获取data中的数据：this.data.msg
+		（2）修改data中的数据：this.setData({msg:"hello world"})
+	
+	
+	
+云开发：
+	一、云数据库
+		mongodb：增删查改
+	二、云存储
+		网络磁盘：上传图片/下载图片/分享图片/视频...
+	三、云函数
+		服务器程序
+		
+	
+云数据库：
+	一、关系型数据库（如：mysql）
+	（1）库 database
+	（2）表 table
+	（3）列 column（字段）
+	（4）行 rows（记录）
+	
+	二、非关系型数据库nosql（如：mongodb）
+	（1）库 database
+	（2）集合 collection
+	（3）字段 field
+	（4）记录 record
+	
+	三、关系型和非关系型区别
+	（1）关系型数据库：适合数据结构复杂的应用，如：企业内部软件
+	（2）非关系型数据库：适合互联网项目（频繁增删查改）
+	
+	四、mongodb支持的数据类型
+	（1）number
+	（2）string
+	（3）object
+	（4）array
+	（5）date
+	（6）geopoint 地理位置
+	（7）bool
+	（8）null
+	
+	五、操作云数据库的三种方式
+	（1）云管理控制面板：创建集合
+	（2）小程序：增删查改（一次只能删除一条）
+	（3）云函数：增删查改（权限更高，删除能够一次删除多条）
+	
+	六、通过小程序开发数据库
+	（1）在控制台面板创建集合
+	
+	（2）创建数据库对象
+		const db = wx.cloud.database();		//默认开发环境
+		如果有多个环境
+		const db = wx.cloud.database({
+			env : "xxx"		//选择一个环境id，xxx为环境id
+		});
+		
+	（3）向指定集合中添加一条记录
+		db.collection("集合名称")
+		.add({
+			data : {
+				字段名 : 值,
+				字段名 : 值,
+				......
+			}
+		})
+		.then(res => {		//添加成功的回调函数
+			console.log(res);
+		})
+		.catch(err => {		//添加失败的回调函数
+			console.log(err);
+		})
+		注：_openid字段表示当前小程序/订阅号用户身份的唯一标识（微信平台的身份证）
+	
+	（4）更新
+		db.collection("集合名称")
+		.doc("当前记录的_id")
+		.update({
+			data : {
+				字段名 : 新值,
+				字段名 : 新值,
+				......
+			}
+		})
+		.then(res => {		//更新成功的回调函数
+			console.log(res);
+		})
+		.catch(err => {		//更新失败的回调函数
+			console.log(err);
+		})
+		注：没有_openid的记录是无法被更新的
+		
+	（5）查询
+		1）查询当前用户的所有记录
+			db.collection("集合名称")
+			.get()
+			.then(res => {		//查询成功的回调函数
+				console.log(res);
+			})
+			.catch(err => {		//查询失败的回调函数
+				console.log(err);
+			})
+			
+		2）查询当前用户的部分记录
+			db.collection("集合名称")
+			.where({
+				name : '小吴'											//只查询name值为小吴的记录
+				age : db.command.eq(22)					//等于22的
+				age : db.command.neq(22)				//不等于22的
+				age : db.command.lte(22)					//小于等于22的
+				age : db.command.gt(22)					//大于22的
+				age : db.command.in([22,25,30])		//在这个数组中存在的（满足一个即可）
+			})
+			.get()
+			.then(res => {		//查询成功的回调函数
+				console.log(res);
+			})
+			.catch(err => {		//查询失败的回调函数
+				console.log(err);
+			})
+			注：没有_openid的记录是无法被查询到的（除非修改权限）
+	
+	（6）删除（只能删除一条）
+		db.collection("集合名称")
+		.doc("当前记录的_id")		或者	where({ 字段名 : 值})
+		.remove()
+		.then(res => {		//删除成功的回调函数
+			console.log(res);
+		})
+		.catch(err => {		//删除失败的回调函数
+			console.log(err);
+		})
+		注：没有_openid的记录是无法被删除的
+		
+		
+		
+云函数：
+	一、特性
+	（1）操作权限高（一次可以删除多条记录）
+	（2）突破网络限制
+	
+	二、使用步骤
+	（1）使用小程序开发工具创建云函数，并上传
+	（2）先在云函数控制面板中对云函数测试
+	（3）在小程序中调用云函数
+	
+	如：
+	（1）开发工具创建云函数 sum（两个数求和函数）
+	（2）会生成两个文件
+		1）package.json		云函数的描述文件
+		2）index.js				函数就在这个文件里写
+	（3）添加代码
+			exports.main = async(event,context) => {
+				return {
+					"sum" : event.i + event.j
+				}
+			}
+			返回结果：{sum : 3}
+			
+			exports.main		创建主函数并向外导出
+			async						异步执行
+			event						事件对象，接收参数
+			context					上下文对象：当前微信用户信息
+			
+	（4）上传并部署：云端安装依赖（鼠标右击云函数）
+	（5）云开发控制面板 -》 测试（传两个值进去试试）
+	（6）使用小程序调用云函数
+		wx.cloud.callFunction({
+			name : "云函数名称",			//sum
+			data : {
+				i : 1,
+				j : 2
+			}
+		}).then(res => {			//返回成功的回调
+			console.log(res);	
+		}).catch(arr => {		//返回失败的回调
+			console.log(arr);
+		})
+		
+		
+		
+云存储：
+	一、主要用来存储文件（txt、jpg、mp4、mp3...）
+	（1）保存用户上传的图片
+		1）选中上传图片（拍照、从相册选一张）
+			wx.chooseImage({
+				count : 1,																一次选择几张图片（不传的话，默认为9）
+				sizeType: ['original', 'compressed'],				图片类型（原图/压缩图）
+				sourceType: ['album', 'camera'],						图片来源（相册/相机）
+				success : (res => {												选中图片成功的回调
+					console.log(res.tempFilePaths)					返回选中的图片数组
+				})
+			})
+		
+		2）上传图片
+			wx.cloud.uploadFile({
+				cloudPath : new Date().getTime() + ".png",			新文件的名称（一般用时间戳 + 后缀名的形式，后缀名一定要与上传时的图片后缀名一致）
+				filePath : res.tempFilePaths[0],									选中图片成功的名称
+				success : (res => {														上传图片成功的回调
+					console.log(res.fileID);											返回上传在云存储中的图片路径
+				}),
+				fail : (err => {
+					console.log(err);		上传失败的回调
+				})
+			})
+			注：上传图片操作应该写在选中图片成功的回调里
+	
+	
+	
+vant UI安装流程：
+	一、创建项目描述文件 package.json
+	（1）鼠标右键 miniprogram 目录，选择在终端中打开
+	（2）输入命令 npm init 生成package.json文件
+	（3）一直按回车直到结束
+	
+	二、安装
+	（1）鼠标右键 miniprogram 目录，选择在终端中打开
+	（2）npm i @vant/weapp -S --production
+	（3）菜单栏 -》 工具 -》 构建npm（如果报错，重新执行）
+	（4）点击左上角“详情”或  菜单栏 -》 设置 -》 项目设置；点击本地设置，把“使用npm模块”勾上
+	（5）选择需要的组件，复制配置信息到当前组件或者根组件中的json文件中
+	
+	
+
+云开发模式发送请求：
+	一、小程序端
+	（1）发送方式：wx.request({})
+	（2）协议支持：只持支htttps
+	（3）是否备案：接口域名需要经过ICP备案
+	（4）域名个数限制：最多只支持调用20个不同的接口域名
+	
+	二、云函数
+	（1）发送方式：第三方ajax request
+	（2）协议支持：根据第三方决定
+	（3）是否备案：可以不备案
+	（4）域名个数限制：无限制
+	
+	三、创建云函数
+	（1）创建云函数 movieList
+	（2）在当前云函数中安装第三方ajax库（注：不同云函数之间第三方库不能共享）
+	（3）右键云函数 movieList -》 打开终端
+		1）npm install -S request						安装依赖库
+		2）npm install -S request-promise		安装ajax库
+	
+	四、使用
+	（1）引入 request-promise 库
+		const rp = require("request-promise")
+	（2）发送请求获取返回结果给调用者
+		exports.main = async (event, context) => {
+			return rp("接口地址")
+			.then(res => {
+				return res;
+			}).catch(err => {
+				console.log(err);
+			})
+		}
+		
+		
+		
+原生小程序发送请求：
+	 wx.request({
+		url: '',								请求地址
+		method: 'POST',			请求方式
+		success: (res) => {		
+			console.log(res);		请求成功返回的回调
+		},
+		fail: (err) => {
+			console.log(err);		请求失败返回的回调
+		}
+	});
+	
+	
+	
+	
+个人中心：
+	一、头像（不需要同意就能拿到）
+		<open-data type="userAvatarUrl"></open-data>			
+		
+	二、头像（不需要同意就能拿到）
+		<open-data type="userNickName"></open-data>		
+		
+	三、获取更多的用户信息（需要授权才能拿到）
+		<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登录（获取信息）</button>
+		bindgetuserinfo 为获取用户信息的事件，此操作会弹窗询问是否允许公开你的信息
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

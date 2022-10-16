@@ -1,0 +1,57 @@
+<!--pages/allGoods/goodsDetails/goodsDetails.wxml-->
+<view class="goodsDetails">
+  <view class="banner" style="background: url({{addUrl+goodsDetails.infoPicture}})no-repeat;background-size: 100% 100%;">
+  </view>
+  <view class="goods_brief">
+    <view class="goods_name">
+      {{goodsDetails.name}}
+    </view>
+    <view class="goods_num">
+      {{sum}}件
+    </view>
+    <view class="sell_num">
+      <text>月售 </text>
+      <text>79</text>
+    </view>
+    <view class="sell_pic">
+      <view class="now_pic">
+        <text>￥</text>
+        <text>{{goodsDetails.presentPrice}}</text>
+      </view>
+      <view class="old_pic">
+        <text>￥</text>
+        <text>{{goodsDetails.originalPrice}}</text>
+      </view>
+      <view class="{{num_flag?'num_al1':'num_al'}}">
+        <icon class="iconfont icon-jian1" bindtap="lose" data-tit="1" hidden="{{num_flag}}"></icon>
+        <text hidden="{{num_flag}}">{{num}}</text>
+        <icon class="iconfont icon-jia1" bindtap="lose" data-tit="2"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="details">
+    详情
+  </view>
+  <view class="details_content">
+    普路拖利库生产的朗姆酒。1860年创立，酒名是由朗姆和丰富两个词合并而成。酒品分为白色和蓝色，哥录特型酒是需要木桶熟成。
+  </view>
+  <view class="meal">
+    套餐
+  </view>
+  <view class="meal_box">
+    <view class="small_box" wx:for="{{mealList}}" wx:key="*this">
+      {{item.title}}
+    </view>
+  </view>
+  <view class="footer">
+    <view class="foot_one">
+      <text>总金额</text>
+      <text>¥{{allPic}}</text>
+    </view>
+    <view class="foot_two">
+      <image src="../../../icon/cars.png" bindtap="goCar"></image>
+      <text bindtap="goOrderdetail">结算</text>
+      <text hidden="{{num_flag}}">{{sum}}</text>
+    </view>
+  </view>
+</view>

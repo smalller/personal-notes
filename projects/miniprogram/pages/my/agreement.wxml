@@ -1,0 +1,13 @@
+<view class="agreement">
+  <view class="hearder">
+    <view class="left">
+      <text class="{{flag?'active':''}}" bindtap="check">服务协议</text>
+    </view>
+    <view class="right">
+      <text class="{{!flag?'active':''}}" bindtap="check">隐私政策</text>
+    </view>
+  </view>
+  <view class="content">
+      <rich-text nodes="{{content.agreementContent}}"></rich-text>
+  </view>
+</view>

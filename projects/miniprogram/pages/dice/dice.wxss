@@ -1,0 +1,142 @@
+/* html,body{
+    padding: 0;
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+.dice{
+    width: 100%;
+    height: 100%;
+}
+.dice .game_bg_1{
+    width: 100%;
+    z-index: 1;
+    height: 100%;
+    object-fit: cover;
+}
+.main{
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    font-size: 0;
+    width: 100%;
+}
+.main::after{
+    content: '';
+    display: table;
+}
+.main .fx{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 94rpx;
+}
+.back_btn{
+    height: 75rpx;
+    width: auto;
+}
+.dice_btn{
+    height: 37rpx;
+    width: auto;
+}
+.game_bg_2{
+    background: url(../../image/dice/game_bg_2.png);
+    width: 100%;
+    height: calc(100% - 169rpx);
+    background-size: 100% 100%;
+}
+.show_dice{
+    height: 82%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}   
+.scope{
+    height: 84%;
+    width: 83%;
+    position: relative;
+}
+.dice_style{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100rpx;
+    height: 100rpx;
+    opacity: 0;
+}
+
+.ani_rotate{
+    animation: ani_style .6s linear;
+}
+@keyframes ani_style{
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+
+.footer{
+    height: 18%;
+    background: url(../../image/dice/btn.png);
+    background-size: 100% 100%;
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+.fbg{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+.fbg img{
+    width: 100%;
+    height: 100%;
+}
+.footer>div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer .left{
+    flex: .28;
+}
+.footer .middle{
+    flex: .44;
+}
+.footer .right{
+    flex: .28;
+}
+.volume{
+    width: 94rpx;
+    height: 126rpx;
+}
+.start_game{
+    width: 94rpx;
+    height: 126rpx;
+}
+.add_minus{
+    width: 100%;
+    height: 1rem;
+    background: url(../../image/dice/add_minus.png);
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.add_minus img{
+    height: 47rpx;
+    width: auto;
+}
+.add_minus .dice_num{
+    font-size: 37rpx;
+    color: #93a2ff;
+} */

@@ -1,0 +1,28 @@
+<view class="gain_page">
+    <view class="gain">
+        <view class="close">
+            <icon bindtap="leavePage" class="iconfont icon-guanbi1"></icon>
+        </view>
+        <view class="coupon_info">
+            <image class="co_bg" src="../../images/co_bg.png"></image>
+            <view class="co_type">{{couponInfo.type || '-'}}
+                <image src="../../images/co_l.png"></image>
+            </view>
+            <view class="co_det">{{couponInfo.details || '-'}}</view>
+            <view class="co_num">{{couponInfo.discountMoney || '-'}}元</view>
+            <view class="get_btn">
+                <image wx:if="{{!isLogin}}" bindtap="receiveCoupon" src="../../images/co_get.png"></image>
+                <block wx:if="{{isLogin}}">
+                    <button plain wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile">
+                        <image src="../../images/co_get.png"></image>
+                    </button>
+                    <button plain wx:else open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>
+                        <image src="../../images/co_get.png"></image>
+                    </button>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>
+
+<selfModel data="{{childComponent}}" show="{{show}}" text="确认离开当前页面?" bindconfirm="confirm" bindcancel="cancel"></selfModel>

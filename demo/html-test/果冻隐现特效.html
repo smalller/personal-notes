@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .blobs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            filter: url(#goo);
+        }
+
+        .circle {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            transform: translate(0, -48px);
+            background: hsl(337, 70%, 58%);
+            clip-path: circle(42px at center);
+        }
+
+        .circle.main {
+            z-index: 2;
+        }
+
+        .first {
+            transition: transform 0.5s 100ms ease-out;
+            background: hsl(307, 70%, 58%);
+        }
+
+        .second {
+            transition: transform 0.5s 300ms ease-out;
+            background: hsl(277, 70%, 58%);
+        }
+
+        .last {
+            transition: transform 0.5s 500ms ease-out;
+            background: hsl(247, 70%, 58%);
+        }
+
+        .first.show {
+            transform: translate(-100px, -120px);
+        }
+
+        .second.show {
+            transform: translate(0px, -150px);
+        }
+
+        .last.show {
+            transform: translate(100px, -120px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blobs">
+        <div class="circle main"></div>
+        <div class="circle first"></div>
+        <div class="circle second"></div>
+        <div class="circle last"></div>
+    </div>
+    <script>
+        const button = document.querySelector(".circle.main");
+        const circles = document.querySelectorAll(".circle");
+
+        button.addEventListener("click", function () {
+            circles.forEach(element => {
+                element.classList.toggle("show");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

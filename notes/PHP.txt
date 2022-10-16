@@ -1,0 +1,303 @@
+php里可以写html标签，html标签里也可以写php
+	如：<?php
+		echo '<h1>hello world</h1>';
+	?>
+
+	或者: <h1><?php
+		echo 'hello world';
+	?></h1>
+
+
+// 单行注释
+#  单行注释
+/*
+	多行
+	注释
+*/
+
+
+变量（variables):
+	$demo = 'hello world';	//用$定义变量
+	echo $demo;
+	
+
+
+数据类型：
+	String
+	Integer		//数值类型
+	Float		//浮点类型
+	Boolean		//布尔类型
+	Array		//数组
+	Object		//对象
+	Null		//空对象
+	Resource	//资源类型
+	
+	
+字符串拼接用 .
+	如：$a = 'hello';
+		$b = 'world';
+		$say = $a . '' . $b;
+	
+	
+单引号：在单引号里面所有内容都是字符串
+双引号：在双引号里的内容是可以被正常解析的
+
+
+echo "<br>"		//换行
+
+count($arr);	//计算数组的长度，相当于js里的arr.length
+
+常量：
+	define('greeting','hello world');		//第一个参数是常量名，第二个参数为常量的值，第三个参数可有可无，默认为false，可以改成true，加了之后表示打印常量时，常量名可以为小写
+	echo greeting;		//打印这个常量
+	
+	
+数组：
+	$arr = [1,2,3,4];   //或者array(1,2,3,4);
+	echo $arr[2];
+	$arr[2] = 10;	//将数组中第二位的值改为10
+	$arr[] = 5;		//向数组的最后添加值
+	echo count($arr);	//计算数组内个数的方法
+	
+	print_r($arr);		//打印出数组或对象内的所有内容
+	var_dump($arr);		//万能打印方法（不常用），但打印的数据更详细
+	
+	
+关联数组：
+	$size = ["small" => 1,"middel" => 2,"large" => 3];
+	echo $size["large"];	//类似于键值对的方式，这里输出的是与large相关的值3
+	$size["xlarge"] = 4;	//向关联数组中添加值
+
+
+多维数组：
+	$car = [
+        ["宝马",10,"100万"],
+        ["奔驰",15,"200万"],
+        ["大众",8,"50万"]
+    ];
+    echo $car[0][1];	
+    $car[0][3] = "20年";	//向多维数组中添加值
+    echo $car[0][3];
+	
+	
+循环：
+	for($i = 0;$i < 10;$i++) {
+		echo $i;
+	}
+	
+	
+	$j = 0;
+	while($j < 10) {
+		$j++;
+		echo $j;
+	}
+	
+	
+	foreach($size as $num) {	//$num是定义的空对象，用于存储遍历的数组$size
+		each $num . "<br>";		//将num循环遍历出来
+	}
+	
+	
+	$size = [
+        "small" => 1,
+        "middle" => 2,
+        "large" => 3
+    ];
+    foreach ($size as $con => $num) {   //$con对应的是左边的尺寸，$num对应的是右边相关联的数值
+        echo $con . ":" . $num . "<br>";
+    }
+	
+	
+字符串函数
+    $demo1 = substr("hello",1);     //从第一位开始，截取后面的所有字符，这里返回ello
+    echo $demo1;
+
+    $demo2 = substr("hello",1,3);     //从第一位开始，截取到第三位，这里返回ell
+    echo $demo2;
+
+    $demo3 = strlen("hello world"); 	//返回字符串长度
+    echo $demo3;
+	
+	$demo4 = strpos("hello world","o");     //查找第一次出现字母o出现的位置
+    echo $demo4;
+	
+	$demo5 = strrpos("hello world","o");     //查找最后一次出现字母o出现的位置
+    echo $demo5;
+	
+	$demo6 = trim("  hello world     ");    //去掉首尾的空格
+    var_dump($demo6);	//打印出详细的情况
+	
+	$demo7 = strtoupper("hello world");     //将字符串小写内容转换成大写
+    echo $demo7;
+	
+	$demo8 = strtolower("HELLO WORLD");     //将字符串大写内容转换成小写
+    echo $demo8;
+	
+	$demo9 = ucwords("hello world");      //将每个单词的首字母转换成大写
+    echo $demo9;
+	
+	$text = "hello world";
+    $demo10 = str_replace("world","PHP",$text);     //第一个参数表示要查询字符串中的哪个内容，第二个参数表示替换成什么内容，第三个参数表示从哪个变量里进行操作
+    echo $demo10;
+	
+	$demo11 = is_string("123");  //判断内容是否为字符串，返回1表示为真，如果无返回值，表示为假
+    echo $demo11;
+	
+	//筛选出字符串的方法
+    $arr = [123,null,true,"123","abc",""," ",0,"0"];
+    foreach($arr as $num) {
+        if(is_string($num)) {
+            echo $num . "<br>";
+        }
+    }
+	
+	$text = "1231bajsdbakshdllqaahsdkjadkj";
+    $demo12 = gzcompress($text);  //压缩字符串，将其压缩为乱码
+    echo $demo12 . "<br>";
+    $demo13 = gzuncompress($demo12);  //解压字符串，将压缩过后的变量解压成原来的值
+    echo $demo13;
+	
+	
+数组：
+	array_push($arr,"hello");       //向数组的最后添加值，栈操作
+    array_unshift($arr,"world");    //向数组的最前添加值，堆操作
+    array_pop($arr);    //删除数组的最后的一个值
+    array_shift($arr);  //删除数组的最前的一个值
+	sort($arr1);    //给数组排序
+	$str = implode(".",$arr2);      //将数组转换为字符串，以句号为分隔形式，第一个参数自定义
+	$arr3 = explode(" ",$str1);     //将字符串转换为数组，以空格为分隔形式，将字符串转换为数组
+	
+	
+文件引入：
+	<?php include "路径地址"?>	即使报错，也会继续执行下面的代码
+	<?php require "路径地址"?>	一旦报错，下面的代码就不会再执行
+	<?php include_once "路径地址"?>	无论引入几次相同的代码，都只执行一次，不常用
+	
+
+如果html和php代码混写，php代码要换行的话，则在下一行的头部加入 <?php  在头一行的尾部加入 ?>  
+	如： 
+	<?php if() { ?>
+		...
+	<?php } ?>
+	<?php else { ?>
+		...
+	<?php } ?>
+	
+	或者：
+	这里的冒号相当于花括号
+	<?php if(): ?>
+		...
+	<?php else: ?>
+		...
+	<?php endif; ?>	//如果是for循环，这里就是endfor，foreach就是endforeach
+	
+	
+GET/POST发送请求数据：
+	一般传数据用POST，请求数据用GET，因为POST安全，传数据时不会将数据显示在url上
+	
+	
+过滤器函数：
+	filter_has_var — 检测是否存在指定类型的变量
+	filter_id — 返回与某个特定名称的过滤器相关联的id
+	filter_input_array — 获取一系列外部变量，并且可以通过过滤器处理它们
+	filter_input — 通过名称获取特定的外部变量，并且可以通过过滤器处理它
+	filter_list — 返回所支持的过滤器列表
+	filter_var_array — 获取多个变量并且过滤它们
+	filter_var — 使用特定的过滤器过滤一个变量
+	
+	
+session存储（存储在服务器里）：
+	session_start();	//只要用到session存储就要调用此方法
+	$_SESSION[""];	//增删改查都是用这个方法
+	unset($_SESSION[""]);	//删除服务器里获取到的值
+	session_destroy();		//删除服务器里所有存储的数据
+	
+	
+cookie存储（存储在浏览器里）：
+	setcookie("xxx",xxx,time()+3600);	//增删改都用此方法，第一个参数表示存储时的名字，第二个表示获取到的值，第三个表示存储的时长，单位为S
+	setcookie("xxx","",time()-3600);	//删除名字为xxx的数据（只需要减去存储的时长就行了）
+	$_COOKIE["xxx"];	//查询cookie用$_COOKIE方法，中括号里面的值是前面存储时的名字
+	count($_COOKIE);	//查询浏览器中共有多少个cookie
+	
+
+sql注入攻击：
+	用户名和密码都输入 ' or '1' = '1'
+
+	
+md5加密与解密：
+	$pass = "123456";
+	echo md5($pass);
+		
+动态加密：
+	$pass = "123456";
+	$hash = password_hash($pass,PASSORD_BCRYPT,["cost"=>8,"salt"=>"asfas2234asfasda98da89uf89ausdaasd9899s"]);	//第一个参数表示要加密的东西，后面的也是一些加密的算法
+	echo $hash;
+	
+	解密：
+		if(password_verify($pass,$hash)) {	//第一个参数表示原始密码，第二个参数表示加密后的密码
+			echo "密码一致";
+		}
+
+	
+
+函数：
+	var_dump(func_num_args());	//当此方法写在函数内部时，且函数被调用时，就会打印出调用时的参数的数量，返回的是一个整形数值
+	func_get_args();	//获取所有传入参数的值（列表），返回的是一个数组
+	func_get_arg(0);	//获取第0个传入的参数的值，要获取第几个，括号里就写第几个
+	gettype();		//获取参数的数据类型，括号里传入变量
+	
+	
+	按值传参不会改变外部变量的值
+	引用传参会改变外部变量的值
+	函数名不区分大小写，不能重名，不能使用保留字和关键字
+	
+	动态函数：
+		$fun = "test";	//这里的"test"就等于test()，以为把test()这个函数赋给$fun
+		
+	$num;
+		普通局部变量，每次在函数调用时，都会进行初始化
+		
+	static $num;
+		静态局部变量，在函数首次调用时，会进行初始化，后面再次调用都不会进行初始化，可以用来作为静态计数器
+	
+	
+	isset($num);		//检测变量是否设置值
+	unset($num);		//销毁变量
+	
+	在函数内部访问不到全局变量，只能访问内部变量和超全局变量
+	$GLOBALS[''];	//超全局变量，在全局范围内都可以访问任何变量，引号里填变量名
+	
+	global $num;	//声明num变量为超全局变量，这样就能使其在任何地方被访问
+	
+	
+	
+配置xampp的主页路径：
+	1.打开 D:\xampp\apache\conf\httpd.conf
+	2.找到第252和253行的 DocumentRoot "D:/xampp/www" 和 <Directory "D:/xampp/www">	，将里面的地址改为自己需要的文件地址，重启阿帕奇
+	
+	
+配置xampp的主页文件名：
+	1.打开 D:\xampp\apache\conf\httpd.conf
+	2.找到第285行，将标签对里的文件名地址改了就行了
+	
+	
+配置xampp的阿帕奇端口：
+	1.打开 D:\xampp\apache\conf\httpd.conf
+	2.找到第60行的 Listen 80 ，将里面的端口号改为自己需要的端口
+	3.打开 D:\xampp\properties.ini 将apache_server_port的值分别改为自己需要的端口（和上面Listen的值一样）
+	4.打开 D:\xampp\xampp-control.ini 将ServicePorts下的Apache的值分别改为自己需要的端口（和上面Listen的值一样）
+	5.运行xampp，点击右上角的config，点击Service and Port Settings，将Main Port改为需要的端口（和上面Listen的值一样），保存
+	6.重启xampp
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

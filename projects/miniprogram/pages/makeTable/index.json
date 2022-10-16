@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "selfModel" : "/components/selfModel/selfModel"
+  },
+  "navigationBarTitleText": "预定桌"
+}

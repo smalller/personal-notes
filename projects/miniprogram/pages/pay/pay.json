@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "selfModel" : "/components/selfModel/selfModel"
+  },
+  "navigationBarTitleText": "订单信息",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true
+}

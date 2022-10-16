@@ -1,0 +1,62 @@
+<view class="main">
+    <view class="content">
+        <view class="aty_bnr" wx:if="{{banner.length>0}}">
+            <swiper indicator-dots="{{indicatorDots}}" class="swi_box" circular="true"
+                bindchange="changeSwiper"
+                indicator-color="rgba(255, 255, 255, .5)" indicator-active-color="#000" autoplay="{{autoplay}}"
+                interval="{{interval}}" duration="{{duration}}">
+                <block wx:for="{{banner}}" wx:key="index" >
+                    <swiper-item wx:if="{{item.isImg}}" bindtap="goDetail" data-id="{{item.storeId}}">
+                        <image mode="aspectFill" src="{{addUrl + item.picture}}"></image>
+                    </swiper-item>
+                    <swiper-item wx:else bindtap="goDetail" data-id="{{item.storeId}}">
+                        <video 
+                            id="myVideo" 
+                            src="{{addUrl + item.picture}}" 
+                            binderror="videoErrorCallback" 
+                            controls="{{true}}"
+                            auto-pause-if-navigate="{{true}}"
+                            bindended="endVideo"
+                            bindplay="playVideo"
+                            autoplay='{{false}}'
+                            picture-in-picture-show-progress="{{true}}"
+                            show-center-play-btn='{{true}}' 
+                            show-play-btn="{{true}}" 
+                            enable-progress-gesture="{{false}}"
+                            show-fullscreen-btn="{{true}}"
+                            bindenterpictureinpicture='bindVideoEnterPictureInPicture'
+                            bindleavepictureinpicture='bindVideoLeavePictureInPicture'
+                        ></video>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+
+        <view class="aty_list" wx:if="{{active.length>0}}">
+            <view class="list_box">
+                <block  wx:for="{{active}}" wx:key="index">
+                    <view class="alst" bindtap="goDetail" data-id="{{item.id}}">
+                        <view class="limg">
+                            <image src="{{addUrl + item.thumb}}"></image>
+                        </view>
+                        <view class="rtext">
+                            <view class="atit"><text class="shop_name">{{item.storeName}}</text><text>{{item.name}}</text></view>
+                            <view class="intro">{{item.synopsis}}</view>
+                            <view class="flex_box lam">
+                                <!-- <view class="lab">
+                                    labs
+                                </view> -->
+                                <view class="go">
+                                    查看更多
+                                </view>
+                            </view>  
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view class="zanwu" wx:if="{{whetherNext==false}}">我到底啦</view>
+        </view>
+
+        <view class="zanwu" wx:else>暂无活动</view>
+    </view>
+</view>

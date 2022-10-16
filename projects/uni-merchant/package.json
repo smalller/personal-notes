@@ -1,0 +1,21 @@
+{
+  "name": "uni_merchant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "echarts": "^4.9.0",
+    "exif-js": "^2.3.0",
+    "jweixin-module": "^1.6.0",
+    "node-sass": "^4.14.1",
+    "uni-request": "^1.0.2",
+    "v-charts": "^1.19.0",
+    "vant": "^2.10.11"
+  }
+}

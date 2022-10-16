@@ -1,0 +1,383 @@
+page{
+  background: #161823;
+}
+.evaluation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 24rpx;
+}
+
+.hearder {
+  width: 226rpx;
+  height: 56rpx;
+  background-color: #242630;
+  text-align: center;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+.on{
+  color: #FACE15;
+}
+.off{
+  color: #C9C9D3;
+}
+.hearder text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+}
+
+.icon {
+  text-align: center;
+}
+
+.icon .iconfont {
+  font-size: 40rpx;
+  color: #9D9FA8;
+  display: inline-flex;
+}
+.eva_list{
+  margin: 0 20rpx 20rpx;
+  background: #262833;
+  border-radius: 12rpx;
+  padding-bottom:48rpx ;
+}
+.selfEvaluation {
+  display: flex;
+  padding: 24rpx 24rpx 0;
+}
+
+.selfEvaluation .left image {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+}
+.middle .names{
+  font-size: 24rpx;
+  color: #C5C5D0;
+  padding-top: 20rpx;
+  display: flex;
+}
+
+.middle .oth_time{
+  color: #C5C5D0;
+  font-size: 24rpx;
+}
+.level {
+  width: 92rpx;
+  height: 40rpx;
+  position: relative;
+  font-size: 20rpx;
+  font-weight: bold;
+  text-align: center;
+  color: #FDFEFD;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.leaveLogo{
+  width: 100%!important;
+  height: 100%!important;
+  vertical-align: bottom;
+}
+.level .lvl{
+  position: absolute;
+  left: 50rpx;
+  font-size: 20rpx!important;
+}
+.hidden_name{
+  max-width: 320rpx;
+  margin-right: 12rpx;
+}
+.selfEvaluation .middle .top text{
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: #C5C5D0;
+  line-height: 40rpx;
+}
+.top{
+  display: flex;
+}
+.createTime{
+  color: #C5C5D0;
+  font-size: 24rpx;
+  padding: 12rpx 0 0 102rpx;
+}
+/* .selfEvaluation .bottom image {
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 12rpx;
+} */
+
+.selfEvaluation .content {
+  width: 100%;
+  margin-left: 14rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.selfEvaluation .content .right {
+  text-align: right;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 40rpx;
+}
+
+.selfEvaluation .content .right image {
+  width: 26rpx;
+  height: 24rpx;
+}
+
+.textContent {
+  width: calc(100% - 102rpx);
+  padding: 0 0 0 102rpx;
+}
+
+.textContent .oldTexts {
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: #F0F0F0;
+  font-size: 26rpx;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3; */
+  -webkit-box-orient: vertical;
+}
+
+.textContent .allTexts {
+  height: 100%;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 34rpx;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; */
+  /* -webkit-line-clamp: 3; */
+  /* line-clamp: 3; */
+  -webkit-box-orient: vertical;
+}
+
+.textContent .allText {
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #103684;
+  line-height: 34rpx;
+}
+
+.ima {
+  padding: 14rpx 0 0 102rpx;
+  display: flex;
+  padding-right: 20rpx;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ima image {
+  width: 182rpx;
+  height: 182rpx;
+  border-radius: 4rpx;
+  margin-bottom: 20rpx;
+}
+.ima::after{
+  content: '';
+  width:184rpx ;
+}
+
+.otherMan {
+  padding: 24rpx 20rpx 0 102rpx;
+  display: flex;
+}
+
+.otherMan .left image {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+}
+
+.otherMan .middle {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 34rpx;
+}
+.level_vip{
+  padding: 2rpx 18rpx;
+  margin-bottom: 20rpx;
+  background: #191D26;
+  text-align: center;
+  color: #fff;
+  font-size: 20rpx!important;
+  font-weight: bold;
+  border-radius: 20rpx;
+  margin-left: 24rpx;
+}
+.otherMan .middle .sayContent{
+  width: 433rpx;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F0F0F0;
+  margin: 22rpx 0;
+}
+
+.otherMan .right image {
+  width: 26rpx;
+  height: 24rpx;
+}
+
+.otherMan .flexRight {
+  margin-left:24rpx;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.flexRight .right{
+  text-align: center;
+}
+.star_icon{
+  font-size: 34rpx;
+  vertical-align: bottom;
+}
+.bottom .star_icon{
+  margin-right: 12rpx;
+}
+.xin_num {
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+.moreSay {
+  padding: 24rpx 0 60rpx 184rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFC100;
+  line-height: 34rpx;
+}
+
+.repayTime {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #999999;
+  line-height: 34rpx;
+  padding: 4rpx 0 0 184rpx;
+}
+.repayH{
+  margin-bottom: 48rpx;
+}
+.star{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.star-wrap image {
+  float: left;
+  width: 22rpx!important;
+  height: 22rpx!important;
+  margin-right: 6px;
+}
+
+.star-wrap text:not(:last-child) {
+  margin-right: 6px;
+}
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+.star_num{
+  font-size: 24rpx;
+  margin-left: 24rpx;
+}
+.red{
+  color: #F55648;
+}
+.gary{
+  color: #ccc;
+}
+.addV{
+  width: 60rpx;
+  height: auto;
+  vertical-align: middle;
+  margin: 0 20rpx;
+}
+
+.rz{
+  font-size: 24rpx;
+}
+
+/* 查看大图 */
+.big_img_box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  height: 100%;
+  width: 100%;
+  background: #191D26;
+}
+.big_img{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 51;
+}
+.big_img .iconfont{
+  display:inline-flex;
+  font-size: 48rpx;
+  color: white;
+  position: absolute;
+  right: 24rpx;
+  top: 24rpx;
+  z-index: 53;
+}
+.big_swiper{
+  width: 100%;
+  height: 100%;
+}
+.big_swiper image{
+  width: 100%;
+  max-height: 100%;
+}
+.swiper_item{
+  display: flex;
+  align-items: center;
+}
+.like_btn{
+  padding: 0;
+}
+.like_btn[plain]{
+  border: none;
+  padding: 0;
+  text-align: right;
+  line-height: 38rpx;
+}
+.like_btn_other{
+  padding: 0;
+}
+.like_btn_other[plain]{
+  border: none;
+  padding: 0;
+  margin-top: 8rpx;
+  text-align: right;
+  line-height: 40rpx;
+}
+.like_btn_other .xin_num{
+  text-align: center;
+}

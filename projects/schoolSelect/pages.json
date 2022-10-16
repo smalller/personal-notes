@@ -1,0 +1,306 @@
+{
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "金树丫"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/student/student",
+			"style": {
+				"navigationBarTitleText": "幼儿",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/schoolList/schoolList",
+			"style": {
+				"navigationBarTitleText": "学校列表",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/schoolDetails/schoolDetails",
+			"style": {
+				"navigationBarTitleText": "学校详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/bindWx/bindWx",
+			"style": {
+				"navigationBarTitleText": "绑定手机号",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/comment/comment",
+			"style": {
+				"navigationBarTitleText": "评价详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/AppPay/AppPay",
+			"style": {
+				"navigationBarTitleText": "支付",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/vip/vip",
+			"style": {
+				"navigationBarTitleText": "会员中心",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/vipInfo/vipInfo",
+			"style": {
+				"navigationBarTitleText": "会员服务协议",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/shuxiang/shuxiang",
+			"style": {
+				"navigationBarTitleText": "参赛作品",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/IDCard/IDCard",
+			"style": {
+				"navigationBarTitleText": "参赛证",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/orderDetails/orderDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/coupon/coupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "兑换卷",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/couponDetails/couponDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"subPackages": [{
+			"root": "pageCamera",
+			"pages": [{
+					"path": "camera/camera",
+					"style": {
+						"navigationBarTitleText": "证件照录入",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "camera/cameraInfo",
+					"style": {
+						"navigationBarTitleText": "证件照预览",
+						"enablePullDownRefresh": false
+					}
+				}, {
+					"path": "cameraTesting/cameraTesting",
+					"style": {
+						"navigationBarTitleText": "证件照检测",
+						"enablePullDownRefresh": false
+					}
+
+				}
+			]
+		},
+		{
+			"root": "pageShuXiang",
+			"pages": [{
+					"path": "shuXiang/shuXiang",
+					"style": {
+						"navigationBarTitleText": "书香天府",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "shuXiang/shuXiangDetail",
+					"style": {
+						"navigationBarTitleText": "作品详情",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "upload/upload",
+					"style": {
+						"navigationBarTitleText": "投稿页面",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "signUp/signUp",
+					"style": {
+						"navigationBarTitleText": "个人报名",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "signUp/signUpInfo",
+					"style": {
+						"navigationBarTitleText": "报名页面",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "groupSignUp/groupSignUp",
+					"style": {
+						"navigationBarTitleText": "团体报名",
+						"enablePullDownRefresh": false
+					}
+
+				},
+				{
+					"path": "groupSignUp/groupSignUpInfo",
+					"style": {
+						"navigationBarTitleText": "报名页面",
+						"enablePullDownRefresh": false
+					}
+				}, {
+					"path": "contribution/contribution",
+					"style": {
+						"navigationBarTitleText": "投稿页面",
+						"enablePullDownRefresh": false
+					}
+
+				}, {
+					"path": "ad/ad",
+					"style": {
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+					}
+
+				}
+			]
+		},
+		{
+			"root": "pageStudentImg",
+			"pages": [{
+				"path": "home/home",
+				"style": {
+					"navigationBarTitleText": "我图我秀",
+					"enablePullDownRefresh": false
+				}
+
+			}    ,{
+                    "path" : "selectImg/selectImg",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "选择照片",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "payInfo/payInfo",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "订单详情",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+		}
+	],
+	"preloadRule": {
+		"pages/home/index": {
+			"network": "all",
+			"packages": ["pageShuXiang", "pageStudentImg"]
+		},
+		"pages/user/user": {
+			"network": "all",
+			"packages": ["pageStudentImg"]
+		},
+		"pages/orderDetails/orderDetails": {
+			"network": "all",
+			"packages": ["pageStudentImg"]
+		},
+		"pages/order/order": {
+			"network": "all",
+			"packages": ["pageStudentImg"]
+		},
+		"pageShuXiang/signUp/signUpInfo": {
+			"network": "all",
+			"packages": ["pageCamera"]
+		}
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#ffaa00",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"iconPath": "static/nav/home.png",
+				"pagePath": "pages/home/index",
+				"selectedIconPath": "static/nav/home_active.png",
+				"text": "首页"
+			},
+			// {
+			// 	"iconPath": "static/nav/compass.png",
+			// 	"pagePath": "pages/student/student",
+			// 	"selectedIconPath": "static/nav/compass_active.png",
+			// 	"text": "资讯"
+			// },
+			{
+				"iconPath": "static/nav/person.png",
+				"pagePath": "pages/user/user",
+				"selectedIconPath": "static/nav/person_active.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "default",
+		"navigationBarTitleText": "金树丫"
+	},
+	"condition": {
+		//模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项
+		"list": []
+	}
+}

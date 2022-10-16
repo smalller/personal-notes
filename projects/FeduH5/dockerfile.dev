@@ -1,0 +1,8 @@
+FROM 172.16.0.107:2180/base/nginx:1.17.6
+LABEL maintainer="wenwst@163.com"
+RUN sed -i "/^user/cuser\ root\;" /etc/nginx/nginx.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
+RUN rm -f /usr/share/nginx/html/index.*
+COPY dist /usr/share/nginx/html/
+EXPOSE 443 80

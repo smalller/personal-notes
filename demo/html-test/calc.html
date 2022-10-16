@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .container {
+            border: 2px solid #999;
+            width: 320px;
+            margin: 50px auto 0;
+        }
+
+        .clearfix::after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+
+        .show-input {
+            height: 120px;
+            padding: 20px;
+            box-sizing: border-box
+        }
+
+        .show-input h2 {
+            height: 50%;
+            display: flex;
+            align-items: center;
+        }
+
+        .show-input h4 {
+            height: 50%;
+            display: flex;
+            align-items: center;
+            color: #666;
+
+        }
+
+        .input-wrap ul li {
+            float: left;
+            width: 25%;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 2px solid #999;
+            box-sizing: border-box;
+            border-right: 0;
+            border-bottom: 0;
+            cursor: pointer;
+        }
+
+        .input-wrap ul li:nth-child(4n + 1) {
+            border-left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        'use strict'
+        const print = console.log;
+
+        class Calc {
+            constructor(options) {
+                this.numList = ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'];
+                this.showInputH4Flag = ''; //h4暂存属性
+                this.isClickSymbolFlag = false; //最后点击的是否是运算符按键标杆
+                this.isCalcFlag = false; //是否点击了等号按键标杆
+
+                this.init();
+            }
+
+            //初始化
+            init() {
+                this.renderView();
+                this.showClickWords();
+            }
+
+            //初始化清零
+            initClear() {
+                if (this.showInputH2.innerHTML == 0) {
+                    this.showInputH2.innerHTML = '';
+                }
+            }
+
+            //如果点击了运算符按键操作
+            isCilckSymbolHandle() {
+                if (this.isClickSymbolFlag) {
+                    this.showInputH2.innerHTML = '';
+                    this.isClickSymbolFlag = false;
+                }
+            }
+
+            //如果点击了等号计算操作
+            isCilckCalcHandle() {
+                if (this.isCalcFlag) {
+                    this.showInputH2.innerHTML = '';
+                    this.showInputH4.innerHTML = '';
+                    this.showInputH4Flag = '';
+                    this.isCalcFlag = false;
+                }
+            }
+
+            //按键点击回显到页面上
+            showClickWords() {
+                this.showInputH2 = document.querySelector('.container .show-input h2');
+                this.showInputH4 = document.querySelector('.container .show-input h4');
+
+                this.calcHtml.onclick = (e) => {
+                    if (e.target.nodeName === 'LI') {
+                        const symbol = e.target.innerText;
+
+                        this.initClear();
+                        this.isCilckSymbolHandle();
+                        this.isCilckCalcHandle();
+
+                        //先暂存每次点击的内容
+                        this.showInputH4Flag += e.target.innerText;
+
+                        if (symbol === '+' || symbol === '-' || symbol === '*' || symbol === '/' || symbol ===
+                            '=') {
+                            //如果点击数字后，最后点击的是运算符就将当前点击的内容回显到h4标签里
+                            this.showInputH4.innerHTML = this.showInputH4Flag;
+                            this.isClickSymbolFlag = true;
+
+                            //运算操作
+                            if (symbol === '=') {
+                                this.showInputH2.innerHTML = eval(this.showInputH4Flag.slice(0, this
+                                    .showInputH4Flag
+                                    .length - 1));
+                                this.isCalcFlag = true;
+                            }
+
+                        } else {
+                            this.showInputH2.innerHTML += e.target.innerText;
+                        }
+
+                    }
+                }
+            }
+
+            //渲染操作
+            renderView() {
+                this.calcHtml = document.createElement('div');
+                let numFlag = '';
+                this.numList.forEach(item => {
+                    numFlag += `<li>${item}</li>`
+                })
+
+                this.calcHtml.innerHTML = `
+                <div class="container clearfix">
+                    <div class="show-input">
+                        <h4></h4>
+                        <h2>0</h2>
+                    </div>
+                    <div class="input-wrap">
+                        <ul>
+                            ${numFlag}
+                        </ul>
+                    </div>
+                </div>
+                `
+
+                document.querySelector('body').appendChild(this.calcHtml);
+            }
+        }
+
+        let calc1 = new Calc();
+    </script>
+</body>
+
+</html>

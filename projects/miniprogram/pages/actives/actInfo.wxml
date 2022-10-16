@@ -1,0 +1,39 @@
+<view>
+    <view class="top_main">
+        <view class="top_cont">
+            
+            <view class="aty_bnr">
+                <view class="store">
+                    <view class="logo"><image mode="aspectFill" src="{{addUrl+info.logo}}"></image></view>
+                    <view class="sif">
+                        <view class="name over_one">{{info.storeName}}</view>
+                        <view class="time">{{info.startTime}} 至 {{info.endTime}}</view>
+                    </view>
+                    <view class="share">
+                        <button open-type="share" class='iconfont icon-fenxiang'></button>
+                    </view>
+                </view>
+            </view>
+            <view class="act_name">
+                <view class="atit"><text>{{info.name}}</text></view>
+                <view class="intro">{{info.synopsis}}</view>
+            </view>
+        </view>
+    </view>
+    
+    <view class="main">
+        <rich-text nodes="{{richText}}"></rich-text>
+
+        <view class="store_info">
+            <image class="tis" src="../../images/act.png"></image>
+            <view class="st_box" catchtap="goDetail">
+                <view class="sl"><image mode="aspectFill" src="{{addUrl+info.logo}}"></image></view>
+                <view class="sm">
+                    <view class="over_one sn">{{info.storeName}}</view>
+                    <view class="over_one sj">{{info.name}}</view>
+                </view>
+                <view class="sr"><image src="../../icon/youjian.png"></image></view>
+            </view>
+        </view>
+    </view>
+</view>

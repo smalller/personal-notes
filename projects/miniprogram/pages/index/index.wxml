@@ -1,0 +1,209 @@
+<view >
+<view class="homePage " >
+    <view style="height:{{topSticky}}px;"></view>
+    <!-- <view class="top_place bg_color2" style="height: {{mobile.top+2}}px;"></view> -->
+    <!-- style="padding-top:{{(mobile.top+2)}}px;height:{{mobile.height*2}}rpx;" -->
+    <view class="top_sticky" >
+        <view class="fx header" style="padding-top:{{(mobile.top+2+32)}}px;">
+            <view>
+                <view class="jiuzuo">JIUZUO 喝酒订座 · 马上玖座</view>
+                <view class="jz_lab">
+                    <text>优惠折扣</text>
+                    |
+                    <text>简单拼桌</text>
+                    |
+                    <text>畅聊社区</text>
+                </view>
+            </view>
+            <view>
+                <view class="city">
+                    <text class="adr" bindtap="goCitys">{{exchangeCity}}</text>
+                    <icon class="iconfont icon-tubiaozhizuo-"></icon>
+                </view>
+            </view>
+        </view>
+        
+        <view class="pd">
+            <view class="search" bindtap="goSearch">
+                <icon  class="iconfont icon-sousuo ser_icon"></icon>
+                <input class="search_inp" disabled placeholder="请输入搜索内容"></input>
+            </view>
+        </view>
+    </view>
+
+    <view class="banner">
+        <swiper indicator-dots="{{indicatorDots}}" class="swi_box" circular="true"
+            indicator-color="rgba(255, 255, 255, .5)" indicator-active-color="#fff" autoplay="{{autoplay}}"
+            interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{shuffList}}" wx:key="index">
+                <swiper-item>
+                    <image mode="aspectFill" bindtap="goStore" data-data="{{item}}" src="{{addUrl + item.picture}}"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+
+    <view class="serve">
+        <view class="title">服务功能</view>
+        <view class="classify">
+            <block wx:for="{{plate_btn}}" wx:key="index">
+                <view class="ify" bindtap="plateList" data-data="{{item}}">
+                    <image class="border" src="../../images/border.png"></image>
+                    <view class="box_">
+                        <view class="dis_inb">
+                            <image style="height:{{item.h}}rpx;width:{{item.w}}rpx;" class="icon_img" src="{{item.img}}"></image>
+                        </view>
+                        <view>
+                            <view class="name">{{item.name}} <image src="../../icon/right.png"></image> </view>
+                            <view class="introduce over_one">{{item.introduce}}</view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+
+    <!-- <view class="award" bindtap="award">
+        <image class="bg_lucky" src="../../images/bg_lucky.png"></image>
+        <view class="award_box" >
+            <image class="lef_i" src="../../icon/123.png"></image>
+            <view class="content">
+                <view class="tip1">每日福利优惠满减券 低价酒水</view>
+                <view class="tip2">抵扣券、满减券、消费礼券</view>
+            </view>
+        </view>
+        <view class="go_award">去抽奖</view>
+    </view> -->
+
+    <view class="award_viae" bindtap="award">
+        <image mode="widthFix" class="award_bg" src="../../images/award_bg.png" alt=""></image>
+        <image mode="widthFix" class="award_hand" src="../../images/award_hand.png" alt=""> </image>
+        <image mode="widthFix" class="award_btn" src="../../images/award_btn.png" alt=""> </image>
+    </view>
+
+    <view class="scroll_box">
+        <view class="recom">
+            <view class="re_l">
+                <block wx:for="{{pageClassify}}" wx:key="index">
+                    <text bindtap="goIndex" data-index="{{index}}" class="nl {{index==active?'important':''}}">{{item.label}}</text>
+                </block>
+                <view style="left:{{left_width}};transition: all .5s;" class="active">
+                    <image src="../../icon/lab_index.png"></image>
+                </view>
+            </view>
+            <view class="re_r" bindtap="next">
+                <image class="{{animateChange?'animate_change':''}}  " src="../../icon/douyidou2.png"></image>
+            </view>
+
+        </view>
+
+        <view class="btm_swiper">
+            <swiper indicator-dots="{{classifySwiper.indicatorDots}}" class="swi_box" circular="true"
+                autoplay="{{classifySwiper.autoplay}}"
+                current="{{active}}"
+                bindchange="changeSwiper"
+                duration="{{classifySwiper.duration}}">
+                <swiper-item>
+                    <view class="store_list">
+                        <view class="sli" wx:for="{{btmArr.storeList}}" wx:key="index" bindtap="storeInfo" data-id="{{item.storeId}}">
+                            <image class="sli_img" mode="aspectFill" src="{{addUrl+item.picture}}"></image>
+                            <view class="text_box">
+                                <view class="st_name over_one">{{item.name}}</view>
+                                <view class="st_intr">{{item.synopsis}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </swiper-item>
+                <swiper-item>
+                    <view class="active_list">
+                        <block wx:if="{{btmArr.actives.length>0}}">
+                            <view class="search_content" wx:for="{{btmArr.actives}}"  wx:key="index"  bindtap="activeInfo" data-id="{{item.id}}">
+                                <view class="left">
+                                    <image mode="aspectFill" src="{{addUrl + item.thumb}}"></image>
+                                </view>
+                                <view class="right">
+                                  <view class="name over_one">{{item.name}}</view>
+                                  <view class="over_more brief">{{item.synopsis}}</view>
+                                </view>
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="without">
+                                <image mode="widthFix" src="../../images/search_null.png"></image>
+                            </view>
+                        </block>
+                    </view>
+                </swiper-item>
+                <swiper-item>
+                    <view class="without">
+                        <image mode="widthFix" src="../../images/downApp.png"></image>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class="bg" bindtap="cancel" wx:if="{{openSet}}"></view>
+        <view class="dio_bg" wx:if="{{openSet}}">
+            <view class="box">
+                <view class="title">温馨提示</view>      
+                <view class="tips">需要获取您的位置授权</view>             
+                <view class="btm_btn">
+                    <button bindtap="cancel">取消</button>
+                    <button open-type="openSetting" bindopensetting="callback">确定</button>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view
+        catchtouchmove="buttonMove" 
+        bindtouchstart="buttonStart" 
+        catchtouchend="buttonEnd" 
+        style="top:{{buttonTop}}px;left:{{buttonLeft}}px;{{aniClass?'transition: 1s;':''}}" class="award_entrance"  wx:if="{{showDrawBall}}">
+            <image class="award_img" catchtap="awardEntrance" src="../../images/draw.png" ></image>
+            <view class="draw" catchtap="awardEntrance">
+                <image  src="../../images/draw_bg.png"></image>
+                <image  src="../../images/draw_text.png"></image>
+            </view>
+
+        <view class="draw_bg" wx:if="{{showDrawList}}" catchtap="closeDraw"></view>
+        <view class="draw_lists {{directionL?'draw_r':'draw_l'}}" style="{{directionT?'bottom:0':'top:0'}}" wx:if="{{showDrawList}}">
+            <block wx:for="{{ballLists}}" wx:key="index">
+                <view class="stores_act" catchtap="offlineLucky" data-id="{{item.luckyDrawId}}">
+                    <view class="st_logo"><image mode="aspectFill" src="{{addUrl+item.storeLogo}}"></image></view>
+                    <view class="st_na over_one">{{item.storeName}}</view>
+                    <view class="ic"><image src="../../icon/youjian.png"></image></view>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+
+<view class="scan_bg" wx:if="{{scanShow}}"></view>
+<view class="scan_box" wx:if="{{scanShow}}">
+    <view class="pd_box">
+        <image mode="aspectFill" bindtap="drawLucky" src="{{addUrl+drwaPicture}}"></image>
+        <button wx:if="{{!isLogin}}" class="scan_login" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>
+        </button>
+        <button class="scan_phone" 
+            wx:if="{{!hasPhone && isLogin}}"
+            open-type="getPhoneNumber" 
+            bindgetphonenumber="getPhoneNumber"
+            >
+        </button>
+        <!-- <image bindtap="closeGood" class="close" src="../../images/x.png"></image> -->
+    </view>
+</view>
+
+
+<!-- <view class="self_bg" bindtap="cancel" wx:if="{{openSet}}"></view>
+<view class="self_bg" wx:if="{{openSet}}">
+    <view class="self_box">
+        <view class="self_title">温馨提示</view>
+        <view class="self_tips">需要获取您的位置授权</view>
+        <view class="self_btm_btn">
+            <button bindtap="cancel">取消</button>
+            <button bindtap="cancel">确定</button>
+        </view>
+    </view>
+</view> -->
+</view>

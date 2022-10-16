@@ -1,0 +1,826 @@
+page{
+  background: #161823;
+}
+.header image {
+  width: 100%;
+  height: 362rpx;
+}
+.ban_header{
+  position: relative;
+}
+.collect{
+  position: absolute;
+  width: 40rpx!important;
+  height: 40rpx!important;
+  z-index: 2;
+  top: 24rpx;
+  right: 124rpx;
+}
+
+.ban_header .iconfont{
+  position: absolute;
+  right: 24rpx;
+  top: 24rpx;
+  display:inline-flex;
+  z-index: 2;
+  color: white;
+  font-size:40rpx;
+  padding: 0;
+  margin: 0;
+  width: 40rpx;
+  height: 40rpx;
+  background: none;
+  line-height: 40rpx;
+}
+
+#myVideo{
+  width: 100%;
+  height: 100%;
+}
+/* 商家简介 */
+.introduce {
+  padding:0 20rpx;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.introduce .left{
+  font-size: 0;
+}
+.store_name{
+  color: white;
+  font-size: 40rpx;
+  max-width:450rpx;
+}
+.introduce .left .store_logo {
+  width: 138rpx;
+  height: 138rpx;
+  border-radius: 8rpx;
+}
+.quality{
+  height: 40rpx;
+  width: 138rpx;
+  margin-top: 10rpx;
+}
+
+.introduce .right {
+  font-size: 40rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #000000;
+  line-height: 60rpx;
+}
+.name_over{
+  display: flex; 
+  align-items: baseline;
+}
+
+.discount{
+  background: #191D26;
+  color: white;
+  font-size: 20rpx;
+  border-radius: 4rpx;
+  padding:0 8rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  margin-left: 10rpx;
+  min-width: 100rpx;
+  text-align: center;
+}
+.introduce .right .down {
+  display: flex;
+  align-items: center;
+}
+.discounts{
+  height: 34rpx;
+  width: 92rpx;
+  position: relative;
+  margin-left: 18rpx;
+}
+.dis_text{
+  font-size: 22rpx;
+  color: #161823;
+  position: absolute;
+  right: 10rpx;
+  top: -13rpx;
+}
+.discounts image{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.perCapitaConsumption{
+  color: #7D7F89;
+  font-size: 20rpx;
+  line-height: 30rpx;
+}
+.work_time{
+  color: #7D7F89;
+  font-size: 24rpx;
+  line-height: 30rpx;
+  margin-top: 14rpx;
+}
+.brief {
+  padding: 0 24rpx;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #CCCCCC;
+  line-height: 34rpx;
+  margin-top: 24rpx;
+  word-break: break-all;
+  padding-bottom: 30rpx;
+}
+
+.time {
+  padding: 0 24rpx;
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 34rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 26rpx;
+}
+
+.time image {
+  width: 64rpx;
+  height: 64rpx;
+  margin-left: 20rpx;
+}
+
+.time .hgropImg {
+  display: flex;
+}
+
+.time .hgropImg .lang {
+  text-align: center;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 34rpx;
+}
+.vipcard{
+  margin-top: 16rpx;
+  padding: 0 24rpx;
+  height: 60rpx;
+}
+.vipcard .vip_img{
+  height: 60rpx;
+  width: 80rpx;
+  vertical-align: middle;
+}
+.vipcard .vip_tip{
+  color: #FFB900;
+  font-size: 28rpx;
+  margin-left: 16rpx;
+}
+
+/* 地址电话 */
+.ctct_box{
+  padding: 0 20rpx;
+}
+.contact .icon-weibiaoti34{
+  color: #FFFFFF;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  margin-left: 4rpx;
+}
+.contact{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2rpx solid #23263C;
+  border-bottom: 2rpx solid #23263C;
+  padding: 26rpx 0;
+}
+.adr_num{
+  font-size: 24rpx;
+  color: #BABABA;
+}
+.sj{
+  width: 36rpx;
+  height: 36rpx;
+}
+.rit_view{
+  padding-right: 20rpx;
+  min-width: 100rpx;
+  text-align: right;
+}
+.place_adr{
+  color: #FFFFFF!important;
+  font-size:26rpx;
+}
+
+.cards{
+  padding: 40rpx 20rpx 30rpx;
+  border-bottom: 10px solid #0E0E11;
+}
+.card_img{
+  height: 114rpx;
+  position: relative;
+  width: 100%;
+}
+.card_img image{
+  height: 100%;
+  width: 100%;
+}
+.examine{
+  position: absolute;
+  right: 40rpx;
+  top: calc(50% - 52rpx/2);
+  font-size: 24rpx;
+  color: #FEE6C1;
+  padding: 0 32rpx;
+  background: #3D3843;
+  border-radius: 36rpx;
+  height: 52rpx;
+    line-height: 52rpx;
+}
+
+
+
+/* 商家推荐 */
+.recommend {
+  padding: 32rpx 20rpx 40rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #000000;
+  line-height: 20px;
+  border-bottom: 10px solid #0E0E11;
+}
+
+.recommend .header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40rpx; 
+  align-items: flex-end;
+}
+.tx1{
+  font-size: 30rpx;
+  color: #FEFFFE;
+}
+.tx1::before{
+  content: ' ';
+  height: 32rpx;
+  width: 6rpx;
+  background: #FACE15;
+  display: inline-block;
+  margin-right: 14rpx;
+  position: relative;
+  top: 6rpx;
+}
+.tx2{
+  color: #B1B1B1;
+  font-size: 26rpx;
+  position: relative;
+  top: 4rpx;
+}
+.tx2 .icon-weibiaoti34{
+  font-size: 26rpx;
+  position: relative;
+  top: -2rpx;
+}
+
+/* .recommend image {
+  width: 12rpx;
+  height: 24rpx;
+} */
+
+.recommend .pic {
+  display: flex;
+}
+
+.pic_box{
+  width: 240rpx;
+  margin-right: 24rpx;
+}
+.recommend .pic_box image {
+  width: 240rpx;
+  height: 320rpx;
+  border-radius: 8rpx;
+  border:2rpx solid #2C3043;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0);
+}
+.recommend .pic .v1 {
+  font-size: 24rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 34rpx;
+}
+.recommend .pic .pices {
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: #FFFFFF;
+}
+.old_n{
+  margin-right: 8rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+.old_p{
+  font-size: 20rpx;
+  color: #FFFFFF;
+  text-decoration: line-through;
+}
+/* 评价 */
+.evaluate{
+  padding: 36rpx 20rpx 0 20rpx;
+  margin-bottom: 32rpx;
+}
+.evaluate .header{
+  font-size: 28rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #000000;
+  line-height: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.evaluate .header image{
+  width: 12rpx;
+  height: 24rpx;
+}
+.evaluate .all{
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  background: #383A44;
+  border-radius: 4rpx;
+  padding: 8rpx 20rpx;
+  margin-left: 14rpx;
+}
+.evaluate .all text:nth-child(1){
+  color: #23D0CB;
+  font-size: 24rpx;
+}
+.evaluate .all text:nth-child(2){
+  color: #E0E0E0;
+  font-size: 20rpx;
+  margin-left: 20rpx;
+}
+
+/* 个人 */
+.first_discuss{
+  background: #262833;
+  border-radius: 12rpx;
+  margin: 0 20rpx;
+  padding-bottom: 10rpx;
+}
+.discuss{
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+}
+.two{
+  /* width: 440rpx; */
+  /* height: 64rpx; */
+  /* display: inline-block; */
+}
+.discuss image{
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+}
+.discuss .two{
+  margin-left: 10rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+}
+.level {
+  width: 92rpx;
+  height: 40rpx;
+  position: relative;
+  font-size: 20rpx;
+  font-weight: bold;
+  text-align: center;
+  color: #FDFEFD;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.leaveLogo{
+  width: 100%!important;
+  height: 100%!important;
+  vertical-align: bottom;
+}
+.level .lvl{
+  position: absolute;
+  left: 50rpx;
+  font-size: 20rpx!important;
+}
+.hidden_name{
+  max-width: 320rpx;
+  margin-right: 12rpx;
+}
+.us_in{
+  color: #C5C5D0;
+  font-size: 24rpx;
+  display: flex;
+}
+.createTime{
+  color: #C5C5D0;
+  font-size: 24rpx;
+  padding: 12rpx 0 0 102rpx;
+}
+.discuss .vip{
+  width: 88rpx;
+  height: 28rpx;
+  margin-left: 24rpx;
+}
+.discuss .mini{
+  width: 19.9rpx;
+  height: 20rpx;
+  margin-right: 12rpx;
+  margin-bottom: 24rpx;
+}
+.discuss .three{
+  text-align: right;
+  font-size: 24rpx;
+}
+.discuss .three text{
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 34rpx;
+  margin-left: 12rpx;
+}
+.three .iconfont{
+  font-size: 38rpx;
+  display: inline-grid;
+  margin-top: 6rpx;
+  vertical-align: sub;
+}
+.level_vip{
+  /* height: 28rpx;
+  width: 88rpx; */
+  padding: 2rpx 18rpx;
+  margin-bottom: 20rpx;
+  background: #191D26;
+  text-align: center;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: bold;
+  border-radius: 20rpx;
+  margin-left: 24rpx;
+}
+.red{
+  color: #E2696F;
+}
+.gary{
+  color: #ccc;
+}
+.evaluate .discuss .three image{
+  width: 26rpx;
+  height: 24rpx;
+  margin-right: 6rpx;
+  vertical-align: middle;
+}
+.content{
+  padding-left:102rpx;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F0F0F0;
+  line-height: 34rpx;
+}
+.content .nav{
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #103684;
+  line-height: 34rpx;
+  margin-top: 4rpx;
+}
+.homepic{
+  display: flex;
+  margin-top: 24rpx;
+  padding-left: 102rpx;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-right: 20rpx;
+  position: relative;
+}
+.all_num{
+  position: absolute;
+  color: #FFFFFF;
+  font-size: 24rpx;
+  right: 24rpx;
+  bottom: 24rpx;
+  padding: 0 12rpx;
+  background: rgba(0, 0, 0, .3);
+  border-radius: 50%;
+}
+.homepic image{
+  width: 182rpx;
+  height: 182rpx;
+  /* margin-right: 30rpx; */
+  border-radius: 4rpx;
+  margin-bottom: 24rpx;
+}
+.homepic::after{
+  content: '';
+  width:182rpx ;
+}
+.allevaluate{
+  width: 100%;
+  margin: 110rpx auto 48rpx;
+}
+.allevaluate .au{
+  width: 320rpx;
+  font-size: 26rpx;
+  height: 76rpx;
+  margin: 0 auto;
+  background: #383A44;
+  color: #FACE15;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 76rpx;
+}
+.noteval_box{
+  text-align: center;
+}
+.noteval{
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 26rpx;
+  margin: 54rpx auto;
+  min-width: 220rpx;
+  background: #383A44;
+  color: #FACE15;
+  line-height: 54rpx;
+  padding: 0 24rpx;
+  display: inline-block;
+}
+/* footer */
+.footer{
+  padding: 0 20rpx;
+  display: flex;
+  background-color: #161823;
+  width: 100%;
+  height: 136rpx;
+  text-align: center;
+  line-height: 136rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+  position: fixed;
+  bottom: 0;
+  border-top: 2rpx solid #23263C;
+  box-sizing: border-box;
+}
+.fle,.fri{
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+.footer_btn{
+  height: 90rpx;
+  width: 222rpx;
+  line-height: 90rpx;
+  border-radius: 8rpx;
+  background: #262833;
+  color: #FACE15;
+}
+.disable_btn{
+  color: #8a8a8a;
+}
+
+.star{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.star-wrap image {
+  float: left;
+  width: 30rpx!important;
+  height: 30rpx!important;
+  margin-right: 6px;
+}
+.star-wrap image:last-child{
+  margin-right:3px ;
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+.star_num{
+  font-size: 20rpx;
+  margin-left: 12rpx;
+  color: #C9C9D3;
+}
+
+.mask1{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 20;
+}
+.booked-box{
+  position: fixed;
+  height: 732rpx;
+  top: calc(50% - 782rpx/2);
+  width: 460rpx;
+  left: calc(50% - 460rpx/2);
+  z-index: 21;
+  background: #202233;
+  border-radius:12rpx ;
+}
+.pd_box{
+  padding: 24rpx;
+}
+.pd_box image:nth-child(1){
+  width: 100%;
+  height: 552rpx;
+  border-radius:8rpx ;
+  border: 2rpx solid #2C3043;
+  box-sizing: border-box;
+}
+.pd_box .fx{
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+}
+.pd_box .fx .one{
+  font-size:28rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+.pd_box .fx .pri{
+  padding-left: 10rpx;
+  color:#EF5954;
+}
+.pd_box .fx .two{
+  font-size:24rpx;
+  color: #C9C9D3;
+}
+.pd_box .fx .th{
+  font-size: 24rpx;
+  color: #C9C9D3;
+  text-decoration: line-through;
+}
+.booked-box .close{
+  height: 64rpx;
+  width: 64rpx;
+  position: absolute;
+  left:calc(50% - 64rpx/2);
+  z-index: 21;
+  bottom:-100rpx;
+}
+.addV{
+  width: 60rpx;
+  height: auto;
+  vertical-align: middle;
+  margin: 0 20rpx;
+}
+
+.rz{
+  font-size: 24rpx;
+}
+
+/* 查看大图 */
+.big_img_box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  height: 100%;
+  width: 100%;
+  background: #191D26;
+}
+.big_img{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 51;
+}
+.big_img .iconfont{
+  display:inline-flex;
+  font-size: 48rpx;
+  color: white;
+  position: absolute;
+  right: 24rpx;
+  top: 24rpx;
+  z-index: 53;
+}
+.big_swiper{
+  width: 100%;
+  height: 100%;
+}
+.big_swiper image{
+  width: 100%;
+  max-height: 100%;
+}
+.swiper_item{
+  display: flex;
+  align-items: center;
+}
+
+/* 登录按钮 */
+.card_btn{
+  padding: 0;
+}
+
+.card_btn[plain]{
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+.more_goods_btn{
+  padding: 0;
+}
+.more_goods_btn[plain]{
+  border: none;
+  color: #B1B1B1;
+  line-height: 36rpx;
+  margin-right: 0;
+}
+.like_btn{
+  border: none;
+  padding: 0;
+  text-align: right;
+  height: 84rpx;
+  line-height: 62rpx;
+}
+.like_btn[plain]{
+  border: none;
+}
+.like_btn .iconfont{
+  vertical-align: bottom;
+}
+
+/* 抽奖弹窗 */
+.scan_bg{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 22;
+  background: rgba(0, 0, 0, .5);
+}
+.scan_login,.scan_phone{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: none;
+  z-index: 24;
+}
+.scan_phone{
+  z-index: 23!important;
+}
+
+.scan_login[plain],.scan_phone[plain]{
+  border:none;
+}
+.scan_box{
+  width: 600rpx;
+  height: 600rpx;
+  position: fixed;
+  left: calc(50% - 600rpx/2);
+  top: calc(50% - 650rpx/2);
+  z-index: 23;
+}
+.pd1_box{
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  border-radius: 8rpx;
+  position: relative;
+}
+.pd1_box .theme{
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+.pd1_box .close{
+  height: 64rpx;
+  width: 64rpx;
+  position: absolute;
+  left:calc(50% - 64rpx/2);
+  z-index: 21;
+  bottom:-100rpx;
+}

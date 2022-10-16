@@ -1,0 +1,337 @@
+基本操作命令：
+	ls		查看当前文件夹下的文件
+	ls -l（ll）	可以看到当前文件夹下的文件夹的全部信息
+		如：drwxr-xr-x 2 root root 4096 Mar  6  2018 default.d
+			-rw-r--r-- 1 root root 1077 Mar  6  2018 fastcgi.conf
+		- : 最前面有-表示这是文件
+		d : 最前面有d表示这是文件夹
+		rw-r--r-- ： 表示的是权限，后面跟的数字表示文件夹里面有几个文件，1表示的就是文件
+		第一个root：拥有者（对于用户）
+		第二个root：拥有者所属的组（对于用户组）
+		4096/1077: 表示文件大小，以字节为单位
+		2018：表示创建时间
+		最后面的表示文件或文件夹名称	
+		
+	ls -h	以k,m,g的形式展现出文件的大小
+	ls -a	显示所有文件，包括隐藏文件（隐藏文件是以.开头的）
+	ls -lh	带单位显示文件大小（相当于ls -l和ls -h一起用）
+	ls -la	显示所有文件/目录（相当于ls -l和ls -a一起用）
+	ls -lt	按文件的时间降序排序（后创建的排在最前面）
+	这些指令都可以和起来用
+		
+	pwd		查看当前的工作目录
+	clear	清屏
+	man ls  查看与ls相关的命令帮助，其他命令前面加上man也可以查看帮助
+	mkdir demo1		创建demo1文件夹
+	mkdir -p demo1/demo2	创建demo1文件夹，并且在demo1里创建demo2文件夹
+	touch a.txt		创建文件
+	cd root/web		切换目录
+	rm a.txt	删除该文件
+	rm f[123].txt	删除f1,f2,f3.txt文件（这里是以正则表达式的形式删除的）
+	xx --help	查看命令的使用方式
+
+绝对路径和相对路径：
+	相对路径: ..
+		cd ..	回到上一级目录
+		cd ../..	回到上上级目录
+		cd		回到home目录（/root）
+	
+	绝对路径：
+		cd /root/web
+		
+		
+隐藏文件或目录是以 . 开头的
+
+
+文件的拷贝：
+	cp a.txt a_cp.txt	复制a.txt，并且命名为a_cp.txt
+	cp -p a.txt a_cp.txt	使复制后的文件跟原文件的创建时间一样（默认复制后的文件的创建时间跟原文件的创建时间是不一样的）
+	cp a.txt b.txt test		将a.txt b.txt复制到test文件夹下
+	cp -r test1 test2		将test1文件夹复制到text2文件夹下
+
+
+文件移动/重命名：
+	mv b.txt b2.txt		将b.txt重命名为b2.txt
+	mv b.txt test1		将b.txt移动到test1文件夹下
+	
+	
+删除文件：
+	rm c.txt	删除c.txt
+	rm -r test1	删除test1文件夹
+	rm -rf test1	强制删除文件夹（慎用）
+	
+	
+查看文件内容：
+	cat a.txt	查看文件内容（全部文件内容都加载出来）
+	cat -n a.txt |more		先加载一部分内容出来，按回车或空格再继续显示一部分
+	more a.txt		跟上面的方法一样，同样是显示先显示一部分
+	less a.txt		可以上下键查看内容
+	head a.txt		查看前10行内容
+	head -n 3 a.txt		查看前3行内容
+	tail a.txt		查看最后10行内容（且是动态的，比如加载日志，可以一直查看最后10行日志）
+	tail -n 5 a.txt	查看最后5行
+
+
+yum（软件资源管理器）使用：
+	语法：
+		yum install	xxx	 安装xxx软件
+		yum remove xxx	 卸载xxx软件
+		yum search xxx	 搜索xxx软件
+		如：yum install nginx
+		
+	
+链接：		
+	硬链接：ln a.txt c	相当于拷贝a.txt这个文件，拷贝到c这个文件，即使删除了原文件，也不影响c文件
+	软链接：ln -s a.txt d	此时d文件就相当于a.txt的快捷方式，原文件一旦删除，d文件也就失去了作用
+
+
+history命令：查看已经执行过的历史命令
+	history 10	只显示最近的10条命令
+	查询过后显示的文档中，可用 ! + 前面的编号，执行当前的命令操作，如：!1221 
+
+
+echo:
+	echo "xxx" > a.txt	将xxx替换掉a.txt文件里的所有数据
+	echo "xxx" >> a.txt	在a.txt文件里追加xxx
+	
+	
+	
+date:（时间命令）
+	date "+%Y-%m-%d %H:%M:%S"	获取当前时间（格式可以自定义）
+	date -s "xx-xx-xx xx:xx:xx"		设定时间
+	ntpdate -u ntp.api.bz		将时间重设为标准时间
+	
+	
+tar打包、压缩及解压：
+	打包：将n个文件打包到1个文件中
+	压缩：将n个文件压缩成一个小文件
+	tar [主选项+辅选项]
+	-c: 打包成一个文件
+	-x: 解压
+	-t: 查看压缩文档里的所有内容
+	-z: gzip 指将其打包成.tar.gz或.tgz格式的压缩文件（压缩成该格式的文件时，z命令是必须的）
+	-j: bzip2 指将其打包成.tar.bz2格式的压缩文件
+	-v: 显示操作的过程
+	-C: 将其打包到指定目录
+	-f: f后面跟上文件名（命令里必须有f）
+	以上命令可以合用
+	
+	tar+打包：
+		tar -cvf logs.tar a.txt		将a.txt打包到logs.tat文件下，并且显示操作的过程
+		tar -tf logs.tar	查看logs.tar文件里的东西
+		tar -xf logs.tar -C temp/	将logs.tar解压到temp文件夹下
+	
+	tar+gzip压缩：
+		tar -zcvf logs.tar.gz a.txt		将a.txt打包并压缩到logs.tar.gz
+		tar -ztf logs.tar.gz	查看压缩文件里的东西
+		tar -zxvf logs.tar.gz -C temp/		将logs.tar.gz文件解压到temp文件夹下
+	
+	tar+bzip2压缩： 将gzip操作里的z换成j，压缩文件后缀改为.tar.bz2就行了
+	bzip2的压缩比更高（耗费的时间更多，但压缩后的体积更小）
+	
+	
+系统命令：
+	网络相关：
+		hostname	查看主机名
+		hostname xxx	临时修改主机名（要想永久更改就去 /etc/sysconfig/network）
+		ping www.baidu.com	查看网络是否连通
+		ifconfig	查看ip地址相关信息
+	
+	进程相关：
+		ps -ef|grep 端口号		查看相关端口的详细信息
+		netstat -anp|grep 端口号	查看相关端口的运行状态
+		
+	磁盘相关：
+		df -h	查看磁盘总内存的使用状态
+		free -h	查看内存
+		top		查看CPU的使用情况
+
+
+vim:
+	yum install vim		安装vim
+	插入命令：		
+		i	在光标前插入
+		o	在光标当前行的下一行插入新行
+		
+	定位命令：
+		:set nu		显示行号
+		:set nonu	取消行号
+		gg		到文本的第一行
+		G		到文本的最后一行
+		:20		移到第20行
+		
+	删除命令：
+		x		删除光标所在处的字符
+		dd		删除光标所在行
+		20dd	删除20行
+		dG		删除光标所在行到末尾的所有内容
+		D		删除光标所在处到行位的内容
+	
+	复制粘贴命令：
+		yy		复制当前行
+		p		粘贴
+		
+	取消命令：
+		u		取消上一步操作
+		Ctrl + r 	返回到u操作之前（回到取消上一步之前）
+		
+	退出命令：
+		:wq		保存并退出（w为保存，q为退出）
+		:q！	强制退出不保存
+		
+		
+安全性模型（权限控制）：
+	1.用户和组来控制对资源文件等的访问
+	2.使用账号密码登录
+	3.每个资源都有owner（默认，可进行修改）
+	
+	用户：
+		UserID	唯一标识符
+		
+		用户信息存放在： /etc/passwd	查看的话在前面加cat
+		root:x:0:0:root:/root:/bin/bash
+		第1个0：userid
+		第2个0：groupid
+		/root: root用户对应的home路径，其他用户对应的home路径为: /home/用户名
+		
+		用户对应的密码存放在：	/etc/shadow		查看的话在前面加cat
+		用户的密码是经过MD5加密的
+		
+	用户组：
+		每个用户都属于某个用户组
+		用户组的信息存放在：	/etc/group		查看的话在前面加cat
+		root:x:0:
+		root: 组名称
+		0: 组id
+		
+	用户管理：
+		useradd small	添加用户
+		su - small	切换到small用户
+		passwd small	给small用户添加密码
+		ssh small@ip地址	远程登录到small用户
+		usermod -l xxx small	将small用户名改为xxx
+		userdel -r small	删除small用户
+		
+	组管理：
+		groupadd small	添加组
+		groupmod -n xxx small	将small用户名改为xxx
+		groupdel small	删除small组
+		useradd -g small xxx	在small组里添加xxx用户
+		
+	目录和文件的权限解读：
+		r	读权限
+		w	写权限
+		x	执行权限
+		-	无权限
+		第1位： 文件类型（d/-  d表示文件夹，/表示文件）
+		第2-10位：表示所有的权限
+		第2-4位：用户的权限
+		第5-7位：组的权限
+		第8-10位：其他用户的权限
+		如： -rwxrw-r--		drwxr-----
+		
+	权限管理：
+		r:	读操作
+		w:	写操作
+		x：	执行操作
+		
+		u（用户） + r	给用户添加读权限
+		g（组） - w		给组取消写权限
+		o（其他用户） = x	给其他用户只赋上执行权限，其它权限不要
+		加权限就是+，减权限就是-，
+		如： chmod g+x small	给small文件夹的组权限添加执行权限
+			 chmod ug-rwx small	给small文件夹的用户和组权限都取消读、写、执行权限
+			 chmod o=w small	给small文件夹的其他用户权限只设为写权限，其他权限不要
+			 chmod a= small		给small文件夹的所有用户和组的权限设为空（任何权限都没有）
+			 chmod -R a= small	给small文件夹里所有文件和文件夹的所有用户和组的权限设为空（任何权限都没有）
+	
+
+
+安装nginx：
+	yum install epel -release	安装nginx的依赖
+	yum install nginx
+	
+
+nginx相关命令：
+	systemctl start nginx	启动 nginx
+	systemctl enable nginx	将 nginx 设置为开机启动
+	systemctl restart nginx	重启 nginx 服务
+
+	netstat -nltp	查看端口进程
+	ps -ef | grep nginx		查看nginx服务是否开启
+	nginx -s reload		重启nginx服务
+
+
+当重启Nginx时，出现[emerg]: bind() to 0.0.0.0:80 failed (98: Address already in use)
+	1. fuser -k 80/tcp	杀死80端口进程
+	2. service nginx start	重启nginx服务
+
+	
+		
+安装MySQL步骤：
+	1.检查系统汇总是否已经安装了MySQL
+		rpm -qa|grep mysqlOK
+		
+	2.如果有，可以删除，重新安
+		yum -y remove ...	后面加上检查出来的mysql文件名
+	3.下载MySQL的yum源
+		wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm	版本可以不同（可以去 https://dev.mysql.com/downloads/repo/yum/ 里下载）
+	4.安装yum源
+		rpm -ivh ...	后面跟上yum文件的名字
+	5.安装MySQL
+		yum -y install mysql-server
+	6.启动MySQL
+		systemctl start mysqld
+	7.检查MySQL的状态
+		service mysqld status
+	8.如何获取随机产生的MySQL的密码
+		grep "temporary password" /var/log/mysqld.log
+	9.登录MySQL
+		mysql -uroot -p	或者直接 mysql -p	
+	10.修改密码
+		set password for 'root'@'localhost'=password('xxxx')	注意！密码一定要复杂不然改不成功
+	11.将数据库的访问权限设为开放模式
+		update user set host ="%" where user ="root";
+		
+		
+	
+	
+安装php7步骤：
+	1.删除之前安装的php
+		yum -y remove php*		
+	2.安装epel-release 升级软件包
+		yum install epel-release -y
+		rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+	3.安装php7.2 fpm cli
+		yum install php72w-fpm php72w-opcache php72w-cli
+	4.安装常用扩展
+		yum -y install php72w php72w-cli php72w-common php72w-devel php72w-embedded php72w-fpm php72w-gd php72w-mbstring php72w-mysqlnd php72w-opcache php72w-pdo php72w-xml
+	5.在nginx.conf里配置相关文件
+		location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+	6.启动服务
+		systemctl start php-fpm
+	7.设为开启自启
+		systemctl enable php-fpm
+	8.查看相关扩展
+		php -m
+	9.重启php服务
+		systemctl restart php-fpm
+		
+		
+		
+		
+		
+		 
+		
+	
+		
+		
+
+
+		

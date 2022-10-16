@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="height: 2000px;"></div>
+
+    <script>
+        // 节流
+        // function throttle(fn, delay) {
+        //     // let last = null
+        //     // return function () {
+        //     //     const now = Date.now()
+        //     //     if (now - last > delay) {
+        //     //         last = now
+        //     //         fn.apply(this, arguments)
+        //     //     }
+        //     // }
+
+        //     let flag = true
+        //     return function () {
+        //         if (flag) {
+        //             flag = false
+        //             setTimeout(() => {
+        //                 fn.apply(this, arguments)
+        //                 flag = true
+        //             }, delay)
+        //         }
+        //     }
+        // }
+
+        // function task() {
+        //     console.log('run task')
+        // }
+        // const throttleTask = throttle(task, 1000)
+        // window.addEventListener('scroll', throttleTask)
+
+
+        // 防抖
+        // function debounce(fn, delay) {
+        //     let timer = null
+        //     return function () {
+        //         if (timer) clearTimeout(timer)
+        //         timer = setTimeout(() => {
+        //             fn.apply(this, arguments)
+        //         }, delay)
+        //     }
+        // }
+
+        // function task() {
+        //     console.log('run task')
+        // }
+        // const debounceTask = debounce(task, 1000)
+        // window.addEventListener('scroll', debounceTask)
+    </script>
+</body>
+
+</html>

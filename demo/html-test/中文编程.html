@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        ;
+        (function (温逗) {
+            温逗.中文 = {
+                加法(参数) {
+                    return 参数.reduce((参数1, 参数2) => {
+                        return 参数1 + 参数2
+                    });
+                },
+                减法(参数) {
+                    return 参数.reduce((参数1, 参数2) => {
+                        return 参数1 - 参数2
+                    });
+                },
+                乘法(参数) {
+                    return 参数.reduce((参数1, 参数2) => {
+                        return 参数1 * 参数2
+                    });
+                },
+                除法(参数) {
+                    return 参数.reduce((参数1, 参数2) => {
+                        return 参数1 / 参数2
+                    });
+                },
+                取余(参数) {
+                    return 参数.reduce((参数1, 参数2) => {
+                        return 参数1 % 参数2
+                    });
+                },
+                弹窗(参数) {
+                    alert(参数);
+                },
+                遍历(参数) {
+                    for (let 每个值 of 参数) {
+                        this.打印(每个值)
+                    }
+                },
+                打印: console.log,
+            }
+        })(window)
+
+        鼠 = '🐀'
+        牛 = '🐂'
+        虎 = '🐅'
+        兔 = '🐇'
+        龙 = '🐉'
+        蛇 = '🐍'
+        马 = '🐎'
+        羊 = '🐏'
+        狗 = '🐕'
+        猪 = '🐖'
+
+        中文.遍历([鼠, 牛, 虎, 兔, 龙, 蛇, 马, 羊, 狗, 猪])
+        中文.弹窗(中文.加法([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    </script>
+</body>
+
+</html>

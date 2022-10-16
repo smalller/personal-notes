@@ -1,0 +1,70 @@
+<view class="ktv">
+    <!-- <view class="make-top">
+        <view class="make-month">
+            <view class="order-image">
+                <image src="../../images/date-bg.png"></image>
+                <text>订</text>
+            </view>
+            <view class="month-text">
+                {{curMonth}}月
+            </view>
+        </view>
+        <view class="split-image">
+            <image src="../../images/split.png"></image>
+        </view>
+        <view class="make-day">
+            <view class="day-num" wx:for="{{weekArr}}" wx:key="this" data-time="{{item}}" bindtap="changeWeekBtn">
+                <image wx:if="{{item.day == curDay}}" src="../../images/date-bg.png"></image>
+                <text wx:if="{{item.day==curDay}}" class="cur-day">{{item.day}}</text>
+                <text wx:else>{{item.day}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="make-top-week">
+        <view>{{curWeekText}}</view>
+    </view>     -->
+    <view class="daySelect"> 
+        <view class="fx day_one">
+          <view class="month-text">{{curMonth}}月{{curDay}}日</view>
+          <view class="min_consume"> <text>低消：</text><text>￥{{minConsumption}}</text></view>
+        </view>
+        <view class="fx day_two">
+          <block wx:for="{{weekArr}}" wx:key="index">
+            <view class="day-num {{item.day==curDay?'cur_day':'not_day'}}"  data-time="{{item}}" bindtap="changeWeekBtn">
+              <view>{{item.week}}</view>
+              <view>{{item.day}}</view>
+            </view>
+          </block>
+        </view>
+    </view>
+
+    <view class="ktv_list">
+        <view class="kli fx" wx:for="{{ktvList}}" wx:key="index" data-data="{{item}}" bindtap="ktvInfo">
+            <view class="kli_l">
+                <image mode="aspectFill" class="big_img" src="{{addUrl + item.listPicture}}"></image>
+            </view>
+            <view class="kli_r">
+                <view class="name">{{item.roomTypeName}}</view>
+                <view class="num over_one">
+                    <text>容纳人数：{{item.capacity}}人</text> · <text>人均：￥{{item.perCapitaConsumption}}</text>
+                </view>
+                <view class="tips">{{item.snacksList.length>0?'含小吃':''}}</view>
+                <view class="min_price"><text>￥{{item.minConsumption}}</text> 起</view>
+            </view>
+        </view>
+    </view>
+
+    <!-- <view class="ktv_list">
+        <view class="kli" wx:for="{{ktvList}}" wx:key="index" data-data="{{item}}" bindtap="ktvInfo">
+            <image mode="aspectFill" class="big_img" src="{{addUrl + item.listPicture}}"></image>
+            <view class="fx content">
+                <view class="fx_l">
+                    <text class="name">{{item.roomTypeName}}</text>
+                    <text class="num">(可容纳<text>{{item.capacity}}</text>人)</text>
+                </view>
+                <view class="fx_r price"><text>{{item.minConsumption}}</text>起</view>
+            </view>
+        </view>
+    </view> -->
+
+</view>

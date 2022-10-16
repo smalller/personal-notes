@@ -1,0 +1,132 @@
+page{
+  background: #0E0E11;
+}
+.clubCard{
+  padding-bottom: 100rpx;
+}
+.hearder {
+  height: 96rpx;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.hearder .left {
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  color: #9D9FA8;
+  /* border-right:1px solid #f1f1f1 ; */
+  height: 44rpx;
+  text-align: center;
+  line-height: 44rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+.hearder .right {
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  color: #9D9FA8;
+  height: 44rpx;
+  text-align: center;
+  line-height: 44rpx;
+  width: 100%;
+}
+.hgroup_card{
+  padding: 32rpx;
+}
+.hgroup_card .bg{
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 2;
+}
+.bg2{
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index:1;
+}
+.bg2 image{
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+.card_li{
+  position: relative;
+  height: 174rpx;
+  width: 100%;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  margin-bottom: 24rpx;
+}
+.card_name{
+  color:#FFFFFF ;
+  font-size: 30rpx;
+  text-shadow: 0px 1px 3px rgba(105, 105, 105, 0.85);
+}
+.card_content{
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.store_logo{
+  height: 88rpx;
+  width: 88rpx;
+  border-radius: 50%;
+}
+.cll{
+  flex: .18;
+  padding: 46rpx 0 0 70rpx;
+}
+.clr{
+  flex: .82;
+  padding-top: 46rpx;
+}
+.vip_card{
+  height: 24rpx;
+  width: 28rpx;
+  vertical-align: middle;
+}
+.txt{
+  font-size: 24rpx;
+  color: #A59872;
+  margin-left: 12rpx;
+}
+.number{
+  font-size: 28rpx;
+  color: #FFFFFF;
+}
+.card_main{
+  padding-right: 44rpx;
+}
+.fl{
+  flex: 1;
+}
+.look{
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.look view{
+  border: 2rpx solid #A59872;
+  color: #A59872;
+  font-size: 28rpx;
+  border-radius: 4rpx;
+  padding: 10rpx 0;
+  width: 160rpx;
+  text-align: center;
+}
+.active{
+  font-weight: bold;
+  color: #ffffff;
+}

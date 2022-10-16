@@ -1,0 +1,642 @@
+page{
+  background: #161823;
+  height: 100%;
+}
+.page_hidden{
+  height: 100%;
+  overflow: hidden;
+}
+.top_sticky{
+    padding-bottom: 20rpx;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    z-index: 10;
+    background: #161823;
+}
+.top_place{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  z-index: 3;
+}
+.header{
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  align-items: center;
+  margin-bottom: 24rpx;
+  height: 82rpx;
+}
+.city {
+  z-index: 2;
+  color: white;
+  font-size: 32rpx;
+}
+.icon-tubiaozhizuo-{
+  font-size: 20rpx;
+  margin-left: 12rpx;
+}
+.jiuzuo{
+  font-size: 32rpx;
+  color: white;
+}
+.jz_lab{
+  color: #C9C9D3;
+  font-size: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.search {
+  z-index: 2;
+  position: relative;
+  height: 64rpx;
+}
+.search .search_inp {
+  height: 100%;
+  background: #383A44;
+  padding-left: 64rpx;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+}
+.ser_icon {
+  position: absolute;
+  left: 18rpx;
+  font-size: 32rpx;
+  top: 10rpx;
+  color: #D0D0D0;
+}
+.pd{
+  padding: 0 20rpx;
+}
+.banner {
+  z-index: 2;
+  padding: 0 20rpx;
+  height: 212rpx;
+  margin-top: 20rpx;
+}
+.swi_box {
+  height: 100%;
+}
+.banner image {
+  width: 100%;
+  height: 100%;
+  border-radius: 4rpx;
+}
+
+.serve{
+  padding: 30rpx 20rpx 10rpx;
+}
+.title{
+  font-size: 36rpx;
+  color: #ffffff;
+}
+.classify{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* margin: 32rpx 0 12rpx 0; */
+}
+.ify{
+  height: 120rpx;
+  width: 344rpx;
+  border-radius: 4rpx;
+  padding: 24rpx 20rpx 24rpx 24rpx;
+  box-sizing: border-box;
+  position: relative;
+  /* margin-bottom: 28rpx; */
+  margin-top: 28rpx;
+}
+/* .icon-weibiaoti34{
+  font-size: 20rpx;
+} */
+.border{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.box_{
+  display: flex;
+  align-content: center;
+}
+.dis_inb{
+  display: flex;
+  align-items: center;
+  margin-right: 28rpx;
+}
+.name{
+  font-size: 26rpx;
+  color: #ffffff;
+}
+.name image{
+  width: 8rpx;
+  height: 14rpx;
+  margin-left: 12rpx;
+}
+.introduce{
+  font-size: 22rpx;
+  color: #9D9FA8;
+}
+/* 抽奖 1*/
+.award{
+  width: 710rpx;
+  height: 140rpx;
+  margin: 0 auto;
+  position: relative;
+}
+.bg_lucky{
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.award_box{
+  padding: 30rpx 24rpx 30rpx 16rpx;
+  font-size: 0;
+}
+.lef_i{
+  height: 82rpx;
+  width: 82rpx;
+}
+.award_box .content{
+  display: inline-block;
+  font-size: 0;
+  vertical-align: top;
+  margin-left: 20rpx;
+}
+.tip1{
+  color: #727CBD;
+  font-size: 26rpx;
+}
+.tip2{
+  color: #585F8D;
+  font-size: 24rpx;
+}
+.go_award{
+  width: 122rpx;
+  height: 52rpx;
+  border-radius: 4rpx;
+  background: linear-gradient(267deg, #4E5992 0%, #8794D2 100%);
+  color: #ffffff;
+  font-size: 26rpx;
+  position: absolute;
+  right: 24rpx;
+  top: 44rpx;
+  text-align: center;
+  line-height: 52rpx;
+}
+
+/* 抽奖 1 end */
+/* 抽奖 2 */
+.award_viae{
+  position: relative;
+  height: 190rpx;
+  margin: 0 20rpx;
+}
+.award_bg{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+}
+.award_hand{
+  position: absolute;
+  left: -20rpx;
+  top: 44rpx;
+  z-index: 2;
+  width: 160rpx;
+  animation: hand_ani 2.5s infinite linear;
+}
+@keyframes hand_ani{
+  0% {
+    transform:translate(0,0);
+  }
+  50%{
+    transform:translate(15rpx,-15rpx);
+  }
+  100% {
+    transform:translate(0,0);
+  }
+} 
+.award_btn{
+  position: absolute;
+  right: 32rpx;
+  top: 60rpx;
+  z-index: 2;
+  width: 100rpx;
+  animation: factor .8s infinite linear;
+}
+@keyframes factor{
+  0% {
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.08);
+  }
+  100% {
+      transform: scale(1);
+  }
+} 
+
+/* 抽奖 2 end*/
+
+
+
+.scroll_box{
+  margin-top: 32rpx;
+}
+.btm_swiper{
+  padding-bottom: 16rpx;
+  height: 800rpx;
+  background: #111115;
+}
+.recom {
+  display: flex;
+  padding: 0 30rpx;
+  line-height: 50rpx;
+  border-bottom:2rpx solid #242630;
+  position: relative;
+}
+.recom .re_l {
+  flex: .7;
+  font-size: 36rpx;
+  color: #000000;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+.re_l text{
+  color:#ACADB1;
+  font-size: 28rpx;
+  margin-right: 68rpx;
+}
+.re_l .important{
+  color:white;
+  font-size: 36rpx;
+}
+.recom .re_r {
+  flex: .3;
+  text-align: right;
+}
+.recom .re_r image{
+  height: 52rpx;
+  width: 48rpx;
+}
+
+.store_list {
+  padding: 30rpx 20rpx 0;
+  font-size: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 760rpx;
+  overflow-y: scroll;
+}
+.active_list{
+  padding: 30rpx 20rpx 0;
+  font-size: 0;
+  height: 760rpx;
+  overflow-y: scroll;
+}
+.sli {
+  width: 344rpx;
+  display: inline-block;
+  height: 368rpx;
+  vertical-align: top;
+  border: 2rpx solid #23263C;
+  box-sizing: border-box;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+  background: #161823;
+}
+
+.sli_img {
+  width: 100%;
+  height: 188rpx;
+  border-radius: 8rpx 8rpx 0 0;
+  border-bottom:2rpx solid #23263C;
+  box-sizing: border-box;
+}
+.text_box {
+  margin-top: 10rpx;
+  padding: 0 16rpx;
+}
+.st_name {
+  color: #FFFFFF;
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+}
+.st_intr {
+  color: #7D7F89;
+  font-size: 24rpx;
+  line-height: 38rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+
+.without{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  width: 100%;
+}
+.without image{
+  width: 220rpx;
+}
+
+.active{
+  width: 60rpx;
+  height: 6rpx;
+  position: absolute;
+  top: 30rpx;
+}
+.active image{
+  width: 100%;
+  height: 100%;
+}
+
+
+.bg{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .5);
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+}
+.dio_bg{
+  position: fixed;
+  top: calc(50% - 180rpx);
+  left: calc(50% - 300rpx);
+  background: #232323;
+  width: 600rpx;
+  height: 360rpx;
+  border-radius: 12rpx;
+  z-index: 51;
+}
+.dio_bg .box{
+  padding-top: 54rpx;    
+}
+.dio_bg .title{
+  font-size: 32rpx;
+  margin-bottom: 45rpx;
+  color: #CECECE;
+  text-align: center;
+  font-weight: 600;
+}
+.dio_bg .tips{
+  margin-bottom: 75rpx;
+  text-align: center;
+  color: #919191;
+  font-size: 32rpx;
+}
+.dio_bg .btm_btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #313131;
+}
+.dio_bg .btm_btn button{
+  border-radius: 0;
+  flex: 1;
+  font-size: 34rpx;
+  font-weight: 600;
+  background:  #232323;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.dio_bg .btm_btn button:nth-child(1){
+  color: #AAAAAA;
+  border-right: 1px solid #313131;
+  box-sizing: border-box;
+}
+.dio_bg .btm_btn button:nth-child(2){
+  color: #576B95;
+}
+
+button::after{
+  border: none;
+}
+.animate_change{
+  animation: shake 1s linear;
+}
+
+@keyframes shake{
+  20% {
+      transform: rotate(30deg);
+  }
+  40% {
+      transform: rotate(-30deg);
+  }
+  60% {
+      transform: rotate(15deg);
+  }
+  80% {
+      transform: rotate(-15deg);
+  }
+  100% {
+      transform: rotate(0deg);
+  }
+} 
+
+.go_award{
+  animation: factor .8s infinite linear;
+}
+@keyframes factor{
+  0% {
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.08);
+  }
+  100% {
+      transform: scale(1);
+  }
+} 
+
+
+
+.search_content{
+  display: flex;
+  padding: 30rpx 0;
+  align-items: center;
+  border-bottom: 2rpx solid #202233;
+  width: 100%;
+}
+.search_content .left image{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+  vertical-align: middle;
+}
+.search_content .left{
+  position: relative;
+}
+.search_content .right{
+  margin-left: 32rpx;
+}
+.active_list .name{
+  color: #FFFFFF;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+.active_list .brief{
+  color: #9D9FA8;
+  font-size: 24rpx;
+  margin-bottom: 16rpx;
+}
+.award_entrance{
+  position: fixed;
+  right: 0rpx;
+  top: 500rpx;
+  z-index: 20;
+}
+.award_entrance image:nth-child(1){
+  height: 100rpx;
+  z-index: 23;
+  position: relative;
+  width: 160rpx;
+}
+.draw{
+  position: relative;
+  left: 34rpx;
+  top: -30rpx;
+}
+.award_entrance .draw image:nth-child(1){
+  width: 104rpx;
+  height: 42rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 23;
+}
+.award_entrance .draw image:nth-child(2){
+  width: 58rpx;
+  height: 22rpx;
+  position: absolute;
+  left: 24rpx;
+  top: 10rpx;
+  z-index: 23;
+  animation: factor1 .8s infinite linear;
+}
+
+.stores_act{
+  height: 78rpx;
+  width: 492rpx;
+}
+
+@keyframes factor1{
+  0% {
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.2);
+  }
+  100% {
+      transform: scale(1);
+  }
+} 
+.scan_login,.scan_phone{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: none;
+  z-index: 23;
+}
+
+.scan_login[plain],.scan_phone[plain]{
+  border:none;
+}
+.scan_box{
+  width: 500rpx;
+  height: 700rpx;
+  position: fixed;
+  left: calc(50% - 500rpx/2);
+  top: calc(50% - 700rpx/2);
+  z-index: 23;
+}
+.pd_box{
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  border-radius: 8rpx;
+  position: relative;
+}
+.pd_box image{
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+.draw_bg,.scan_bg{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 22;
+  background: rgba(0, 0, 0, .5);
+}
+.draw_lists{
+  position: absolute;
+  z-index: 23;
+  max-height: 500rpx;
+  overflow-y: scroll;
+}
+.draw_l{
+  left: -500rpx;
+}
+.draw_r{
+  left: 170rpx;
+}
+.stores_act{
+  display: flex;
+  background: #172A5B;
+  border: 2rpx solid #68DCF9;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 0 20rpx 0 6rpx;
+  margin-bottom: 14rpx;
+}
+.stores_act .st_logo{
+  width: 74rpx;
+  font-size: 0;
+}
+.stores_act .st_logo image{
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 4rpx;
+}
+.stores_act .st_na{
+  color: white;
+  font-size: 28rpx;
+  flex: .8;
+}
+.stores_act .ic{
+  flex: .2;
+  text-align: right;
+  color: white;
+}
+.stores_act .ic image{
+  flex: .2;
+  height: 20rpx;
+  width: 12rpx;
+}

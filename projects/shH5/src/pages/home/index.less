@@ -1,0 +1,176 @@
+.home {
+  min-height: 100vh;
+  width: 100vw;
+  background: #ffffff url('../../assets/image/homeBg.png') no-repeat;
+  background-size: 100% auto;
+
+  .homeHead {
+    width: 100vw;
+    padding: 100px 15px 0;
+    box-sizing: border-box;
+
+    .headBox {
+      height: 138px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.98);
+      margin: 0 auto;
+      display: flex;
+      padding: 23px 15px 19px;
+
+      &.parentHead {
+        height: 131px;
+      }
+
+      .pic {
+        margin-right: 14px;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .infoBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+
+        .title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          span {
+            color: #333333;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 32px;
+          }
+
+          .changeStudentBtn {
+            padding: 4px 12px;
+            box-sizing: border-box;
+            border: 1px solid #3775f6;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 12px;
+            color: #3775f6;
+            line-height: 17px;
+          }
+        }
+
+        .userInfo {
+          display: flex;
+          justify-content: space-between;
+
+          .userName {
+            span {
+              margin-right: 15px;
+              font-size: 16px;
+              color: #585858;
+
+              &.studentSchoolName {
+                font-weight: 500;
+                color: #898989;
+              }
+            }
+          }
+
+          .changeSchoolBtn {
+            white-space: nowrap;
+            border: 1px solid #3775f6;
+            box-sizing: border-box;
+            border-radius: 6px;
+            width: 88px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+              width: 16px;
+              height: 16px;
+              margin-right: 4px;
+            }
+
+            span {
+              color: #3775f6;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .homeItem {
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    .itemTitle {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+
+      span {
+        display: inline-block;
+        width: 4px;
+        height: 16px;
+        background: #3775f6;
+        border-radius: 6px;
+        margin-right: 12px;
+      }
+
+      p {
+        color: #333333;
+        font-weight: 700;
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+
+    .itemBox {
+      padding: 0 10px;
+      box-sizing: border-box;
+      //display: grid;
+      //grid-template-rows: repeat(auto-fill, 74px);
+      //grid-template-columns: repeat(3, 56px);
+      //grid-row-gap: 10px;
+      //grid-column-gap: 64px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .btn {
+        margin-top: 16px;
+        width: 33%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+          width: 42px;
+          height: 42px;
+        }
+
+        span {
+          font-size: 14px;
+          line-height: 32px;
+          color: #585858;
+        }
+      }
+    }
+  }
+
+  .line {
+    width: 100%;
+    height: 10px;
+    background: #f9f9f9;
+    margin-top: 14px;
+  }
+}

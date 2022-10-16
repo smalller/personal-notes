@@ -1,0 +1,76 @@
+<view class="amendGetails bg_color2">
+  <view class="hOne">
+    <view class="peoNum">
+      <text>预计人数</text>
+    </view>
+    <view class="pos">
+      <input class="inp io" maxlength="2"  placeholder="请输入人数" type="number" value="{{seatCapacity}}" bindinput="bindInput_p" />
+      <!-- <text class="">人</text> -->
+    </view>
+  </view>
+  <view class="hOne" wx:if="{{ktv!=3}}">
+    <view class="peoNum seat">
+      <text>座位需求</text>
+    </view>
+    <view class="btns">
+      <view class="forNeeds" wx:for="{{needs}}" wx:key="index" bindtap="chenck" data-id="{{item.id}}">
+        <text class="content {{item.flag?'yes':'not'}} ">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="hOne">
+    <view class="peoNum">
+      <text>手机号码</text>
+    </view>
+    <view class="pos"><input class="inp" placeholder="请输入手机号" bindinput="bindInput_n"  type="number" value="{{contactTel}}" /></view>
+  </view>
+  <view class="fuText">
+    <textarea bindinput="inputRemarks" maxlength="-1" placeholder="请输入您的需求" value="{{remarks}}" />
+  </view>
+  <view>
+    <view class="top">
+      <!-- <image src="../../icon/tixing.png"></image> -->
+      <text>商家提醒</text>
+    </view>
+    <view class="bottom" hidden="{{!Upflag}}">
+      <view wx:for="{{remake}}" wx:key="index">{{item}}</view>
+    </view>
+    <view class="bottom" hidden="{{Upflag}}">
+      <view wx:for="{{remake}}" wx:key="index">{{item}}</view>
+    </view>
+    <view class="confirm">
+      <block wx:if="{{Upflag}}">
+        <block wx:if="{{hasPhone}}">
+          <image src="../../icon/confirm.png" bindtap ="confirm" data-title="lineUp"></image>
+        </block>
+        <block wx:if="{{!hasPhone}}">
+          <button class="nr btn_tel" 
+            open-type="getPhoneNumber" 
+            data-title="lineUp"
+            data-type="1"
+            bindgetphonenumber="getPhoneNumber"
+            >
+            <image src="../../icon/confirm.png" bindtap ="confirm" data-title="lineUp"></image>
+          </button>
+        </block>
+      </block>
+
+
+      <block wx:if="{{!Upflag}}">
+        <block wx:if="{{hasPhone}}">
+          <image src="../../images/xuanjiushui.png" hidden="{{Upflag}}" bindtap ="choose" data-title="getSeat"></image>
+        </block>
+        <block wx:if="{{!hasPhone}}">
+          <button class="nr btn_tel" 
+            open-type="getPhoneNumber" 
+            data-title="getSeat"
+            data-type="2"
+            bindgetphonenumber="getPhoneNumber"
+            >
+            <image src="../../images/xuanjiushui.png"></image>
+          </button>
+        </block>
+      </block>
+    </view>
+  </view>
+</view>

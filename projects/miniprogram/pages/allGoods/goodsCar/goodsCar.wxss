@@ -1,0 +1,222 @@
+/* pages/allGoods/goodsCar/goodsCar.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #F7F7F7;
+}
+.header {
+  width: 100%;
+  height: 270rpx;
+  background: linear-gradient(to right, #FEE041, #FB9E74);
+  /* padding: 64rpx 0 0 24rpx; */
+  box-sizing: border-box;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 105rpx;
+  align-items: flex-end;
+}
+
+.tabs image {
+  width: 18rpx;
+  height: 30rpx;
+  margin-right: 24rpx;
+}
+
+.tabs text {
+  font-size: 36rpx;
+  color: #fff;
+}
+.car_club .iconfont2{
+  font-size: 34rpx;
+  color: orange;
+}
+.car_club .iconfont1{
+  font-size: 34rpx;
+  color: #cdcdcd;
+}
+
+.tabs .compile {
+  display: flex;
+  align-items: flex-end;
+  font-size: 32rpx;
+  color: #FFFFFF;
+}
+.tabs .compile .iconfont{
+  font-size: 36rpx;
+}
+.car_club{
+  margin-top: 48rpx;
+  background-color: #fff;
+  width: 702rpx;
+  height: 630rpx;
+  border-radius: 6rpx;
+  padding: 12rpx 12rpx 0 12rpx;
+  box-sizing: border-box;
+}
+.car_club .club image:nth-child(1){
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+}
+.car_club .club image:nth-child(2){
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 5rpx;
+  vertical-align: middle;
+  margin: 0 24rpx 0 16rpx;
+}
+.car_club .club text{
+font-size: 28rpx;
+font-weight: 600;
+}
+.car_club .club_goods{
+  display: flex;
+  align-items: center;
+  margin-top: 48rpx;
+}
+.car_club .club_goods image:nth-child(1){
+  width: 32rpx;
+  height: 32rpx;
+}
+.car_club .club_goods image:nth-child(2){
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 5rpx;
+  margin: 0 24rpx 0 16rpx;
+}
+.car_club .club_goods .goods_cont{
+font-size: 28rpx;
+font-weight: 600;
+}
+.car_club .club_goods .goods_cont{
+  margin-top: -40rpx;
+}
+.car_club .club_goods .goods_cont .goods_pic{
+  margin-top: 12rpx;
+}
+.car_club .club_goods .goods_cont .goods_pic text{
+  font-weight: initial;
+font-size: 28rpx;
+}
+.car_club .club_goods .goods_cont .goods_pic text:nth-child(2){
+  font-weight: initial;
+  text-decoration: line-through;
+  color: #ccc;
+  margin: 0 26rpx 0 114rpx;
+}
+.discounts{
+  width: 564rpx;
+  display: flex;
+  justify-content: space-between;
+  margin:48rpx 0 24rpx 56rpx;
+}
+.subtotal{
+  width: 564rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 56rpx;
+}
+.discounts text:nth-child(1){
+font-size: 28rpx;
+}
+.discounts text:nth-child(2){
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #FF3636;
+}
+.subtotal text:nth-child(1){
+font-size: 28rpx;
+}
+.subtotal text:nth-child(2){
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.account{
+  width: 376rpx;
+  height: 92rpx;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 92rpx;
+  border-radius: 10rpx;
+  background: linear-gradient(to right, #FEE140, #FB9E74);
+  margin: 78rpx auto 0;
+  color: #fff;
+  letter-spacing: 2;
+}
+.footer{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+.footer image{
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+  margin: 0 24rpx 0 48rpx;
+}
+.footer .left{
+font-size: 28rpx;
+}
+.footer .right{
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 98rpx;
+  width: 188rpx;
+  height: 98rpx;
+  background: linear-gradient(to right, #FEE140, #FB9E74);
+  color: #fff;
+}
+.shade{
+  width: 594rpx;
+  height: 700rpx;
+  background-color: #fff;
+  margin: auto;
+  position: relative;
+  z-index: 4;
+}
+.shade image{
+  width: 432rpx;
+  height: 360rpx;
+  margin: 48rpx  0 0 82rpx;
+}
+.shade view:nth-child(2){
+font-size: 32rpx;
+text-align: center;
+}
+.shade view .text_one{
+  display: inline-block;
+  text-align: center;
+  line-height: 80rpx;
+  width: 226rpx;
+  height: 80rpx;
+  margin: 72rpx 0 0 46rpx;
+  background-color: #f1f1f1;
+  border-radius: 10rpx;
+}
+.shade view .text_two{
+  display: inline-block;
+  text-align: center;
+  line-height: 80rpx;
+  width: 226rpx;
+  height: 80rpx;
+  margin: 72rpx 0 0 46rpx;
+  color: #fff;
+  background: linear-gradient(to right, #FEE041, #FB9E74);
+  border-radius: 10rpx;
+}
+.fc{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba( 192,192,192, .3);
+}

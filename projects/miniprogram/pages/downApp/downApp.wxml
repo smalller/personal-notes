@@ -1,0 +1,3 @@
+<view>
+    <web-view bindmessage="getMessage" src="{{url}}#wechat_redirect"></web-view>
+</view>

@@ -1,0 +1,262 @@
+.paymentData {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  .head {
+    * {
+      box-sizing: border-box;
+    }
+    .content {
+      background: #3775f6;
+      width: 100%;
+      padding: 16px 15px;
+      box-sizing: border-box;
+      .typeChangeBox {
+        display: flex;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #1c58d7;
+        height: 58px;
+        box-sizing: border-box;
+        .changeItem {
+          flex: 1;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #ffffff;
+          font-weight: 500;
+          font-size: 16px;
+          transition: 0.3s;
+          box-sizing: border-box;
+          &.active {
+            color: #3775f6;
+            background: #ffffff;
+          }
+        }
+      }
+      .searchInputBox {
+        width: 100%;
+        display: flex;
+        margin-top: 17px;
+        align-items: center;
+        box-sizing: border-box;
+        .inputBox {
+          height: 36px;
+          flex: 1;
+          background: #f6f7f9;
+          border-radius: 4px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
+          padding-right: 6px;
+          padding-left: 8px;
+          .typeBtn {
+            display: flex;
+            align-items: center;
+            img {
+              width: 10px;
+              height: 7px;
+              margin-left: 4px;
+            }
+          }
+          input {
+            margin-left: 16px;
+            flex: 1;
+            font-size: 14px;
+            color: #333333;
+            border: none;
+            outline: none;
+            background: rgba(0, 0, 0, 0);
+            &::placeholder {
+              color: #c8c8c8;
+              font-size: 14px;
+            }
+          }
+          .searchIcon {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        .filterBtn {
+          display: flex;
+          flex-direction: column;
+          margin-left: 14px;
+          box-sizing: border-box;
+          img {
+            width: 24px;
+            height: 24px;
+          }
+          span {
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 12px;
+          }
+        }
+      }
+      .numInfoBox {
+        margin-top: 16px;
+        > div {
+          display: flex;
+          align-items: center;
+          font-size: 16px;
+          color: #ffffff;
+          span {
+            font-size: 14px;
+          }
+          &:last-child {
+            margin-top: 6px;
+          }
+        }
+      }
+    }
+    .filterBox {
+      width: 100%;
+      background: #ffffff;
+      padding: 26px 18px 6px;
+      .filterItem {
+        margin-bottom: 30px;
+        .label {
+          color: #333333;
+          font-weight: 700;
+          font-size: 16px;
+        }
+        .itemBox {
+          margin-top: 16px;
+          .line {
+            width: 12px;
+            height: 2px;
+            background: #b4b4b4;
+            margin: 0 12px;
+            border-radius: 2px;
+          }
+        }
+        .dateBox {
+          display: flex;
+          align-items: center;
+
+          .dateSelectBtn {
+            border: 1.5px solid #e2e2e2;
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding: 0 10px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            img {
+              margin-left: 11px;
+              width: 18px;
+              height: 18px;
+            }
+          }
+        }
+        .classSelect {
+          display: flex;
+          flex-wrap: wrap;
+          .gradeItem {
+            border-radius: 4px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            box-sizing: border-box;
+            border: 1px solid #e2e2e2;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            color: #333;
+            &.active {
+              background: #e2e2e2;
+            }
+          }
+        }
+        .numBox {
+          display: flex;
+          align-items: center;
+          input {
+            width: 91px;
+            height: 34px;
+            border: 1.5px solid #e2e2e2;
+            border-radius: 4px;
+            outline: none;
+            box-sizing: border-box;
+            padding: 0 16px;
+          }
+        }
+      }
+    }
+    .btnBox {
+      padding: 20px 0;
+      .btn {
+        width: 100%;
+        height: 44px;
+        background: #3775f6;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 500;
+        font-size: 16px;
+        color: #ffffff;
+        &:active {
+          background: #2153ba;
+        }
+      }
+    }
+  }
+  .payData {
+    flex: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 0 15px;
+    background: #ffffff;
+    .payDataItem {
+      border-bottom: 1px solid #eaeaea;
+      padding: 14px 0;
+      box-sizing: border-box;
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      .left {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .name {
+          color: #333333;
+          font-weight: 500;
+          font-size: 16px;
+        }
+        .info {
+          span {
+            color: #898989;
+            font-weight: 500;
+            font-size: 13px;
+            margin-right: 10px;
+          }
+        }
+      }
+      .right {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        div {
+          &:first-child {
+            color: #585858;
+            font-weight: 700;
+            font-size: 20px;
+          }
+          &:last-child {
+            color: #b4b4b4;
+            font-weight: 500;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

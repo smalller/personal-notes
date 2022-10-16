@@ -1,0 +1,174 @@
+<view class="content">
+    <view class="top_img">
+        <swiper indicator-dots="{{indicatorDots}}" class="swi_box" circular="true"
+            indicator-color="rgba(255, 255, 255, .5)" indicator-active-color="#000" autoplay="{{autoplay}}"
+            interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{ktv.sketchMap}}" wx:key="index">
+                <swiper-item>
+                    <image mode="aspectFill" src="{{addUrl + item}}"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+
+    <view class="private">
+        <view class="fx top_box">
+            <view class="fx_l">{{ktv.roomTypeName}}</view>
+            <view class="fx_r price"><text>￥{{ktv.minConsumption}}</text>起</view>
+        </view>
+
+        <view class="desc" wx:if="{{ktv.roomDetail}}">{{ktv.roomDetail}}</view>
+        <view>
+            <view class="title">包间详情</view>
+            <view class="fx info_ul">
+                <view class="over_one info_li">
+                    <text>容纳人数: </text>
+                    <text>{{ktv.capacity}}人</text>
+                </view>
+                <view class="over_one info_li">
+                    <text>低消: </text>
+                    <text class="imp">￥{{active?active.minConsumption:ktv.minConsumption}}</text>
+                </view>
+                <view class="over_one info_li">
+                    <text>人均: </text>
+                    <text>￥{{active?active.perCapitaConsumption:ktv.perCapitaConsumption}}</text>
+                </view>
+                <view class="over_one info_li" wx:if="{{ktv.haveToilet==1}}">
+                    <text>卫生单间：</text>
+                    <text>{{ktv.haveToilet==1?'有':'无'}}</text>
+                </view>
+                <view class="over_one info_li" wx:if="{{ktv.haveMahjong==1}}">
+                    <text>机麻：</text>
+                    <text>{{ktv.haveMahjong==1?'有':'无'}}</text>
+                </view>
+                <view class="over_one info_li" wx:if="{{ktv.haveSwimming==1}}">
+                    <text>泳池：</text>
+                    <text>{{ktv.haveSwimming==1?'有':'无'}}</text>
+                </view>
+                <view class="over_one info_li" wx:if="{{ktv.haveDiningTable==1}}">
+                    <text>餐桌：</text>
+                    <text>{{ktv.haveDiningTable==1?'有':'无'}}</text>
+                </view>
+                <view class="over_one info_li" wx:if="{{ktv.haveTableTennis==1}}">
+                    <text>桌球：</text>
+                    <text>{{ktv.haveTableTennis==1?'有':'无'}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="snacks mgbtm" wx:if="{{ktv.ncsGoodsList.length>0}}">
+        <view class="ktv_detail">
+            <view class="title">必选商品</view>
+            <block  wx:for="{{ktv.ncsGoodsList}}" wx:key="index">
+                <view class="fx food" catchtap="goodsInfo" data-id="{{item}}">
+                    <view class="food_name">{{item.goodsName}}</view>
+                    <view class="food_num">x {{item.number}}</view>
+                </view>
+            </block>
+        </view>            
+    </view>
+
+    <view class="snacks mgbtm" wx:if="{{ktv.snacksList.length>0}}">
+        <view class="ktv_detail">
+            <view class="title">赠品</view>
+            <view class="fx food" wx:for="{{ktv.snacksList}}" wx:key="index">
+                <view class="food_name">{{item.name}}</view>
+                <view class="food_num">x {{item.num}}</view>
+            </view>
+        </view>            
+    </view>
+    <view class="timeSelect"> 
+        <view class="title">时间段 <image class="tip_img" src="../../images/tip_img.png"></image></view>
+        <view class="fx time_per">
+            <block wx:for="{{ktv.roomTimeIntervalList}}" wx:key="index">
+                <view class="times {{item.ktvFieldStatus!=1?'':'not'}} {{active.roomTimeId==item.roomTimeId?'active':''}}" bindtap="selectTime" data-data="{{item}}">
+                    <view class="ti_one">{{item.startTime}}至{{item.endTime}}</view>
+                    <!-- <view>任选4小时</view> -->
+                </view> 
+            </block>
+        </view>
+        <!-- <view class="atten">注：最晚到店时间不得少于预定桌时间段4小时</view> -->
+        <view class="ktv_detail mgbtm ktv_tips">
+            <view class="title">注意事项</view>
+            <view class="tips" wx:for="{{ktv.ktvReservationNotes}}" wx:key="index">{{item}}</view>
+
+            <view class="reading">  
+                <image bindtap="readed" src="{{readState?'../../icon/readed.png':'../../icon/read_not.png'}}  "></image>   
+                <text>确认已阅读注意事项</text>
+            </view>
+        </view>
+        
+
+        <block wx:if="{{active.reserveFlag}}">
+            <view class="yuding not_selet">已预定</view>        
+        </block>
+        <block wx:else>
+            <view class="fix_btn">
+                <view wx:if="{{isLogin}}" class="yuding {{(active && readState)?'ok_selet':'not_selet'}}" bindtap="reservation">立即预定</view>
+
+                <block wx:if="{{!isLogin}}">
+                    <button wx:if="{{canIUseGetUserProfile}}" class="yuding {{(active && readState)?'ok_selet':'not_selet'}}" plain bindtap="getUserProfile">立即预订</button>
+                    <button wx:else class="yuding {{(active && readState)?'ok_selet':'not_selet'}}" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>立即预订</button>
+                </block>
+            </view>
+        </block>
+    </view>
+
+    <!-- <view class="mask" hidden="{{!isShowSelType}}" bindtap="closeOrder"></view>
+    <view class="booked-box booked-box-sel" hidden="{{!isShowSelType}}">
+        <view class="store-mian">
+            <image src="../../images/prebook.png"></image>
+        </view>
+        <view class="store-text">即将预约{{active.startTime}} ~ {{active.endTime}}时间段</view>
+        <view class="store-text">是否前往预定酒水</view>
+        <view class="store-btn">
+            <button bindtap="cancel" class="pbtn_l pbtn">取消</button>
+            <button bindtap="goCart" class="pbtn_r pbtn">立即前往</button>
+        </view>
+    </view> -->
+
+    <view class="mask" hidden="{{!chooseTimePopup}}" bindtap="closeTime"></view>
+    <view class="times_box" hidden="{{!chooseTimePopup}}">
+        <view class="store-btn">
+            <block wx:for="{{active.ktvFieldsDTOS}}" wx:key="index"> 
+                <view class="times {{item.isSelected==0?'':'choose'}} " bindtap="selectTimeFiled" data-data="{{item}}" data-index="index">
+                    <view class="{{item.isSelected==0?'type':'type_on'}} ">{{item.name}}</view>
+                    <view class="{{item.isSelected==0?'timed':'timed_on'}} ">{{item.timeSlot}}</view>
+                </view>
+            </block>
+            <image bindtap="closeTime" class="close" src="../../images/x.png"></image>
+        </view>        
+    </view>
+
+
+    <view class="shade_bg" bindtap="closeDetail" hidden="{{!seeDetail}}"></view>
+    <view class="vertical_box" hidden="{{!seeDetail}}" catchtap="closeDetail">
+        <view class="box" hidden="{{!seeDetail}}">
+            <view class="tact">
+                <image mode="aspectFill" wx:if="{{detailsInfo.infoPicture}}" class="good_logo" src="{{addUrl + detailsInfo.infoPicture}}"></image>
+                <view class="hearder">{{detailsInfo.name}}</view>
+                <view class="hearder">
+                    <text class="new_price" wx:if="{{detailsInfo.presentPrice}}"> <text>¥</text>{{detailsInfo.presentPrice || ''}}</text>
+                    <text class="old_price" wx:if="{{detailsInfo.originalPrice}}">¥{{detailsInfo.originalPrice || ''}}</text>    
+                </view>
+            </view> 
+            <view class="introduce">{{detailsInfo.synopsis}}</view>
+            <view hidden="{{!detailsInfo.setMealGoodsList.length>0}}">
+                <view class="specifi">套餐</view>  
+                <view class="fx tains" >
+                    <view class="contains" wx:for="{{detailsInfo.setMealGoodsList}}" wx:for-index="k"  wx:for-item="val" wx:key="k">
+                        <view>{{val.goodsName}} x{{val.number}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="close1" catchtap="closeDetail">
+                <icon class="iconfont icon-guanbi1"></icon>
+            </view>
+        </view>
+    </view>
+
+
+    <selfModel data="{{childComponent}}" show="{{show}}" text="{{topText}}" bindconfirm="confirmPopup" bindcancel="cancelPopup"></selfModel>
+
+</view>

@@ -1,0 +1,9 @@
+page{
+    background: #161823;
+}
+view{
+    font-size: 0;
+}
+image{
+    width: 100%;
+}

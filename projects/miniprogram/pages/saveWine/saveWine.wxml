@@ -1,0 +1,45 @@
+<view class="save_wine">
+    <view class="top">
+        <view class="search">
+            <icon  class="iconfont icon-sousuo ser_icon"></icon>
+            <input class="search_inp" placeholder="请输入商家名称" value="{{initial}}" bindinput="searchInp" maxlength="{{14}}"></input>
+        </view>
+        <view class="property">
+            <text class="text">我的存酒总资产约：</text>
+            <text class="total">¥{{property}}</text>
+        </view>
+    </view>
+
+    <view class="st_ul" wx:if="{{wineList.length>0}}">
+        <view class="store_list" wx:for="{{wineList}}" wx:key="index" >
+            <view class="fx jus li_top">
+                <view class="store_name over_one" catchtap="downOrder" data-id="{{item.storeId}}">{{item.storeName}}</view>
+                <view class="store_property">存酒累计金额约：¥{{item.cumulate}}</view>
+            </view>
+            <view class="goods_li" wx:for="{{item.appInventoryWineTimeItems}}" wx:key="idx" wx:for-item="val" wx:for-index="idx">
+                <view class="time fx jus">
+                    <view class="tl">{{val.timeStr}}</view>
+                    <view class="tr">(剩余{{val.timeRemaining}}天过期)</view>
+                </view>
+                <view class="goods fx" wx:for="{{val.appInventoryWineGoodsItems}}" wx:key="cIdx" wx:for-item="child" wx:for-index="cIdx">
+                    <view class="goods_picture">
+                        <image src="{{addUrl + child.picture}}"></image>
+                    </view>
+                    <view class="goods_info">
+                        <view class="goods_name over_more">{{child.goodsName}}</view>
+                        <view class="goods_num">{{child.numStr}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="fx jus li_btm">
+                <view class="hint">若存酒有误，请联系商家核对</view>
+                <view class="down_order" catchtap="downOrder" data-id="{{item.storeId}}">去下单</view>
+            </view>
+        </view>
+        <view class="zanwu" wx:if="{{isMore==false}}">我到底啦</view>
+    </view>
+
+    <view class="wine_res" wx:else>
+        <image class="wine_null" src="../../images/not_wine.png"></image>
+    </view>
+</view>

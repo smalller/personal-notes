@@ -1,0 +1,67 @@
+<view class="coupons bg_color1">
+  <view class="top bg_color2" wx:if="{{!isClick}}">
+    <view class="hearder fs_color4">
+      <view 
+        class="{{index==state?'on':''}}" 
+        bindtap="check" 
+        data-index="{{item.id}}" 
+        wx:for="{{nav}}" wx:key="index"
+        >
+        {{item.text}}
+      </view>
+      <view style="left:{{left_width}};transition: all .5s;" class="active"></view>
+    </view>
+    <view class="preferential">
+      <text bindtap="checkBg" data-index="2" class="fs_color4 {{inds==2?'actv':''}}">满减券</text>
+      <text bindtap="checkBg" data-index="1" class="fs_color4 {{inds==1?'actv':''}}">抵扣券</text>
+      <text bindtap="checkBg" data-index="3" class="fs_color4 {{inds==3?'actv':''}}">消费礼券</text>
+    </view>
+  </view>
+  <!-- 优惠卷介绍 -->
+  <view class="main bg_color1 {{isClick?'':'mt'}}" >
+    <view class="weui-cells bg_color1">
+      <view wx:for="{{couponsList}}" wx:key="index">
+        <mp-slideview buttons="{{slideButtons}}" disable="{{canSlide}}" data-index="{{index}}" data-data="{{item}}" bindbuttontap="slideButtonTap">
+          <view class="big_box">
+            <view class="bg bg_color2 {{item.choose?'active_circle':''}}" bindtap="choose" data-item="{{item}}" data-index="{{index}}">
+              <image wx:if="{{item.isUsed==1}}" class="tip_img" src="../../images/yishiyong.png"></image>
+              <image wx:if="{{item.past && item.isUsed!=1}}" class="tip_img" src="../../images/yiguoqi.png"></image>
+              <view class="content">
+                <view class="left">
+                  <image mode="aspectFill" src="{{ addUrl + item.storeLogo}}"></image>
+                </view>
+                <view class="middle">
+                  <view class="over_one">{{item.storeName}}</view>
+                  <view style="margin:{{item.details.length>20?0:'16rpx 0'}};font-size:{{item.details.length>20?20:28}}rpx">{{item.details}}</view>
+                  <view wx:if="{{item.useEndTime}}">领取日起至{{item.useEndTime}}</view>
+                  <view wx:else>永久有效</view>
+                </view>
+                <view class="right bg_color2 {{item.past?'gary':''}}" >
+                  <view class="name " wx:if="{{item.category != 3}}">
+                    <text class="douler">￥</text>
+                    <text>{{item.discountMoney}}</text>
+                  </view>
+                  <view class="name " wx:else>
+                    <text class="cate_txt">礼券</text>
+                  </view>
+                  <view class="type " wx:if="{{item.source == 0}}">
+                    {{item.category==1?'抵扣券':(item.category==2?'满' + item.contentMoney + '可用'  :'满' + item.contentMoney + '可用')}}
+                  </view>
+                  <view class="type " wx:if="{{item.source == 1}}">
+                    {{item.category==1?'抵扣券':(item.category==2?'满' + item.contentMoney + '可用'  :'')}}
+                  </view>
+                </view>
+                <view class="circle1 {{item.choose?'oft_r':''}}"></view>
+                <view class="circle2 {{item.choose?'oft_r':''}}"></view>
+              </view>
+            </view>
+            <!-- <view class="delete" data-index="{{index}}" bindtap="delete" data-id="{{item.id}}">删除</view> -->
+          </view>
+        </mp-slideview>
+      </view>       
+    </view>
+    <view class="zanwu">我到底啦</view>
+  </view>
+</view>
+
+<selfModel data="{{childComponent}}" show="{{show}}" text="确认删除优惠券?" bindconfirm="confirm" bindcancel="cancel"></selfModel>

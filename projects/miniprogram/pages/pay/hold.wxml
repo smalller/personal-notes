@@ -1,0 +1,16 @@
+<view class="hold">
+    <view class="content">
+        <view>
+            <view class="txt">请选择占座时间</view>
+            <view class="fx times">
+                <view data-data="{{item}}" bindtap="changeBtn" class="time_btn {{active.id==item.id?'on':'off'}}" wx:for="{{timeClassification}}" wx:key="index">{{item.minutes}}分钟</view>
+            </view>
+            <view class="txt mt">占座时间说明</view>
+            <view class="tip" wx:for="{{explain}}" wx:key="index">{{item}}</view>
+        </view>
+        <view class="footer fx">
+            <view class="fl">¥ {{active.price || 0}}</view>
+            <view class="fr" bindtap="payment">立即支付</view>
+        </view>
+    </view>
+</view>

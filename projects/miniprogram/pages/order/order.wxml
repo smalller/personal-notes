@@ -1,0 +1,92 @@
+<view class='order'>
+    <view class="content">
+        <view class="header">
+            <view class="search">
+                <image class="ser_icon" src="../../icon/search1.png"></image>
+                <input class="search_inp" model:value="{{keyWord}}" placeholder="请输入搜索关键词"></input>
+            </view>
+            <view>
+                <view class="nav">
+                    <view 
+                        class="nl {{item.type==active?'on':''}}"
+                        wx:for="{{orderState}}" wx:key="index" bindtap="goIndex"
+                        data-index="{{item.type}}">
+                        {{item.label}}
+                        <block wx:for="{{count}}" wx:for-index="cIdx" wx:key="cIdx" wx:for-item="cNum">
+                            <block wx:if="{{cNum.status == item.type && cNum.count>0}}">
+                                ({{cNum.count>99?'99+':cNum.count}})
+                            </block>
+                        </block>
+                    </view>
+                    <view style="left:{{left_width}};transition: all .5s;" class="active"></view>
+                </view>
+            </view>
+        </view>
+        <view class="main">
+            <view class="olt" wx:for="{{orderList}}" wx:key="index">
+                <view class="order_name fx">
+                    <view class="store over_one" bindtap="goStore" data-data="{{item}}">
+                        <image class="i_ic" src="../../icon/store.png"></image>
+                        <text class="st_name cors">{{item.storeName}}</text>
+                        <icon class="iconfont icon-weibiaoti34"></icon>
+                    </view>
+                    <view wx:if="{{item.orderStatus == 1}}" class="state orange">等待使用</view>
+                    <view wx:if="{{item.orderStatus == 2}}" class="state red">等待支付</view>
+                    <view wx:if="{{item.orderStatus == 3}}" class="state white">交易成功</view>
+                    <view wx:if="{{item.orderStatus == 4}}" class="state white">交易关闭</view>
+                    <view wx:if="{{item.orderStatus == 5}}" class="state orange">等待商家接单</view>
+                </view>        
+                <view class="goods" wx:if="{{item.goodsList.length>0}}">
+                    <view class="fx gli" wx:for="{{item.goodsList}}" wx:key="index" wx:for-index="idx"  wx:for-item="val">
+                        <block wx:if="{{idx<4}}">
+                            <view class="good_img">
+                                <image src="{{addUrl + val.goodsPicture}}"></image>
+                            </view>
+                            <view class="info">
+                                <view class="good_name over_one">{{val.goodsName}}</view>
+                                <view class="good_js over_one">{{val.synopsis}}</view>
+                            </view>
+                            <view class="price_num">
+                                <view class="pri cors">¥{{val.activityPrice}}</view>
+                                <view class="num">x<text>{{val.quantity}}</text></view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+                <view class="explain">
+                    <view class="tip" wx:if="{{item.orderStatus == 4}}">{{item.closedReason}}</view>
+                    <!-- <view class="tip" wx:if="{{item.orderStatus == 2}}">交易倒计时 剩余15:00</view> -->
+                    <view class="fx dt_box">
+                        <view class="dtt tl">总价</view>
+                        <view class="dtp tr white">¥{{item.payableAmount<=0?item.minAmount:item.payableAmount}}</view>
+                    </view>
+                    <view class="fx dt_box">
+                        <view class="dtt tl">特价优惠</view>
+                        <view class="dtp tr white">¥{{item.discountFee}}</view>
+                    </view>
+                    <view class="fx dt_box" wx:if="{{item.couponAmount>0}}">
+                        <view class="dtt tl">优惠券优惠</view>
+                        <view class="dtp tr white">¥{{item.couponAmount}}</view>
+                    </view>
+                    <view class="fx dt_box">
+                        <view class="tl actu_t">实付款</view>
+                        <view class="tr actu_p redimp">¥{{item.orderAmount}}</view>
+                    </view>
+                </view>
+                <view class="tb">
+                    <view class="btn look_btn" data-data="{{item}}" bindtap="lookOrder">查看订单</view>
+                    <view 
+                    bindtap="deteleOrder" data-index="{{index}}" data-id="{{item.orderNo}}"
+                    wx:if="{{item.orderStatus == 2 || item.orderStatus == 3 || item.orderStatus == 4}}" 
+                    class="btn del_btn">删除订单</view>
+                    <!-- <view wx:if="{{item.orderStatus == 3}}" class="btn leave_btn">评价</view> -->
+                    <!-- <view wx:if="{{item.orderStatus == 5 && item.goodsList.length>0}}" class="btn leave_btn">加入购物车</view> -->
+                </view>
+            </view>
+            <view class="zanwu" wx:if="{{!isMore}}">暂无数据</view>
+        </view>
+    </view>
+</view>
+
+
+<selfModel data="{{childComponent}}" show="{{show}}" text="确认删除订单?" bindconfirm="confirm" bindcancel="cancel"></selfModel>

@@ -1,0 +1,64 @@
+<!--pages/allGoods/goodsCar/goodsCar.wxml-->
+<view class="header" style="padding: {{HH}} 24rpx 0 24rpx;">
+  <view class="tabs">
+    <view class="compile">
+      <icon class="iconfont icon-left" bindtap="goBack"></icon>
+      <view bindtap="redact" hidden="{{!flag}}" style="margin-left: 10rpx;">编辑</view>
+      <view bindtap="redact" hidden="{{flag}}">取消</view>
+    </view>
+    <text>购物车</text>
+    <text></text>
+  </view>
+  <view class="car_club">
+    <view class="club">
+      <!-- <image src="../../../icon/huanggou.png"></image> -->
+      <icon class="iconfont icon-gouxuan-copy {{colorFlag?'iconfont2':'iconfont1'}}" bindtap="changeColor"></icon>
+      <image src="../../../images/brand.png"></image>
+      <text>PlayHouse</text>
+    </view>
+    <view class="club_goods">
+      <icon class="iconfont icon-gouxuan-copy {{colorFlag?'iconfont2':'iconfont1'}}" bindtap="changeColor"></icon>
+      <image src="../../../images/alcohol.png"></image>
+      <view class="goods_cont">
+        <text>绝对小奶酒套餐</text>
+        <view class="goods_pic">
+          <text>×3</text>
+          <text>¥2249.00</text>
+          <text>¥1170.00</text>
+        </view>
+      </view>
+    </view>
+    <view class="discounts">
+      <text>已优惠</text>
+      <text>¥290.00</text>
+    </view>
+    <view class="subtotal">
+      <text>小计</text>
+      <text>¥1230.00</text>
+    </view>
+    <view class="account">
+      去结算
+    </view>
+  </view>
+</view>
+<view class="footer" hidden="{{flag}}">
+  <view class="left">
+    <image src="../../../icon/huanggou.png"></image>
+    <text>全选</text>
+  </view>
+  <view class="right" bindtap="shadeDis">
+    删除
+  </view>
+</view>
+<!-- 遮罩 -->
+<view class="shade" hidden="{{delFlag}}">
+      <image src="../../../images/zhezhaoche.png"></image>
+  <view>是否删除所选商品</view>
+  <view>
+    <text class="text_one">删除</text>
+    <text class="text_two">取消</text>
+  </view>
+</view>
+<view class="fc" hidden="{{delFlag}}">
+
+</view>

@@ -1,0 +1,15 @@
+<!--pages/personSet/phoneSet/phoneSet.wxml-->
+<view class="phoneSet">
+  <view class="num_one">更换绑定手机号</view>
+  <view class="inp bg_color2">
+    <input placeholder="请输入手机号" type="number" model:value="{{phone}}" />
+  </view>
+  <view class="num_one">验证码</view>
+  <view class="inp bg_color2 pos">
+    <input placeholder="验证码" type="number" model:value="{{code}}" class="code"/>
+    <text bindtap='getCode' class="{{flag?'fs_color1':'off'}}">
+      {{time}}
+    </text>
+  </view>
+</view>
+

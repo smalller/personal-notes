@@ -1,0 +1,126 @@
+安装jest：
+	npm install jest@24.8.0 -D
+	
+基本使用：
+	一、创建 sum.js 文件
+		function sum(a, b) {
+			return a + b;
+		}
+		module.exports = sum;
+	
+	二、创建名为 sum.test.js 的文件，这个文件包含了实际测试内容
+		const sum = require('./sum');	//引入要测试的js文件
+	
+		test('1加2的值', () => {		//参数'1加2的值'为测试名称，自定义
+			expect(sum(1, 2)).toBe(3);	//sum(1, 2)为调用要测试的函数，并传参，toBe(3)为期望的值
+		});
+		
+		test.only()		先执行该测试用例，其他的暂时先不执行
+	
+	三、修改package.json文件
+		"scripts": {
+			"test": "jest"
+		}
+		
+	四、运行测试 npm run test
+
+
+
+生成初始化配置：
+	npx jest --init
+	
+生成代码测试覆盖率报告：
+	npx jest --coverage
+	
+	该命令可在package.json中修改
+	"scripts": {
+		"coverage": "jest --coverage"
+	}
+	运行 npm run coverage 即可
+	
+安装babel转换器，是使其可以使用import形式引入模块
+	1.npm add @babel/core@7.4.5 @babel/preset-env@7.4.5 --dev
+	2.在根目录下创建.babelrc
+		输入：
+		{
+			"presets": [
+				[
+				"@babel/preset-env",{
+					"targets":{
+					"node":"current"
+					}
+				}
+				]
+			]
+		}
+		
+	
+
+匹配器：
+	toBe()							相当于 ===
+	toEqual()						相当于 ==
+	toBeNull()						匹配值是否为null
+	toBeUndefined()					匹配值是否为undefined
+	toBeDefined()					匹配值是否定义
+	toBeTruthy()					匹配值为真
+	toBeFalsy()						匹配值为假
+	toBeGreaterThan()				大于某个值
+	toBeLessThan()					小于某个值
+	toBeGreaterThanOrEqual()		大于等于某个值
+	toBeLessThanOrEqual()			小于等于某个值
+	toBeCloseTo()					忽略浮点错误
+	toMatch()						匹配字符串中是否有某个值
+	toContain()						匹配数组中是否有某个值
+	toThrow()						匹配是否有异常抛出，如果有就过，没有就不过，括号里可以写要匹配的抛出异常内容
+	.not.toThrow()					不抛出异常就过， .not为取反，很多地方都可以用到
+	
+	
+
+钩子函数：
+	beforeAll：在所有测试用例之前执行
+		beforeAll(() => {
+			console.log('在所有测试用例之前执行');
+		})
+		
+	afterAll：在所有测试用例之后执行
+		afterAll(() => {
+			console.log('在所有测试用例之后执行');
+		})
+	
+	beforeEach：在每一个测试用例之前都会执行
+		beforeEach(() => {
+			console.log('在每一个测试用例之前都会执行');
+		})
+		
+	afterEach：在每一个测试用例之后都会执行
+		afterEach(() => {
+			console.log('在每一个测试用例之后都会执行');
+		})
+		
+		
+
+测试用例分组：
+	describe('测试用例分组1',() => {
+		test()...
+	})
+	
+	describe('测试用例分组2',() => {
+		test()...
+	})
+	
+	
+	
+钩子函数的作用域：
+	1.钩子函数在父级分组中可作用于所有子集，类似继承
+	2.钩子函数同级分组作用域互不干扰，各起作用
+	3.先执行外部的钩子函数，再执行内部的钩子函数
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

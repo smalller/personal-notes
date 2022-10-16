@@ -1,0 +1,80 @@
+<view class="search">
+  <icon class="iconfont icon-sousuo"></icon>
+  <input placeholder="请输入搜索内容" focus="{{true}}" value="{{initial}}" bindinput="searchInp" maxlength="{{14}}"/>
+  <text class="t_one" bindtap="chenckIinp">×</text>
+  <text class="t_two" bindtap="chenckIinp">取消</text>
+</view>
+<view class="search_type">
+  <block wx:for="{{searchClassify}}" wx:key="index">
+    <view class="sear_btn {{item.type==active?'on':'not'}}" bindtap="switchType" data-data="{{item}}">{{item.name}}</view>
+  </block>
+</view>
+
+
+<view class="content" hidden="{{!searchFlag}}">
+  <view class="header">
+    <text>搜索历史</text>
+    <icon class="iconfont icon-cangpeitubiao_shanchu" hidden="{{!hisFlag}}" bindtap="chenckHis"></icon>
+    <view class="dis_none" hidden="{{hisFlag}}">
+      <text bindtap="delAll">全部删除</text>
+      <text bindtap="chenckHis">完成</text>
+    </view>
+  </view>
+
+  <view class="bor_rad {{packUp?'bor_rad1':''}}" wx:if="{{notHistory}}">
+    <block wx:for="{{searHistory}}" wx:key="index">
+      <view class="con" wx:if="{{index<=num}}" bindtap="historyOne" data-value="{{item}}">
+        {{item}}
+        <view class="t_one t_pos" hidden="{{hisFlag}}" catchtap="delOne" data-index="{{index}}">×</view>
+      </view>
+    </block>
+  </view>
+  <view wx:else class="not_text">还没有搜索历史哦~</view>
+  <image src="../../icon/zhankai.png" class="img" bindtap="chenckAll" data-type="1" hidden="{{!moreIcon}}"></image>
+  <image src="../../icon/shouqi.png" class="img1" hidden="{{!packUp}}" data-type="2" bindtap="chenckAll"></image>
+</view>
+
+<view class="content" hidden="{{!searchFlag}}">
+  <view class="header" wx:if="{{hotRecom.length>0}}">
+    <text>热门推荐</text>
+  </view>
+  <view class="body" >
+    <view class="bo_right" wx:for="{{hotRecom}}" wx:key="index" bindtap="hotJump" data-data="{{item}}">{{item.name}}</view>
+  </view>
+
+</view>
+
+
+<block wx:if="{{searResult.length>0}}">
+  <view class="all_res">
+    <view class="res_box" wx:for="{{searResult}}" wx:key="index">
+      <view class="top_type" wx:if="{{item.type == 1 && active == 0}}">
+        <view>商家</view>
+        <view bindtap="lookMore" data-type="{{item.type}}">查看更多</view>
+      </view>
+      <view class="top_type" wx:if="{{item.type == 6 && active == 0}}">
+        <view>活动</view>
+        <view bindtap="lookMore" data-type="{{item.type}}">查看更多</view>
+      </view>
+      <view class="search_content" wx:key="idx" wx:for-item="child" wx:for-index="idx" wx:for="{{item.content}}" hidden="{{searchFlag}}" bindtap="goStore" data-data="{{child}}" data-parent="{{item}}">
+        <view class="left">
+          <image src="{{addUrl + child.img}}"></image>
+          <block wx:if="{{child.isBrand==1}}">
+            <image class="sanjiao" src="../../images/quality.png"></image>
+          </block>
+        </view>
+        <view class="right">
+          <view class="name">{{child.name}}</view>
+          <view class="over_more brief">{{child.desc}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+
+<block wx:if="{{searResult.length<1 && !searchFlag}}">
+  <view class="search_res">
+    <image class="search_null" src="../../images/search_null.png"></image>
+  </view>
+</block>

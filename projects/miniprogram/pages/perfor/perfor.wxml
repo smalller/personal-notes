@@ -1,0 +1,22 @@
+<image mode="aspectFill" src="../../images/performance.png" bindtap="indexPage"></image>
+
+
+<block wx:if="{{showLogin}}">
+    <button class="login" plain wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"></button>
+    <button class="login" plain wx:else open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'></button>
+</block>
+
+
+<view class="bg" bindtap="cancel" wx:if="{{openPhone}}"></view>
+<view class="dio_bg" wx:if="{{openPhone}}">
+    <view class="box">
+        <view class="title">登录需要</view>      
+        <view class="tips">获取您的手机号码</view>             
+        <view class="btm_btn">
+            <button bindtap="cancel">取消</button>
+            <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定</button>
+        </view>             
+    </view>
+</view>
+
+

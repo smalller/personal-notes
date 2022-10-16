@@ -1,0 +1,146 @@
+<view class="my bg_color2">
+    <view class="content bg_color2">
+        <!-- style="background: url({{addUrl}});background-size: 100% 100%;" -->
+        <!-- <view class="opacity_bg"></view> -->
+        <view class="header" style="background: url({{addUrl+backgroundPortrait}});background-size: 100% 100%;">
+            <view class="opacity_bg">
+                <view class="i_l"
+                    style="margin-top:{{(mobile.top+2)}}px;height:{{mobile.height}}px;line-height:{{mobile.height}}px">
+                    <icon class="iconfont icon-shezhi" bindtap="goPersonSet"></icon>
+                </view>
+                <view class="userinfo">
+                    <view class="head_img">
+                        <image src="{{head_portrait}}"></image>
+                    </view>
+                    <view class="info">
+                        <view class="one {{!loginFlag?'one_other':''}}">
+                            <block wx:if="{{loginFlag}}">
+                                <button class="name" plain wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 点击登录 </button>
+                                <button class="name" plain wx:else open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>点击登录</button>
+                            </block>
+                            <!-- <button class="name" plain wx:if="{{loginFlag}}" open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>点击登录</button> -->
+                            <text class="name {{!loginFlag?'name_over':''}} over_one" wx:else>{{username}}</text> 
+                            <view class="attestation" wx:if="{{info.certificationId}}">
+                                <image src="../../icon/jiaV.png"></image> 
+                                <text>{{info.certificationName}}</text>      
+                            </view>
+                        </view>
+
+                        <view class="two">
+                            <view wx:if="{{!loginFlag}}">
+                                <text class="u_t">{{info.address || '所在地未知'}}</text> 
+                                <text class="u_t">{{info.age}}</text> 
+                                <image style="width: 26rpx;height: 26rpx;" wx:if="{{info.sex==1}}" src="../../icon/boy.png"></image>
+                                <image style="width: 26rpx;height: 26rpx;" wx:if="{{info.sex==2}}" src="../../icon/girl.png"></image>
+                                <!-- <image style="width: 74rpx;height: 32rpx;" wx:if="{{info.sex==0}}" src="../../icon/unknown.png"></image> -->
+                            </view>
+                        </view>
+                        <!-- hidden="{{info.wealthLevel<=0}}" -->
+                        <view class="pro" >
+                            <view class="pro_box">
+                                <view class="all_w"></view>
+                                <view class="now_w" style="width: {{info.levelRate}};"></view>
+                            </view>
+                            <view class="level" bindtap="levelInfo" wx:if="{{!loginFlag}}">
+                                <image  mode="heightFix" src="{{leaveLogo}}" ></image>
+                                <text class="lvl">{{info.wealthLevel}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="personal_info">
+                    <view class="info_box" bindtap="appTips">
+                        <view class="info_tit">粉丝</view>
+                        <view class="info_num">{{info.fansNumb}}</view>
+                    </view>
+                    <view class="info_box" bindtap="appTips">
+                        <view class="info_tit">关注</view>
+                        <view class="info_num">{{info.focusNumb}}</view>
+                    </view>
+                    <view class="info_box" bindtap="appTips">
+                        <view class="info_tit">收藏</view>
+                        <view class="info_num">{{info.collNumb}}</view>
+                    </view>
+                    <view class="info_box" bindtap="appTips">
+                        <view class="info_tit">动态</view>
+                        <view class="info_num">{{info.postNewNumb}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="tab">
+            <view class="box">
+                <view class="btns">
+                    <view class="btn_type" wx:for="{{orderBtn}}" wx:key="index" data-id="{{item.id}}" bindtap="orderList">
+                        <view class="img_box" >
+                            <view class="num_box" style="height: {{item.h}}rpx;width: {{item.w}}rpx;">
+                                <image  class="btn_img" src="{{item.icon}}"></image>
+                                <view class="num" wx:if="{{item.num>0}}">{{item.num}}</view>
+                            </view>
+                        </view>
+                        <view class="btn_tt">{{item.text}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="service bg_color2">
+            <view class="box">
+                <view class="title">
+                    <view class="text">个人服务</view>
+                </view>
+                <view class="btns two">
+                    <view class="btn_type_1" wx:for="{{serviceBtn}}" wx:key="index" bindtap="goWhere"
+                        data-id="{{item.id}}">
+                        <block wx:if="{{item.id == 8 && !hasPhone && !loginFlag}}">
+                            <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="vit_phone_btn">
+                                <view class="img_box" >
+                                    <image style="height: {{item.h}}rpx;width: {{item.w}}rpx;" class="btn_img" src="{{item.icon}}"></image>
+                                </view>
+                                <view class="btn_tt">{{item.text}}</view>
+                            </button>
+                        </block>
+                        <block wx:else>
+                            <view class="img_box" >
+                                <image style="height: {{item.h}}rpx;width: {{item.w}}rpx;" class="btn_img" src="{{item.icon}}"></image>
+                            </view>
+                            <view class="btn_tt">{{item.text}}</view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    <!-- 弹窗 -->
+    <view class="bg" bindtap="cancel" wx:if="{{openPhone}}"></view>
+    <view class="dio_bg" wx:if="{{openPhone}}">
+        <view class="box">
+            <view class="title">登录需要</view>      
+            <view class="tips">获取您的手机号码</view>             
+            <view class="btm_btn">
+                <button bindtap="cancel">取消</button>
+                <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定</button>
+            </view>             
+        </view>
+    </view>
+
+    <view class="invita_bg" bindtap="cancelCode" wx:if="{{invitationCode}}"></view>
+    <view class="invita_box" wx:if="{{invitationCode}}">
+        <view class="invita_main">
+            <view class="invita_title">填写邀请码</view>      
+            <view class="invita_inp">
+                <input type="text" focus model:value="{{InvCode}}" placeholder="请输入邀请码" /> 
+            </view>             
+            <view class="invita_btm_btn">
+                <view bindtap="cancelCode">取消</view>
+                <view bindtap="submitCode">立即绑定</view>
+            </view>
+        </view>
+    </view>
+
+
+
+</view>

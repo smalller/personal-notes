@@ -1,0 +1,234 @@
+<view class="makeTable-box bg_color2">
+  <view class="daySelect"> 
+    <view class="fx day_one">
+      <view class="month-text">{{curMonth}}月{{curDay}}日</view>
+      <view class="min_consume"> <text>低消：</text><text>￥{{storeTips.minPrice}}</text></view>
+    </view>
+
+    <view class="fx day_two">
+      <block wx:for="{{weekArr}}" wx:key="index">
+        <view class="day-num {{item.day==curDay?'cur_day':'not_day'}}"  data-time="{{item}}" bindtap="changeWeekBtn">
+          <view>{{item.week}}</view>
+          <view>{{item.day}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- <view class="make-top">
+    <view class="make-month">
+      <view class="order-image">
+        <image src="../../images/date-bg.png"></image>
+        <text>订</text>
+      </view>
+      <view class="month-text">
+        {{curMonth}}月
+      </view>
+    </view>
+    <view class="split-image">
+      <image src="../../images/split.png"></image>
+    </view>
+    <view class="make-day">
+      <view class="day-num" wx:for="{{weekArr}}" wx:key="index" data-time="{{item}}" bindtap="changeWeekBtn">
+        <image wx:if="{{item.day == curDay}}" src="../../images/date-bg.png"></image>
+        <text wx:if="{{item.day==curDay}}" class="cur-day">{{item.day}}</text>
+        <text wx:else>{{item.day}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="make-top-week">
+    <view>{{curWeekText}}</view>
+    <view>当天最低：￥{{storeTips.minPrice}}</view>
+  </view> -->
+
+  <view class="line"></view>
+  <view class="session" wx:if="{{storeTips.storeFields.length>0}}">
+    <block wx:for="{{storeTips.storeFields}}" wx:key="index">
+      <view bindtap="session" data-index="{{index}}" data-data="{{item}}" class="{{index==0?'night':'wee'}} {{item.isSelected==1?'session_on':'session_off'}}">
+        <view>{{item.name}}</view>
+        <view class="ses_time">{{item.timeSlot}}</view>
+      </view>    
+    </block>
+  </view>
+
+  <view class="screen" bindtap="showScreen">
+    <view class="world">筛选</view>
+    <view style="width: 520rpx;"> 
+      <text></text> 
+    </view>
+    <view class="icon"><image src="../../icon/shaixuan_open.png"></image></view>
+
+    <view class="screen_list_box" wx:if="{{showScreenState}}">
+      <block wx:for="{{screenList}}" wx:key="index">
+        <view catchtap="checkedPeople" data-data="{{item}}" data-index="{{index}}" class="people {{item.checked?'people_true':'people_false'}}">{{item.text}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="screen_popup" bindtap="closePopup" wx:if="{{showScreenState}}" style="height: {{makeTableBoxHeight}}px;"></view>
+
+  <view class="line"></view>
+  <view class="make-content">
+    <view class="flr_content">
+      <view class="floors fx"> 
+        <view class="layout-image" bindtap="lookLayout">
+          <text>布局图</text>
+          <image src="../../images/layout.png"></image>
+        </view>
+        <view class="flrs">
+          <block wx:for="{{floors}}" wx:key="index">
+            <view bindtap="cutFloor" data-index="{{index}}" data-data="{{item}}" class="flr {{index == floorAct?'flr_on':''}}">{{item.floor}}</view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="page-section" style="position: relative;">
+      <movable-area class="seat-scale-box">
+        <movable-view direction="all" out-of-bounds scale="{{true}}" x="{{x}}" y="{{y}}" scale-min="{{scaleMin}}" scale-max="{{scaleMax}}" scale-value="{{scaleNum}}" bindscale="bindscaleEvent">
+          <view class="seat-box" bindtap="doubleTap" bindtouchstart="touchStart" bindtouchend="touchEnd">
+            <view style="display:flex;font-size: 0;position: relative;" class="zuowei_box">
+              <view class="seat" wx:for="{{coordinate1}}" wx:key="index">
+                <view wx:for="{{item[0]}}"  wx:key="idx" wx:for-item="itm" wx:for-index="idx" class="mgn">
+                  <!-- {{itm.seatAttribute}} -- {{itm.seatType}}  -->
+                  <!-- 过道 -->
+                  <view style="background: #202233;width: 38rpx;height:34rpx;" wx:if="{{itm.seatType == 3}}"></view>
+                  <!-- 舞台 -->
+                  <view class="wutai" style="background: #202233;width: 38rpx;height:34rpx;" wx:if="{{itm.seatType == 4}}">
+                    <!-- left:{{wutai.sx}}px;top:{{wutai.sy}}px -->
+                    <image wx:if="{{itm.theOne}}" style="display: block;height:62rpx;width: 128rpx;position: absolute;" src="../../images/stage.png"></image>
+                  </view>
+                  <!-- 不可预定 并且  座位类型等于 普通座位或者卡座（软座） -->
+                  <image bindtap="seatInfo" data-data="{{itm}}" wx:if="{{itm.seatAttribute == 1 && (itm.seatType == 1 || itm.seatType == 2)}}" src="../../images/book1.png"></image>
+                  <!-- 可预定 -->
+                  <image bindtap="seatInfo" data-data="{{itm}}" wx:if="{{itm.seatAttribute == 2}}" src="{{itm.choose?'../../images/book4.png':'../../images/book0.png'}}"></image>
+
+                  <!-- 已预定 -->
+                  <image bindtap="seatInfo" data-data="{{itm}}" wx:if="{{itm.seatAttribute == 4 || itm.seatAttribute == 3}}" src="{{itm.choose?'../../images/book4.png':'../../images/book2.png'}}"></image>
+                  <!--  AA 拼桌-->
+                  <image bindtap="seatInfo" data-data="{{itm}}" wx:if="{{itm.seatAttribute == 5}}" src="../../images/book3.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </movable-view>
+      </movable-area>
+
+      <view class="status">
+        <view class="type">
+          <image src="../../images/book0.png"></image>
+          可预订
+        </view>
+        <view class="type">
+          <image src="../../images/book2.png"></image>
+          已预订
+        </view>
+        <view class="type">
+          <image src="../../images/book3.png"></image>
+          AA拼桌
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="line"></view>
+  <view class="make-detail">
+   <view class="public-detail" hidden="{{!nowSeat}}">
+    <view class="title">桌次详情</view>
+    <view class="seat-con">
+      <view class="seat-item">
+        <view class="sl"><text class="one">当前桌位：</text><text class="two">{{nowSeat.seatCode}}</text> </view>
+        <view class="sr"><text class="one">座位类型：</text><text class="two">{{nowSeat.softHardStatusStr}}</text></view>
+      </view>
+      <view class="seat-item">
+        <view class="sl"><text class="one">最低消费：</text><text class="sign">￥{{nowSeat.weekPriceList[0].price}}</text> </view>
+        <view class="sr"><text class="one">容纳人数：</text><text class="two">{{nowSeat.numberOfPeople}}</text></view>   
+      </view>
+      <view class="seat-item">
+        <!-- <view class="sl"><text class="one">人均消费：</text><text class="two">￥{{nowSeat.minConsumption}}</text></view> -->
+        <view class="sr"><text class="one">保留时间最晚至：</text><text class="two">{{nowSeat.seatLatestReservationTime}}</text></view> 
+      </view>
+      <!-- <view class="seat-item">
+        <image src="../../images/seat-detail9.png"></image>
+        <text>{{nowSeat.seatCode}}</text>
+      </view>
+      <view class="seat-item">
+        <image src="../../images/seat-detail0.png"></image>
+        <text>{{nowSeat.numberOfPeople}}人</text>
+      </view>
+      <view class="seat-item">
+        <image src="../../images/seat-detail1.png"></image>
+        <text>¥{{nowSeat.weekPriceList[0].price}}</text>
+      </view>
+      <view class="seat-item">
+        <image src="../../images/seat-detail2.png"></image>
+        <text>最晚至{{nowSeat.seatLatestReservationTime}}</text>
+      </view> -->
+      <!-- <view class="seat-item">
+        <image src="../../images/seat-detail3.png"></image>
+        <text>¥{{nowSeat.minConsumption}}/人</text>
+      </view> -->
+    </view>
+   </view>
+   <view class="public-detail">
+    <view class="title">注意事项</view>
+    <view class="careful-con">
+      <view wx:for="{{storeTips.tableReservationNotes}}" wx:key="index">{{item}}</view>
+      <!-- <view class="imp_tips">{{storeTips.orderHint}}</view> -->
+
+      <rich-text nodes="{{storeTips.orderHint}}"></rich-text>
+
+      <!-- <view class="imp_tips" wx:html=>{{storeTips.orderHintSecond}}</view> -->
+
+
+      <rich-text nodes="{{storeTips.orderHintSecond}}"></rich-text>
+
+
+    </view>
+   </view>
+   <view class="reading">  
+    <image bindtap="readed" src="{{readState?'../../icon/readed.png':'../../icon/read_not.png'}}  "></image>   
+    <text>确认已阅读注意事项</text>
+   </view>
+  </view>
+  <view class="fix_btn">
+    <button wx:if="{{isLogin}}" class="join-btn {{(nowSeat && readState)?'has_j':'not_j'}}" bindtap="joinOrder">立即预订</button>
+    <block wx:if="{{!isLogin}}">
+      <button wx:if="{{canIUseGetUserProfile}}" class="join-btn {{(nowSeat && readState)?'has_j':'not_j'}}" plain bindtap="getUserProfile">立即预订</button>
+      <button wx:else class="join-btn {{(nowSeat && readState)?'has_j':'not_j'}}" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>立即预订</button>
+    </block>
+    <!-- <button wx:if="{{!isLogin}}" class="join-btn {{(nowSeat && readState)?'has_j':'not_j'}}" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>立即预订</button> -->
+  </view>
+
+  <!-- 到店选取和立即前往模态框 -->
+  <!-- <view class="mask" hidden="{{!isShowSelType}}" bindtap="closeOrder"></view>
+  <view class="booked-box booked-box-sel" hidden="{{!isShowSelType}}">
+    <view class="store-mian">
+      <image src="../../images/prebook.png"></image>
+    </view>
+    <view class="store-text">即将预约{{nowSeat.seatCode}}座</view>
+    <view class="store-text">是否前往预定酒水</view>
+    <view class="store-btn">
+      <button bindtap="cancel"  class="pbtn_l pbtn">取消</button>
+      <button bindtap="goCart" class="pbtn_r pbtn">立即前往</button>
+    </view>
+  </view> -->
+
+  <!-- <view class="mask" hidden="{{layoutState}}" bindtap="lookLayout"></view>
+    <view class="booked-box booked-box-sel" hidden="{{layoutState}}">
+      <image wx:if="{{storeTips.layoutPicture}}"  class="layout_img" src="{{addUrl+storeTips.layoutPicture}}"></image>
+    </view> -->
+    
+  <!-- 布局图 -->
+  <view class="big_img_box" wx:if="{{!layoutState}}" bindtap="lookLayout"></view>
+  <view class="big_img" wx:if="{{!layoutState}}">
+    <icon  class="iconfont icon-yiliaohangyedeICON-" bindtap="lookLayout"></icon>
+    <view class="big_swiper">
+      <view class="swiper_item">
+          <image wx:if="{{storeTips.layoutPicture}}" mode="widthFix" src="{{addUrl + storeTips.layoutPicture}}"></image>
+      </view>
+    </view>
+  </view>
+
+
+  <selfModel  show="{{show}}" text="{{showPopupText}}" bindconfirm="confirmPopup" bindcancel="cancelPopup"></selfModel>
+
+</view>

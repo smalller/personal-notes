@@ -1,0 +1,34 @@
+* {
+  outline: none;
+  font-family: "pingfang", "PingFang SC", "微软雅黑", "Microsoft Himalaya";
+}
+body,
+p,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+.el-drawer__close-btn:hover i {
+  color: #FF9900 !important;
+}
+.el-drawer__header {
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+.el-drawer__header .el-icon {
+  font-size: 18px !important;
+}
+.el-drawer__body {
+  overflow: auto;
+}

@@ -1,0 +1,2 @@
+<!--pages/appPage/index.wxml-->
+<include src="../../components/openApp/index.wxml"/>

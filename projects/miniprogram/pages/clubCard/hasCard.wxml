@@ -1,0 +1,27 @@
+<view class="content">
+    <view class="card_li">
+        <view class="bg2">
+            <image wx:if="{{info.listPicture}}" mode="aspectFill" class="vip_bg" src="{{addUrl+info.listPicture}}"></image>
+        </view>
+        <view class="card_content fx">
+            <view class="cll">
+              <image class="store_logo" wx:if="{{info.logo}}" src="{{addUrl+info.logo}}"></image>
+            </view>
+            <view class="clr">
+                <view class="card_name">{{info.storeName}}</view>
+                <view class="card_main">{{info.name}}</view>
+            </view>
+        </view>
+        <view class="integral">积分：{{info.havePoints}}</view>
+        <image class="vip_word" mode="widthFix" src="../../icon/vip_word.png"></image>
+    </view>
+
+    <view class="explain">
+        <view>积分可1:1等同人民币在{{info.storeName}}进行任何消费</view>
+    </view>
+
+    <view class="instructions"> 
+        <view class="title">会员卡说明</view>
+        <view class="ptxt" wx:for="{{tips}}" wx:key="index">{{item}}</view>
+    </view>
+</view>

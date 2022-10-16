@@ -1,0 +1,96 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/order/order",
+                    "pathName": "pages/order/order",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/allGoods/allGoods",
+                    "pathName": "pages/allGoods/allGoods",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/details/details",
+                    "pathName": "pages/details/details",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/list/list",
+                    "pathName": "pages/list/list",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/discovery/index",
+                    "pathName": "pages/discovery/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/index/index",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/saveWine/saveWine",
+                    "pathName": "pages/saveWine/saveWine",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/my",
+                    "pathName": "pages/my/my",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/order/order",
+                    "pathName": "pages/order/order",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/perfor/perfor",
+                    "pathName": "pages/perfor/perfor",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/couponsActive/couponsActive",
+                    "pathName": "pages/couponsActive/couponsActive",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/discovery/index",
+                    "pathName": "pages/discovery/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/details/details",
+                    "pathName": "pages/details/details",
+                    "query": "id=1329624735638061058",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

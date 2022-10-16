@@ -1,0 +1,12 @@
+<view class="about bg_color2">
+    <view class="logo">
+        <image src="../../images/logo.png"></image>
+    </view>
+    <view class="version">
+        版本号  {{versions || '1.0.8'}}
+    </view>
+    <view class="btm"> 
+        <view>蜀ICP备2020026940号</view>
+        <view>©2021 四川恒麒弘泰科技有限公司</view>
+    </view>
+</view> 

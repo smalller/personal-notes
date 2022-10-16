@@ -1,0 +1,100 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/my/my",
+        "pages/discovery/index",
+        "pages/news/index",
+        "pages/appPage/index",
+        "pages/login/login",
+        "pages/list/list",
+        "pages/my/about",
+        "pages/order/order",
+        "pages/details/details",
+        "pages/clubCard/clubCard",
+        "pages/coupons/coupons",
+        "pages/outlet/outlet",
+        "pages/my/agreement",
+        "pages/makeTable/index",
+        "pages/details/evaluation/evaluation",
+        "pages/amendGetails/amendGetails",
+        "pages/grabSeat/grabSeat",
+        "pages/allGoods/allGoods",
+        "pages/allGoods/goodsDetails/goodsDetails",
+        "pages/allGoods/goodsCar/goodsCar",
+        "pages/personSet/personSet",
+        "pages/personSet/passwordSet/passwordSet",
+        "pages/personSet/phoneSet/phoneSet",
+        "pages/personSet/affirmPass/affirmPass",
+        "pages/search/search",
+        "pages/index/citys/citys",
+        "pages/clubCard/hasCard",
+        "pages/clubCard/buyCard",
+        "pages/pay/pay",
+        "pages/pay/hold",
+        "pages/lucky/lucky",
+        "pages/ktv/ktv",
+        "pages/ktv/ktvInfo",
+        "components/password/password",
+        "pages/actives/actives",
+        "pages/actives/actInfo",
+        "pages/downApp/downApp",
+        "pages/level/level",
+        "pages/langPicture/langPicture",
+        "pages/shareInfo/shareInfo",
+        "pages/dice/dice",
+        "pages/saveWine/saveWine",
+        "pages/offlineLuckyDraw/offlineLuckyDraw",
+        "pages/perfor/perfor",
+        "pages/couponsActive/couponsActive"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#161823",
+        "navigationBarTitleText": "玖座",
+        "navigationBarTextStyle": "white",
+        "backgroundColor": "#161823"
+    },
+    "tabBar": {
+        "color": "#A1A1A1",
+        "selectedColor": "#A1A1A1",
+        "backgroundColor": "#161823",
+        "borderStyle": "black",
+        "position": "bottom",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "icon/1.png",
+                "selectedIconPath": "icon/1-1.png"
+            },
+            {
+                "pagePath": "pages/discovery/index",
+                "text": "发现",
+                "iconPath": "icon/2.png",
+                "selectedIconPath": "icon/2-2.png"
+            },
+            {
+                "pagePath": "pages/news/index",
+                "text": "消息",
+                "iconPath": "icon/4.png",
+                "selectedIconPath": "icon/4-4.png"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "text": "我的",
+                "iconPath": "icon/3.png",
+                "selectedIconPath": "icon/3-3.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json",
+    "usingComponents": {},
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
+    },
+    "useExtendedLib": {
+        "weui": true
+    }
+}

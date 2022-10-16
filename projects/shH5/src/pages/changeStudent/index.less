@@ -1,0 +1,56 @@
+.changeSchool {
+  width: 100vw;
+  min-height: 100vh;
+
+  .SchoolNormal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 112px;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    span {
+      margin-top: 32px;
+      color: #b4b4b4;
+      font-size: 16px;
+    }
+  }
+  .schoolList {
+    width: 100%;
+    padding: 10px 15px 0;
+    box-sizing: border-box;
+    .schoolItem {
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
+      border-radius: 8px;
+      background: #ffffff;
+      height: 118px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      .schoolName {
+        span {
+          color: #333333;
+          font-weight: 700;
+          font-size: 18px;
+        }
+      }
+      .schoolInfo {
+        display: flex;
+        justify-content: space-between;
+        .left {
+          span {
+            margin-right: 15px;
+            color: #585858;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

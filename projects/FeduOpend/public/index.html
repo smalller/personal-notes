@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width,initial-scale=1.0" name="viewport" />
+    <!-- <link id="linkUrl" href="" rel="icon" /> -->
+    <link id="linkUrl" href="<%= BASE_URL %>logo.png" rel="icon" />
+    <title><%= VUE_APP_TITLE %></title>
+    <script
+      type="text/javascript"
+      charset="utf-8"
+      src="./static/svg_inject.js"
+    ></script>
+    <script src="./static/aliyunUpload/aliyun-oss-sdk-5.3.1.min.js"></script>
+    <script src="./static/aliyunUpload/aliyun-upload-sdk-1.5.0.min.js"></script>
+    <meta content="<%= VUE_APP_AUTHOR %>" name="author" />
+    <link href="<%= BASE_URL %>static/css/loading.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      charset="utf-8"
+      src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="utf-8"
+      src="aliplayercomponents-1.0.5.min.js"
+    ></script>
+  </head>
+  <body>
+    <div id="vue-admin-beautiful-pro">
+      <div class="first-loading-wrp">
+        <div class="loading-wrp">
+          <span class="dot dot-spin">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+        </div>
+        <h1><%= VUE_APP_TITLE %></h1>
+      </div>
+    </div>
+    <script>
+      ;/^http(s*):\/\//.test(location.href) ||
+        alert('基于vue-admin-beautiful-pro开发的项目需要部署到服务器下访问')
+    </script>
+    <script>
+      var _hmt = _hmt || []
+      ;(function () {
+        var hm = document.createElement('script')
+        hm.src = 'https://hm.baidu.com/hm.js?7174bade1219f9cc272e7978f9523fc8'
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(hm, s)
+      })()
+    </script>
+    <script>
+      var SecretKey = 'a6f06fa252c463b60f05b717d0e0f684'
+    </script>
+  </body>
+</html>

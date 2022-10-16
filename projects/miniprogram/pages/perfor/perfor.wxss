@@ -1,0 +1,83 @@
+page{
+    width: 100%;
+    height: 100%;
+}
+image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+.login{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 12;
+}
+.login[plain]{
+    border: none;
+    border-radius: 0;
+}
+.bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .5);
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+  }
+  .dio_bg{
+    position: fixed;
+    top: calc(50% - 180rpx);
+    left: calc(50% - 300rpx);
+    background: #232323;
+    width: 600rpx;
+    height: 360rpx;
+    border-radius: 12rpx;
+    z-index: 51;
+  }
+  .dio_bg .box{
+    padding-top: 54rpx;    
+  }
+  .dio_bg .title{
+    font-size: 32rpx;
+    margin-bottom: 45rpx;
+    color: #CECECE;
+    text-align: center;
+    font-weight: 600;
+  }
+  .dio_bg .tips{
+    margin-bottom: 75rpx;
+    text-align: center;
+    color: #919191;
+    font-size: 32rpx;
+  }
+  .dio_bg .btm_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #313131;
+  }
+  .dio_bg .btm_btn button{
+    flex: 1;
+    font-size: 34rpx;
+    font-weight: 600;
+    background:  #232323;
+    height: 86rpx;
+    line-height: 86rpx;
+  }
+  .dio_bg .btm_btn button:nth-child(1){
+    color: #AAAAAA;
+    border-right: 1px solid #313131;
+    box-sizing: border-box;
+  }
+  .dio_bg .btm_btn button:nth-child(2){
+    color: #576B95;
+  }
+  
+  button::after{
+    border: none;
+  }

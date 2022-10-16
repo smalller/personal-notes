@@ -1,0 +1,54 @@
+/* 全局公共样式 */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+text,
+button,
+ul,
+li {
+	font-family: PingFangSC-Regular, PingFang SC;
+	color: #000;
+}
+
+
+.has-navBar {
+	padding-top: 88rpx;
+	box-sizing: border-box;
+}
+
+.file-upload {
+	border-radius: 16rpx;
+	background-color: #F7F7F7;
+	cursor: pointer;
+	position: relative;
+}
+
+.file-upload::after {
+	display: block;
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 140rpx;
+	height: 140rpx;
+	margin-top: -70rpx;
+	margin-left: -70rpx;
+	background: url(./static/images/add_file.png) no-repeat;
+	background-size: 100%;
+}
+
+input {
+	border-radius: 16rpx;
+	box-sizing: border-box;
+	font-size: 32rpx;
+}
+
+button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "axios": "^0.26.0",
+    "dayjs": "^1.11.1",
+    "pinyin-pro": "^3.8.0"
+  },
+  "dependencies": {
+    "eslint": "^8.10.0",
+    "qs": "^6.10.3"
+  }
+}

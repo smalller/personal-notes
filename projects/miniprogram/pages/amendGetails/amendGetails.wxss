@@ -1,0 +1,154 @@
+page{
+  background: #161823;
+}
+.amendGetails{
+  padding-bottom: 200rpx;
+}
+.hOne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx ;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  /* line-height: 88rpx;
+  height: 88rpx; */
+  margin-bottom: 56rpx;
+  position: relative;
+}
+.mg{
+  margin: 90rpx 0 56rpx 0;
+}
+.btns{
+  /* flex: .8; */
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.btns::after{
+  content: '';
+  width: 180rpx;
+}
+.inp{
+  height: 88rpx;
+  background: #262833;
+  border-radius: 4rpx;
+  padding-left: 32rpx;
+  color: #FFFFFF;
+}
+.io{
+  padding-right: 50rpx;
+}
+.pos{
+  position: relative;
+  flex: 1;
+}
+.pos text{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.peoNum{
+  /* margin-right: 20rpx; */
+  /* flex: .2; */
+  width: 150rpx;
+}
+.seat{
+  margin-bottom: 110rpx;
+}
+.hOne .peoNum image {
+  width: 56rpx;
+  height: 56rpx;
+  vertical-align: middle;
+  margin-right: 24rpx;
+}
+
+.hOne .peoNum text {
+  color: #FFFFFF;
+  font-size: 28rpx;
+}
+.not{
+  color: #ffffff;
+}
+.yes{
+  color: #FACE15;
+}
+.forNeeds{
+  width: 180rpx;
+  margin-bottom: 10rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #262833;
+  color: #ffffff;
+  font-size: 26rpx;
+  border-radius: 4rpx;
+  text-align: center;
+}
+
+.hOne .forNeeds image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 8rpx;
+}
+
+.fuText {
+  height: 200rpx;
+  padding-top: 24rpx;
+}
+
+.fuText textarea {
+  border-radius: 8rpx;
+  background: #262833;
+  margin-top: 24rpx;
+  height: 220rpx;
+  width: 710rpx;
+  margin: 0 auto;
+  padding: 24rpx;
+  box-sizing: border-box;
+  color: #7B7E93;
+  font-size: 28rpx;
+}
+
+.top image {
+  width: 80rpx;
+  height: 90rpx;
+}
+.top{
+  font-size: 26rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #C5C6CB;
+  margin: 48rpx 44rpx 20rpx 44rpx;
+}
+
+.bottom {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #7B7E93;
+  line-height: 40rpx;
+  /* text-align: center; */
+  /* width: 76%; */
+  margin: 0 44rpx;
+}
+.confirm{
+  width: 686rpx;
+  height: 88rpx;
+  margin: 272rpx auto 0; 
+}
+.confirm image{
+  width: 100%;
+  height: 100%;
+}
+.btn_tel{
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.btn_tel[plane]{
+  border: none;
+  border-radius: 0;
+}

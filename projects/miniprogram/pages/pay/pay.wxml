@@ -1,0 +1,499 @@
+
+<view class="order_detail">
+    <view style="background:#1A1C29;height: {{(mobile.top+mobile.height+5)}}px;"></view>
+    <view class="custom_header" style="top: 0;padding-top:{{(mobile.top+2)}}px;height:{{mobile.height+3}}px;line-height:{{mobile.height+3}}px">
+        <view><icon bindtap="backIcon" class="iconfont icon-left back_left"></icon></view>
+        <view>{{pageTitle}}</view>
+        <view></view>
+    </view>
+    <!-- <view class="map" wx:if="{{payState == 0}}">
+        <map 
+            id="map" 
+            longitude="{{markers[0].longitude}}" 
+            latitude="{{markers[0].latitude}}" 
+            scale="13" 
+            bindcontroltap="controltap" 
+            markers="{{markers}}" 
+            bindmarkertap="markertap" 
+            polyline="{{polyline}}" 
+            bindregionchange="regionchange"
+            show-location='true'
+            style="width: 100%; height: 400rpx;">
+        </map>
+    </view> -->
+    <!-- <view class="share">
+        <button open-type="share" class='iconfont icon-fenxiang'></button>
+    </view> -->
+    <view wx:if="{{payState != 0}}" class="state_content">
+        <view class="state_box" >
+            <view class="save_wine" wx:if="{{orderInfo.isApplyWine == 1}}" bindtap="saveWine">
+                <image src="../../icon/save_wine.png"></image>
+                <view>转为存酒</view>
+            </view>
+            <view class="save_wine" wx:if="{{orderInfo.isApplyWine == 2}}">
+                <image src="../../icon/save_wine.png"></image>
+                <view>已存酒</view>
+            </view>
+
+            <block wx:if="{{orderInfo.orderStatus == 4}}">
+                <view>交易已关闭</view>
+                <view>{{orderInfo.closedReason}}</view>
+            </block>
+            <block wx:if="{{orderInfo.orderStatus == 3}}">
+                <view>交易已完成</view>
+                <view>{{orderInfo.closedReason}}</view>
+            </block>
+            <block wx:if="{{orderInfo.orderStatus != 3 && orderInfo.orderStatus != 4}}">
+                <block wx:if="{{payState == 2}}">
+                    <view>等待买家支付</view>
+                    <view wx:if="{{pay_timer}}">{{pay_timer}}</view>
+                </block>
+                <block wx:if="{{payState == 1 || payState == 3}}">
+                    <view wx:if="{{storeState == -1}}">等待商家接单</view>
+                    <view wx:if="{{storeState == 0 || storeState == 2 || storeState == 3 || storeState == 4 || storeState == 5}}">
+                        {{orderInfo.orderType == 2?'商家已叫号':'商家已接单'}}
+                        <text class="tip" wx:if="{{tips}}">（{{tips}}）</text>
+                    </view>
+                    <view wx:if="{{storeState == 1}}">商家已拒绝</view>
+                    <view wx:if="{{payState == 1 && waitIng}}">已等待 {{waitIng}}</view>
+
+                    <block wx:if="{{orderInfo.orderType!=2 && isKtv!=3}}">
+                        <view wx:if="{{payState == 3 && storeState != 3}}">{{reachTimeDown}}</view>
+                    </block>
+                    <block wx:if="{{orderInfo.orderType!=2}}">
+                        <view wx:if="{{storeState != 1 && storeState != -1}}">验证码<text class="code">{{orderInfo.smsCode}}</text><text class="tip">(到店后使用)</text> </view>
+                    </block>
+                </block>
+            </block>
+        </view>
+    </view>
+
+    <view class="store">
+        <view class="fx ">
+            <view class="st_img"><image wx:if="{{storeInfo.logo}}" src="{{addUrl+storeInfo.logo}}"></image></view>
+            <view class="rtext">
+                <view class="st_name ">
+                    <text class="over_one">{{storeInfo.name}}</text>
+                    <button wx:if="{{orderInfo.orderStatus == 1 || orderInfo.orderStatus == 5}}" open-type="share" class='iconfont icon-fenxiang share_btn'></button>
+                </view>
+                <view class="time">营业时间 {{storeInfo.startTime}}-{{storeInfo.endTime}}</view>
+                <!-- <view class="star">
+                    <view class="bottom star-wrap">
+                        <block wx:for="{{5}}" wx:key="this">
+                            <image src="../../icon/xing_1.png"></image>
+                        </block>
+                    </view>
+                    <view class="mask star-wrap" style="width: {{storeInfo.starWidth}}">
+                        <view style="width: 400rpx;">
+                            <block wx:for="{{5}}" wx:key="this" >
+                                <image src="../../icon/xing.png"></image>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+                <text class="star_num">{{storeInfo.score}}</text>
+                <text class="star_num">好评率 {{storeInfo.applauseRate}}%</text> -->
+            </view>
+        </view>
+        <!-- <view class="introduce">
+            {{storeInfo.goodsStoreSynopsis}}
+        </view> -->
+        <!-- <view class="time">营业时间 {{storeInfo.startTime}}-{{storeInfo.endTime}}</view> -->
+    </view>
+    <view class="list_info">
+        <view class="seat dash" wx:if="{{orderInfo.orderType == 0 || orderInfo.orderType == 1 || plOrder == 0}}">
+            <view class="tips">座位信息</view>
+            <view class="fx tp_l">
+                <view class="il">座位号</view>
+                <view wx:if="{{isKtv==3}}" class="ir">{{ktvInfo.roomTypeName}}</view>
+                <view wx:else class="ir">{{payInfo.seat.seatCode}}</view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">容纳人数</view>
+                <view wx:if="{{isKtv==3}}" class="ir">{{ktvInfo.capacity}}</view>
+                <view wx:else class="ir">{{payInfo.seat.numberOfPeople}}人</view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">保留时间</view>
+                <view wx:if="{{isKtv==3}}" class="ir">{{ktvTimeShowText}}</view>
+                <view wx:else class="ir"> 
+                    <block wx:if="{{payInfo.storeLocation==3}}">
+                        {{payInfo.seat.seatLatestReservationTime}}
+                    </block>
+                    <block wx:else>
+                        <text>最晚至</text> {{payInfo.seat.seatLatestReservationTime}}
+                    </block>
+                </view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">低消金额</view>
+                <view wx:if="{{isKtv==3}}" class="ir red">¥ {{miniTotal}}</view>
+                <view wx:else class="ir red">¥ {{miniTotal}}</view>
+            </view>
+        </view>
+        <!-- <view class="seat dash" wx:else>
+            <view class="tips">座位信息</view>
+            <view class="fx tp_l">
+                <view class="il">低消金额</view>
+                <view wx:if="{{isKtv==3}}" class="ir">¥ {{miniTotal}}</view>
+                <view wx:else class="ir">¥ {{miniTotal}}</view>
+            </view>
+        </view> -->
+
+        <view class="ctct_box dash">
+            <view class="contact">
+                <view bindtap='openMap'>
+                    <view class="fx pl_box">
+                        <text class="place_adr over_one">{{storeInfo.province}}{{storeInfo.city}}{{storeInfo.district}}{{storeInfo.trustAddress}}</text>
+                        <icon class="iconfont icon-weibiaoti34" ></icon>
+                    </view>
+                    <view class="adr_num"><text>距您{{storeInfo.distance}}</text></view>
+                </view>
+                <view class="rit_view">
+                    <image class="sj" bindtap="call" src="../../icon/call.png"></image>
+                </view>
+            </view>
+        </view>
+
+
+        <view class="listing dash">
+            <view class="tips" wx:if="{{cartList.length>0}}">酒水清单</view>
+            <view class="goods " wx:if="{{cartList.length>0}}">
+                <block wx:if="{{payState == 0}}">
+                    <block  wx:for="{{cartList}}" wx:key="index">
+                        <view class="fx glist" catchtap="goodsInfo" data-id="{{item}}">
+                            <view class="goods_img"><image mode="aspectFill" src="{{addUrl + item.listPicture}}"></image></view>
+                            <view class="gtext">
+                                <view class="gd_name">{{item.goodsName}}</view>
+                                <view class="fx">
+                                    <view class="ir" style="text-align:left">
+                                        <text class="new red">¥{{item.presentPrice}}</text>
+                                        <text class="old">¥{{item.originalPrice}}</text>
+                                    </view>
+                                    <view class="gil" style="text-align:right">x {{item.number}}</view>
+                                </view>
+                            </view>
+                        </view>   
+                    </block>   
+
+                    <view class="snacks dash" wx:if="{{snacksList.length>0}}">
+                        <view class="tips">赠品</view>
+                        <view class="fx tp_l" wx:for="{{snacksList}}" wx:key="index">
+                            <view class="il">{{item.name}}</view>
+                            <view class="ir">x {{item.num}}</view>
+                        </view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="glist" wx:for="{{cartList}}" wx:key="index">
+                        <view class="fx add" wx:if="{{cartList.length>=2}}">
+                            <view class="add_order">{{item.groupName}}</view>
+                            <view class="add_time" wx:if="{{item.createTime}}">{{item.createTime}}</view>
+                        </view>
+                        <block wx:for="{{item.goodsList}}" wx:for-index="oIdx" wx:key="oIdx" wx:for-item="child">
+                            <view class="fx" catchtap="goodsInfo" data-id="{{child}}" style="margin-bottom: 20rpx;">
+                                <view class="goods_img"><image mode="aspectFill" src="{{addUrl + child.goodsPicture}}"></image></view>
+                                <view class="gtext">
+                                    <view class="gd_name">{{child.goodsName}}</view>
+                                    <view class="fx">
+                                        <view class="ir" style="text-align:left">
+                                            <text class="new red">¥{{child.activityPrice}}</text>
+                                            <text class="old">¥{{child.originalPrice}}</text>
+                                        </view>
+                                        <view class="gil" style="text-align:right">x {{child.quantity}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="snacks dash" wx:if="{{snacksList.length>0}}">
+                        <view class="tips">赠品</view>
+                        <view class="fx tp_l" wx:for="{{snacksList}}" wx:key="index">
+                            <view class="il">{{item.name}}</view>
+                            <view class="ir">x {{item.num}}</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+
+            <view class="fx yhq"  wx:if="{{payState == 0 }}" bindtap="goCoupons">
+                <view class="yhq_l">
+                    <text class="">优惠券</text><image mode="widthFix" src="../../icon/yhq.png"></image>
+                </view>
+                <view class="yhq_r">
+                    <image class="go_look" src="../../icon/go_look.png"></image>
+                    <icon class="iconfont icon-weibiaoti34"></icon>
+                </view>
+            </view>
+            <view class="total">
+                <view class="fx tp_l" wx:if="{{cartList.length>0}}">
+                    <view class="il">特价优惠</view>
+                    <view class="ir red coa">¥ {{preferential}}</view>
+                </view> 
+
+                <view class="fx tp_l" wx:if="{{orderInfo.appDetails}}">
+                    <view class="il">平台优惠券</view>
+                    <view class="ir red coa cons">{{orderInfo.appDetails}}</view>
+                </view>
+                <view class="fx tp_l" wx:if="{{orderInfo.storeDetails}}">
+                    <view class="il">商家优惠券</view>
+                    <view class="ir red coa cons">{{orderInfo.storeDetails}}</view>
+                </view>
+
+                <block wx:if="{{cartList.length>0 && !orderInfo.appDetails && !orderInfo.storeDetails}}">
+                    <block wx:for="{{coupons}}" wx:key="index">
+                        <view class="fx tp_l" wx:if="{{item.source == 1}}">
+                            <view class="il">平台优惠券</view>
+                            <view class="ir red coa cons">{{item.details}}</view>
+                        </view>     
+                        <view class="fx tp_l" wx:if="{{item.source == 0}}">
+                            <view class="il">商家优惠券</view>
+                            <view class="ir red coa cons">{{item.details}}</view>
+                        </view> 
+                    </block>
+                </block>
+                <!-- <view class="fx tp_l" wx:if="{{coupons.length>0}}">
+                    <view class="il">优惠券优惠</view>
+                    <view class="ir red">
+                        <view class="cop red" wx:for="{{coupons}}" wx:key="index">{{item.details}}</view>
+                    </view>
+                </view>    -->
+                <view class="fx tp_l">
+                    <view class="il">总计</view>
+                    <view class="ir red coa">¥ {{total}}</view>
+                </view>
+            </view>
+        </view>
+
+        <!-- <view class="snacks dash" wx:if="{{snacksList.length>0}}">
+            <view class="tips">赠品</view>
+            <view class="fx tp_l" wx:for="{{snacksList}}" wx:key="index">
+                <view class="il">{{item.name}}</view>
+                <view class="ir">x {{item.num}}</view>
+            </view>
+        </view> -->
+
+        <view class="userinfo dash">
+            <view class="tips">客户信息</view>
+            <view class="fx tp_l">
+                <view class="il">预订用户</view>
+                <view class="ir">
+                    <input class="ipt" placeholder-class="phcolor" disabled="{{payState==0?false:true}}" model:value="{{username}}" type="text" placeholder="点击填写" />
+                </view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">预订手机</view>
+                <view class="ir">
+                    <input class="ipt" placeholder-class="phcolor" disabled="{{payState==0?false:true}}" model:value="{{tel}}" type="number" placeholder="点击填写" />
+                </view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">备注信息</view>
+                <view class="ir">
+                    <block wx:if="{{payState == 0}}">
+                        <input placeholder-class="phcolor" disabled="{{payState==0?false:true}}" maxlength="60" model:value="{{remake}}" class="textarea" auto-height placeholder="点击填写" />
+                    </block>
+                    <block wx:else>
+                        <view>{{remake}}</view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo dash" wx:if="{{payState != 0}}">
+            <view class="tips">订单信息</view>
+            <view class="fx tp_l">
+                <view class="il">订单编号</view>
+                <view class="ir">{{orderInfo.orderNo}} <text class="copy" bindtap="copy">复制</text></view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">订单类型</view>
+                <view class="ir">{{orderInfo.typeText}}</view>
+            </view>
+            <view class="fx tp_l" wx:if="{{orderInfo.occupySeatTime>0}}">
+                <view class="il">占座时间</view>
+                <view class="ir">{{orderInfo.occupySeatTime+' 分钟'}}</view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">创建时间</view>
+                <view class="ir">{{orderInfo.createTime || ''}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="btm_btn_two" wx:if="{{payState == 0}}">
+        <view class="fx btm_box">
+            <view class="fx1">
+                <view>¥<text>{{total}}</text></view>
+                <view class="old_total">原价{{oldTotal}}</view>
+            </view>
+            <view class="fx2" bindtap="goCart">{{cartList.length>0?'继续选购':'选取酒水'}}</view>
+
+            <view class="fx3" wx:if="{{hasPhone}}" bindtap="createOrder">立即支付</view>
+
+            <view class="fx3" wx:if="{{!hasPhone}}">
+                <button class="btn_pay" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">立即支付</button>
+            </view>    
+        </view>
+    </view>
+
+    <view class="btm_btn" wx:if="{{payState != 0}}">
+        <block wx:if="{{orderInfo.orderStatus == 3 || orderInfo.orderStatus == 4}}">
+            <view class="yellow" bindtap="popup" data-type="1">删除订单</view>    
+        </block>
+
+        <block wx:else>
+            <block wx:if="{{payState == 1 && storeState == -1}}">
+                <view wx:if="{{orderInfo.orderType != 2}}" class="yellow" bindtap="popup" data-type="2">取消订单</view>
+                <view class="powder" bindtap="reminder">催单</view>
+            </block>
+            <block wx:if="{{payState == 2}}">
+                <view class="yellow" bindtap="popup" data-type="2">取消订单</view>
+                <view wx:if="{{!timeOut}}" class="powder" bindtap="createOrder">继续支付</view>
+            </block>
+            <block wx:if="{{payState == 3 && storeState == 0}}">
+                <view class="yellow" bindtap="popup" data-type="2">取消订单</view>
+                <!-- <view class="powder" bindtap="addTo">追加订单</view> -->
+                <view wx:if="{{orderInfo.haveStationStatus==0}}" class="powder" bindtap="hold">占座</view>
+                <view wx:if="{{orderInfo.haveStationStatus==1}}" bindtap="lookOccupyseat" class="powder">已占座</view>
+            </block>
+            
+            <block wx:if="{{storeState == 3}}">
+                <view class="powder" bindtap="addTo">追加订单</view>    
+            </block>
+            <block wx:if="{{storeState == 1 || storeState == 2 || storeState == 4 || storeState == 5}}">
+                <view wx:if="{{payState == 3 }}" class="yellow" bindtap="popup" data-type="1">删除订单</view>    
+            </block>
+        </block>
+    </view>
+
+    <view class="mask_bg" hidden="{{pay}}" bindtap="createOrder"></view>
+    <view class="pay_box" hidden="{{pay}}">
+        <view class="pay_top">
+            <view class="total">¥<text>{{total}}</text></view>
+            <view class="total_txt">{{storeInfo.name}}</view>
+        <!-- <icon class="iconfont icon-iconset0143"></icon> -->
+        </view>
+        <view class="pay_type">请选择支付方式</view>
+        <view class="pay_list">
+            <!-- bindtap="weixin" data-type="1" -->
+            <view class="pli" bindtap="weixinBefore" data-type="1">
+                <view class="pil_l">
+                    <image class="pay_icon" mode="widthFix" src="../../icon/weixin.png"></image>
+                    <text class="type">微信支付</text>
+                </view>
+                <view class="pil_r">
+                    <image src="{{payment==1?'../../icon/select_y.png':'../../icon/select_n.png'}}"></image>
+                </view>
+            </view>
+            <!-- bindtap="jifen" data-type="2" -->
+            <view class="pli" bindtap="jifenBefore" data-type="2" wx:if="{{jifenInfo.haveVip || jifenInfo.vipPoint>0}}">
+                <view class="pil_l">
+                    <image class="pay_icon" mode="widthFix" src="../../icon/jifen.png"></image>
+                    <text class="type">积分支付</text>
+                </view>
+                <view class="pil_r">
+                    <image src="{{payment==2?'../../icon/select_y.png':'../../icon/select_n.png'}}"></image>
+                </view>
+            </view>
+        </view>
+
+        <view class="payment">
+            <view bindtap="selectAfter">立即支付</view>
+        </view>
+    </view>
+
+
+
+    <view class="mask_bg" hidden="{{!isShowSelType}}" bindtap="closeOrder"></view>
+    <view class="order-box booked-box-sel" hidden="{{!isShowSelType}}">
+        <view class="store-text">{{popup_txt}}</view>
+        <view class="store-btn">
+            <view class="conf" bindtap="closeOrder">取消</view>
+            <view class="canc" bindtap="confirmOrder">确认</view>
+        </view>
+    </view>
+
+    <!-- 查看占座状态 -->
+
+    <view class="mask_bg" wx:if="{{occupyseat}}" bindtap="lookOccupyseat"></view>
+    <view class="occupyseat" wx:if="{{occupyseat}}">
+        <view class="occu_title">占座信息</view>
+        <view class="occu_text one">已为您占座 <text class="o_time">{{orderInfo.occupySeatTime}}</text> 分钟 </view>
+        <view class="occu_text">剩余时间 <text>{{occupyseatTime}}</text></view>
+        <view class="occu-btn store-btn">
+            <view class="conf_occ" bindtap="lookOccupyseat">取消</view>
+            <view class="canc_occ" bindtap="hold">追加时间</view>
+        </view>
+    </view>
+
+
+    <view class="psw_bg" bindtap="closeBg" wx:if="{{showPsw}}"></view>
+    <view class="psw" wx:if="{{showPsw}}">
+        <view class="key_box">
+            <icon class="iconfont close icon-yiliaohangyedeICON-" bindtap="closeBg"></icon>
+            <view class="keyboard" >
+                <view class="inp">
+                    <text wx:for="{{passNum}}" wx:key="index">{{item}}</text>
+                </view>
+                <view class="tips_psw">请输入资金密码</view>
+                <view wx:if="{{errTip}}" class="err_tip">
+                    <text class="err_txt">密码错误</text>
+                    <text class="forget" bindtap="forget">忘记密码</text>
+                </view>
+            </view>
+            <view class="num_board" >
+              <view class="num_eng {{item.colorFlag?'bg':''}}" wx:for="{{num}}" wx:key="index" bindtap="bind_num" data-num="{{item.id}}"
+                data-index="{{index}}">{{item.id}}</view>
+                <icon class="iconfont icon-shanchu" bindtap="delate"></icon>
+            </view>
+        </view>
+    </view>
+
+    <!-- 积分支付 成功 失败提示 -->
+    <view class="mask_bg" wx:if="{{jifenState != 0}}" bindtap="closeIntegral"></view>
+    <view class="booked-box booked-box-sel" wx:if="{{jifenState != 0}}">
+        <view class="jifen-mian">
+            <image src="{{jifenState==1?'../../icon/jifen.png':'../../icon/jifen_not.png'}}   "></image>
+        </view>
+        <view class="store-text">{{jifenState==1?'积分支付成功':'当前账户积分余额不足'}}</view>
+        <view class="jifen-btn">
+            <block wx:if="{{jifenState == 1}}">
+                <button class="conf_1" bindtap="goStore">返回商铺</button>
+                <button class="canc_1" bindtap="goOrder">查看详情</button>
+            </block>
+            <block wx:if="{{jifenState == 2}}">
+                <button class="conf_1" bindtap="hiddenJifen">取消</button>
+                <button class="canc_1" bindtap="goBuyCard">前往充值</button>    
+            </block>
+        </view>
+    </view>
+
+
+    <view class="shade_bg" bindtap="closeDetail" hidden="{{!seeDetail}}"></view>
+    <view class="vertical_box" hidden="{{!seeDetail}}" catchtap="closeDetail">
+        <view class="box" hidden="{{!seeDetail}}">
+            <view class="tact">
+                <image mode="aspectFill" wx:if="{{detailsInfo.infoPicture}}" class="good_logo" src="{{addUrl + detailsInfo.infoPicture}}"></image>
+                <view class="hearder">{{detailsInfo.name}}</view>
+                <view class="hearder">
+                    <text class="new_price" wx:if="{{detailsInfo.presentPrice}}"> <text>¥</text>{{detailsInfo.presentPrice || ''}}</text>
+                    <text class="old_price" wx:if="{{detailsInfo.originalPrice}}">¥{{detailsInfo.originalPrice || ''}}</text>    
+                </view>
+            </view> 
+            <view class="introduce">{{detailsInfo.synopsis}}</view>
+            <view hidden="{{!detailsInfo.setMealGoodsList.length>0}}">
+                <view class="specifi">套餐</view>  
+                <view class="fx tains" >
+                    <view class="contains" wx:for="{{detailsInfo.setMealGoodsList}}" wx:for-index="k"  wx:for-item="val" wx:key="k">
+                        <view>{{val.goodsName}} x{{val.number}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="close1" catchtap="closeDetail">
+                <icon class="iconfont icon-guanbi1"></icon>
+            </view>
+        </view>
+    </view>
+
+    <selfModel data="{{childComponent}}" show="{{show}}" text="{{topText}}" bindconfirm="confirm" bindcancel="cancel"></selfModel>
+
+</view>

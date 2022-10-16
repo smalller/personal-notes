@@ -1,0 +1,83 @@
+<view class="homePage bg_color2">
+    <view class="top-bg">
+        <image mode="aspectFill" wx:if="{{details.rowNumberBanner}}" src="{{addUrl + details.rowNumberBanner}}"></image>
+    </view>
+    <view class="outlet-circle">
+        <image mode="aspectFill" wx:if="{{details.logo}}" src="{{addUrl + details.logo}}"></image>
+    </view>
+    <view class="middle-text">
+        <view class="one">{{details.name}}</view>
+        <view class="two">{{details.trustAddress}}</view>
+        <view class="three">
+            营业时间
+            <text>{{details.startTime}}</text>
+            ~
+            <text>{{details.endTime}}</text>
+        </view>
+        <block>
+            <view class="max_price">
+                <view class="top_price"> <text>￥</text>{{info.money}}</view>
+                <view class="four">当前抢座最高竞价</view>
+            </view>
+        </block>
+    </view>
+    <view class="botm-box">
+        <view>
+            <view class="middle-txt">
+                <text>{{lySize}}</text>桌
+            </view>
+            <view class="top-txt">
+                <text>当前排队等待</text>
+                <!-- <image src="../../icon/Fill1.png" bindtap="showDialogFn" data-txt='取号排队队列'></image> -->
+            </view>
+            <view class="btn-bg" bindtap="goRowNum" data-title="lineUp" wx:if="{{isLogin}}">
+                <image src="../../images/live-up.png"></image>
+            </view>
+            <view wx:if="{{!isLogin}}">
+                <button class="login_btn" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' data-type="1">
+                    <image src="../../images/live-up.png"></image>
+                </button>
+            </view>
+        </view>
+
+        <view>
+            <view class="middle-txt">
+                <text>{{vieSize}}</text>桌
+            </view>
+            <view class="top-txt">
+                <text>当前抢座等待</text>
+                <!-- <image src="../../icon/Fill1.png" bindtap="showDialogFn" data-txt='抢座队列'></image> -->
+            </view>
+            <view class="btn-bg" bindtap = "goSeat" data-title="getSeat" wx:if="{{isLogin}}">
+                <image src="../../images/nab-seat.png"></image>
+            </view>
+            <view wx:if="{{!isLogin}}">
+                <button class="login_btn" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' data-type="2">
+                    <image src="../../images/nab-seat.png"></image>
+                </button>
+            </view>
+        </view>
+    </view>
+
+    <!-- 遮罩层 -->
+    <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap="closeModa"></view>
+    <!-- 弹出层 -->
+    <view class="modalDlg" wx:if="{{showModal}}">
+        <view>当前为{{modalInfo.txt}}</view>
+        <view>
+            前方等待桌数
+            <text wx:if="{{modalInfo.txt === '取号排队队列'}}">{{lySize}}</text>
+            <text wx:else>{{vieSize}}</text>
+            桌
+        </view>
+        <view>
+            大约等待
+            <text wx:if="{{modalInfo.txt === '取号排队队列'}}">{{lyDuration}}</text>
+            <text wx:else>{{vieDuration}}</text>
+            小时
+        </view>
+    </view>
+
+
+    <selfModel data="{{childComponent}}" show="{{show}}" text="您已有一个未支付抢座订单" bindconfirm="confirm" bindcancel="cancel"></selfModel>
+</view>

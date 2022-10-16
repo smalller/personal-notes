@@ -1,0 +1,134 @@
+<view class="evaluation bg_color2">
+  <block wx:for="{{headerLabel}}" wx:key="index">
+    <view class="hearder {{active==index?'on':'off'}}" wx:if="{{index<num}}" bindtap="commentsLabel" data-data="{{item}}" data-index="{{index}}">
+      <text>{{item.labels}} ({{item.count}})</text>
+    </view>
+  </block>
+</view>
+<view class="icon">
+  <icon class="iconfont {{more?'icon-shang':'icon-below-line'}} " bindtap="labMore"></icon>
+</view>
+
+<block wx:for="{{comments}}" wx:key="index">
+  <view class="eva_list" >
+    <view class="selfEvaluation">
+      <view class="left">
+        <image src="{{addUrl+item.headPortrait}}"></image>
+      </view>
+      <view class="content">
+        <view class="middle">
+          <view class="top">
+            <text class="hidden_name over_one">{{item.userName}}</text>
+            <view class="level" wx:if="{{item.wealthLevel>0}}">
+              <image class="leaveLogo" src="{{item.leaveLogo}}"></image>
+              <text class="lvl">{{item.wealthLevel}}</text>
+            </view>
+          </view>
+          <view class="star">
+            <view class="bottom star-wrap">
+                <block wx:for="{{5}}" wx:key="this">
+                    <image src="../../../icon/xing_1.png"></image>
+                </block>
+            </view>
+            <view class="mask star-wrap" style="width: {{item.starWidth}}">
+                <view style="width: 400rpx;">
+                    <block wx:for="{{5}}" wx:key="this" >
+                        <image src="../../../icon/xing.png"></image>
+                    </block>
+                </view>
+            </view>
+          </view>
+        </view>
+        <view class="right">
+          <!-- <view class="top">{{item.createTime}}</view> -->
+          <view class="bottom" >
+            <block wx:if="{{isLogin}}">
+              <icon bindtap="isLike" data-index="{{index}}" data-data="{{item}}"  class="star_icon iconfont {{item.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}}"></icon>
+              <text class="xin_num">{{item.fabulous}}</text>
+            </block>
+            <block wx:if="{{!isLogin}}">
+              <button class="like_btn" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' data-type="1" data-index="{{index}}" data-data="{{item}}">
+                <icon data-index="{{index}}" data-data="{{item}}"  class="star_icon iconfont {{item.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}}"></icon>
+                <text class="xin_num">{{item.fabulous}}</text>
+              </button>
+            </block>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <view class="textContent">
+      <text class="{{flag?'allTexts':'oldTexts'}}">{{item.content}}</text>
+      <!-- <block>
+        <view class="allText" data-index="{{index}}" data-status="{{item.moreText}}" bindtap="allContent" hidden="{{item.moreText}}">全文</view>
+        <view class="allText" data-index="{{index}}" data-status="{{item.moreText}}" bindtap="allContent" hidden="{{!item.moreText}}">收起</view>
+      </block> -->
+    </view>
+    <view class="createTime">{{item.createTime}}</view>
+    <view class="ima" wx:if="{{item.appraisePictureList}}">
+      <image bindtap="showBigImg" mode="aspectFill" data-index="{{index}}" data-data="{{item}}" wx:for="{{item.appraisePictureList}}" wx:key="index" wx:for-item="picture" src="{{addUrl+picture}}"></image>
+    </view>
+    <block wx:for="{{item.commentAllDTOList}}" wx:for-index="oIdx" wx:key="index" wx:for-item="other">
+      <block wx:if="{{oIdx<item.childNum}}">
+        <!-- 其他回复 -->
+        <view class="otherMan"> 
+          <view class="left">
+            <image src="{{addUrl+other.userLogo}}"></image>
+          </view>
+          <view class="flexRight">
+            <view class="middle">
+              <view class="names">
+                <text class="over_one" style="margin-right: 12rpx;max-width: 280rpx;">{{other.userName}} </text>
+                <view class="level" wx:if="{{other.wealthLevel>0}}">
+                  <image class="leaveLogo" src="{{other.leaveLogo}}"></image>
+                  <text class="lvl">{{other.wealthLevel}}</text>
+                </view>
+              </view>
+              <view class="sayContent">{{other.comment}}</view>
+              <view class="oth_time"> {{other.createTime}}</view>
+            </view>
+            <view class="right">
+              <block wx:if="{{isLogin}}">
+                <icon bindtap="isLikeChild" data-index="{{oIdx}}" data-pidx="{{index}}" data-parent="{{item}}" data-data="{{other}}"  class="star_icon iconfont {{other.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}}"></icon>
+                <view class="xin_num">{{other.fabulous}}</view>
+              </block>
+              <block wx:if="{{!isLogin}}">
+                <button class="like_btn_other" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' data-type="2" data-index="{{oIdx}}" data-pidx="{{index}}" data-parent="{{item}}" data-data="{{other}}">
+                  <icon  data-index="{{oIdx}}" data-pidx="{{index}}" data-parent="{{item}}" data-data="{{other}}"  class="star_icon iconfont {{other.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}}"></icon>
+                  <view class="xin_num">{{other.fabulous}}</view>
+                </button>
+              </block>
+              
+
+            </view>
+
+            <!-- <view class="bottom">
+              <icon bindtap="isLikeChild" data-index="{{oIdx}}" data-pidx="{{index}}" data-parent="{{item}}" data-data="{{other}}"  class="star_icon iconfont {{other.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}}"></icon>
+              <view class="xin_num">{{other.fabulous}}</view>
+            </view> -->
+          </view>
+        </view>
+      </block>
+    </block>
+
+    <block wx:if="{{item.commentAllDTOList.length>3}}">
+      <text class="moreSay" data-data="{{item}}" data-index="{{index}}" data-status="{{item.more}}" bindtap="repay" hidden="{{item.more}}">展开更多回复</text>
+      <text class="moreSay" data-data="{{item}}" data-index="{{index}}" data-status="{{item.more}}" bindtap="repay" hidden="{{!item.more}}">收起回复</text>
+    </block>
+  </view>
+</block>
+
+<!-- 评论图片 查看大图 -->
+<view class="big_img_box" wx:if="{{lookBigImg}}"></view>
+<view class="big_img" wx:if="{{lookBigImg}}">
+  <icon  class="iconfont icon-yiliaohangyedeICON-" bindtap="toggleBigImg"></icon>
+  <swiper indicator-dots="{{indicatorDots}}" class="big_swiper" circular="true"
+      indicator-color="rgba(255, 255, 255, .5)" indicator-active-color="#000" autoplay="{{false}}"
+      duration="{{500}}" current="{{imgIndex}}">
+      <block wx:for="{{bigImg}}" wx:key="index">
+          <swiper-item class="swiper_item">
+              <image mode="widthFix" src="{{addUrl + item}}"></image>
+          </swiper-item>
+      </block>
+  </swiper>
+</view>

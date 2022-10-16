@@ -1,0 +1,98 @@
+.el-select-dropdown__item.selected {
+  color: #FF9900 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  position: relative;
+
+  &::before {
+    display: block;
+    font-family: "iconfont";
+    content: "\e68f";
+    position: absolute;
+    top: 0;
+    left: 10px;
+    line-height: 34px;
+    font-size: 12px;
+  }
+}
+
+.el-select-dropdown__item {
+  padding: 0 32px 0 33px !important;
+}
+
+.el-select-dropdown__item:hover {
+  background-color: #EFEFEF !important;
+}
+
+.el-select-dropdown__item.hover {
+  background-color: #fff !important;
+}
+
+.el-select,
+.el-input__icon,
+.el-input__suffix {
+  line-height: 32px !important;
+
+  // .el-input__inner {
+  //   height: 32px !important;
+  // }
+}
+
+// 去掉可以多选的下拉框
+.el-input__inner:not(.el-select.multiple .el-input__inner) {
+  border-radius: 3px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  font-size: 14px !important;
+  color: #222;
+}
+
+// 如果是可以多选的下拉框
+.el-select.multiple .el-input__inner {
+  border-radius: 3px !important;
+  min-height: 32px !important;
+  // height: 32px !important;
+  line-height: 32px !important;
+  font-size: 14px !important;
+  color: #222;
+}
+
+.el-select.multiple .el-input__icon {
+  line-height: 40px !important;
+}
+
+.select-trigger input::-webkit-input-placeholder {
+  color: #222 !important;
+  font-size: 14px !important;
+}
+
+input[disabled]::-webkit-input-placeholder {
+  color: #d9d9d9 !important;
+}
+
+input[disabled]::-ms-input-placeholder {
+  color: #d9d9d9 !important;
+}
+
+.el-select .el-input__inner:focus,
+.el-input__inner:hover,
+.el-select .el-input.is-focus .el-input__inner {
+  border-color: #999 !important;
+}
+
+.el-select .el-input.is-disabled .el-input__inner {
+  pointer-events: none !important;
+}
+
+.el-input.is-disabled .el-input__inner {
+  background-color: #fff !important;
+  border-color: #D9D9D9 !important;
+}
+
+.el-select .el-input .el-select__caret {
+  color: #999 !important;
+}
+
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after {
+  content: '' !important;
+}

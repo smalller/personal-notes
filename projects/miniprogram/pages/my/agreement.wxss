@@ -1,0 +1,48 @@
+page{
+  background: #161823;
+}
+.hearder {
+  height: 96rpx;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.hearder .left {
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  color: #ffffff;
+  border-right:1px solid #f1f1f1 ;
+  height: 44rpx;
+  text-align: center;
+  line-height: 44rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+.hearder .right {
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  color: #ffffff;
+  height: 44rpx;
+  text-align: center;
+  line-height: 44rpx;
+  width: 100%;
+}
+.active{
+  font-weight: bold;
+}
+.content{
+  padding: 6rpx 24rpx 134rpx 24rpx;
+  font-size: 24rpx;
+  letter-spacing: 1px;
+  line-height: 48rpx;
+  background: #ffffff;
+}
+.empty{
+  display: inline-block;
+  width: 60rpx;
+}
+.content view:nth-child(1){
+  text-indent: 2rem;
+}

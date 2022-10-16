@@ -1,0 +1,50 @@
+.selectUserType{
+  background: #F9F9F9;
+  padding: 52px 15px 0;
+  box-sizing: border-box;
+  .selectTitle{
+    span{
+      color: #585858;
+      font-size: 18px;
+    }
+  }
+  .selectBox{
+    margin-top: 16px;
+    width: 100%;
+    .selectItem{
+      margin-top: 10px;
+      padding: 15px 18px;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content:  space-between;
+      border-radius: 8px;
+      background: #ffffff;
+      transition:  all 0.3s;
+      &:active{
+        background: #E1EBFF;
+      }
+      &:first-child{
+        margin-top: 0;
+      }
+      .itemLeft{
+        img{
+          width: 74px;
+          height: 74px;
+        }
+        span{
+          margin-left: 12px;
+          color: #333333;
+          font-size: 20px;
+        }
+      }
+      .itemRight{
+        img{
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}

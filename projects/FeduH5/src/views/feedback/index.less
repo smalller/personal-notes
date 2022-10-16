@@ -1,0 +1,161 @@
+.feedback{
+  width: 100vw;
+  height: 100vh;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  .headBtn{
+    color: #1C1C1C !important;
+    font-size: 16px !important;
+  }
+  .selectProblem{
+    width: 100%;
+    padding: 22px 16px;
+    box-sizing: border-box;
+    .label{
+      padding-bottom: 12px;
+      color: #1C1C1C;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .content{
+      display: grid;
+      grid-template-columns: 30% 30% 30% ;
+      grid-template-rows: 40px 40px;
+      grid-row-gap: 12px;
+      grid-column-gap: 5%;
+      box-sizing: border-box;
+      .typeItem{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #FFFFFF;
+        border: 1px solid #CBCBCB;
+        border-radius: 4px;
+        box-sizing: border-box;
+        color: #1C1C1C;
+        font-weight: 500;
+        font-size: 14px;
+        &.active{
+          border: 1px solid #FF9F3D;
+          background: #FFFAF5;
+          color: #FF9F3D;
+        }
+      }
+    }
+
+  }
+  .problemInfo{
+    margin-top: 4px;
+    padding: 0 16px;
+    .label{
+      padding-bottom: 12px;
+      color: #1C1C1C;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .content{
+      width: 100%;
+      height: 100px;
+      textarea{
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        color: #1C1C1C;
+        border: none;
+        &::placeholder{
+
+          font-size: 14px;
+          font-weight: 400;
+          color: #CCCCCC;
+        }
+      }
+    }
+  }
+  .imgBox{
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 80px 80px 80px 80px ;
+    grid-template-rows: auto;
+    grid-row-gap: 12px;
+    grid-column-gap: 6px;
+    box-sizing: border-box;
+    >div {
+      width: 80px;
+      height: 80px;
+    }
+    .uploadBtn{
+      background: #EEEEF0;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        width: 18px;
+        height: 18px;
+      }
+    }
+    .imgItem{
+      position: relative;
+      border-radius: 6px;
+      background: #EEEEF0;
+      overflow: hidden;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+      .showDetailBtn{
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-radius: 0px 6px 0px 6px;
+        background: rgba(0,0,0,0.5);
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #FFFFFF;
+      }
+    }
+  }
+  .contentData{
+    flex: 1;
+    //overflow-y: auto;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+  }
+  .btnBox{
+    //height: 60px;
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    border-top: 1px solid #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    .btn{
+      width: 280px;
+      height: 46px;
+      background: #FFAA53;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      &:active{
+        background: #f69837;
+      }
+    }
+  }
+
+
+}
+.van-image-preview{
+  background: #000000;
+}

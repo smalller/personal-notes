@@ -1,0 +1,111 @@
+page{
+    height: 100%;
+}
+.main{
+    height: 100%;
+}
+.content{
+    /* overflow-y: scroll; */
+    /* height: 100%; */
+}
+.content::before{
+    content: '';
+    display: table;
+}
+.aty_bnr{
+    height: 308rpx;
+    padding: 0 24rpx 24rpx;
+    font-size: 0;
+}
+.aty_bnr image{
+    border-radius: 10rpx;
+    width: 100%;
+    height: 100%;
+}
+.aty_list .alst{
+    padding: 24rpx;
+    border-top: 1px solid #f7f7f7;
+    display: flex;
+}
+.aty_list .limg{
+    flex: .38;
+    font-size: 0;
+}
+.aty_list .limg image{
+    border-radius: 5px;
+    width: 240rpx;
+    height: 240rpx;
+}
+.aty_list .rtext{
+    flex: .62;
+}
+.rtext .atit{
+    font-size: 32rpx;
+    color: #000;
+    margin: 16rpx 0 24rpx 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    font-weight: 600;
+}
+.rtext .shop_name::after{
+    content: ' ';
+    height: 28rpx;
+    width: 4rpx;
+    background: #000;
+    display: inline-block;
+    margin: 0 10rpx;
+}
+.rtext .intro{
+    color: #999999;
+    font-size: 28rpx;
+    margin-bottom: 28rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical; 
+    -webkit-line-clamp:2; 
+}
+.rtext .lam{
+    font-size: 24rpx; 
+}
+.rtext .lab span{
+    padding: 4rpx 12rpx;
+    color: white;
+    background: #ffa5a5;
+    border-radius: 10rpx;
+    margin-right: 4rpx;
+    margin-bottom: 4rpx;
+}
+.rtext .lab{
+    flex: .65;
+    display: flex;
+    flex-wrap: wrap;
+}
+.rtext .go{
+    color: #FFC100;
+    /* margin: auto;
+    margin-right: 0; */
+    flex: .35;
+    text-align: right;
+    font-weight: 600;
+    /* min-width: 5.5rem; */
+}
+.rtext .go i{
+    /* margin-left: .3rem; */
+}
+.load_more{
+    color: #000;
+    font-size:24rpx;
+    font-weight: bold;
+    text-align: center;
+}
+.not_m,.more{
+    height: 200rpx;
+    line-height: 200rpx;
+}
+.not_m{
+    display: none;
+}

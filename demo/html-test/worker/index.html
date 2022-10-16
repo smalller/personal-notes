@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web worker</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        // console.log('执行开始')
+        // console.time("执行用时")
+        // let arr = []
+        // for (let i = 0; i < 100000000; i++) {
+        //     arr.push(i)
+        // }
+        // console.timeEnd("执行用时")
+        // console.log('该我执行了')
+
+
+        console.log('执行开始')
+        console.time("执行用时")
+
+        // 兼容性判断
+        if (!Worker) throw new Error('当前浏览器不支持多线程')
+
+        // 创建子线程
+        const childThread = new Worker('child.js')
+
+        // 向子线程发送数据
+        childThread.postMessage(10000000)
+
+        // 监听子线程信息
+        childThread.addEventListener('message', (e) => {
+            console.log('子线程回传的数据: ', e.data)
+            childThread.terminate()
+        })
+
+        console.timeEnd("执行用时")
+        console.log('该我执行了');
+    </script>
+</body>
+
+</html>

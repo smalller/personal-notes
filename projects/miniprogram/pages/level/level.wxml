@@ -1,0 +1,4 @@
+<view>
+    <!-- #wechat_redirect解决ios无响应 -->
+    <web-view src="{{url}}#wechat_redirect"></web-view>
+</view>

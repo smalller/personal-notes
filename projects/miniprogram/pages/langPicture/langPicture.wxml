@@ -1,0 +1,3 @@
+<view>
+    <image mode="widthFix" src="{{addUrl + url}}"></image>
+</view>

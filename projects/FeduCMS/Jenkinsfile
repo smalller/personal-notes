@@ -1,0 +1,247 @@
+podTemplate(yaml: """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: kubectl
+    image: 172.16.0.107:2180/base/kubectl:latest
+    imagePullPolicy: IfNotPresent
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: kubectl
+  - name: node
+    image: 172.16.0.107:2180/base/node:12
+    imagePullPolicy: IfNotPresent
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: node
+    volumeMounts:
+    - name: repo-npm-cache
+      mountPath: /root/npm
+  - name: docker
+    image: 172.16.0.107:2180/base/docker:latest
+    imagePullPolicy: IfNotPresent
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: docker
+    volumeMounts:
+    - name: repo-docker-sock
+      mountPath: /var/run/docker.sock
+  volumes:
+  - name: repo-npm-cache
+    persistentVolumeClaim:
+      claimName: devnpm
+  - name: repo-docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+"""
+) {
+    def RUN_ENV = 'yjbdev'
+    def PROJECT_NAME = env.BRANCH_NAME
+    def PROJECT_SVC = PROJECT_NAME
+    def PROJECT_SVC_NP = PROJECT_NAME + '-np'
+
+    def PROJECT_CONTEXT = 'yjbcms'
+    def PROJECT_GIT = 'https://codeup.aliyun.com/5edde0a5d1d1abe63b55f4fa/FeduYJB/front-end/FeduCMS.git'
+    def PROJECT_BRANCH = 'develop'
+    def PROJECT_PORT = 80
+    def PROJECT_PORT_EXT = 30198
+    def PROJECT_ING = PROJECT_NAME + '-ing'
+
+    def BUILD_USER, DOCKER_IMAGE
+
+    node(POD_LABEL) {
+        properties(
+            [
+                pipelineTriggers([cron('TZ=Asia/Shanghai\nH 3 * * *')]),
+            ]
+        )
+        stage('Run shell') {
+            wrap([$class: 'BuildUser']) {
+                BUILD_USER = "${BUILD_USER}"
+                DOCKER_IMAGE = "172.16.0.107:2180/zdyjb/" + env.BRANCH_NAME + ':' + env.BUILD_ID
+            }
+            sh "echo ${DOCKER_IMAGE}"
+        }
+
+
+        stage('Get Npm project') {
+            git  branch: 'develop', credentialsId: 'test-jenkins', url: PROJECT_GIT
+            container('node') {
+                stage('Build a Maven project') {
+                    sh 'npm config ls'
+                    sh 'npm config set registry https://registry.npm.taobao.org'
+                    sh 'npm install -g cnpm --registry=https://registry.npm.taobao.org'
+                    sh 'npm install -g node-gyp'
+                    sh '/root/npm/node_global_module/bin/cnpm install'
+                    sh '/root/npm/node_global_module/bin/cnpm run ctrdev'
+                    sh 'ls ./dist'
+                }
+            }
+        }
+
+        stage('Build image') {
+            container('docker') {
+                stage('Build a Maven project') {
+                    echo "构建Docker镜像"
+                    withCredentials([usernamePassword(credentialsId: 'harbor', passwordVariable: 'password', usernameVariable: 'username')]) {
+                        sh 'docker login -u $username -p $password 172.16.0.107:2180'
+                        sh "docker build -f dockerfile-dev -t ${DOCKER_IMAGE} ."
+                        sh "docker push ${DOCKER_IMAGE}"
+                    }
+                }
+            }
+        }
+
+        stage('deploy') {
+            container('kubectl') {
+                stage('deploy to kubernetes') {
+                    echo "构建Docker镜像"
+                    kubeconfig(credentialsId: 'zk8s', serverUrl: 'https://172.16.0.105:6443') {
+                        sh 'kubectl get pods -n jenkins'
+                        sh """
+mkdir -pv manifests
+cat >manifests/manifest.yaml<<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ${PROJECT_NAME}
+  name: ${PROJECT_NAME}
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: ${PROJECT_NAME}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ${PROJECT_NAME}
+    spec:
+      imagePullSecrets:
+        - name: harbor-secret
+      containers:
+        - env:
+          image: ${DOCKER_IMAGE}
+          imagePullPolicy: Always
+          name: ${PROJECT_NAME}
+          ports:
+            - containerPort: ${PROJECT_PORT}
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/localtime
+              name: volume-localtime
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - hostPath:
+            path: /etc/localtime
+            type: ''
+          name: volume-localtime
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${PROJECT_SVC}
+  namespace: ${RUN_ENV}
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: http
+    port: ${PROJECT_PORT}
+    protocol: TCP
+    targetPort: ${PROJECT_PORT}
+  selector:
+    app: ${PROJECT_NAME}
+  sessionAffinity: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${PROJECT_SVC_NP}
+  namespace: ${RUN_ENV}
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: ${PROJECT_PORT}
+    protocol: TCP
+    targetPort: ${PROJECT_PORT}
+    nodePort: ${PROJECT_PORT_EXT}
+  selector:
+    app: ${PROJECT_NAME}
+  sessionAffinity: None
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/service-weight: ""
+  generation: 2
+  name: ${PROJECT_ING}
+  namespace: ${RUN_ENV}
+spec:
+  rules:
+  - host: ${PROJECT_CONTEXT}.yjbit.zhidiansaas.com
+    http:
+      paths:
+      - backend:
+          serviceName: ${PROJECT_SVC}
+          servicePort: ${PROJECT_PORT}
+        path: /
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/service-weight: ""
+  generation: 2
+  name: yjbagent-ing
+  namespace: ${RUN_ENV}
+spec:
+  rules:
+  - host: yjbagent.yjbit.zhidiansaas.com
+    http:
+      paths:
+      - backend:
+          serviceName: ${PROJECT_SVC}
+          servicePort: ${PROJECT_PORT}
+        path: /
+---
+EOF
+cat manifests/manifest.yaml
+                        """
+                        sh 'kubectl -n yjbdev apply -f manifests/manifest.yaml'
+                    }
+                }
+            }
+        }
+    }
+}

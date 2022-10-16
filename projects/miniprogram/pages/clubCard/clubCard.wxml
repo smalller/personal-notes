@@ -1,0 +1,37 @@
+<!--pages/clubCard/clubCard.wxml-->
+<view class="clubCard bg_color1">
+  <view class="hearder bg_color2">
+    <view class="right">
+      <text class="{{flag==0?'active':''}}" data-type="2" bindtap="check">购买会员卡</text>
+    </view>
+    <view class="left">
+      <text class="{{flag==1?'active':''}}" data-type="1" bindtap="check">我的会员卡</text>
+    </view>
+  </view>
+
+  <view class="hgroup_card bg_color1" >
+    <view class="card_li" wx:for="{{cards}}" wx:key="index" bindtap="toView" data-value="{{item}}">
+      <!-- <view class="bg"></view> -->
+      <view class="bg2">
+        <image mode="center" class="vip_bg" src="{{addUrl+item.listPicture}}"></image>
+      </view>
+
+      <view class="card_content fx">
+        <view class="cll">
+          <image class="store_logo" src="{{addUrl+item.logo}}"></image>
+        </view>
+        <view class="clr">
+          <view class="card_name over_one">{{item.storeName}}{{item.name}}</view>
+          <view class="card_main fx">
+            <view class="fl" hidden="{{flag != 1}}">
+              <view class="number">积分：{{item.havePoints}}</view>
+            </view>
+            <view class="fl" hidden="{{flag != 0}}">
+              <view class="number">去详情</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

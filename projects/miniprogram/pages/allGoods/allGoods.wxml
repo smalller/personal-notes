@@ -1,0 +1,357 @@
+<view class="all_shade">
+  <view class="allGoods">
+    <!-- <view style="background:#1A1C29;height: {{(mobile.top+mobile.height)}}px;"></view>
+    <view class="custom_header" style="top: 0;padding-top:{{(mobile.top+2)}}px;height:{{mobile.height}}px;line-height:{{mobile.height}}px">
+      <view><icon bindtap="closeDetail" class="iconfont icon-left back_left"></icon></view>
+      <view>{{storeName}}</view>
+      <view></view>
+    </view> -->
+    <view class="top_con">
+      <view class="head">
+        <view class="left">
+          <image mode="aspectFill" wx:if="{{store.logo}}" src="{{addUrl+store.logo}}"></image>
+        </view>
+        <view class="right">
+          <view class="top over_one">
+            {{store.name}}
+          </view>
+          <view class="bottom over_more">
+            {{store.synopsis}}
+          </view>
+        </view>
+      </view>
+      <!-- <view class="banner" wx:if="{{storePic.length>0}}">
+        <swiper indicator-dots="true" class="banner_img" circular="true"
+            indicator-color="rgba(255, 255, 255, .5)" indicator-active-color="#000" autoplay="true"
+            interval="2000" duration="500">
+            <block wx:for="{{storePic}}" wx:key="index">
+                <swiper-item>
+                  <image mode="aspectFill" src="{{addUrl+item.picName}}"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+      </view> -->
+    </view>
+
+    <view class="content {{fixed_top?'scroll_view':''}}">
+      <scroll-view scroll-y="true" class="list_left {{fixed_top?'scroll_view':''}}" style="height: 100%;">
+        <view  wx:for="{{goodsLists}}" wx:key="index" bindtap="check" data-index="{{index}}" data-type="{{item.type}}"
+          class="over_one {{item.type==inds?'active':''}}">
+          {{item.typeName}}
+        </view>
+      </scroll-view>
+      <scroll-view scroll-y="true" class="goods_right {{fixed_top?'scroll_view':''}}" style="height: 100%;">
+        <!-- <view class="hot_head"> -->
+          <!-- <image hidden="{{rightTop.type != 1}}" mode='widthFix' class="top_hot" src="../../icon/hot.png"></image> -->
+          <!-- <text>{{rightTop.typeName}}</text> -->
+        <!-- </view> -->
+        <view>
+          <block wx:for="{{goodsLists}}" wx:for-index="par_index" wx:key="par_index">
+            <block wx:for="{{item.goodsList}}" wx:for-index="index"  wx:for-item="val" wx:key="index">
+              <block wx:if="{{val.type == inds}}">
+                <view class="goods_content" bindtap="details" data-data="{{val}}">
+                  <view class="hot_father">
+                    <!-- <view wx:if="{{val.type==1 && index<3}}" class="top_three">TOP{{index+1}}</view> -->
+                    <!-- <image wx:if="{{val.isFold==1}}" src=""></image> -->
+                    <image  wx:if="{{val.listPicture}}" mode="aspectFill" src="{{addUrl+val.listPicture}}" lazy-load ></image>
+                    <text class="hot_son" hidden="{{hotFlag}}">TOP{{val.id}}</text>
+                    <image wx:if="{{val.necessaryNum>0}}" class="must" src="../../icon/must.png"></image>
+                  </view>
+                  <view class="right_content">
+                    <view class="title">{{val.name}}</view>
+                    <view class="goods_num over_one">{{val.synopsis}}</view>
+                    <view wx:if="{{val.type==1}}" class="old_pic">￥{{val.originalPrice}}</view>
+                    <view wx:else class="old_pic"></view>
+                    <view class="goods_pices">
+                        <text class="new_pic">￥{{val.type==1?val.statisticalPrice:val.originalPrice}}</text>
+                        <!-- <text class="old_pic" >{{val.originalPrice}}</text> -->
+                        <image class="upup" wx:if="{{val.isFold==1}}" src="../../icon/upup.png"></image>
+                      <!-- <block wx:else>
+                        <text class="new_pic">￥{{val.originalPrice}}</text>
+                      </block> -->
+                      <!-- <text class="new_pic">{{val.presentPrice}}</text>
+                      <text class="old_pic" >{{val.originalPrice}}</text> -->
+                      <!-- 直接添加 -->
+                      <view class="pic_add {{val.flag?'pic_add1':''}}" wx:if="{{val.skuList.length<=1}}">
+                        <block wx:if="{{val.skuList[0].sellOut == 0}}">
+                          <image class="iconfont"  catchtap="addOrLose" wx:if="{{val.skuList[0].num>0}}" data-type="{{-1}}" data-value="{{val}}" src="../../icon/minus_num.png"></image>
+                          <text wx:if="{{val.skuList[0].num>0}}">{{val.skuList[0].num}}</text>
+                          <image class="iconfont" catchtap="addOrLose" data-type="{{1}}" data-value="{{val}}" src="../../icon/add_num.png"></image>
+                        </block>
+
+                        <block wx:if="{{val.skuList[0].sellOut == 1}}">
+                          <view><image catchtap="sellOut" class="sell_out" src="../../icon/sell_out.png"></image></view>
+                        </block>
+                      </view>
+                      <!-- 选规格 -->
+                      <view class="snack_specification" wx:else catchtap="shade" data-data="{{val}}" data-index="{{index}}">
+                        选规格
+                        <text hidden="{{val.number<=0}}" class="guige_num">{{val.number}}</text>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </block>
+            </block>
+          </block>
+        </view>
+        <!-- </scroll-view> -->
+      </scroll-view>
+    </view>
+
+    <view class="null_pre"></view>
+
+    <view class="discounts" hidden="{{showCar}}" style="bottom:100rpx">
+      <view class="dtxt">折扣已减{{oldTotal}}元</view>
+    </view>
+    <view class="footer">
+      <view class="icon" bindtap="showCar">
+        <image src="../../icon/cars.png" ></image>
+        <text class="bor_radios">{{carNum}}</text>
+      </view>
+      <view class="all_pic">
+        <view>
+          <text class="dis">{{store.discounts/10}}折</text>
+          <text class="text">总金额：</text>
+          <text class="two_pic">￥{{total}}</text>
+        </view>
+        <view class="old_pri">
+          <text>原价：</text>
+          <text>￥{{oldPrice}}</text>
+        </view>
+      </view>
+      <view class="go_settle" bindtap="goOrderdetail">
+        结 算
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 遮罩层 -->
+<view class="shade_bg" bindtap="shadeClose" hidden="{{shade_dis}}"></view>
+<view class="vertical_box" hidden="{{shade_dis}}">
+  <view class="box" hidden="{{shade_dis}}">
+    <view class="tact">
+      <image mode="aspectFill" wx:if="{{specifications.listPicture}}" class="good_logo" src="{{addUrl + specifications.listPicture}}"></image>
+      <view class="hearder">{{specifications.name}}</view>
+    </view> 
+    <view class="specifi">规格</view>  
+    <view class="specifi_box">
+      <view class="to_specification">
+        <block wx:for="{{specifications.skuList}}" wx:key="index">
+          <block wx:if="{{item.sellOut == 1}}">
+            <text catchtap="specifiSellOut" class="spec_sellout over_one">{{item.specName}}</text>
+          </block>
+          <block wx:if="{{item.sellOut == 0}}">
+            <text data-type="{{item}}" data-index="{{index}}" catchtap="big_small" class="{{spec_index == item.skuId?'spec_on':'spec_off'}} over_one">{{item.specName}}</text>
+          </block>
+        </block>
+      </view>
+    </view>
+    <view class="btm_content">
+      <view class="fx btm_btn">
+        <view>
+          <text class="new_price" wx:if="{{spec_tips.presentPrice}}"> <text>¥</text>{{spec_tips.presentPrice || ''}}</text>
+          <text class="old_price" wx:if="{{spec_tips.originalPrice}}">¥{{spec_tips.originalPrice || ''}}</text>    
+        </view>
+        <view wx:if="{{spec_tips.num<=0}}" class="addcare" catchtap="addSpecCar" data-value="{{spec_tips}}">+加入购物车</view>
+        
+        <view  wx:if="{{spec_tips.num>0}}" class="pic_add">
+          <image class="iconfont"  bindtap="addOrLose" hidden="{{spec_tips.num<=0}}" data-type="{{-1}}" data-value="{{specifications}}" src="../../icon/minus_num.png"></image>
+          <text hidden="{{spec_tips.num<=0}}">{{spec_tips.num}}</text>
+          <image class="iconfont"  bindtap="addOrLose" data-type="{{1}}" data-value="{{specifications}}" data-car="true" src="../../icon/add_num.png"></image>  
+        </view>
+      </view>
+    </view>
+    <view class="close1" catchtap="shadeClose">
+      <icon class="iconfont icon-guanbi1"></icon>
+    </view>
+
+  </view>
+</view>
+
+
+<view class="car_bg" hidden="{{!showCar}}" bindtap="closeCar"></view>
+<view class="car_box" hidden="{{!showCar}}">
+  <view class="">
+    <view class="car_discounts">
+      <view class="dtxt">折扣已减{{oldTotal}}元</view>
+    </view>
+    <view class="car_top">
+      <icon class="iconfont icon-cangpeitubiao_shanchu"></icon><text bindtap="claerCart">清空购物车</text>
+    </view>        
+    <view class="car_list">
+      <view class="goods_content car_goods" wx:for="{{carListNow}}" wx:key="index">
+        <view class="hot_father car_hot_father">
+          <image mode="aspectFill" wx:if="{{item.listPicture}}" src="{{addUrl+item.listPicture}}"></image>
+          <text class="hot_son" hidden="{{hotFlag}}">TOP{{item.id}}</text>
+          <image wx:if="{{item.skuList[0].necessaryNum>0}}" class="must" src="../../icon/must.png"></image>
+        </view>
+        <view class="right_content car_right_content">
+          <view class="title">{{item.name}}</view>
+          <view class="goods_num car_js over_more">{{item.synopsis}}</view>
+          <view class="goods_pices car_last">
+            <text class="new_pic">￥{{item.aloneNowPrice}}</text>
+            <text class="old_pic">￥{{item.aloneOldPrice}}</text>
+            <view class="pic_add {{item.flag?'pic_add1':''}}">
+              <image class="iconfont"  bindtap="addOrLose" hidden="{{item.skuList[0].num<=0}}" data-type="{{-1}}" data-value="{{item}}" src="../../icon/minus_num.png"></image>
+              <text hidden="{{item.skuList[0].num<=0}}">{{item.skuList[0].num}}</text>
+              <image class="iconfont"  bindtap="addOrLose" data-type="{{1}}" data-value="{{item}}" data-car="true" src="../../icon/add_num.png"></image>  
+            </view>
+          </view>
+        </view>
+      </view>
+      <block wx:if="{{carListNow.length<=0}}">
+        <view class="empty">购物车为空~</view>
+      </block>
+    </view>         
+  </view>
+</view>
+
+<!-- 抢座状态 -->
+<view class="mask_bg" hidden="{{pay}}" bindtap="createOrder"></view>
+<view class="pay_box" hidden="{{pay}}">
+    <view class="pay_top">
+      <view class="total">¥<text>{{total}}</text></view>
+            <view class="total_txt">{{store.name}}</view>
+    </view>
+    <view class="pay_type">请选择支付方式</view>
+    <view class="pay_list">
+        <view class="pli" bindtap="weixinBefore" data-type="1">
+            <view class="pil_l">
+              <image class="pay_icon" mode="widthFix" src="../../icon/weixin.png"></image>
+              <text class="type">微信支付</text>
+            </view>
+            <view class="pil_r">
+              <image src="{{payment==1?'../../icon/select_y.png':'../../icon/select_n.png'}}"></image>
+            </view>
+        </view>
+        <view class="pli" bindtap="jifenBefore" data-type="2" wx:if="{{jifenInfo.haveVip}}">
+            <view class="pil_l">
+              <image class="pay_icon" mode="widthFix" src="../../icon/jifen.png"></image>
+              <text class="type">积分支付</text>
+            </view>
+            <view class="pil_r">
+              <image src="{{payment==2?'../../icon/select_y.png':'../../icon/select_n.png'}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="payment">
+      <view bindtap="selectAfter">立即支付</view>
+    </view>
+</view>
+
+<!-- 详情 -->
+
+<view class="shade_bg" bindtap="closeDetail" hidden="{{!seeDetail}}"></view>
+<view class="vertical_box" hidden="{{!seeDetail}}" catchtap="closeDetail">
+  <view class="box" hidden="{{!seeDetail}}">
+    <view class="tact">
+      <image mode="aspectFill" wx:if="{{detailsInfo.infoPicture}}" class="good_logo" src="{{addUrl + detailsInfo.infoPicture}}"></image>
+      <view class="hearder">{{detailsInfo.name}}</view>
+      <view class="hearder">
+        <text class="new_price" wx:if="{{detailsInfo.presentPrice}}"> <text>¥</text>{{detailsInfo.presentPrice || ''}}</text>
+        <text class="old_price" wx:if="{{detailsInfo.originalPrice}}">¥{{detailsInfo.originalPrice || ''}}</text>    
+      </view>
+    </view> 
+    <view class="introduce">{{detailsInfo.synopsis}}</view>
+    <view hidden="{{!detailsInfo.setMealGoodsList.length>0}}">
+      <view class="specifi">套餐</view>  
+      <view class="fx tains" >
+        <view class="contains" wx:for="{{detailsInfo.setMealGoodsList}}" wx:for-index="k"  wx:for-item="val" wx:key="k">
+          <view>{{val.goodsName}} x{{val.number}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="close1" catchtap="closeDetail">
+      <icon class="iconfont icon-guanbi1"></icon>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- <view class="goods_detail" wx:if="{{seeDetail}}">
+  <view class="good_info">
+    <view class="header">
+        <image mode="aspectFill" wx:if="{{detailsInfo.infoPicture}}" src="{{addUrl + detailsInfo.infoPicture}}"></image>
+          <icon style="top:{{(mobile.top)}}px" class="iconfont icon-left detail_left" bindtap="closeDetail"></icon>
+    </view>
+    <view class="main">
+      <view class="goods_name">{{detailsInfo.name}}</view>
+      <view class="fx">
+        <view class="price">
+          <text class="new">￥{{detailsInfo.presentPrice}}</text>
+          <text class="old">￥{{detailsInfo.originalPrice}}</text>
+        </view>
+        <view class="addNum">
+          <view class="pic_add {{val.flag?'pic_add1':''}}" wx:if="{{detailsInfo.skuList.length<=1}}">
+            <icon class="iconfont info_icon icon-jian1" catchtap="addOrLose" wx:if="{{detailsInfo.skuList[0].num>0}}" data-type="{{-1}}" data-value="{{detailsInfo}}"></icon>
+            <text wx:if="{{detailsInfo.skuList[0].num>0}}">{{detailsInfo.skuList[0].num}}</text>
+            <icon class="iconfont info_icon icon-jia1" catchtap="addOrLose" data-type="{{1}}" data-value="{{detailsInfo}}"></icon>
+          </view>
+          <view class="snack_specification" wx:else catchtap="shade" data-data="{{detailsInfo}}" data-index="{{index}}">
+            选规格
+            <text hidden="{{detailsInfo.number<=0}}" class="guige_num">{{detailsInfo.number}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="text">详情</view>
+      <view class="introduce">{{detailsInfo.synopsis}}</view>
+      <view class="text" hidden="{{!detailsInfo.setMealGoodsList.length>0}}">套餐</view>
+      <view class="fx tains" hidden="{{!detailsInfo.setMealGoodsList.length>0}}">
+        <view class="contains" wx:for="{{detailsInfo.setMealGoodsList}}" wx:for-index="k"  wx:for-item="val" wx:key="k">
+          <view>{{val.goodsName}} x{{val.number}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> -->
+
+
+
+<!-- 密码 -->
+<view class="psw_bg" bindtap="closeBg" wx:if="{{showPsw}}"></view>
+<view class="psw" wx:if="{{showPsw}}">
+    <view class="key_box">
+        <icon class="iconfont close icon-yiliaohangyedeICON-" bindtap="closeBg"></icon>
+        <view class="keyboard" >
+            <view class="inp">
+                <text wx:for="{{passNum}}" wx:key="index">{{item}}</text>
+            </view>
+            <view class="tips_psw">请输入资金密码</view>
+            <view wx:if="{{errTip}}" class="err_tip">
+                <text class="err_txt">密码错误</text>
+                <text class="forget" bindtap="forget">忘记密码</text>
+            </view>
+        </view>
+        <view class="num_board" >
+          <view class="num_eng {{item.colorFlag?'bg_btn':''}}" wx:for="{{numArr}}" wx:key="index" bindtap="bind_num" data-num="{{item.id}}"
+            data-index="{{index}}">{{item.id}}</view>
+            <icon class="iconfont icon-shanchu" bindtap="delate"></icon>
+        </view>
+    </view>
+</view>
+
+
+<!-- 积分支付 成功 失败提示 -->
+<view class="jifen_bg" wx:if="{{jifenState != 0}}" bindtap="closeIntegral"></view>
+<view class="booked-box booked-box-sel" wx:if="{{jifenState != 0}}">
+    <view class="jifen-mian">
+      <image src="{{jifenState==1?'../../icon/jifen.png':'../../icon/jifen_not.png'}}   "></image>
+    </view>
+    <view class="store-text">{{jifenState==1?'积分支付成功':'当前账户积分余额不足'}}</view>
+    <view class="store-btn">
+        <block wx:if="{{jifenState == 1}}">
+            <button class="conf" bindtap="goStore">返回商城</button>
+            <button class="canc" bindtap="goOrder">查看订单</button>
+        </block>
+        <block wx:if="{{jifenState == 2}}">
+            <button class="conf" bindtap="hiddenJifen">取消</button>
+            <button class="canc" bindtap="goBuyCard">前往充值</button>    
+        </block>
+    </view>
+</view>
+
+
+<selfModel data="{{childComponent}}" show="{{show}}" text="{{topText}}" bindconfirm="confirm" bindcancel="cancel"></selfModel>

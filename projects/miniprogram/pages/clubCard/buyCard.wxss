@@ -1,0 +1,193 @@
+page{
+    background: #0E0E11;
+}
+.content{
+    padding: 30rpx;
+}
+.card_li{
+    position: relative;
+    height: 246rpx;
+    width: 100%;
+    border-radius: 8rpx;
+    margin: 0 auto;
+    margin-bottom: 32rpx;
+}
+.hgroup_card .bg{
+    width: 100%;
+    height: 100%;
+    border-radius: 8rpx;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 2;
+}
+.bg2{
+    width: 100%;
+    height: 100%;
+    border-radius: 8rpx;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index:1;
+}
+.bg2 image{
+    width: 100%;
+    height: 100%;
+}
+.card_li{
+    position: relative;
+    height: 334rpx;
+    width: 100%;
+    border-radius: 8rpx;
+    margin: 0 auto;
+    margin-bottom: 32rpx;
+}
+.card_name{
+    color:#FFFFFF ;
+    font-size: 30rpx;
+    margin-bottom: 4rpx;
+    word-break: break-all;
+}
+.card_content{
+    z-index: 2;
+    width: 100%;
+    position: absolute;
+}
+
+.card_price{
+    color:#A59872;
+    font-size: 36rpx;
+}
+.card_content{
+    z-index: 2;
+    width: 100%;
+    position: absolute;
+}
+.store_logo{
+    height: 88rpx;
+    width: 88rpx;
+    border-radius: 50%;
+}
+.integral{
+    color: #FFFFFF;
+    font-size:28rpx;
+    position: absolute;
+    left: 30rpx;
+    bottom: 32rpx;
+    z-index:2;
+}
+.cll{
+    flex: .18;
+    padding: 32rpx 0 0 30rpx;
+}
+.clr{
+    flex: .82;
+    padding-top: 44rpx;
+    padding-right: 20rpx;
+}
+.instructions{
+    padding-bottom: 300rpx;
+}
+.title{
+    font-size: 28rpx;
+    margin-bottom: 16rpx;
+    color: #FFFFFF;
+}
+.ptxt{
+    margin-bottom: 16rpx;
+    font-size: 24rpx;
+    color: #CACEDD;
+} 
+
+.card_main{
+    color: #FFFFFF;
+    font-size: 24rpx;
+    word-break: break-all;
+}
+.vip_word{
+    position: absolute;
+    width: 46rpx;
+    top: 40rpx;
+    right: 30rpx;
+    z-index: 2;
+}
+
+.vip_card_info{
+    height: 156rpx;
+    background: #262732;
+    border-radius: 12rpx;
+    padding: 0 20rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.vip_card_info>view{
+    flex: 1;
+    position: relative;
+    text-align: center;
+}
+.rb::after{
+    content: '';
+    height: 40rpx;
+    width: 2rpx;
+    background: #333333;
+    display: inline-block;
+    position: absolute;
+    top: calc(50% - 20rpx);
+    right: 0;
+}
+
+.vip_card_info .text{
+    color: #9D9FA8;
+    font-size: 24rpx;
+    margin-bottom: 14rpx;
+}
+.vip_card_info .num{
+    color: #FFFFFF;
+    font-size: 28rpx;
+}
+.explain{
+    padding: 0 30rpx;
+    margin: 60rpx 0;
+}
+.explain view{
+    color: #A98A54;
+    font-size: 26rpx;
+    text-align: center;
+    border-radius: 12rpx;
+    padding: 32rpx 20rpx;
+    word-break: break-all;
+}
+
+.btn_pay{
+    position: fixed;
+    width: 690rpx;
+    height: 88rpx;
+    bottom: 76rpx;
+    left: calc(50% - 690rpx/2);
+}
+.btn_pay view{
+    color: #A98A54;
+    font-size: 26rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    word-break: break-all;
+    background: #262732;
+    height: 100%;
+    line-height: 88rpx;
+}
+.pay_btn{
+    color: #A98A54;
+    font-size: 26rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    padding: 0;
+    word-break: break-all;
+    background: #262732;
+    height: 100%;
+    line-height: 88rpx;
+}
+.pay_btn[plane]{
+    border: none;
+}

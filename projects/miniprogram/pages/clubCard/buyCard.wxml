@@ -1,0 +1,49 @@
+<view class="content">
+    <view class="hgroup_card bg_color1" >
+        <view class="card_li">
+            <view class="bg2">
+                <image wx:if="{{cardInfo.listPicture}}" mode="aspectFill" class="vip_bg" src="{{addUrl+cardInfo.listPicture}}"></image>
+            </view>
+            <view class="card_content fx">
+                <view class="cll">
+                  <image class="store_logo" wx:if="{{cardInfo.logo}}" src="{{addUrl+cardInfo.logo}}"></image>
+                </view>
+                <view class="clr">
+                    <view class="card_name">{{cardInfo.storeName}}</view>
+                    <view class="card_main">{{cardInfo.name}}</view>
+                </view>
+            </view>
+            <view class="integral">￥{{cardInfo.presentPrice}}</view>
+            <image class="vip_word" mode="widthFix" src="../../icon/vip_word.png"></image>
+        </view>
+    </view>
+
+    <view class="vip_card_info">
+        <view class="rb">
+            <view class="text">价格</view>
+            <view class="num">￥{{cardInfo.presentPrice}}</view>
+        </view>
+        <view class="rb">
+            <view class="text">可获积分</view>
+            <view class="num">{{cardInfo.originalPrice}}</view>
+        </view>
+        <view >
+            <view class="text">财富值</view>
+            <view class="num">+{{cardInfo.presentPrice*10}}</view>
+        </view>
+    </view>
+
+    <view class="explain">
+        <view>积分可1:1等同人民币在{{cardInfo.storeName}}进行任何消费</view>
+    </view>
+    
+    <view class="instructions"> 
+        <view class="title">会员卡说明</view>
+        <view class="ptxt" wx:for="{{tips}}" wx:key="index">{{item}}</view>
+    </view>
+
+    <view class="btn_pay">
+        <view wx:if="{{hasPhone}}" bindtap="buyCard" data-data="{{cardInfo}}">立即购买</view>
+        <button class="pay_btn" wx:if="{{!hasPhone}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-data="{{cardInfo}}">立即购买</button>
+    </view>
+</view>

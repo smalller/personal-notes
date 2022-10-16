@@ -1,0 +1,335 @@
+<view class="details bg_color2">
+  <view class="header ban_header" >
+    <!-- <icon class="iconfont icon-zhuanfa" bindtap="share"></icon> -->
+    <image class="collect " bindtap="collect" src="{{details.userCollectionFlag?'../../images/ysc.png':'../../images/wsc.png'}}"></image>
+    <button open-type="share" class='iconfont icon-zhuanfa'></button>
+    <swiper indicator-dots="{{indicatorDots}}" class="swi_box" circular="true"
+        bindchange="changeSwiper"
+        indicator-color="rgba(255, 255, 255, .5)" indicator-active-color="#000" autoplay="{{autoplay}}"
+        interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{banner}}" wx:key="index">
+            <swiper-item wx:if="{{item.isImg}}">
+                <image wx:if="{{item.url}}" mode="aspectFill" src="{{addUrl + item.url}}"></image>
+            </swiper-item>
+            <swiper-item wx:else>
+              <video 
+                id="myVideo" 
+                src="{{addUrl + item.url}}" 
+                binderror="videoErrorCallback" 
+                controls="{{true}}"
+                auto-pause-if-navigate="{{true}}"
+                bindended="endVideo"
+                bindplay="playVideo"
+                autoplay='{{false}}'
+                picture-in-picture-show-progress="{{true}}"
+                show-center-play-btn='{{true}}' 
+                show-play-btn="{{true}}" 
+                enable-progress-gesture="{{false}}"
+                show-fullscreen-btn="{{true}}"
+                bindenterpictureinpicture='bindVideoEnterPictureInPicture'
+                bindleavepictureinpicture='bindVideoLeavePictureInPicture'
+              ></video>
+            </swiper-item>
+        </block>
+    </swiper>
+  </view>
+  <!-- 商家简介 -->
+  <view class="introduce">
+    <view class="right">
+      <view class="name_over">
+        <view class="store_name">{{details.name}}</view>
+        <view class="discounts" wx:if="{{details.discount!='100' && details.discount!=''}}">
+          <image src="../../images/dis.png"></image>
+          <text class="dis_text">{{details.discount/10}} 折</text>
+        </view>
+      </view>
+      <view>
+        <view class="star">
+          <view class="bottom star-wrap">
+              <block wx:for="{{5}}" wx:key="this">
+                  <image src="../../icon/xing_1.png"></image>
+              </block>
+          </view>
+          <view class="mask star-wrap" style="width: {{details.starWidth}}">
+              <view style="width: 400rpx;">
+                  <block wx:for="{{5}}" wx:key="index" >
+                      <image src="../../icon/xing.png"></image>
+                  </block>
+              </view>
+          </view>
+        </view>
+        <text class="star_num">{{details.score}}</text>
+        <text class="star_num">好评率({{details.applauseRate}}%)</text>
+      </view>
+      <view class="perCapitaConsumption">人均：{{details.perCapitaConsumption}}/人</view>
+      <view class="work_time">营业时间：{{details.startTime}}-{{details.endTime}}</view>
+    </view>
+    <view class="left">
+      <image class="store_logo" wx:if="{{details.logo}}" mode="aspectFill" src="{{addUrl+details.logo}}"></image>
+      <view wx:if="{{details.isBrand==1}}">
+        <image class="quality" src="../../images/quality.png"></image>
+      </view>
+      <view wx:if="{{details.isBrand==2}}">
+        <image class="quality" src="../../images/liansuo.png"></image>
+      </view>
+      <view wx:if="{{details.isBrand==3}}">
+        <image class="quality" src="../../images/yuexiang.png"></image>
+      </view>
+      <view wx:if="{{details.isBrand==4}}">
+        <image class="quality" src="../../images/shushi.png"></image>
+      </view>
+      
+    </view>
+  </view>
+  <view class="brief">{{details.synopsis}}</view>
+
+  <!-- 联系 -->
+  <view class="ctct_box">
+    <view class="contact bg_color2">
+      <view bindtap='openMap'>
+        <view class="fx pl_box">
+          <text class="place_adr over_one">{{details.province}}{{details.city}}{{details.district}}{{details.trustAddress}}</text>
+          <icon class="iconfont icon-weibiaoti34" ></icon>
+        </view>
+        <view class="adr_num"><text>距您{{distance}}</text></view>
+      </view>
+      <view class="rit_view">
+        <image class="sj" bindtap="call" src="../../icon/call.png"></image>
+        <!-- bindtap="call" data-index="{{index}}" data-phone="{{item}}" wx:for="{{detailsPhone}}" wx:key="index" -->
+      </view>
+    </view>
+  </view>
+
+  <view class="cards" wx:if="{{details.haveVip}}" >
+    <view class="card_img" bindtap="buyVip" wx:if="{{isLogin}}" >
+      <image src="../../images/cards.png"></image>
+      <view class="examine">去查看</view>
+    </view>
+    <block wx:if="{{!isLogin}}">
+      <button wx:if="{{canIUseGetUserProfile}}" class="card_img card_btn" plain bindtap="getUserProfile" data-type="1">
+        <image src="../../images/cards.png"></image>
+        <view class="examine">去查看</view>
+      </button>
+
+      <button class="card_img card_btn" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' wx:else data-type="1">
+        <image src="../../images/cards.png"></image>
+        <view class="examine">去查看</view>
+      </button>
+    </block>
+  </view>
+
+
+  <!-- 商家推荐 -->
+  <view class="recommend">
+    <view class="header">
+      <view class="tx1">推荐</view>
+      <view class="tx2" bindtap="goGoods" wx:if="{{isLogin}}">
+        <text>更多</text>
+        <icon class="iconfont icon-weibiaoti34" data-storeId="{{details.storeId}}"></icon>
+      </view>
+      <block wx:if="{{!isLogin}}">
+        <button wx:if="{{canIUseGetUserProfile}}" class="more_goods_btn tx2" plain bindtap="getUserProfile" data-type="2">
+          <text>更多</text>
+          <icon class="iconfont icon-weibiaoti34" data-storeId="{{details.storeId}}"></icon>
+        </button>
+  
+        <button wx:else class="more_goods_btn tx2" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' data-type="2">
+          <text>更多</text>
+          <icon class="iconfont icon-weibiaoti34" data-storeId="{{details.storeId}}"></icon>
+        </button>
+      </block>
+
+    </view>
+    <block wx:if="{{goodsList.length>0}}">
+      <scroll-view scroll-x="true">
+        <view class="pic">
+          <view class="pic_box" wx:for="{{goodsList}}" wx:key="index" bindtap="lookGoods" data-data="{{item}}">
+            <image wx:if="{{item.recommendPicture}}" mode="aspectFill" src="{{addUrl+item.recommendPicture}}"></image>
+            <view class="v1 over_one">{{item.name}}</view>
+            <view class="pices over_one">
+              <text class="old_n">¥{{item.presentPrice}}</text>
+              <text class="old_p">¥{{item.originalPrice}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </block>
+    <block wx:else>
+      <view class="noteval_box">
+        <view class="noteval">
+          商家还没有上架推荐商品哦~
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 评价 -->
+  <block wx:if="{{first}}">
+    <view class="evaluate">
+      <view class="header">
+        <view>
+          <text class="tx1">评价</text>
+          <text class="all"><text>共{{allEva}}条评论</text>  <text>({{details.applauseRate}}%好评率)</text></text>
+        </view>
+        <view class="tx2" bindtap="goEvaluation">
+          <text>更多</text>
+          <icon class="iconfont icon-weibiaoti34"></icon>
+        </view>
+      </view>
+    </view>
+    <!-- 个人 -->
+    <view class="first_discuss">
+      <view class="discuss">
+        <view style="flex:.8">
+          <image wx:if="{{first.headPortrait}}" src="{{addUrl+first.headPortrait}}"></image>
+          <view class="two">
+            <view class="us_in">
+              <text class="hidden_name over_one">{{first.userName}}</text>
+              <view class="level" wx:if="{{first.wealthLevel>0}}">
+                <image wx:if="{{leaveLogo}}" class="leaveLogo" src="{{leaveLogo}}"></image>
+                <text class="lvl">{{first.wealthLevel}}</text>
+              </view>
+            </view>
+            <view class="star">
+              <view class="bottom star-wrap">
+                  <block wx:for="{{5}}" wx:key="this">
+                      <image src="../../icon/xing_1.png"></image>
+                  </block>
+              </view>
+              <view class="mask star-wrap" style="width: {{first.starWidth}}">
+                  <view style="width: 400rpx;">
+                      <block wx:for="{{5}}" wx:key="this" >
+                          <image src="../../icon/xing.png"></image>
+                      </block>
+                  </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="three" style="flex:.2">
+          <block wx:if="{{isLogin}}">
+            <!-- <view>{{first.createTime}}</view> -->
+            <view>
+              <icon bindtap="isLike" class="iconfont {{first.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}} "></icon>
+              <text>{{first.fabulous}}</text>
+            </view>
+          </block>
+          <block wx:if="{{!isLogin}}">
+            <button class="like_btn" plain wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile" data-type="3">
+              <icon class="iconfont {{first.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}} "></icon>
+              <text>{{first.fabulous}}</text>
+            </button>
+
+            <button wx:else class="like_btn" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' data-type="3">
+              <icon class="iconfont {{first.fabulousType==1?'icon-aixin2 red':'icon-aixin3 gary'}} "></icon>
+              <text>{{first.fabulous}}</text>
+            </button>
+          </block>
+        </view>
+
+      </view>
+      <view class="content">
+        <text class="{{showAllContent?'':'over_more'}}">{{first.content}}</text>
+        <view wx:if="{{first.content.length>45}}" bindtap="showAll" class="nav">全文</view>
+      </view>
+      <view class="createTime">{{first.createTime}}</view>
+      <block wx:if="{{first.appraisePictureList.length>0}}">
+        <view class="homepic">
+          <block wx:for="{{first.appraisePictureList}}" wx:key="index">
+            <image bindtap="showBigImg" mode="aspectFill" data-index="{{index}}" data-data="{{item}}" wx:if="{{index<3}}" src="{{addUrl + item}}"></image>
+          </block>
+          <view wx:if="{{first.appraisePictureList.length>2}}" class="all_num">{{first.appraisePictureList.length}}</view>
+        </view>
+      </block>
+    </view>
+
+    <view class="allevaluate" bindtap="goEvaluation">
+      <view class="au">
+        查看全部评价
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="noteval_box">
+      <view class="noteval">
+        暂无评价
+      </view>
+    </view>
+  </block>
+
+  <!-- tab -->
+  <view style="height: 136rpx;"></view>
+  <view class="footer">
+    <view class="fle fx">
+      <view class="footer_btn"  bindtap="ftrGo" data-type="1"><text>预定</text></view>
+    </view>
+    <view class="fle fx">
+      <view class="footer_btn"  bindtap="ftrGo" data-type="3"><text>AA拼单</text></view>
+    </view>
+    <view class="fri fx">
+      <view class="footer_btn disable_btn"  bindtap="ftrGo" data-type="2"><text>排号</text></view>
+    </view>
+  </view>
+
+
+
+  <!-- 酒水弹窗 -->
+  <view class="mask1" hidden="{{!isShowGood}}" bindtap="closeGood"></view>
+  <view class="booked-box" hidden="{{!isShowGood}}">
+    <view class="pd_box">
+      <image mode="aspectFill" wx:if="{{goodInfo.recommendPicture}}" src="{{addUrl + goodInfo.recommendPicture}}"></image>
+      <view class="fx">
+        <view class="one over_one">{{goodInfo.name}}</view>
+        <view class="one pri">￥{{goodInfo.presentPrice}}</view>
+      </view>
+      <view class="fx" hidden="{{goodInfo.type != 1}}">
+        <view class="two over_one">产地：{{goodInfo.area || '无'}}</view>
+        <view class="th">￥{{goodInfo.originalPrice}}</view>
+      </view>
+      <view class="fx" hidden="{{goodInfo.type != 1}}">
+        <view class="two over_one">年份：{{goodInfo.year || '无'}}</view>
+      </view>
+
+      <!-- <image bindtap="closeGood" class="close" src="../../images/x.png"></image> -->
+    </view>
+  </view> 
+
+  <!-- 评论图片 查看大图 -->
+
+  <view class="big_img_box" wx:if="{{lookBigImg}}"></view>
+  <view class="big_img" wx:if="{{lookBigImg}}">
+    <icon  class="iconfont icon-yiliaohangyedeICON-" bindtap="toggleBigImg"></icon>
+    <swiper indicator-dots="{{indicatorDots}}" class="big_swiper" circular="true"
+        indicator-color="rgba(255, 255, 255, .5)" indicator-active-color="#000" autoplay="{{false}}"
+        duration="{{500}}" current="{{imgIndex}}">
+        <block wx:for="{{bigImg}}" wx:key="index">
+            <swiper-item class="swiper_item">
+                <image wx:if="{{item}}" mode="widthFix" src="{{addUrl + item}}"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+  </view>
+
+
+  <!-- 抽奖码弹窗 -->
+  <view class="scan_bg" wx:if="{{scanShow}}"></view>
+  <view class="scan_box" wx:if="{{scanShow}}">
+      <view class="pd1_box">
+          <image class="theme" mode="aspectFill" bindtap="drawLucky" src="{{addUrl+drwaPicture}}"></image>
+          <block wx:if="{{!isLogin}}">
+            <button wx:if="{{canIUseGetUserProfile}}" class="scan_login" plain bindtap="getUserProfileScan"></button>
+            <button wx:else class="scan_login" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfoScan'>
+            </button>
+          </block>
+          <!-- <button wx:if="{{!isLogin}}" class="scan_login" plain open-type='getUserInfo' bindgetuserinfo='bindGetUserInfoScan'>
+          </button> -->
+          <button class="scan_phone" 
+              wx:if="{{!hasPhone && isLogin}}"
+              open-type="getPhoneNumber" 
+              bindgetphonenumber="getPhoneNumberScan"
+              >
+          </button>
+          <image bindtap="closeScan" class="close" src="../../images/x.png"></image>
+      </view>
+  </view>
+
+</view>

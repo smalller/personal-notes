@@ -1,0 +1,93 @@
+.parentUser {
+  background: #ffffff;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  .head {
+    padding: 36px 20px 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+
+      .userName {
+        font-size: 28px;
+      }
+
+      div {
+        display: flex;
+        align-items: flex-end;
+
+        &:last-child {
+          margin-top: 8px;
+          color: #898989;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .userPic {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+
+      > div {
+        display: flex;
+        align-items: center;
+
+        &:first-child {
+          img {
+            width: 28px;
+            height: 28px;
+          }
+
+          span {
+            margin-left: 8px;
+            color: #333333;
+            font-size: 16px;
+            line-height: 22px;
+          }
+        }
+
+        &:last-child {
+          span {
+            color: #898989;
+            font-size: 12px;
+            line-height: 18px;
+          }
+
+          img {
+            margin-left: 2px;
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+  }
+}

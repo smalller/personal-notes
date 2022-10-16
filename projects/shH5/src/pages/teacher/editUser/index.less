@@ -1,0 +1,73 @@
+.editUserInfo {
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  .userForm {
+    box-sizing: border-box;
+    padding: 0 20px;
+    flex: 1;
+    overflow-y: auto;
+    .userItem {
+      width: 100%;
+      height: 68px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f9f9f9;
+      &:last-child {
+        border-bottom: none;
+      }
+      .left {
+        color: #333333;
+        font-weight: 500;
+        font-size: 16px;
+      }
+      .right {
+        color: #898989;
+        font-weight: 500;
+        font-size: 12px;
+        .pic {
+          width: 48px;
+          height: 48px;
+          overflow: hidden;
+          border-radius: 50%;
+        }
+        .selectBtn {
+          margin-left: 2px;
+          width: 24px;
+          height: 24px;
+        }
+        input {
+          border: none;
+          text-align: right;
+        }
+      }
+    }
+  }
+  .btnBox {
+    height: 86px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    .btn {
+      height: 44px;
+      width: 100%;
+      background: #3775f6;
+      border-radius: 8px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 16px;
+      transition: 0.3s;
+      &:active {
+        background: #2a66e1;
+      }
+    }
+  }
+}

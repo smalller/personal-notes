@@ -1,0 +1,137 @@
+page{
+    background: #161823;
+}
+.store {
+    padding: 32rpx;
+    background: #202233;
+}
+.st_img {
+    flex: .24;
+    font-size: 0;
+}
+.st_img image {
+    height: 128rpx;
+    width: 128rpx;
+    border-radius: 8rpx;
+}
+.adr_num{
+    font-size: 24rpx;
+    color: #BABABA;
+}
+.rtext {
+    padding-top: 8rpx;
+    flex: .76;
+}
+.st_name {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-bottom: 8rpx;
+}
+.time {
+    color: #E2E4ED;
+    font-size: 28rpx;
+}
+.list_info {
+    background: #202233;
+    padding: 0 32rpx;
+    font-size: 30rpx;
+    padding-bottom: 298rpx;
+}
+.dash {
+    border-top: 2rpx solid #2C304B;
+}
+.tips {
+    margin: 28rpx 0;
+    color: #FFFFFF;
+    font-size: 30rpx;
+    font-weight: bold;
+}
+.tp_l {
+    margin-bottom: 26rpx;
+}
+.il {
+    flex: .3;
+    color: #C2C5DB;
+}
+.ir {
+    flex: .7;
+    color: #C2C5DB;
+    text-align: right;
+}
+.red {
+    color: #EF5954;
+}
+.new{
+    font-weight: bold;  
+    font-size: 30rpx;
+}
+.old{
+    margin-left: 26rpx;
+    color: #CCCCCC;
+    font-size: 24rpx;
+    text-decoration: line-through;
+}
+.contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22rpx 0;
+}
+.place_adr {
+    color: #FFFFFF!important;
+    font-size: 26rpx;
+}
+.contact .icon-weibiaoti34 {
+    color: #FFFFFF;
+    font-size: 20rpx;
+    line-height: 40rpx;
+    margin-left: 4rpx;
+}
+.iconfont {
+    display: inline-flex;
+}
+.goods {
+    border-bottom: 2rpx solid #2C304B;
+}
+.glist {
+    margin-bottom: 26rpx;
+}
+.goods_img {
+    flex: .295;
+    font-size: 0;
+}
+.goods_img image {
+    height: 180rpx;
+    width: 180rpx;
+    border-radius: 8rpx;
+}
+.gtext {
+    padding-top: 8rpx;
+    flex: .705;
+}
+.gd_name {
+    color: #ffffff;
+    font-size: 26rpx;
+    margin-bottom: 76rpx;
+    font-weight: bold;
+}
+.gil {
+    flex: .3;
+    color: #FFFFFF;
+    font-size: 30rpx;
+}
+.total {
+    margin-top: 26rpx;
+}
+.tp_l {
+    margin-bottom: 26rpx;
+}
+
+.coa {
+    font-weight: bold;
+}
+.copy {
+    margin-left: 24rpx;
+    color: #5E67BC;
+}

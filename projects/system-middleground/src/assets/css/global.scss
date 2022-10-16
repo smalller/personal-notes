@@ -1,0 +1,69 @@
+@import './element-variables.scss';
+@import './variables.scss';
+@import './mixin.scss';
+
+h1,h2,h3,h4,h5,h6,ul,li,p {
+    margin: 0;
+    padding: 0;
+}
+
+ul,li {
+    list-style: none;
+}
+
+.pagination {
+    margin-top: 20px;
+    justify-content: end;
+}
+
+.drawer-box {
+    width:960px !important;
+}
+
+#nprogress .bar {
+    background: var(--el-color-primary) !important;
+}
+
+.flex-wrap-wrap {
+    flex-wrap: wrap;
+}
+
+a {
+    color: #1890ff;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: color .3s;
+}
+a:active,
+a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+a:active {
+    color: #096dd9;
+}
+a:hover {
+    color: #40a9ff;
+}
+
+.border-solid-transparent{
+    border: solid 1px transparent;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.float-right {
+    float: right;
+}
+
+.padding-t10 {
+    padding-top: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

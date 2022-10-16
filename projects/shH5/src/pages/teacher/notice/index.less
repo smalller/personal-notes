@@ -1,0 +1,88 @@
+.notice {
+  width: 100vw;
+  min-height: 100vh;
+
+  .noticeNormal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 112px;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+
+    span {
+      margin-top: 32px;
+      color: #b4b4b4;
+      font-size: 16px;
+    }
+  }
+
+  .noticeList {
+    background: #fff;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    .noticeItemBox {
+      border-bottom: 1px solid #eaeaea;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .noticeItem {
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .stu-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+
+      .itemTitle {
+        color: #333333;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .itemDesc {
+        margin-top: 10px;
+        color: #898989;
+      }
+
+      .itemInfo {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left {
+          color: #b4b4b4;
+          font-size: 13px;
+        }
+
+        .right {
+          width: 92px;
+          height: 30px;
+          border-radius: 66px;
+          background: #dfdfdf;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          font-size: 12px;
+
+          &.active {
+            background: #3775f6;
+          }
+        }
+      }
+    }
+  }
+}

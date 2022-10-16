@@ -1,0 +1,133 @@
+<view class="order_detail">
+    <view class="store">
+        <view class="fx ">
+            <view class="st_img"><image wx:if="{{storeInfo.logo}}" src="{{addUrl+storeInfo.logo}}"></image></view>
+            <view class="rtext">
+                <view class="st_name over_one">{{storeInfo.name}}</view>
+                <view class="time">营业时间 {{storeInfo.startTime}}-{{storeInfo.endTime}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="list_info">
+        <view class="seat dash" wx:if="{{orderInfo.orderType == 0 || orderInfo.orderType == 1 || plOrder == 0}}">
+            <view class="tips">座位信息</view>
+            <view class="fx tp_l">
+                <view class="il">座位号</view>
+                <view wx:if="{{isKtv==3}}" class="ir">{{ktvInfo.roomTypeName}}</view>
+                <view wx:else class="ir">{{payInfo.seat.seatCode}}</view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">容纳人数</view>
+                <view wx:if="{{isKtv==3}}" class="ir">{{ktvInfo.capacity}}</view>
+                <view wx:else class="ir">{{payInfo.seat.numberOfPeople}}人</view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">保留时间</view>
+                <view wx:if="{{isKtv==3}}" class="ir">{{ktvTimeShowText}}</view>
+                <view wx:else class="ir"> 
+                    <block wx:if="{{payInfo.storeLocation==3}}">
+                        {{payInfo.seat.seatLatestReservationTime}}
+                    </block>
+                    <block wx:else>
+                        <text>最晚至</text> {{payInfo.seat.seatLatestReservationTime}}
+                    </block>
+                </view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">低消金额</view>
+                <view wx:if="{{isKtv==3}}" class="ir red">¥ {{miniTotal}}</view>
+                <view wx:else class="ir red">¥ {{miniTotal}}</view>
+            </view>
+        </view>
+        
+        <view class="ctct_box dash">
+            <view class="contact">
+                <view bindtap='openMap'>
+                    <view class="fx pl_box">
+                        <text class="place_adr over_one">{{storeInfo.province}}{{storeInfo.city}}{{storeInfo.district}}{{storeInfo.trustAddress}}</text>
+                        <icon class="iconfont icon-weibiaoti34" ></icon>
+                    </view>
+                    <view class="adr_num"><text>距您{{storeInfo.distance}}</text></view>
+                </view>
+            </view>
+        </view>
+
+        <view class="listing dash">
+            <view class="tips" wx:if="{{cartList.length>0}}">酒水清单</view>
+            <view class="goods " wx:if="{{cartList.length>0}}">
+                <block>
+                    <view class="glist" wx:for="{{cartList}}" wx:key="index">
+                        <view class="fx add" wx:if="{{cartList.length>=2}}">
+                            <view class="add_order">{{item.groupName}}</view>
+                            <view class="add_time" wx:if="{{item.createTime}}">{{item.createTime}}</view>
+                        </view>
+                        <block wx:for="{{item.goodsList}}" wx:for-index="oIdx" wx:key="oIdx" wx:for-item="child">
+                            <view class="fx" style="margin-bottom: 20rpx;">
+                                <view class="goods_img"><image mode="aspectFill" src="{{addUrl + child.goodsPicture}}"></image></view>
+                                <view class="gtext">
+                                    <view class="gd_name">{{child.goodsName}}</view>
+                                    <view class="fx">
+                                        <view class="ir" style="text-align:left">
+                                            <text class="new red">¥{{child.activityPrice}}</text>
+                                            <text class="old">¥{{child.originalPrice}}</text>
+                                        </view>
+                                        <view class="gil" style="text-align:right">x {{child.quantity}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="snacks dash" wx:if="{{snacksList.length>0}}">
+                        <view class="tips">赠品</view>
+                        <view class="fx tp_l" wx:for="{{snacksList}}" wx:key="index">
+                            <view class="il">{{item.name}}</view>
+                            <view class="ir">x {{item.num}}</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+
+            <view class="total">
+                <view class="fx tp_l" wx:if="{{cartList.length>0}}">
+                    <view class="il">特价优惠</view>
+                    <view class="ir red coa">¥ {{preferential}}</view>
+                </view> 
+
+                <view class="fx tp_l" wx:if="{{orderInfo.appDetails}}">
+                    <view class="il">平台优惠券</view>
+                    <view class="ir red coa cons">{{orderInfo.appDetails}}</view>
+                </view>
+                <view class="fx tp_l" wx:if="{{orderInfo.storeDetails}}">
+                    <view class="il">商家优惠券</view>
+                    <view class="ir red coa cons">{{orderInfo.storeDetails}}</view>
+                </view>
+
+                <view class="fx tp_l">
+                    <view class="il">总计</view>
+                    <view class="ir red coa">¥ {{total}}</view>
+                </view>
+            </view>
+        </view>
+        
+        <view class="orderinfo dash" wx:if="{{payState != 0}}">
+            <view class="tips">订单信息</view>
+            <view class="fx tp_l">
+                <view class="il">订单编号</view>
+                <view class="ir">{{orderInfo.orderNo}}</view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">订单类型</view>
+                <view class="ir">{{orderInfo.typeText}}</view>
+            </view>
+            <view class="fx tp_l" wx:if="{{orderInfo.occupySeatTime>0}}">
+                <view class="il">占座时间</view>
+                <view class="ir">{{orderInfo.occupySeatTime+' 分钟'}}</view>
+            </view>
+            <view class="fx tp_l">
+                <view class="il">创建时间</view>
+                <view class="ir">{{orderInfo.createTime || ''}}</view>
+            </view>
+        </view>
+    </view>
+</view>

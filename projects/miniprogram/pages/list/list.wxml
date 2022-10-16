@@ -1,0 +1,198 @@
+<view class="activity bg_color2">
+    <view class="screening flex_box">
+        <view class="bf adrs uli" wx:for="{{labList}}" wx:key="index">
+            <view class="adrsbtn ibl" bindtap="showLab" class="{{item.flag?'asr_text':''}}" data-type='{{item.type}}'>
+                <text class="ontxt">{{item.text}}</text>
+                <icon class="iconfont icon-tubiaozhizuo- _ic {{index+1 == active?'rotate':''}}"></icon>
+            </view>
+        </view>
+    </view>
+    <view class="content bg_color2">
+        <view class="aty_list">
+            <view>
+                <block wx:for="{{initData}}" wx:key="index">
+                    <!-- wx:if="{{(index+1)%4!=0}}" -->
+                    <!-- wx:if="{{!item.isShowMaxImg}}" --> 
+                    <view class="alst" bindtap="goDetails" data-id="{{item.storeId}}">
+                        <view class="limg" wx:if="{{initData.length>0}}">
+                            <image lazy-load="true" class="store_logo" mode="aspectFill" src="{{addUrl + item.picture}}"></image>
+                            <block wx:if="{{item.isBrand==1}}">
+                                <image class="sanjiao" src="../../images/quality.png"></image>
+                            </block>
+                            <block wx:if="{{item.isBrand==2}}">
+                                <image class="sanjiao" src="../../images/liansuo.png"></image>
+                            </block>
+                            <block wx:if="{{item.isBrand==3}}">
+                                <image class="sanjiao" src="../../images/yuexiang.png"></image>
+                            </block>
+                            <block wx:if="{{item.isBrand==4}}">
+                                <image class="sanjiao" src="../../images/shushi.png"></image>
+                            </block>
+                        </view>
+                        <view class="rtext">
+                            <view class="atit">{{item.name}}</view>
+                            <view style="position: relative;">
+                                <view class="star">
+                                    <view class="bottom star-wrap">
+                                        <block wx:for="{{5}}" wx:key="index">
+                                            <image class="xing_img2" src="../../icon/xing_1.png"></image>
+                                        </block>
+                                    </view>
+                                    <view class="mask star-wrap" style="width: {{item.starWidth}}">
+                                        <view style="width: 400rpx;">
+                                            <block wx:for="{{5}}" wx:key="index" >
+                                                <image class="xing_img" src="../../icon/xing.png"></image>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                                <text class="star_num">{{item.score}}</text>
+                                <text class="al">距离{{item.distance}}</text>
+                            </view>
+
+                            <view class="ad_pr">
+                                <view class="pr">人均：¥{{item.perCapitaConsumption}}/人</view>
+                            </view>
+
+                            <view class="flex_box lh_l">
+                                <text class="liuyan_l">{{item.synopsis}}</text>
+                            </view>
+
+                            <block wx:if="{{item.discount != '100' && item.discount != ''}}">
+                                <view class="discount">
+                                    全场{{item.discount/10}}折
+                                </view>
+                            </block>    
+                            
+                        </view>
+                    </view>
+                    <!-- <view class="aty_bnr" bindtap="goDetails" data-id="{{item.storeId}}" wx:else>
+                        <view class="big_img_box">
+                            <image lazy-load="true" class="big_sto_logo" mode="aspectFill" src="{{addUrl + item.appListBigPicture}}"></image>
+                            <block wx:if="{{item.discount != '100'}}">
+                                <image class="sanjiao_big" src="../../images/sanjiao.png"></image>
+                                <view class="discount_big">
+                                    <view>全场</view>
+                                    <view>{{item.discount/10}}折!</view>
+                                </view>
+                            </block>
+                        </view>
+
+                        <view class="info">
+                            <view class="flex_box one">
+                                <view class="bnr_n">{{item.name}}</view>
+                                <view class="lab lab_r">
+                                </view>
+                            </view>
+                            <view class="flex_box lh">
+                                <view class="fxl">
+                                    <view class="star">
+                                        <view class="bottom star-wrap">
+                                            <block wx:for="{{5}}" wx:key="index">
+                                                <image src="../../icon/xing_1.png"></image>
+                                            </block>
+                                        </view>
+                                        <view class="mask star-wrap" style="width: {{item.starWidth}}">
+                                            <view style="width: 400rpx;">
+                                                <block wx:for="{{5}}" wx:key="index" >
+                                                    <image src="../../icon/xing.png"></image>
+                                                </block>
+                                            </view>
+                                        </view>
+                                    </view>
+                                    <text class="star_num">{{star}}</text>
+                                </view>
+                                <view class="tr">距离 {{item.distance}}</view>
+                            </view>
+                            <view class="flex_box lh">
+                                <view class="fxl" style="display: flex;">
+                                    <image class="pinl" src="../../icon/pl.png"></image>
+                                    <text class="liuyan">{{item.synopsis}}</text>
+                                </view>
+                                <view class="tr">人均 {{item.perCapitaConsumption}}/人</view>
+                            </view>
+                        </view>
+                    </view> -->
+                </block>
+            </view>
+            <view class="zanwu" wx:if="{{whetherNext==false}}">我到底啦</view>
+        </view>
+    </view>
+    <!-- 弹窗 -->
+    <view class="bg hei_one" bindtap="hide" wx:if='{{showAdr}}'></view>
+
+    <view class="address_dio dio" wx:if='{{active==1}}'>
+        <view class="flex_box ad_box">
+            <view class="area">
+                <scroll-view class="srl area_ul" scroll-y='true'>
+                    <view class="ali" wx:for="{{regionList}}" wx:key="index"><text bindtap="cheBg" data-val="{{item}}" data-index="{{index}}" class="{{placeInd==index?'acBg':'sli_bg'}}">{{item.name}}</text></view>
+                </scroll-view>
+            </view>
+            <view class="land srl">
+                <scroll-view class="land_ul" scroll-y='true'>
+                    <view class="ali_r" bindtap="word" data-type="{{item}}" data-index="{{index}}" wx:for="{{placeList}}" wx:key="index">
+                        <text class="{{placeInds==index?'onAdr':'sli_adr'}}">{{item.districtStreet}}</text>
+                        <!-- bindtap="cheBgs" data-type="{{item}}" data-index="{{index}}"  -->
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <view class="sort_dio dio" wx:if='{{active==2}}'>
+        <view class="sort_ul">
+            <view wx:for="{{sortList}}" wx:key="index" class="svw" data-index="{{index}}" data-data="{{item}}"
+            bindtap="wordColor">
+                <!-- <image class="sli" mode="widthFix" wx:if="{{index==num}}" src="{{addUrl+item.highlightedIcon}}"></image>
+                <image class="sli" mode="widthFix" wx:if="{{index!=num}}" src="{{addUrl+item.icon}}"></image> -->
+                <text class="{{index==num?'activitys':''}}">{{item.collation}}</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="scre_dio dio" wx:if='{{active==3}}'>
+        <scroll-view scroll-y='true' style="height: 728rpx;">
+            <view class="scre_box">
+                <view class="type">
+                    <view class="tip">类型</view>
+                    <view class="lab_lt">
+                        <text bindtap="type_one" wx:for="{{screening.storeScreeningDTOS}}" wx:key="index" data-data="{{item}}" data-index="{{index+1}}" class="{{is==index+1?'act':'sli_act'}}">{{item.recommendBrand}}</text>
+                    </view>
+                </view>
+                <view class="max_peo">
+                    <view class="tip">容纳人数</view>
+                    <view class="lab_lt">
+                        <text wx:for="{{screening.accommodationList}}" wx:key="index" bindtap="type_two" data-data="{{item}}" data-index="{{index+1}}" class="{{isPeople==index+1?'act':'sli_act'}}">{{item}}</text>
+                    </view>
+                </view>
+                <view class="price">
+                    <view class="tip">均价范围</view>
+                    <view class="lab_lt">
+                        <text wx:for="{{screening.consumptionList}}" wx:key="index" bindtap="type_three" data-index="{{index+1}}" data-data="{{item}}" class="{{isDollar==index+1?'act':'sli_act'}}">￥{{item}}/人</text>
+                    </view>
+                </view>
+                <view class="distance">
+                    <view class="tip">距离</view>
+                    <view class="line_box">
+                        <view class="move_line" style="width:{{moveX}}px"></view>
+                        <view class="fix_line"></view>
+                        <view class="move" style="left:{{moveX}}px">
+                            <view class="km">{{km}}km</view>
+                            <image class="move_img" bindtouchstart="moveStart" bindtouchmove="moveIng"
+                                bindtouchend="moveEnd" src="../../icon/adr_icon.png">
+                            </image>
+                        </view>
+                        <text class="def">0km</text>
+                        <text class="end">20km</text>
+                    </view>
+                </view>
+                <view class="btns">
+                    <view class="tbtn reset" bindtap="reset">
+                        <image class="cz_icon" src="../../icon/chongzhi.png"></image>
+                        重置
+                    </view>
+                    <view class="tbtn conf" bindtap="hide">确定</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

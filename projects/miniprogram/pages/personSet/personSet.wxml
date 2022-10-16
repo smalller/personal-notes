@@ -1,0 +1,136 @@
+<view class="popupFlag">
+  <view class="info_set">
+    <view class="info_body">
+      <view class="fx bdtop">
+        <view class="nl">
+          <text class="putong">编辑个人资料</text>
+        </view>
+        <view class="nm"></view>
+        <view class="nr">  
+          <view class="clic" bindtap="selfInfo">
+            <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="info_set">
+    <view class="info_body">
+      <view class="fx bdtop">
+        <view class="nl">
+          <!-- <image class="indiv" src="../../icon/phone.png"></image> -->
+          <text class="putong">绑定手机</text>
+        </view>
+        <view class="nm">{{tel}}</view>
+        <button class="nr btn_tel" 
+          wx:if="{{getPhone}}"
+          open-type="getPhoneNumber" 
+          bindgetphonenumber="getPhoneNumber"
+          >
+          <!-- 修改 -->
+          <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+        </button>
+        <view class="nr" wx:else>  
+          <view class="clic" bindtap="tiedPhonr" bindtap="goVerify">
+            <!-- 修改 -->
+            <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="info_body">
+      <view class="fx bdtop">
+        <view class="nl">
+          <!-- <image src="../../icon/key.png"></image> -->
+          <text class="putong">资金密码</text>
+        </view>
+        <view class="nm"></view>
+        <button class="nr btn_tel" 
+          wx:if="{{getPhone}}"
+          open-type="getPhoneNumber" 
+          bindgetphonenumber="getPhoneNumber"
+          >
+          <!-- 设置 -->
+          <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+        </button>
+        <view class="nr"  wx:else>  
+          <view class="clic" bindtap="tiedPhonr" bindtap="passwordSet">
+            <!-- 设置 -->
+            <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class="info_body">
+      <view class="fx bdtop">
+        <view class="nl">
+          <!-- <image src="../../icon/clear.png"></image> -->
+          <text class="putong">清除缓存</text>
+        </view>
+        <view class="nm"></view>
+        <view class="nr">  
+          <view class="clic" bindtap="clearStorage">
+            <!-- 清除 -->
+            <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="info_body">
+      <view class="fx bdtop">
+        <view class="nl">
+          <!-- <image src="../../icon/blacklist.png"></image> -->
+          <text class="putong">黑名单列表</text>
+        </view>
+        <view class="nm"></view>
+        <view class="nr">  
+          <view class="clic" bindtap="blacklist">
+            <!-- 查看 -->
+            <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="info_body">
+      <view class="fx bdtop">
+        <view class="nl">
+          <!-- <image src="../../icon/shareapp.png"></image> -->
+          <text class="putong">分享我们</text>
+        </view>
+        <view class="nm"></view>
+        <button class="nr btn_tel" open-type="share">
+          <!-- 分享 -->
+          <icon class="iconfont icon-weibiaoti34 l-ic"></icon>
+        </button>
+      </view>
+    </view>  
+  </view>
+
+
+  <view class="footer" bindtap="logout">
+    退出
+  </view>
+
+
+  <selfModel data="{{childComponent}}" show="{{show}}" text="确认退出登录?" bindconfirm="confirm" bindcancel="cancel"></selfModel>
+</view>
+<!-- 弹出 -->
+<!-- <view class="box" wx:if="{{popupFlag}}" bindtap="popup"></view>
+<view class="popup" wx:if="{{popupFlag}}">
+  <view>
+    您正在进行修改绑定手机操作
+  </view>
+  <view>
+    如需修改请验证
+  </view>
+  <input placeholder="请输入验证码" /><text class="pos">({{time}}s)</text>
+  <view class="bg" bindtap="getCode">
+    发送验证码
+  </view>
+</view> -->

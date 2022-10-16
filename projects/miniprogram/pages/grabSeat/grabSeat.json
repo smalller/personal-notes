@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "selfModel" : "/components/selfModel/selfModel"
+  },
+  "navigationBarTitleText": "我的排号",
+  "navigationStyle": "custom"
+}

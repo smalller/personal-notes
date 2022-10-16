@@ -1,0 +1,30 @@
+<view class="login">
+    <view class="box"> 
+        <view class="tip">绑定手机号</view>
+        <view class="form">
+            <view class="cinp"> 
+                <input class="inp phone" model:value="{{phone}}" placeholder="请输入手机号码"></input>
+            </view>
+            <view class="cinp">
+                <input class="inp code" model:value="{{code}}" placeholder="请输入验证码"> </input>
+                <text class="g_cd" catchtap="getCode">{{text}}</text>
+            </view>
+
+            <view class="btm_c">
+                <view class="text">点击登录即表示同意 <text>《隐私政策》</text> 和 <text>《服务条款》</text></view>
+                <view class="btn_v">
+                    <van-button 
+                        custom-style="height:100rpx;width:400rpx;font-size:28rpx" 
+                        class="btn" round  block 
+                        bindtap="login"
+                        color="linear-gradient(to right, #FEE140,#FB9E74)">
+                        登录
+                    </van-button>
+                </view>
+            </view>
+        </view>    
+    </view>        
+</view>
+
+
+<van-toast id="van-toast" />

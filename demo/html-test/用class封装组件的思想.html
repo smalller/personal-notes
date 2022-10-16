@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .k-dialog {
+            width: 30%;
+            z-index: 2001;
+            display: block;
+            position: absolute;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+            margin: 0 auto;
+            top: 15vh;
+            left: 30%;
+            display: none;
+        }
+
+        .k-wrapper {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            bottom: 0px;
+            right: 0px;
+            background: black;
+            opacity: 0.4;
+            z-index: 2000;
+            display: none;
+        }
+
+        .k-header {
+            padding: 20px 20px 10px;
+        }
+
+        .k-header .k-title {
+            line-height: 24px;
+            font-size: 18px;
+            color: #303133;
+            float: left;
+        }
+
+        .k-body {
+            padding: 30px 20px;
+            color: #606266;
+            font-size: 14px;
+        }
+
+        .k-footer {
+            padding: 10px 20px 30px;
+            text-align: right;
+        }
+
+        .k-close {
+            color: #909399;
+            font-weight: 400;
+            float: right;
+            cursor: pointer;
+        }
+
+        .k-cancel {
+            color: #606266;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .k-cancel:hover {
+            color: #409eff;
+            background: #ecf5ff;
+            border-color: #c6e2ff;
+        }
+
+        .k-primary {
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            font-weight: 500;
+            background: #409eff;
+            color: #fff;
+            margin-left: 10px;
+        }
+
+        .k-primary:hover {
+            background: #66b1ff;
+        }
+
+        .k-input {
+            width: 100%;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-inner {
+            -webkit-appearance: none;
+            background-color: #fff;
+            background-image: none;
+            border-radius: 4px;
+            border: 1px solid #dcdfe6;
+            box-sizing: border-box;
+            color: #606266;
+            display: inline-block;
+            font-size: inherit;
+            height: 40px;
+            line-height: 40px;
+            outline: none;
+            padding: 0 15px;
+            transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="dailog1">点击</button>
+    <button class="dailog2">点击2</button>
+</body>
+<script>
+    // 对内：封闭；对外：开放（api、配置）
+    /*
+    {
+        width: "30%",
+        height: "250px",
+        title: "测试标题",
+        content: "测试内容",
+        dragable: true, //是否可拖拽
+        maskable: true, //是否有遮罩
+        isCancel:false //是否有取消
+    }
+    */
+
+
+    // 继承DOM自带的EventTarget;
+    // 封装的js
+    class Dailog extends EventTarget {
+        constructor(options) {
+            super();
+
+            // 合并配置（新内容会覆盖掉就内容）
+            this.opts = Object.assign({
+                width: "30%",
+                height: "200px",
+                title: "默认标题",
+                content: "默认内容",
+                dragable: true, //是否可拖拽
+                maskable: true, //是否有遮罩
+                isCancel: false, //是否有取消
+                success() {
+                    console.log('默认点击确定！！');
+                },
+                cancel() {
+                    console.log('默认点击取消！！');
+                }
+            }, options);
+
+            this.init();
+        }
+
+        //初始化操作
+        init() {
+            this.renderView();
+
+            //在EventTarget上注册特定事件类型的事件处理程序
+            this.addEventListener("cancel", this.opts.cancel);
+            let cancel = new Event("cancel");
+
+            //按钮点击事件
+            this.dailogHtml.onclick = e => {
+                switch (e.target.className) {
+                    case 'k-close':
+                        this.close();
+
+                        // 将事件分派到此EventTarget
+                        this.dispatchEvent(cancel);
+                        break;
+                    case 'k-cancel':
+                        this.close();
+
+                        // 将事件分派到此EventTarget
+                        this.dispatchEvent(cancel);
+                        break;
+                    case 'k-primary':
+                        this.close();
+                        this.confim();
+                        break;
+                }
+            }
+        }
+
+        //点击确认后的回调
+        confim(value) {
+            //在EventTarget上注册特定事件类型的事件处理程序
+            this.addEventListener("success", this.opts.success);
+            let success = new CustomEvent("success", {
+                detail: value
+            });
+
+            // 将事件分派到此EventTarget
+            this.dispatchEvent(success);
+        }
+
+        //关闭对话框
+        close() {
+            this.dailogHtml.querySelector(".k-wrapper").style.display = "none";
+            this.dailogHtml.querySelector(".k-dialog").style.display = "none";
+        }
+
+        //显示对话框
+        open() {
+            //是否显示背景深色弹层
+            if (this.opts.maskable) {
+                this.dailogHtml.querySelector(".k-wrapper").style.display = "block";
+            }
+            this.dailogHtml.querySelector(".k-dialog").style.display = "block";
+        }
+
+        //渲染对话框样式
+        renderView() {
+            this.dailogHtml = document.createElement("div");
+            this.dailogHtml.innerHTML = `<div class="k-wrapper"></div>
+                <div class="k-dialog" style="width:${this.opts.width};height:${this.opts.height}">
+                    <div class="k-header">
+                        <span class="k-title">${this.opts.title}</span><span class="k-close">X</span>
+                    </div>
+                    <div class="k-body">
+                        <span>${this.opts.content}</span>
+                    </div>
+                    <div class="k-footer">
+                        ${this.opts.isCancel ? '<span class="k-cancel">取消</span>' : ''}
+                        <span class="k-primary">确定</span>
+                    </div>
+                </div>`;
+            document.querySelector("body").appendChild(this.dailogHtml);
+        }
+    }
+
+
+    //有输入框的类（并且继承父类的对象）
+    class ExtendsDailog extends Dailog {
+        constructor(options) {
+            super(options);
+            this.renderInput();
+        }
+
+        //输入框渲染样式
+        renderInput() {
+            let myInput = document.createElement("input");
+            myInput.type = "text";
+            myInput.classList.add("input-inner");
+            this.dailogHtml.querySelector(".k-body").appendChild(myInput);
+        }
+
+        confim() {
+            //获取输入框的输入值
+            let value = this.dailogHtml.querySelector(".input-inner").value;
+
+            //调用父类的返回回调方法
+            super.confim(value);
+        }
+    }
+
+
+
+    //普通对话框
+    let dailog1 = new Dailog({
+        width: "40%",
+        height: "250px",
+        title: "测试标题",
+        isCancel: true,
+        maskable: true,
+        success() {
+            console.log('点击确定！！');
+        },
+        cancel() {
+            console.log('点击取消！！');
+        }
+    })
+
+    document.querySelector(".dailog1").onclick = function () {
+        dailog1.open();
+    }
+
+
+    //有输入框的对话框
+    let dailog2 = new ExtendsDailog({
+        width: "40%",
+        height: "250px",
+        title: "测试标题",
+        isCancel: true,
+        maskable: false,
+        success(e) {
+            console.log('点击确定！！', e.detail);
+        },
+        cancel() {
+            console.log('点击取消！！');
+        }
+    })
+
+    document.querySelector(".dailog2").onclick = function () {
+        dailog2.open();
+    }
+</script>
+
+</html>

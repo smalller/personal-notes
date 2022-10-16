@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}123
+        <div>{{a}}</div>
+        <div>{{b}}</div>
+        <div v-html="htmlValue" test="123"></div>
+        芳龄18
+        <p>哈哈哈</p>
+        <p>
+            <input v-model="modelValue1" type="text">{{modelValue1}}
+        </p>
+        <p>
+            <input v-model="modelValue2" type="text">{{modelValue2}}
+        </p>
+    </div>
+</body>
+
+<script type="module">
+    import Svue from './svue.js'
+
+    'use stict'
+    const println = console.log;
+
+    let vm = new Svue({
+        el: '#app',
+        data: {
+            msg: '大家好！',
+            msg2: '我是small l',
+            htmlValue: '<h1>我是h1</h1>',
+            modelValue1: '',
+            modelValue2: '',
+            a : {
+                c : 3
+            },
+            b:[1,2,3]
+        }
+    });
+
+    setTimeout(() => {
+        vm.$options.data.msg = '你好！';
+        vm.$options.data.a.c = 6;
+        println(vm.$options.data.a.c);
+    }, 1000)
+</script>
+
+</html>

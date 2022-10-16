@@ -1,0 +1,72 @@
+.parentPayDetails {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  .content {
+    flex: 1;
+    padding: 0 15px;
+    width: 100%;
+    background: #ffffff;
+    overflow-y: auto;
+    .head {
+      border-bottom: 1px solid #eaeaea;
+      padding: 18px 0 16px;
+      .title {
+        color: #000000;
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .subTitle {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        span {
+          color: #898989;
+          font-weight: 500;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .remarksBox {
+      padding-top: 24px;
+      color: #898989;
+      font-weight: 500;
+      font-size: 14px;
+    }
+  }
+
+  .btnBox {
+    padding: 16px 15px 28px;
+    display: flex;
+    justify-content: space-between;
+    .btn {
+      //width: 164px;
+      flex: 1;
+      height: 46px;
+      border-radius: 8px;
+      border: 1px solid #3775f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: 0.3s;
+      &.left {
+        margin-right: 16px;
+        color: #3775f6;
+      }
+      &.right {
+        color: #ffffff;
+        background: #3775f6;
+        &:active {
+          background: #245ed3;
+        }
+      }
+    }
+  }
+}

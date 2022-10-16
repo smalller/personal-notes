@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "selfModel" : "/components/selfModel/selfModel"
+  }
+}

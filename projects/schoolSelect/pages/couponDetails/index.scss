@@ -1,0 +1,103 @@
+.couponDetails{
+	width: 100vw;
+	height: 100vh;
+	box-sizing: border-box;
+	background: #2285CC;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px 30px;
+	.tips_a{
+		color: #FFFFFF;
+		font-weight: 400;
+		font-size: 16px;
+	}
+	.tips_b{
+		font-weight: 400;
+		font-size: 16px;
+		color: rgba(255, 255, 255, 0.5);
+		margin-top: 30px;
+	}
+	.topBorder{
+		background: #F6A13E;
+		border-radius: 12px 12px 0px 0px;
+		width: 276px;
+		height: 12px;
+		margin-top: 18px;
+	}
+	.content{
+		width: 100%;
+		border-radius: 12px;
+		overflow: hidden;
+		.top{
+			padding: 20px 20px 16px;
+			background: #FFFFFF;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: relative;
+			z-index: 2;
+			.title{
+				text-align: center;
+				color: #333333;
+				font-weight: 700;
+				font-size: 20px;
+			}
+			.qrcodeBox{
+				margin-top: 6px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: #FFFFFF;
+				width: 180px;
+				height: 180px;
+				.qrcodes{
+					width: 170px;
+					height: 170px;
+				}
+			}
+			.num{
+				margin-top: 8px;
+				color: #333333;
+				font-weight: 700;
+				font-size: 20px;
+			}
+			&::after{
+				content: '';
+				position: absolute;
+				left: -17px;
+				bottom: -17px;
+				width: 34px;
+				height: 34px;
+				border-radius: 50%;
+				background: #2285CC;
+			}
+			&::before{
+				content: '';
+				position: absolute;
+				right: -17px;
+				bottom: -17px;
+				width: 34px;
+				height: 34px;
+				border-radius: 50%;
+				background: #2285CC;
+			}
+		}
+		.bottom{
+			position: relative;
+			z-index: 1;
+			transform: translateY(-1px);
+			width: 100%;
+			background: #f6f7f9;
+			padding: 34px 20px 12px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.time{
+				color: #333333;
+				font-weight: 400;
+				font-size: 17px;
+			}
+		}
+	}
+}

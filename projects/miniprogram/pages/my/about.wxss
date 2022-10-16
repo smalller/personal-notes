@@ -1,0 +1,29 @@
+page{
+    height: 100%;
+}
+.about{
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+}
+.version{
+    font-size: 36rpx;
+    text-align: center;
+}
+.logo{
+    margin-top: 150rpx;
+    margin-bottom: 70rpx;
+    text-align: center;
+}
+.logo image{
+    height: 300rpx;
+    width: 300rpx;
+}
+.btm{
+    text-align: center;
+    font-size: 24rpx;
+    position: absolute;
+    width: 100%;
+    bottom: 170rpx;
+}

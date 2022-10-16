@@ -1,0 +1,37 @@
+<!-- <view>
+    <view class="li" bindtap="dice">
+        <view class="left">
+            <image src="../../icon/dice.png"></image>
+            <text class="text">摇骰子</text>
+        </view>
+        <view class="right">
+            <image src="../../icon/youjian.png"></image>
+        </view>
+    </view>
+    <view class="tips">小程序暂不支持此功能</view>
+</view> -->
+
+<view class="discover">
+    <view class="main">
+        <view class="title">发现功能</view>
+        <view class="ul">
+            <view class="li" bindtap="dice">
+                <image class="icon_fo" src="../../images/touzi.png"></image>
+                <view class="text">摇骰子</view>
+            </view> 
+            <view class="li_dis" bindtap="tips">
+                <image class="icon_fi" src="../../images/dongtai.png"></image>
+                <view class="text">动态</view>
+            </view> 
+            <view class="li_dis" bindtap="tips">
+                <image class="icon_s" src="../../images/fujin.png"></image>
+                <view class="text">附近的人</view>
+            </view> 
+            <view class="li_dis" bindtap="tips">
+                <image class="icon_t" src="../../images/saoma.png"></image>
+                <view class="text">扫一扫</view>
+            </view> 
+        </view>
+    </view>
+</view>
+

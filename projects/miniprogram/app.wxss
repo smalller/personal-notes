@@ -1,0 +1,90 @@
+/**app.wxss**/
+@import "./icons/iconfont.wxss";
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+.fx{
+  display: flex;
+}
+.cors{
+  font-weight: bold;
+}
+.iconfont{
+  display: inline-flex;
+}
+.over_one{
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:1; 
+  word-break: break-all;
+}
+.over_more{
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2; 
+  word-break: break-all;
+}
+
+button::after{
+  border: none;
+}
+
+.zanwu{
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  /* margin-top: 48rpx;
+  padding-bottom: 48rpx; */
+  color: #999;
+  position: relative;
+}
+.zanwu::before{
+  content: '';
+  height: 2rpx;
+  width: 100rpx;
+  background:#202233;
+  position: absolute;
+  left: 128rpx;
+  top: 48rpx;
+}
+.zanwu::after{
+  content: '';
+  height: 2rpx;
+  width: 100rpx;
+  background:#202233;
+  position: absolute;
+  right: 128rpx;
+  top: 48rpx;
+}
+
+.bg_color1{
+  background:  #0E0E11;
+}
+.bg_color2{
+  background: #161823;
+}
+
+.fs_color1{
+  color: #FACE15;
+}
+.fs_color2{
+  color: #EFD66E;
+}
+.fs_color3{
+  color: #23D0CB;
+}
+.fs_color4{
+  color: #9D9FA8;
+}
+/* 自定义 防wx 弹窗 */

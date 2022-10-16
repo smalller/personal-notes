@@ -1,0 +1,249 @@
+mysql -h129.28.125.151 -P3306 -uroot -p		--使用密码登录远程服务器的数据库
+	-h host			--主机ip/域名（默认连接本地，可不写）
+	-P	port		--数据库的端口（默认为3306，可不写）
+	-u	user		--登录的用户身份
+	-p	password	--登录密码
+	
+mysql -uroot 	--以root身份登录本地数据库（数据库没设密码的情况下）
+use mysql;	--使用mysql这个数据库
+update user set host ="%" where user ="root";	--将数据库的访问权限设为开放模式
+flush privileges	--重新加载访问权限
+
+
+xxx.表名	--表示指定的数据库里的表
+
+
+查看数据库/表：
+	show databases;		--查看所有数据库
+	show databases like "%a%";		--查看相似的所有数据库（名字中间有a的）
+	show create databases mysql;	--查看创建mysql数据库时用的语句
+	show create table my_table;		--查看创建该表时用的语句
+
+
+创建数据库：
+	create database 数据库名字 charset utf8;	--创建数据库并且加上字符集
+	alter database 数据库名字 charset 要修改的字符集;	--修改数据库的字符集
+	
+	
+删除数据库/表：
+	drop database 数据库名字;	--删除数据库
+	drop database if exists 数据库名字;		--删除数据库，如果存在的话
+	drop table  表名;		--删除表
+	drop table if exists 表名;		--删除表，如果没有该表，那么也不会报错，只会报警告
+	show warnngs;	--查看警告信息
+	
+	
+创建表：
+	create table 表名(
+		字段名 字段类型 [字段属性],
+		字段名 字段类型 [字段属性],
+		...
+		字段名 字段类型 [字段属性]
+	)charset 字符集;
+	
+	如：create table admin(
+			id int primary key auto_increment,	--id字段设为主键，并且自动增长
+			username varchar(20),
+			password char(32)
+		)charset utf8;
+	--字段属性并非强制要求。创建表时，建议提前编辑好复制到命令行中执行
+	
+	创建已经存在的表的同结构表（仿照已经有的表，再创建一个结构类似的新表）：
+		create table 新表表名 like 数据库名.旧表表名
+		
+		
+查看表：
+	show tables;	--查看全部表
+	show tables like "%a%";		--查看相似的表（匹配表名中有a的表）
+	desc 表名;		--查看表结构
+	show create table 表名;		--查看表的组成结构
+	
+	
+修改表：
+	rename table 表名 to 新表名;	--修改表名
+	alter table 表名 要修改的表选项（如：charset）= xxx;	--修改表选项
+	alter table 表名 add 字段名 字段类型;		--增加表里的字段（如果要将新增的字段放到最前面，那么就在语句的最后面加一个first）
+	alter table 表名 change 旧字段名 新字段名 字段类型;		--修改表里的字段名
+	alter table 表名 modify 字段名 新字段类型;		--修 
+
+	
+新增数据：
+	insert into 表名 values('字段1对应的值','字段2对应的值'...);	--给所有的字段按顺序插入对应的值
+	insert into 表名(字段名1，字段名2...) values('字段1对应的值','字段2对应的值'...);	--给指定的字段按顺序插入对应的值
+	insert into 表名(字段名1，字段名2...) values('字段1对应的值','字段2对应的值'...);		--给指定的字段按顺序插入多条记录
+	
+	
+查询数据：
+	select * from 表名;		--查询表里的所有数据
+	select 字段名1,字段名2,... from 表名;		--查看指定字段的数据
+	select 字段名 from 表名 where 条件表达式（如：name = "small"   age > 20）;		--查看所指定的条件匹配到的数据
+	
+	
+更新数据：
+	update 表名 set 字段名 = 新值;		--更新某个字段的全部值
+	update 表名 set 字段名 = 新值 where 条件表达式（如：name = "small"）;		--修改指定字段的值
+	update 表名 set 字段名1 = 新值1,字段名2 = 新值2... where 条件表达式（如：age > 20）;		--修改多个字段的值
+	
+	
+删除数据：
+	delete from 表名;	--删除表里的所有数据
+	delete from 表名 where 条件表达式（如：age = 20）;		--删除表里指定的某条记录
+	
+字符集:
+	set names xxx;		--修改系统中三个重要的字符集	
+	
+
+校对集：
+	order by 字段 asc/desc;		--对某个字段查询时进行排序（默认为asc升序时，可以不加asc，desc为降序）
+	
+	
+数据类型：
+	定点型（decimal）：能够更加精确的存储数据，如金额，默认为 decimal(10)，可以更改长度
+	char()：适用于存储定长的字符串数据，如身份证号码，手机号
+	varchar()：适用于存储长度不定的字段，不会浪费空间，只要不超过规定的长度就可以
+	
+	
+随机查询数据（limit后面的数字为要随机查询的条数）：
+	select * from topic order by rand() limit 1;
+	SELECT * FROM topic WHERE id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM topic ))) ORDER BY id LIMIT 1;
+	
+
+SQL的脚本模式：
+	客户端把要执行的多行命令编写在一个.sql文件中，一次性提交给服务器执行，适用于批量的操作数据
+	如： mysql -uroot < 文件的路径（必须表明用户身份，文件的路径可以采用拖拽文件的方式）
+	
+
+主键约束（primary key）：
+	1.不允许字段出现重复的值
+	2.一个表里只能有一个主键
+	3.设置了主键就不能使用null值
+	
+	
+非空约束（not null）：
+	声明了非空约束的字段不能插入null值
+	
+	
+唯一约束（unique）:
+	1.声明了唯一约束的字段不能插入相同的值，null值除外
+	2.非空约束和唯一约束可以同时运用，作用相当于主键约束
+	
+	
+默认值约束（default）：
+	可以使用default关键之声明默认值
+
+
+外键约束（foreign key）：
+	1.声明了外键约束的字段，取值必须在另一个表的主键字段上出现过
+	2.主键和外键的字段类型得一致
+	3.允许使用null或者多个null
+	格式：foreign key(字段名) references 表名(主键字段名)
+
+
+自增列（auto_increment）：
+	1.值会自动增长，无需手动赋值
+	2.直接赋值为null，会获取当前的最大值，然后加1插入
+	3.只能在整数型的主键列上使用
+	4.自增列允许手动赋值
+
+	
+给字段起别名：
+	格式：select name as 姓名,sex as 性别 from user;	其中as可以省略，但要加空格
+	
+	
+显示不同的记录/合并相同的记录
+	示例：查询出员工都在哪些部门
+	select distinct deptid from emp;	在要查询的字段前面加上关键字 distinct（合并相同的值的作用，相同的值只显示一条）
+	
+	
+在查询时执行计算：
+	示例：计算2+3*5+7.4*3.5
+	select 2+3*5+7.4*3.5;
+	
+	
+查询结果集排序：
+	格式：select * from emp order by deptid asc;	order by 表示以...怎样...	asc表升序，desc表降序，不加排序规则的话，默认为升序
+	order by 可以按照数值、日期/时间、字符串来排序，默认按照asc升序排序
+
+	
+!=表示查询不等于某个值，如果要查询某个字段的值为null ，就在字段后面加上 is null，如果要查询不为null，就加is not null
+	
+	
+查询两个值之间：
+	select * from emp where salary between 5000 and 7000;	表示查询工资为5000~7000的值（包含5000和7000）
+	select * from emp where salary not between 5000 and 7000;	表示查询不在5000~7000之间的值
+	
+
+查询两个具体的值：
+	select * from emp where deptid in(20,30);		表示查询编号为20或30的记录
+	select * from emp where deptie not in(20,30);		表示查询编号不为20或30的记录
+	
+	
+模糊条件查询：
+	select * from emp where ename like "%e%";		表示查询名字里有'e'的值
+	select * from emp where ename like "%e";		表示查询名字里以'e'结尾的值
+	select * from emp where ename like "%e_";		表示查询名字中倒数第二个字符为e的值，任意值用_表示
+	
+	
+分页查询：
+	需要两个条件：当前的页码和每页的数据量
+	格式：select * from emp limit start,count;		start表示从哪一条开始读取（开始的页码），count表示每页的数据量
+	start = （当前的页码 - 1）* 每页的数据量
+	
+	
+聚合查询：
+	聚合函数：
+		count 	计数
+		sum		求和
+		avg 		求平均
+		max 		求最大
+		min		求最小
+		
+		
+分组查询（group by ）：
+	示例：查询出男女员工的最高工资（这里是按性别分组）
+	select sex,max(salary) from emp group by sex;
+	
+	year()	获取日期中的年份
+	如：查询1991年出生的员工有哪些
+	select * from emp where year(birthday) = 1991;
+	
+	month()	获取日期中的月份
+	如：查询6月出生的员工有哪些
+	select * from emp where month(birthday) = 6;
+
+
+子查询：
+	把一个SQL语句的结果作为另一个SQL语句的查询条件（当要查询的字段分别在两个或多个表中的时候）
+	示例：查询出研发部所有的员工有哪些
+	select * from emp where deptid = (select did from dept where dname = '研发部');
+
+
+多表查询：
+	示例：查询出所有的员工姓名及其部门名称
+	其中emp和dept是两个表
+	普通多表查询方法：
+		select ename,dname from emp,dept where deptid = did;		
+	内连接：
+		select ename,dname from emp inner join dept on deptid = did;
+		
+	注意：以上2种方法无法查询出没有部门的员工，也无法查询出没有员工的部门
+	
+	左外连接（显示左侧表中所有记录）：
+		这里emp就是左侧表，先写的就是左侧表
+		select ename,dname from emp left join dept on deptid = did;
+	
+	右外连接（显示右侧表中所有记录）：
+		这里dept就是右侧表，后写的就是右侧表
+		select ename,dname from emp right join dept on deptid = did;
+
+
+
+
+
+
+
+
+
+
+
+

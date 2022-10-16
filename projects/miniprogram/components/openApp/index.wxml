@@ -1,0 +1,10 @@
+<!--components/openApp/index.wxml-->
+<view class="tips">
+    <view>小程序暂不支持此功能</view>    
+    <view>请前往应用商城下载APP</view>    
+    <!-- ， <text bindtap="goAPP">立即前往</text> -->
+</view>
+<!-- 
+<template name="goApp">
+    使用此功能，请下载APP， <text bindtap="goAPP">立即前往</text>   
+</template> -->

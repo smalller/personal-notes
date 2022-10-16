@@ -1,0 +1,95 @@
+@import "../../components/openApp/index.wxss";
+page{
+    height: 100%;
+    background:#161823;
+}
+/* .li{
+    height: 100rpx;
+    background: rgba(255, 255, 255, .07);
+    line-height: 100rpx;
+    padding:0 20rpx;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14rpx;
+}
+.li .left image{
+    width: 62rpx;
+    height: 62rpx;
+    margin-right: 44rpx;
+    vertical-align: middle;
+}
+.li .left .text{
+    color: #ffffff;
+    font-size:30rpx ;
+}
+.li .right image{
+    width: 13rpx;
+    height: 22rpx;
+} */
+
+.discover{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main{
+    padding: 0 76rpx;
+    width: calc(100% - 76rpx*2);
+}
+.title{
+    color: #ffffff;
+    font-size: 40rpx;
+    margin-bottom: 102rpx;
+    text-align: center;
+}
+.ul{
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+}
+.li,.li_dis{
+    width: 284rpx;
+    height: 236rpx;
+    border-radius: 16rpx;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30rpx;
+}
+.li{
+    background-image:linear-gradient(#42485E, #363F51);
+}
+.li_dis{
+    background-image:linear-gradient(rgba(66,72,94,.3),rgba(54,63,81,.3));
+}
+.icon_fi{
+    width: 68rpx;
+    height: 52rpx;
+    margin-bottom: 30rpx;
+}
+.icon_s{
+    width: 66rpx;
+    height: 54rpx;
+    margin-bottom: 30rpx;
+}
+.icon_t{
+    width: 54rpx;
+    height: 54rpx;
+    margin-bottom: 30rpx;
+}
+.icon_fo{
+    width: 104rpx;
+    height: 110rpx;
+    margin-bottom: 12rpx;
+}
+.li .text{
+    color: #A1A5AF;
+    font-size: 28rpx;
+}
+.li_dis .text{
+    color:#464752;
+    font-size: 28rpx;
+}

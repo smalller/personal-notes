@@ -1,0 +1,135 @@
+<view class="grabSeat">
+  <view style="background:#1A1C29;height: {{(mobile.top+mobile.height+5)}}px;"></view>
+  <view class="custom_header" style="top: 0;padding-top:{{(mobile.top+2)}}px;height:{{mobile.height+3}}px;line-height:{{mobile.height+3}}px">
+    <view><icon bindtap="backIcon" class="iconfont icon-left back_left"></icon></view>
+    <view>{{pageTitle}}</view>
+    <view></view>
+  </view>
+
+
+  <view class="hearder {{!Upflag?'grab':''}}" >
+    <view>
+      <view class="myWord">{{numInfo.codeNo}}</view>
+      <view class="myNum">我的号码</view>
+    </view>
+    <view wx:if="{{!Upflag}}">
+      <view class="myWord imp pri">￥{{numInfo.paidAmount}}</view>
+      <view class="myNum">消费金额</view>
+    </view>
+    <image src="../../images/yiquxiao.png" hidden="{{!cancelFlag}}"></image>
+  </view>
+
+  <view class="parent_box">
+    <view class="line_up fx" hidden="{{cancelFlag}}">
+      <view class="fxl" wx:if="{{Upflag}}">
+        <view class="line_num">{{numInfo.waitFor}}座</view>
+        <view class="line_text">前方等待</view>
+      </view>
+
+      <view class="fxl" wx:if="{{!Upflag}}">
+        <view class="line_num">第{{numInfo.ranking}}位</view>
+        <view class="line_text">当前位于</view>
+      </view>
+
+      <view class="fxm" wx:if="{{!Upflag}}">
+        <view class="line_num imp">￥{{numInfo.firstPayAmount}}</view>
+        <view class="line_text">最高抢座金额</view>
+      </view>
+      <view class="fxr">
+        <view class="line_num">{{numInfo.expectedWaitingTime}} 分钟</view>
+        <view class="line_text">预计等待时间</view>
+      </view>
+      <view class="line" wx:if="{{Upflag}}"></view>
+    </view>
+
+    <view class="look_good" wx:if="{{!Upflag}}">
+      <view bindtap="lookGood">查看酒水</view>
+    </view>
+
+    <view class="overTime">
+      <view class="details">
+        <text>已等待：</text><text>{{waiting}}</text>
+      </view>
+      <view class="details">
+        <text>手机号码：</text><text>{{numInfo.contactTel}}</text>
+      </view>
+      <view class="details">
+        <text>取号时间：</text><text>{{numInfo.createTime}}</text>
+      </view>
+      <view class="details">
+        <text>取号渠道：</text>
+        <text>{{numInfo.channelType}}</text>
+      </view>
+    </view>
+    <view class="inform" hidden="{{cancelFlag}}">
+      <text>实时排队进度通知</text>
+      <view class="page__bd">
+        <view class="section section_gap">
+          <view class="body-view">
+            <switch checked="{{numInfo.notifyType==1?true:false}}" bindchange="switch1Change" color="#F2C814" />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="demand" hidden="{{cancelFlag}}">
+      <view>备注需求</view>
+      <view class="reamke">{{numInfo.remarks?numInfo.remarks:'无'}}</view>
+    </view>
+
+    <view class="explain">
+      <view class="tt">商家说明</view>
+      <block wx:if="{{numInfo.businessReminder.length>0}}">
+        <view class="rule" wx:for="{{numInfo.businessReminder}}" wx:key="index">{{item}}</view>
+      </block>
+      <block wx:else>
+        <view class="rule">无</view>
+      </block>
+    </view>
+
+      <view class="relationBoss" hidden="{{cancelFlag}}">
+        <text class="tt">联系商家</text>
+        <image bindtap="relation" src="../../icon/shangjia.png"></image>
+      </view>
+  </view>
+
+  <view class="footer">
+    <view class="quxiaopaidui {{cancelFlag?'quxiaopaidui1':''}}">
+      <image src="../../icon/quxiaopaidui.png" hidden="{{!Upflag}}" bindtap = "cancelUp" wx:if="{{!cancelFlag}}"></image>
+      <image src="../../images/xuanjiushui.png" bindtap="continueGoods" hidden="{{Upflag}}"></image>
+      <view class="again" hidden="{{!cancelFlag}}" bindtap="againGetNum">
+        <image src="../../images/chongxinquhao.png"></image>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="mask" bindtap="lookGood" hidden="{{!showGoodsList}}"></view>
+  <view class="dio_box" hidden="{{!showGoodsList}}"> 
+    <view class="title">已选酒水</view>
+    <view class="list">
+      <view class="glis fx" wx:for="{{numInfo.goodsLists}}" wx:key="index">
+        <view class="glis_l">
+          <image src="{{addUrl + item.goodsPicture}}"></image>
+        </view>
+        <view class="glis_r">
+          <view class="good_name over_one">{{item.goodsName}}</view>
+          <view class="good_intro over_one">{{item.synopsis}}</view>
+          <view class="price">
+            <text class="new"><text>￥</text>{{item.activityPrice}}</text>
+            <text class="good_num">x {{item.quantity}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="total">
+      <view><text>合计：</text> <text>￥</text>{{numInfo.paidAmount}}</view>
+    </view>
+  </view>
+
+  
+  <selfModel data="{{childComponent}}" show="{{show}}" text="{{topText}}" bindconfirm="confirm" bindcancel="cancel"></selfModel>
+
+
+</view>
+

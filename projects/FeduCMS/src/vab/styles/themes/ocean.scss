@@ -1,0 +1,181 @@
+/**
+ * @description 海洋之心主题
+ */
+
+body.vab-theme-ocean {
+  $base-menu-background: #1890ff;
+  $base-menu-background-active: #399efd;
+  $base-color-blue: #1890ff;
+
+  @mixin container {
+    background: linear-gradient(to right, #006cff, #399efd) !important;
+  }
+
+  @mixin active {
+    &:hover {
+      color: $base-color-white;
+      background-color: $base-menu-background-active !important;
+    }
+
+    &.is-active {
+      color: $base-color-white;
+      background-color: $base-menu-background-active !important;
+    }
+  }
+
+  .logo-container-horizontal {
+    background: $base-color-blue !important;
+  }
+
+  .logo-container-vertical,
+  .logo-container-comprehensive {
+    @include container;
+  }
+
+  .logo-container-gallery {
+    .logo {
+      @include container;
+    }
+  }
+
+  .gallery-bar-container.el-scrollbar {
+    .el-tabs {
+      .el-tabs__nav {
+        @include container;
+      }
+
+      .el-tabs__item.is-active,
+      .el-tabs__item:hover {
+        background: $base-menu-background-active !important;
+      }
+    }
+
+    .el-menu {
+      .el-menu-item.is-active,
+      .el-submenu__title.is-active,
+      .el-menu-item:hover,
+      .el-submenu__title:hover {
+        i {
+          color: $base-menu-background !important;
+        }
+
+        color: $base-menu-background !important;
+        background-color: rgba($base-color-blue, 0.1) !important;
+      }
+    }
+  }
+
+  .layout-container-horizontal {
+    .top-bar-container {
+      background: $base-color-blue !important;
+    }
+
+    .el-menu {
+      background: $base-color-blue !important;
+
+      .el-submenu__title {
+        background: $base-color-blue !important;
+      }
+
+      .el-menu-item {
+        background: $base-color-blue !important;
+      }
+    }
+
+    .side-bar-container,
+    .comprehensive-bar-container {
+      background: $base-color-blue !important;
+
+      .el-menu-item {
+        @include active;
+      }
+    }
+  }
+
+  .layout-container-vertical,
+  .layout-container-comprehensive,
+  .layout-container-common {
+    .side-bar-container,
+    .comprehensive-bar-container {
+      @include container;
+
+      .el-menu {
+        @include container;
+        @include active;
+
+        .el-submenu__title,
+        .el-menu-item {
+          background-color: transparent !important;
+          @include active;
+
+          &.is-active {
+            background-color: $base-menu-background-active !important;
+          }
+        }
+      }
+    }
+  }
+
+  .top-bar-container {
+    @include container;
+
+    .vab-main {
+      .el-menu.el-menu {
+        &--horizontal {
+          .el-submenu,
+          .el-menu-item {
+            &.is-active {
+              background-color: $base-menu-background-active !important;
+            }
+          }
+
+          > .el-menu-item {
+            &.is-active {
+              background-color: transparent !important;
+              border-bottom: 3px solid $base-color-white !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tabs-bar-container {
+    background: $base-color-white;
+    border-top: 1px solid #f6f6f6;
+
+    .tabs-content {
+      .el-tabs__header {
+        .el-tabs__item {
+          &.is-active {
+            background: $base-color-blue !important;
+            border: 1px solid $base-color-blue !important;
+
+            &:hover {
+              color: $base-color-white !important;
+            }
+          }
+
+          &:hover {
+            color: $base-color-blue !important;
+          }
+        }
+      }
+    }
+  }
+
+  .nav-bar-container {
+    .el-tabs__item.is-active,
+    .el-tabs__item:hover {
+      color: $base-color-blue !important;
+    }
+
+    .el-tabs__active-bar {
+      background-color: $base-color-blue !important;
+    }
+  }
+
+  .theme-setting {
+    background: $base-color-blue !important;
+  }
+}

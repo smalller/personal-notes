@@ -1,0 +1,42 @@
+page {
+  background-color: #0E0E11;
+}
+.phoneSet .num_one {
+  font-size: 26rpx;
+  color: #FFFFFF;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  padding: 24rpx 0 24rpx 48rpx;
+}
+.phoneSet .inp {
+  height: 92rpx;
+  padding: 24rpx 30rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #CCCCCC;
+  line-height: 40rpx;
+  margin: 0 30rpx;
+}
+.inp input{
+  height: 100%;
+}
+.code{
+  width: 70%;
+}
+.phoneSet .pos{
+  position: relative;
+}
+.phoneSet .inp text {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  position: absolute;
+  top: -10rpx;
+  right: 38rpx;
+}
+.on{
+  color: #022877;
+}
+.off{
+  color: #C9C9D3;
+}

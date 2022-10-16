@@ -1,0 +1,13 @@
+<view name="user" wx:if="{{show}}">
+    <view class="self_bg" bindtap="cancel"></view>
+    <view class="self_dio_bg">
+        <view class="self_box">
+            <view wx:if="{{title}}" class="self_title">{{title}}</view>
+            <view class="self_tips">{{text}}</view>
+            <view class="self_btm_btn">
+                <view class="btn" bindtap="cancel">{{cancelText}}</view>
+                <view class="btn" bindtap="confirm">{{confirmText}}</view>
+            </view>
+        </view>
+    </view>
+</view>

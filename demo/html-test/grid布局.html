@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid {
+            display: grid;
+            /* width: 600px; */
+            height: 600px;
+
+            /* grid-template-columns: 100px 300px 100px; */
+            /* grid-template-columns: 20% 60% 20%; */
+            /* grid-template-columns: 100px auto 30%; */
+
+            /* 按比例均分当前容器 */
+            /* grid-template-columns: 1fr 3fr 1fr; */
+
+            /* 第一个参数表示重复的次数，第二个参数表示每列的宽度 */
+            grid-template-columns: repeat(3, 200px);
+
+            /* 重复 50px 100px 这样的宽度三次，前提是该容器的项目能达到三次这么多，即至少9个项目 */
+            /* grid-template-columns: repeat(3, 50px 100px); */
+
+
+
+
+            /* 列外边距 */
+            /* column-gap: 30px; */
+
+            /* 行外边距 */
+            /* row-gap: 30px; */
+
+
+
+
+
+
+
+            /* grid-template-rows: repeat(3, 100px); */
+
+            /* justify-items: center; */
+
+        }
+
+        .grid>div {
+            /* width: 300px; */
+            /* height: 100px; */
+            border: 1px solid #000;
+            box-sizing: border-box;
+
+        }
+
+        .child {
+            width: 30px;
+            height: 30px;
+            background-color: #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <script src="Object.defineProperty.js"></script> -->
+    <!-- <script src="iterator.js"></script> -->
+    <div class="grid">
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+        <div>
+            <div class="child"></div>
+        </div>
+    </div>
+</body>
+
+</html>

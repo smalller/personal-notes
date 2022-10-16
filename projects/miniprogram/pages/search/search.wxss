@@ -1,0 +1,260 @@
+page{
+  background: #161823;
+}
+.search{
+  display: flex;
+  position: relative;
+  padding-left: 20rpx;
+  background: #161823;
+}
+.search .icon-sousuo{
+  font-size: 28rpx;
+  position: absolute;
+  left: 50rpx;
+  top: 15rpx;
+  display: inherit;
+  color: #FFFFFF;
+}
+.search input{
+  width: 604rpx;
+  height: 68rpx;
+  background-color: #2C2E3E;
+  border-radius: 4rpx;
+  padding-left: 80rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+.search input::placeholder{
+  font-size: 28rpx;
+  color: #A2A2A7;
+}
+.t_one{
+  display: inline-block;
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #7D7F89;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 32rpx;
+  position: absolute;
+  top: 18rpx;
+  right: 152rpx;
+  z-index: 2;
+}
+.search .t_two{
+  font-size: 28rpx;
+  margin: 10rpx 0 0 50rpx;
+  color: #FFFFFF;
+}
+.search_type{
+  display: flex;
+  height: 108rpx;
+  line-height: 108rpx;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+  border-bottom: 12rpx solid #0E0E11;
+}
+.not{
+  color: #A2A2A7;
+}
+.on{
+  color: #E5C352;
+}
+.sear_btn{
+  margin-right: 80rpx;
+}
+
+.content{
+  position: relative;
+}
+.content .header{
+  padding: 72rpx 20rpx 0 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 41rpx;
+}
+.content .header text{
+  font-size: 26rpx;
+  line-height: 34rpx;
+  color: #7D7F89;
+}
+.content .header .iconfont{
+  font-size: 28rpx;
+  color: #7D7F89;
+}
+.content .dis_none{
+  margin-top: -10rpx;
+}
+.content .dis_none text:nth-child(1){
+  padding-right: 8rpx;
+  border-right: 1px solid #292C3C;
+}
+.content .dis_none text:nth-child(2){
+  color: #EF5954;
+  margin-left: 8rpx;
+}
+.bor_rad{
+  padding-top: 12rpx;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 24rpx;
+  margin-top: 24rpx;
+  height: 160rpx;
+  overflow: hidden;
+}
+.bor_rad1{
+  overflow: initial;
+  height: 100%;
+}
+.bor_rad .con{
+  font-size: 26rpx;
+  padding: 0 24rpx ;
+  background-color: #242630;
+  border: 2rpx solid #292C3C;
+  text-align: center;
+  border-radius: 4rpx;
+  margin-right: 20rpx;
+  margin-bottom: 32rpx;
+  height: 52rpx;
+  line-height: 52rpx;
+  color: white;
+  position: relative;
+}
+.bor_rad .t_pos{
+  position: absolute;
+  right: -8px;
+  top: -14rpx;
+}
+.content .img{
+  width: 56rpx;
+  height: 56rpx;
+  margin-left: 24rpx;
+}
+.content .img1{
+  width: 56rpx;
+  height: 56rpx;
+  margin: 4rpx 0 0 10rpx;
+  margin-left: 24rpx;
+}
+.not_text{
+  text-align: center;
+  margin: 24rpx 0 ;
+  font-size: 28rpx;
+  color: #999999;
+}
+.hot_search{
+  padding: 48rpx 48rpx 0 24rpx;
+  margin-top: 28rpx;
+
+}
+.hot_search .hearder{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hot_search .hearder text{
+font-size: 24rpx;
+margin-right: 12rpx;
+}
+.hot_search .hearder .img1{
+  width: 20rpx;
+  height: 24rpx;
+}
+.hot_search .hearder image{
+  width: 34rpx;
+  height: 22rpx;
+} 
+.body{
+  padding:20rpx 0 0 24rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.body .bo_right{
+  font-size: 24rpx;
+  padding: 8rpx 28rpx;
+  background: #242630;
+  color: #C9C9D3;
+  border: 2rpx solid #292C3C;
+  box-sizing: border-box;
+  margin: 0 20rpx 20rpx 0;
+}
+
+.all_res{
+  padding-bottom: 240rpx;
+}
+.res_box{
+  padding: 0 20rpx;
+}
+.top_type{
+  display: flex;
+  justify-content: space-between;
+  color: #A2A2A7;
+  font-size: 26rpx;
+  padding: 24rpx 0 12rpx 0;
+}
+.search_content{
+  display: flex;
+  padding: 30rpx 0;
+  align-items: center;
+  border-bottom: 2rpx solid #202233;
+}
+.search_content .left image{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+  vertical-align: middle;
+}
+/* .search_content .left text{
+  font-size: 28rpx;
+  color: #000;
+} */
+.sanjiao{
+  position: absolute;
+  z-index: 1;
+  height: 38rpx!important;
+  width: 108rpx!important;
+  top: -1rpx;
+  right: 0;
+}
+.search_content .left{
+  position: relative;
+}
+.search_content .right{
+  margin-left: 32rpx;
+}
+.res_box .name{
+  color: #FFFFFF;
+  font-size: 28rpx;
+  margin-bottom: 28rpx;
+}
+.res_box .brief{
+  color: #9D9FA8;
+  font-size: 24rpx;
+  margin-bottom: 16rpx;
+}
+.res_box .discount{
+  color: #E58B52;
+  font-size: 24rpx;
+  border: 2rpx solid #E58B52;
+  box-sizing: border-box;
+  border-radius: 4rpx;
+  padding: 2rpx 8rpx;
+  display: inline-block;
+}
+.search_res{
+  padding-top: 100rpx;
+  display: flex;
+  justify-content: center;
+}
+.search_null{
+  width: 266rpx;
+  height: 230rpx;
+}
+.search_text{
+  text-align: center;
+  font-size: 32rpx;
+  color: #CCCCCC;
+}

@@ -1,0 +1,110 @@
+podTemplate(yaml: """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: kubectl
+    image: 172.16.0.107:2180/base/kubectl:latest
+    imagePullPolicy: IfNotPresent
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: kubectl
+  - name: node
+    image: 172.16.0.107:2180/base/node:12
+    imagePullPolicy: IfNotPresent
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: node
+    volumeMounts:
+    - name: repo-npm-cache
+      mountPath: /root/npm
+  - name: docker
+    image: 172.16.0.107:2180/base/docker:latest
+    imagePullPolicy: IfNotPresent
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: docker
+    volumeMounts:
+    - name: repo-docker-sock
+      mountPath: /var/run/docker.sock
+  volumes:
+  - name: repo-npm-cache
+    persistentVolumeClaim:
+      claimName: devnpm
+  - name: repo-docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+"""
+) {
+    def RUN_ENV = 'yjb-test'
+    def PROJECT_NAME = env.BRANCH_NAME
+    def PROJECT_SVC = PROJECT_NAME
+    def PROJECT_SVC_NP = PROJECT_NAME + '-np'
+
+    def PROJECT_CONTEXT = 'yjbopend'
+    def PROJECT_GIT = 'https://codeup.aliyun.com/5edde0a5d1d1abe63b55f4fa/FeduYJB/front-end/FeduOpend.git'
+    def PROJECT_BRANCH = 'release'
+    def PROJECT_PORT = 80
+    def PROJECT_PORT_EXT = 30197
+    def PROJECT_ING = PROJECT_NAME + '-ing'
+
+    def BUILD_USER, DOCKER_IMAGE
+
+    node(POD_LABEL) {
+        stage('获取GIT'){
+            git  branch: PROJECT_BRANCH, credentialsId: 'test-jenkins', url: PROJECT_GIT
+        }
+        stage('镜像参数') {
+            wrap([$class: 'BuildUser']) {
+                BUILD_USER = "${BUILD_USER}"
+                DOCKER_IMAGE = "registry.cn-shenzhen.aliyuncs.com/zdpro/" + env.BRANCH_NAME + ':' + env.BUILD_USER +'-'+ env.BUILD_ID
+            }
+            sh "echo ${DOCKER_IMAGE}"
+        }
+        stage('编译NPM') {
+            container('node') {
+                sh 'npm config ls'
+                sh 'npm config set registry https://registry.npm.taobao.org'
+                sh 'npm config set cache "/root/npm/nodde_cache"'
+                sh 'npm config set prefix "/room/npm/nodde_global_modules"'
+                sh 'npm install'
+                sh 'npm run ctrdev'
+                sh 'ls ./dist'
+            }
+        }
+        stage('编译镜像') {
+            container('docker') {
+                withCredentials([usernamePassword(credentialsId: 'aliregistry', passwordVariable: 'password', usernameVariable: 'username')]) {
+                    sh 'docker login -u $username -p $password registry.cn-shenzhen.aliyuncs.com'
+                    sh 'pwd && ls -l'
+                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    sh "docker push ${DOCKER_IMAGE}"
+                }
+
+            }
+        }
+        stage('部署') {
+            container('kubectl') {
+                    configFileProvider([configFile(fileId: "c26ae8c7-a3a5-4e58-863d-4e8c5eef17de", targetLocation: "config")]){
+                    sh "pwd && ls"
+                    sh "mkdir -p /root/.kube && cp config  /root/.kube/ "
+                    sh "kubectl get pods -n yjb-test"
+                    sh "sed -i s@IMAGE@${DOCKER_IMAGE}@g ./manifests_release/manifests.yaml"
+                    sh "kubectl -n yjb-test apply -f ./manifests_release/manifests.yaml"
+                }
+            }
+        }
+    }
+}

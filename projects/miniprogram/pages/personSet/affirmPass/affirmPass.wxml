@@ -1,0 +1,37 @@
+<view class="affirm">
+  <view class="header">
+    请输入短信验证码
+  </view>
+  <view class="body">
+    <text>验证码已发送至 +86 </text>
+    <text>{{phone}}</text>
+  </view>
+  <view class="inp">
+    <!-- <input hold-keyboard="{{true}}" focus="{{on==0?true:false}}" model:value="{{code1}}" type="number" data-index='1' bindinput="bindKeyInput" maxlength="1"/>
+    <input hold-keyboard="{{true}}" focus="{{on==1?true:false}}" model:value="{{code2}}" type="number" data-index='2' bindinput="bindKeyInput" maxlength="1"/>
+    <input hold-keyboard="{{true}}" focus="{{on==2?true:false}}" model:value="{{code3}}" type="number" data-index='3' bindinput="bindKeyInput" maxlength="1"/>
+    <input hold-keyboard="{{true}}" focus="{{on==3?true:false}}" model:value="{{code4}}" type="number" data-index='4' bindinput="bindKeyInput" maxlength="1"/> -->
+    <view class="keyboard" >
+      <view class="inp">
+          <text wx:for="{{passNum}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+  </view>
+  <view class="footer">
+    <text bindtap="getCode" class="{{flag?'on':'off'}}">未收到短信，再次发送</text>
+    <text wx:if="{{!flag}}">已发送({{seconds}}s)</text>
+  </view>
+
+
+    <!-- 密码 -->
+  <view class="psw" wx:if="{{showPsw}}">
+    <view class="key_box">
+        <view class="num_board" >
+          <view class="num_eng {{item.colorFlag?'bg_btn':''}}" wx:for="{{numArr}}" wx:key="index" bindtap="bind_num" data-num="{{item.id}}"
+            data-index="{{index}}">{{item.id}}</view>
+            <icon class="iconfont icon-shanchu" bindtap="delate"></icon>
+        </view>
+    </view>
+  </view>
+</view>

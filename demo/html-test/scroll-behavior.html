@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            display: inline-block;
+            width: 50px;
+            font-size: 30px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #f00;
+        }
+
+        .scroll-container,
+        scroll-container {
+            display: block;
+            width: 350px;
+            height: 200px;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        scroll-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a href="#A">A</a>
+        <a href="#B">B</a>
+        <a href="#C">C</a>
+    </div>
+    <scroll-container>
+        <scroll-page id="A">A</scroll-page>
+        <scroll-page id="B">B</scroll-page>
+        <scroll-page id="C">C</scroll-page>
+    </scroll-container>
+    <!-- <div class="scroll-container">
+        <h1 id="A">A</h1>
+        <h1 id="B">B</h1>
+        <h1 id="C">C</h1>
+    </div> -->
+</body>
+
+</html>

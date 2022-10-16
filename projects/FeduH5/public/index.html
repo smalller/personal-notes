@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+      <title data-react-helmet="true">金树丫</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="金树丫">
+      <meta name="keywords" content="金树丫2">
+      <meta name="robots" content="金树丫3">
+      <meta name="subject" content="你的网站主题">
+      <meta
+              property="og:image"
+              content="https://img02.mockplus.cn/idoc/image/2020-10-27/fc6f8811-17fb-11eb-a26f-b3a70a815e7f.png"
+      >
+      <meta property="og:title" content="金树丫2" >
+      <meta property="og:description" content="设计+协作，摹客就够了！全流程协作、高保真设计、设计规范管理，All in One" >
+      <link
+              rel="apple-touch-icon"
+              href="https://img02.mockplus.cn/idoc/image/2019-07-31/52f74051-b372-11e9-b3f9-03f4475e032c.png"
+      >
+      <meta http-equiv="x-dns-prefetch-control" content="on" >
+      <meta name="google" content="notranslate">
+      <meta name="google" content="nositelinkssearchbox">
+      <meta http-equiv="pragram" content="no-cache">
+      <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no" />
+    <script src="./static/cdn/alipayjsapi.inc.min.js"></script>
+<!--    <script src="./static/cdn/micell.js"></script>-->
+    <script src="https://unpkg.com/micell@0.13.3/dist/micell.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/micell"></script>-->
+<!--    <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>-->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=nrEn9RuR1FVAUcHfTRTn4a4SGtYRkGSK" ></script>
+    <link rel="icon" href="<%= BASE_URL %>logo.png">
+      <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+
+<!--      <script src="https://cdn.staticfile.org/vue/2.6.11/vue.js"></script>-->
+      <script src="https://cdn.staticfile.org/vue/2.6.11/vue.min.js"></script>
+<!--      <script src="https://cdn.staticfile.org/vuex/3.6.2/vuex.js"></script>-->
+      <script src="https://cdn.staticfile.org/vuex/3.6.2/vuex.min.js"></script>
+<!--      <script src="https://cdn.staticfile.org/vue-router/3.5.3/vue-router.js"></script>-->
+      <script src="https://cdn.staticfile.org/vue-router/3.5.3/vue-router.min.js"></script>
+      <script src="https://cdn.staticfile.org/element-ui/2.15.7/index.js"></script>
+      <link href="https://cdn.staticfile.org/element-ui/2.15.7/theme-chalk/index.min.css" rel="stylesheet">
+      <script src="https://cdn.staticfile.org/axios/0.24.0/axios.js"></script>
+      <script src="https://cdn.staticfile.org/dayjs/1.10.7/dayjs.min.js"></script>
+      <script src="https://cdn.staticfile.org/dayjs/1.10.7/locale/zh-cn.js"></script>
+    <script>dayjs.locale('zh-cn')</script>
+
+      <link href="https://cdn.staticfile.org/vant/2.12.39/index.min.css" rel="stylesheet">
+<!--      <script src="https://cdn.staticfile.org/vant/2.12.39/vant.js"></script>-->
+      <script src="https://cdn.staticfile.org/vant/2.12.39/vant.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/flv.js/1.6.2/flv.min.js"></script>
+    <script src="https://cdn.staticfile.org/hls.js/1.1.2/hls.min.js"></script>
+
+
+  </head>
+  <script>
+    if ('https:' === document.location.protocol) {
+      let meta = document.createElement('meta');
+      meta.content='upgrade-insecure-requests';
+      meta.httpEquiv='Content-Security-Policy';
+      document.getElementsByTagName('head')[0].appendChild(meta)
+    }
+  </script>
+  <body>
+    <noscript>
+      <!-- <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong> -->
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+    if(location.pathname.indexOf('//')>-1){
+
+      const path = location.pathname.replace('//', '/')
+      location.href = location.origin+path+location.search
+    }
+      const arr = ['/faceInfo','/feedback','/MembershipServiceAgreement','/boardcast','/studentFile','/details','/mediaDetails','/school','/camera','/weChat','/wechat','/apply', '/weChatVipInfo','/sxtfGroupSign']
+
+      if(!micell.ua.isMobile()&&arr.indexOf(location.pathname)<0) {
+        location.href = "https://www.jinshuy.com"
+      }
+  </script>
+</html>
