@@ -7,21 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
         ul,
         li {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
         .container {
             margin: 30px auto;
             width: 440px;
             height: 440px;
-            /* border: 1px solid #000; */
             position: relative;
         }
 
@@ -77,48 +73,42 @@
             outline: none;
             cursor: pointer;
         }
-
-        .end {
-            text-align: right;
-            margin-top: 30px;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <p>尊敬的xxx：</p>
         <div class="img-box">
-            <img src="https://img0.baidu.com/it/u=3600360080,3001503118&fm=253&fmt=auto&app=138&f=JPEG?w=526&h=500"
-                alt="">
+            <img src="https://smalll.cn/img/1.png">
         </div>
         <div class="btn-box">
             <ul>
                 <li class="left">
-                    <button id="agree">同意</button>
+                    <button id="agree">我爱你</button>
                 </li>
                 <li class="right">
-                    <button id="not-agree">不同意</button>
+                    <button id="not-agree">不可能</button>
                 </li>
             </ul>
         </div>
-        <p class="end">辞职人：xxx</p>
     </div>
     <script>
         const notAgreeBtn = document.getElementById('not-agree');
         const agreeBtn = document.getElementById('agree')
-        notAgreeBtn.addEventListener('mouseenter', () => {
-            const leftRandomNum = Math.floor(Math.random() * (300 + 1 - 0) + 0)
-            const topRandomNum = Math.floor(Math.random() * (300 + 1 - 0) + 0)
+        const scopeVal = 300
+        notAgreeBtn.addEventListener('mousemove', () => {
+            const leftRandomNum = Math.floor(Math.random() * (scopeVal + 1))
+            const topRandomNum = Math.floor(Math.random() * (scopeVal + 1))
             notAgreeBtn.style.cssText = `
-            position: absolute;
-            top:${topRandomNum}px;
-            left:${leftRandomNum}px;
-            z-index:10;
+                position: absolute;
+                top:${topRandomNum}px;
+                left:${leftRandomNum}px;
+                z-index:10;
             `
         })
         agreeBtn.addEventListener('click', () => {
-            alert('感谢，溜了溜了！')
+            alert('我也爱你，么么哒！')
+            location.reload()
         })
     </script>
 </body>

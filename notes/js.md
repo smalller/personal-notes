@@ -139,10 +139,10 @@ const obj3 = {...obj1,...obj2}
   - Math.min(123,-2,0,1,5)  取最小值
   - Math.round(4.49)  四舍五入取整
   - Math.floor(4.99)  对数进行向下取整，值为4
-	- Math.ceil(5.01) 对数进行向上取整，值为6
+  - Math.ceil(5.01) 对数进行向上取整，值为6
   - Math.random() 取0到1之间的随机小数（包含0，不包含1）
-		Math.random()\*10  取0到10之间的随机小数
-		Math.floor(Math.random()\*(y+1-x)+x) 取x到y之间的随机整数
+  - Math.random()\*10  取0到10之间的随机小数
+  - Math.floor(Math.random() * (max - min + 1) + min) 取max与min之间的随机整数，可以取到最大值，如果不需要取到最大值就去掉+1
 
 #### Date对象
   1. 创建Date对象
