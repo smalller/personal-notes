@@ -42,21 +42,21 @@
 
 
         // 防抖
-        // function debounce(fn, delay) {
-        //     let timer = null
-        //     return function () {
-        //         if (timer) clearTimeout(timer)
-        //         timer = setTimeout(() => {
-        //             fn.apply(this, arguments)
-        //         }, delay)
-        //     }
-        // }
+        function debounce(fn, delay) {
+            let timer = null
+            return function (...args) {
+                if (timer) clearTimeout(timer)
+                timer = setTimeout(() => {
+                    fn.apply(this, ...args)
+                }, delay)
+            }
+        }
 
-        // function task() {
-        //     console.log('run task')
-        // }
-        // const debounceTask = debounce(task, 1000)
-        // window.addEventListener('scroll', debounceTask)
+        function task() {
+            console.log('run task')
+        }
+        const debounceTask = debounce(task, 1000)
+        window.addEventListener('scroll', debounceTask)
     </script>
 </body>
 
